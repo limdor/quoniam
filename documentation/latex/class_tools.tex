@@ -1,0 +1,153 @@
+\hypertarget{class_tools}{\section{Tools Class Reference}
+\label{class_tools}\index{Tools@{Tools}}
+}
+
+
+{\ttfamily \#include $<$Tools.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Q\+Vector$<$ int $>$ \hyperlink{class_tools_ae0b619c9e9c08c30094847760c942db0}{Get\+Ordered\+Indexes\+By\+Dimension} (Q\+Vector$<$ Q\+Pair$<$ int, glm\+::vec3 $>$ $>$ \&p\+Values, int p\+Dimension)
+\item 
+static Q\+Vector$<$ int $>$ \hyperlink{class_tools_a3506c0f27d83f2ebd449664df66b5459}{Get\+Ordered\+Indexes} (const Q\+Vector$<$ float $>$ \&p\+Values)
+\item 
+static Q\+Vector$<$ int $>$ \hyperlink{class_tools_a24bb86a8e42c993d9ad36e8895ed2727}{Get\+Positions} (const Q\+Vector$<$ int $>$ \&p\+Values)
+\item 
+static Q\+Vector$<$ glm\+::vec4 $>$ \hyperlink{class_tools_a735f9c58afb7b291d0a0a7d8de106f02}{Convert\+Floats\+To\+Colors} (const Q\+Vector$<$ float $>$ \&p\+Values, bool p\+Inverted)
+\item 
+static Q\+Vector$<$ glm\+::vec4 $>$ \hyperlink{class_tools_a513af853ac315a3d93ed12ab726c7a02}{Convert\+Normalized\+Floats\+To\+Colors} (const Q\+Vector$<$ float $>$ \&p\+Values, bool p\+Inverted)
+\item 
+static Q\+Vector$<$ float $>$ \hyperlink{class_tools_a27f3ce25d03612e754147a8f0be1793c}{Scale\+Values} (const Q\+Vector$<$ float $>$ \&p\+Values, float p\+Lower\+Bound, float p\+Upper\+Bound, float p\+Percent\+Of\+Clipping=0.\+0f)
+\item 
+static float \hyperlink{class_tools_aebedcc71427b4036db23ac98e6e047f7}{Mean} (const Q\+Vector$<$ float $>$ \&p\+Values, const Q\+Vector$<$ float $>$ \&p\+Weights=Q\+Vector$<$ float $>$())
+\item 
+static Q\+Vector$<$ int $>$ \hyperlink{class_tools_a86b9c89c467568778ad24529ed2ea3fb}{Find\+Nearest\+Than\+Epsilon\+By\+Dimension} (int p\+Position, Q\+Vector$<$ Q\+Pair$<$ int, glm\+::vec3 $>$ $>$ \&p\+Vector, float p\+Epsilon, int p\+Dimension)
+\item 
+static Q\+Vector$<$ int $>$ \hyperlink{class_tools_a8a8e778cc3d0f1522ec2a6330d760cf6}{Merge\+Neighbours} (const Q\+Vector$<$ int $>$ \&p\+Vector1, const Q\+Vector$<$ int $>$ \&p\+Vector2, const Q\+Vector$<$ int $>$ \&p\+Vector3)
+\item 
+static float \hyperlink{class_tools_aa4eba8890f192b82c56364622f2e047a}{Triangle\+Area} (const glm\+::vec3 \&p\+A, const glm\+::vec3 \&p\+B, const glm\+::vec3 \&p\+C)
+\item 
+static Q\+String \hyperlink{class_tools_a227a860b7656df69e68b11d9db3fae5e}{Get\+Program\+Path} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static glm\+::vec4 \hyperlink{class_tools_a2c4b1ff763df162ba0a2be81290143f6}{Convert\+Normalized\+Float\+To\+Color} (float p\+Value, bool p\+Inverted)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_tools_a735f9c58afb7b291d0a0a7d8de106f02}{\index{Tools@{Tools}!Convert\+Floats\+To\+Colors@{Convert\+Floats\+To\+Colors}}
+\index{Convert\+Floats\+To\+Colors@{Convert\+Floats\+To\+Colors}!Tools@{Tools}}
+\subsubsection[{Convert\+Floats\+To\+Colors}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ glm\+::vec4 $>$ Tools\+::\+Convert\+Floats\+To\+Colors (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ float $>$ \&}]{p\+Values, }
+\item[{bool}]{p\+Inverted}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a735f9c58afb7b291d0a0a7d8de106f02}
+\hypertarget{class_tools_a513af853ac315a3d93ed12ab726c7a02}{\index{Tools@{Tools}!Convert\+Normalized\+Floats\+To\+Colors@{Convert\+Normalized\+Floats\+To\+Colors}}
+\index{Convert\+Normalized\+Floats\+To\+Colors@{Convert\+Normalized\+Floats\+To\+Colors}!Tools@{Tools}}
+\subsubsection[{Convert\+Normalized\+Floats\+To\+Colors}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ glm\+::vec4 $>$ Tools\+::\+Convert\+Normalized\+Floats\+To\+Colors (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ float $>$ \&}]{p\+Values, }
+\item[{bool}]{p\+Inverted}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a513af853ac315a3d93ed12ab726c7a02}
+\hypertarget{class_tools_a2c4b1ff763df162ba0a2be81290143f6}{\index{Tools@{Tools}!Convert\+Normalized\+Float\+To\+Color@{Convert\+Normalized\+Float\+To\+Color}}
+\index{Convert\+Normalized\+Float\+To\+Color@{Convert\+Normalized\+Float\+To\+Color}!Tools@{Tools}}
+\subsubsection[{Convert\+Normalized\+Float\+To\+Color}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec4 Tools\+::\+Convert\+Normalized\+Float\+To\+Color (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Value, }
+\item[{bool}]{p\+Inverted}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_tools_a2c4b1ff763df162ba0a2be81290143f6}
+\hypertarget{class_tools_a86b9c89c467568778ad24529ed2ea3fb}{\index{Tools@{Tools}!Find\+Nearest\+Than\+Epsilon\+By\+Dimension@{Find\+Nearest\+Than\+Epsilon\+By\+Dimension}}
+\index{Find\+Nearest\+Than\+Epsilon\+By\+Dimension@{Find\+Nearest\+Than\+Epsilon\+By\+Dimension}!Tools@{Tools}}
+\subsubsection[{Find\+Nearest\+Than\+Epsilon\+By\+Dimension}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ int $>$ Tools\+::\+Find\+Nearest\+Than\+Epsilon\+By\+Dimension (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Position, }
+\item[{Q\+Vector$<$ Q\+Pair$<$ int, glm\+::vec3 $>$ $>$ \&}]{p\+Vector, }
+\item[{float}]{p\+Epsilon, }
+\item[{int}]{p\+Dimension}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a86b9c89c467568778ad24529ed2ea3fb}
+\hypertarget{class_tools_a3506c0f27d83f2ebd449664df66b5459}{\index{Tools@{Tools}!Get\+Ordered\+Indexes@{Get\+Ordered\+Indexes}}
+\index{Get\+Ordered\+Indexes@{Get\+Ordered\+Indexes}!Tools@{Tools}}
+\subsubsection[{Get\+Ordered\+Indexes}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ int $>$ Tools\+::\+Get\+Ordered\+Indexes (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ float $>$ \&}]{p\+Values}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a3506c0f27d83f2ebd449664df66b5459}
+\hypertarget{class_tools_ae0b619c9e9c08c30094847760c942db0}{\index{Tools@{Tools}!Get\+Ordered\+Indexes\+By\+Dimension@{Get\+Ordered\+Indexes\+By\+Dimension}}
+\index{Get\+Ordered\+Indexes\+By\+Dimension@{Get\+Ordered\+Indexes\+By\+Dimension}!Tools@{Tools}}
+\subsubsection[{Get\+Ordered\+Indexes\+By\+Dimension}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ int $>$ Tools\+::\+Get\+Ordered\+Indexes\+By\+Dimension (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Pair$<$ int, glm\+::vec3 $>$ $>$ \&}]{p\+Values, }
+\item[{int}]{p\+Dimension}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_ae0b619c9e9c08c30094847760c942db0}
+\hypertarget{class_tools_a24bb86a8e42c993d9ad36e8895ed2727}{\index{Tools@{Tools}!Get\+Positions@{Get\+Positions}}
+\index{Get\+Positions@{Get\+Positions}!Tools@{Tools}}
+\subsubsection[{Get\+Positions}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ int $>$ Tools\+::\+Get\+Positions (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ int $>$ \&}]{p\+Values}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a24bb86a8e42c993d9ad36e8895ed2727}
+\hypertarget{class_tools_a227a860b7656df69e68b11d9db3fae5e}{\index{Tools@{Tools}!Get\+Program\+Path@{Get\+Program\+Path}}
+\index{Get\+Program\+Path@{Get\+Program\+Path}!Tools@{Tools}}
+\subsubsection[{Get\+Program\+Path}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Tools\+::\+Get\+Program\+Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a227a860b7656df69e68b11d9db3fae5e}
+\hypertarget{class_tools_aebedcc71427b4036db23ac98e6e047f7}{\index{Tools@{Tools}!Mean@{Mean}}
+\index{Mean@{Mean}!Tools@{Tools}}
+\subsubsection[{Mean}]{\setlength{\rightskip}{0pt plus 5cm}float Tools\+::\+Mean (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ float $>$ \&}]{p\+Values, }
+\item[{const Q\+Vector$<$ float $>$ \&}]{p\+Weights = {\ttfamily QVector$<$float$>$()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_aebedcc71427b4036db23ac98e6e047f7}
+\hypertarget{class_tools_a8a8e778cc3d0f1522ec2a6330d760cf6}{\index{Tools@{Tools}!Merge\+Neighbours@{Merge\+Neighbours}}
+\index{Merge\+Neighbours@{Merge\+Neighbours}!Tools@{Tools}}
+\subsubsection[{Merge\+Neighbours}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ int $>$ Tools\+::\+Merge\+Neighbours (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ int $>$ \&}]{p\+Vector1, }
+\item[{const Q\+Vector$<$ int $>$ \&}]{p\+Vector2, }
+\item[{const Q\+Vector$<$ int $>$ \&}]{p\+Vector3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a8a8e778cc3d0f1522ec2a6330d760cf6}
+\hypertarget{class_tools_a27f3ce25d03612e754147a8f0be1793c}{\index{Tools@{Tools}!Scale\+Values@{Scale\+Values}}
+\index{Scale\+Values@{Scale\+Values}!Tools@{Tools}}
+\subsubsection[{Scale\+Values}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ float $>$ Tools\+::\+Scale\+Values (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ float $>$ \&}]{p\+Values, }
+\item[{float}]{p\+Lower\+Bound, }
+\item[{float}]{p\+Upper\+Bound, }
+\item[{float}]{p\+Percent\+Of\+Clipping = {\ttfamily 0.0f}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_a27f3ce25d03612e754147a8f0be1793c}
+\hypertarget{class_tools_aa4eba8890f192b82c56364622f2e047a}{\index{Tools@{Tools}!Triangle\+Area@{Triangle\+Area}}
+\index{Triangle\+Area@{Triangle\+Area}!Tools@{Tools}}
+\subsubsection[{Triangle\+Area}]{\setlength{\rightskip}{0pt plus 5cm}float Tools\+::\+Triangle\+Area (
+\begin{DoxyParamCaption}
+\item[{const glm\+::vec3 \&}]{p\+A, }
+\item[{const glm\+::vec3 \&}]{p\+B, }
+\item[{const glm\+::vec3 \&}]{p\+C}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_tools_aa4eba8890f192b82c56364622f2e047a}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\hyperlink{_tools_8h}{Tools.\+h}\item 
+src/\hyperlink{_tools_8cpp}{Tools.\+cpp}\end{DoxyCompactItemize}

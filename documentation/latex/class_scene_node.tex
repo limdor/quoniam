@@ -1,0 +1,424 @@
+\hypertarget{class_scene_node}{\section{Scene\+Node Class Reference}
+\label{class_scene_node}\index{Scene\+Node@{Scene\+Node}}
+}
+
+
+Class for a node of a scene.  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Node.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scene_node_a7e696c70c3989a791353bd23e561d7b4}{Scene\+Node} (const Q\+String \&p\+Name)
+\begin{DoxyCompactList}\small\item\em Constructor with the name of the node. \end{DoxyCompactList}\item 
+\hyperlink{class_scene_node_a11be58b869975806f2ff5a627770fa2e}{$\sim$\+Scene\+Node} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+Q\+String \hyperlink{class_scene_node_a994b622bd2dea04dc47e29e5c6c88c71}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the node. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_node_aad670030082043555020615148c017b3}{Set\+Local\+Transform} (const glm\+::mat4 \&p\+Transform)
+\begin{DoxyCompactList}\small\item\em Set the local transform of the node (scale must be equal in x, y and z) \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_scene_node_a38e85751e316c2ccb0447fac18c70edc}{Get\+Local\+Transform} () const 
+\begin{DoxyCompactList}\small\item\em Get the local transform of the node. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_scene_node_a022ed44829491fd01f4245f8b595adda}{Get\+Global\+Transform} () const 
+\begin{DoxyCompactList}\small\item\em Get the global transform of the node. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_a8d8679be06927ade78f38dae66e6005e}{Get\+Number\+Of\+Vertices} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of vertices in the node. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_a854d028a5dd8f142233aeb4ed8963b1e}{Get\+Number\+Of\+Polygons} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of polygons in the node. \end{DoxyCompactList}\item 
+const \hyperlink{class_bounding_sphere}{Bounding\+Sphere} $\ast$ \hyperlink{class_scene_node_a51cb72b965f1b6c3e90cd32d2fbe0b70}{Get\+Bounding\+Sphere} () const 
+\begin{DoxyCompactList}\small\item\em Get the bounding sphere of the node. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_node_a59d422a4a9eda1f61f0f6b396454824a}{Add\+Mesh} (\hyperlink{class_mesh}{Mesh} $\ast$p\+Mesh)
+\begin{DoxyCompactList}\small\item\em Add a mesh into the node. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_node_a53ae9d1ceb8f2c9121a98960d30f98ab}{Add\+Camera} (\hyperlink{class_camera}{Camera} $\ast$p\+Camera)
+\begin{DoxyCompactList}\small\item\em Add a camera into the node. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_node_abcabdce00df9d3d560427e74fc829a82}{Add\+Child} (\hyperlink{class_scene_node}{Scene\+Node} $\ast$p\+Child)
+\begin{DoxyCompactList}\small\item\em Add a node child into the node. \end{DoxyCompactList}\item 
+\hyperlink{class_scene_node}{Scene\+Node} $\ast$ \hyperlink{class_scene_node_a53aba5c8a4e8cc31735c6b8c6a30e9f0}{Get\+Parent} () const 
+\begin{DoxyCompactList}\small\item\em Get the parent. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_node_ad1a4820022772a7be4fc85509a170fa3}{Set\+Parent} (\hyperlink{class_scene_node}{Scene\+Node} $\ast$p\+Parent)
+\begin{DoxyCompactList}\small\item\em Set the parent. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_aa3ddf1a8e213d816a63c2b34448fbdf5}{Get\+Num\+Meshes} () const 
+\begin{DoxyCompactList}\small\item\em Obtain the number of meshes. \end{DoxyCompactList}\item 
+const \hyperlink{class_mesh}{Mesh} $\ast$ \hyperlink{class_scene_node_af3e49f6cf2fb7b4f42f5999ce052510e}{Get\+Mesh} (int p\+Position) const 
+\begin{DoxyCompactList}\small\item\em Obtain the mesh. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_a6625dcbebbce366e7fcf5544df71f2b1}{Get\+Num\+Cameras} () const 
+\begin{DoxyCompactList}\small\item\em Obtain the number of cameras. \end{DoxyCompactList}\item 
+const \hyperlink{class_camera}{Camera} $\ast$ \hyperlink{class_scene_node_abc04a1526fd66a7689ce704e34d0920b}{Get\+Camera} (int p\+Position) const 
+\begin{DoxyCompactList}\small\item\em Obtain the camera. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_aa7fed4b6f2c3624c8cbbc8373ee80559}{Get\+Num\+Childs} () const 
+\begin{DoxyCompactList}\small\item\em Obtain the number of childs. \end{DoxyCompactList}\item 
+const \hyperlink{class_scene_node}{Scene\+Node} $\ast$ \hyperlink{class_scene_node_abd11242715742498f9fdc2580cc94467}{Get\+Child} (int p\+Position) const 
+\begin{DoxyCompactList}\small\item\em Obtain the child. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_scene_node_ae7111fc017631027a07f0d0ac9762c52}{Update\+Global\+Transform} ()
+\begin{DoxyCompactList}\small\item\em Update global transform. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_node_a37121add3dbbc4dee59497d511be88b7}{Update\+Geometry\+Information} ()
+\begin{DoxyCompactList}\small\item\em Update geometry information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \hyperlink{class_scene_node_ad362c98f40bfd634a446a8074081ca00}{m\+Name}
+\begin{DoxyCompactList}\small\item\em Name of the node. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_scene_node_a747578d1cb21d8ee37071cbf7d2f4218}{m\+Local\+Transform}
+\begin{DoxyCompactList}\small\item\em Local transform. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_scene_node_a7d96b292c5b46cdc1ffeae67811ae652}{m\+Global\+Transform}
+\begin{DoxyCompactList}\small\item\em Global transform. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_a7c740b28389775b5df3a5a37af990c35}{m\+Number\+Of\+Vertices}
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_node_a212fad91b1eeb3aad793101d81c1ba3e}{m\+Number\+Of\+Polygons}
+\begin{DoxyCompactList}\small\item\em Number of polygons. \end{DoxyCompactList}\item 
+\hyperlink{class_bounding_sphere}{Bounding\+Sphere} $\ast$ \hyperlink{class_scene_node_a64fcb90c98557ef563761dff3b8fd274}{m\+Bounding\+Sphere}
+\begin{DoxyCompactList}\small\item\em Bounding sphere. \end{DoxyCompactList}\item 
+\hyperlink{class_scene_node}{Scene\+Node} $\ast$ \hyperlink{class_scene_node_aa478ebb376c411801a004bcc2590046d}{m\+Parent}
+\begin{DoxyCompactList}\small\item\em Parent node. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_mesh}{Mesh} $\ast$ $>$ \hyperlink{class_scene_node_aced6fad8487c27dad0f6ee1d1ec80b90}{m\+Meshes}
+\begin{DoxyCompactList}\small\item\em Meshes of the node. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_camera}{Camera} $\ast$ $>$ \hyperlink{class_scene_node_adcdbf0c12c63308f53ec11a7e4b141b0}{m\+Cameras}
+\begin{DoxyCompactList}\small\item\em Cameras of the node. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_scene_node}{Scene\+Node} $\ast$ $>$ \hyperlink{class_scene_node_ab6fe55f9975dfdcd9007ec9cd6dd2206}{m\+Childs}
+\begin{DoxyCompactList}\small\item\em Childs of the node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for a node of a scene. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Nicolau Sunyer 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scene_node_a7e696c70c3989a791353bd23e561d7b4}{\index{Scene\+Node@{Scene\+Node}!Scene\+Node@{Scene\+Node}}
+\index{Scene\+Node@{Scene\+Node}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Scene\+Node}]{\setlength{\rightskip}{0pt plus 5cm}Scene\+Node\+::\+Scene\+Node (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{p\+Name}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_a7e696c70c3989a791353bd23e561d7b4}
+
+
+Constructor with the name of the node. 
+
+\hypertarget{class_scene_node_a11be58b869975806f2ff5a627770fa2e}{\index{Scene\+Node@{Scene\+Node}!````~Scene\+Node@{$\sim$\+Scene\+Node}}
+\index{````~Scene\+Node@{$\sim$\+Scene\+Node}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{$\sim$\+Scene\+Node}]{\setlength{\rightskip}{0pt plus 5cm}Scene\+Node\+::$\sim$\+Scene\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_a11be58b869975806f2ff5a627770fa2e}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scene_node_a53ae9d1ceb8f2c9121a98960d30f98ab}{\index{Scene\+Node@{Scene\+Node}!Add\+Camera@{Add\+Camera}}
+\index{Add\+Camera@{Add\+Camera}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Add\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Add\+Camera (
+\begin{DoxyParamCaption}
+\item[{{\bf Camera} $\ast$}]{p\+Camera}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_a53ae9d1ceb8f2c9121a98960d30f98ab}
+
+
+Add a camera into the node. 
+
+\hypertarget{class_scene_node_abcabdce00df9d3d560427e74fc829a82}{\index{Scene\+Node@{Scene\+Node}!Add\+Child@{Add\+Child}}
+\index{Add\+Child@{Add\+Child}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Add\+Child}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Add\+Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene\+Node} $\ast$}]{p\+Child}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_abcabdce00df9d3d560427e74fc829a82}
+
+
+Add a node child into the node. 
+
+\hypertarget{class_scene_node_a59d422a4a9eda1f61f0f6b396454824a}{\index{Scene\+Node@{Scene\+Node}!Add\+Mesh@{Add\+Mesh}}
+\index{Add\+Mesh@{Add\+Mesh}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Add\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Add\+Mesh (
+\begin{DoxyParamCaption}
+\item[{{\bf Mesh} $\ast$}]{p\+Mesh}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_a59d422a4a9eda1f61f0f6b396454824a}
+
+
+Add a mesh into the node. 
+
+\hypertarget{class_scene_node_a51cb72b965f1b6c3e90cd32d2fbe0b70}{\index{Scene\+Node@{Scene\+Node}!Get\+Bounding\+Sphere@{Get\+Bounding\+Sphere}}
+\index{Get\+Bounding\+Sphere@{Get\+Bounding\+Sphere}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Bounding\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Bounding\+Sphere} $\ast$ Scene\+Node\+::\+Get\+Bounding\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a51cb72b965f1b6c3e90cd32d2fbe0b70}
+
+
+Get the bounding sphere of the node. 
+
+\hypertarget{class_scene_node_abc04a1526fd66a7689ce704e34d0920b}{\index{Scene\+Node@{Scene\+Node}!Get\+Camera@{Get\+Camera}}
+\index{Get\+Camera@{Get\+Camera}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Camera} $\ast$ Scene\+Node\+::\+Get\+Camera (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Position}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_abc04a1526fd66a7689ce704e34d0920b}
+
+
+Obtain the camera. 
+
+\hypertarget{class_scene_node_abd11242715742498f9fdc2580cc94467}{\index{Scene\+Node@{Scene\+Node}!Get\+Child@{Get\+Child}}
+\index{Get\+Child@{Get\+Child}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Child}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Scene\+Node} $\ast$ Scene\+Node\+::\+Get\+Child (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Position}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_abd11242715742498f9fdc2580cc94467}
+
+
+Obtain the child. 
+
+\hypertarget{class_scene_node_a022ed44829491fd01f4245f8b595adda}{\index{Scene\+Node@{Scene\+Node}!Get\+Global\+Transform@{Get\+Global\+Transform}}
+\index{Get\+Global\+Transform@{Get\+Global\+Transform}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Global\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Scene\+Node\+::\+Get\+Global\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a022ed44829491fd01f4245f8b595adda}
+
+
+Get the global transform of the node. 
+
+\hypertarget{class_scene_node_a38e85751e316c2ccb0447fac18c70edc}{\index{Scene\+Node@{Scene\+Node}!Get\+Local\+Transform@{Get\+Local\+Transform}}
+\index{Get\+Local\+Transform@{Get\+Local\+Transform}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Local\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Scene\+Node\+::\+Get\+Local\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a38e85751e316c2ccb0447fac18c70edc}
+
+
+Get the local transform of the node. 
+
+\hypertarget{class_scene_node_af3e49f6cf2fb7b4f42f5999ce052510e}{\index{Scene\+Node@{Scene\+Node}!Get\+Mesh@{Get\+Mesh}}
+\index{Get\+Mesh@{Get\+Mesh}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Mesh} $\ast$ Scene\+Node\+::\+Get\+Mesh (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Position}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_af3e49f6cf2fb7b4f42f5999ce052510e}
+
+
+Obtain the mesh. 
+
+\hypertarget{class_scene_node_a994b622bd2dea04dc47e29e5c6c88c71}{\index{Scene\+Node@{Scene\+Node}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Scene\+Node\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a994b622bd2dea04dc47e29e5c6c88c71}
+
+
+Get the name of the node. 
+
+\hypertarget{class_scene_node_a854d028a5dd8f142233aeb4ed8963b1e}{\index{Scene\+Node@{Scene\+Node}!Get\+Number\+Of\+Polygons@{Get\+Number\+Of\+Polygons}}
+\index{Get\+Number\+Of\+Polygons@{Get\+Number\+Of\+Polygons}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Number\+Of\+Polygons}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::\+Get\+Number\+Of\+Polygons (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a854d028a5dd8f142233aeb4ed8963b1e}
+
+
+Get the number of polygons in the node. 
+
+\hypertarget{class_scene_node_a8d8679be06927ade78f38dae66e6005e}{\index{Scene\+Node@{Scene\+Node}!Get\+Number\+Of\+Vertices@{Get\+Number\+Of\+Vertices}}
+\index{Get\+Number\+Of\+Vertices@{Get\+Number\+Of\+Vertices}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Number\+Of\+Vertices}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::\+Get\+Number\+Of\+Vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a8d8679be06927ade78f38dae66e6005e}
+
+
+Get the number of vertices in the node. 
+
+\hypertarget{class_scene_node_a6625dcbebbce366e7fcf5544df71f2b1}{\index{Scene\+Node@{Scene\+Node}!Get\+Num\+Cameras@{Get\+Num\+Cameras}}
+\index{Get\+Num\+Cameras@{Get\+Num\+Cameras}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Num\+Cameras}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::\+Get\+Num\+Cameras (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a6625dcbebbce366e7fcf5544df71f2b1}
+
+
+Obtain the number of cameras. 
+
+\hypertarget{class_scene_node_aa7fed4b6f2c3624c8cbbc8373ee80559}{\index{Scene\+Node@{Scene\+Node}!Get\+Num\+Childs@{Get\+Num\+Childs}}
+\index{Get\+Num\+Childs@{Get\+Num\+Childs}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Num\+Childs}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::\+Get\+Num\+Childs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_aa7fed4b6f2c3624c8cbbc8373ee80559}
+
+
+Obtain the number of childs. 
+
+\hypertarget{class_scene_node_aa3ddf1a8e213d816a63c2b34448fbdf5}{\index{Scene\+Node@{Scene\+Node}!Get\+Num\+Meshes@{Get\+Num\+Meshes}}
+\index{Get\+Num\+Meshes@{Get\+Num\+Meshes}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Num\+Meshes}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::\+Get\+Num\+Meshes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_aa3ddf1a8e213d816a63c2b34448fbdf5}
+
+
+Obtain the number of meshes. 
+
+\hypertarget{class_scene_node_a53aba5c8a4e8cc31735c6b8c6a30e9f0}{\index{Scene\+Node@{Scene\+Node}!Get\+Parent@{Get\+Parent}}
+\index{Get\+Parent@{Get\+Parent}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Get\+Parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\+Node} $\ast$ Scene\+Node\+::\+Get\+Parent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_node_a53aba5c8a4e8cc31735c6b8c6a30e9f0}
+
+
+Get the parent. 
+
+\hypertarget{class_scene_node_aad670030082043555020615148c017b3}{\index{Scene\+Node@{Scene\+Node}!Set\+Local\+Transform@{Set\+Local\+Transform}}
+\index{Set\+Local\+Transform@{Set\+Local\+Transform}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Set\+Local\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Set\+Local\+Transform (
+\begin{DoxyParamCaption}
+\item[{const glm\+::mat4 \&}]{p\+Transform}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_aad670030082043555020615148c017b3}
+
+
+Set the local transform of the node (scale must be equal in x, y and z) 
+
+\hypertarget{class_scene_node_ad1a4820022772a7be4fc85509a170fa3}{\index{Scene\+Node@{Scene\+Node}!Set\+Parent@{Set\+Parent}}
+\index{Set\+Parent@{Set\+Parent}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Set\+Parent}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Set\+Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf Scene\+Node} $\ast$}]{p\+Parent}
+\end{DoxyParamCaption}
+)}}\label{class_scene_node_ad1a4820022772a7be4fc85509a170fa3}
+
+
+Set the parent. 
+
+\hypertarget{class_scene_node_a37121add3dbbc4dee59497d511be88b7}{\index{Scene\+Node@{Scene\+Node}!Update\+Geometry\+Information@{Update\+Geometry\+Information}}
+\index{Update\+Geometry\+Information@{Update\+Geometry\+Information}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Update\+Geometry\+Information}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Update\+Geometry\+Information (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_a37121add3dbbc4dee59497d511be88b7}
+
+
+Update geometry information. 
+
+\hypertarget{class_scene_node_ae7111fc017631027a07f0d0ac9762c52}{\index{Scene\+Node@{Scene\+Node}!Update\+Global\+Transform@{Update\+Global\+Transform}}
+\index{Update\+Global\+Transform@{Update\+Global\+Transform}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{Update\+Global\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Node\+::\+Update\+Global\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_ae7111fc017631027a07f0d0ac9762c52}
+
+
+Update global transform. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_scene_node_a64fcb90c98557ef563761dff3b8fd274}{\index{Scene\+Node@{Scene\+Node}!m\+Bounding\+Sphere@{m\+Bounding\+Sphere}}
+\index{m\+Bounding\+Sphere@{m\+Bounding\+Sphere}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Bounding\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bounding\+Sphere}$\ast$ Scene\+Node\+::m\+Bounding\+Sphere\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_a64fcb90c98557ef563761dff3b8fd274}
+
+
+Bounding sphere. 
+
+\hypertarget{class_scene_node_adcdbf0c12c63308f53ec11a7e4b141b0}{\index{Scene\+Node@{Scene\+Node}!m\+Cameras@{m\+Cameras}}
+\index{m\+Cameras@{m\+Cameras}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Cameras}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf Camera}$\ast$$>$ Scene\+Node\+::m\+Cameras\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_adcdbf0c12c63308f53ec11a7e4b141b0}
+
+
+Cameras of the node. 
+
+\hypertarget{class_scene_node_ab6fe55f9975dfdcd9007ec9cd6dd2206}{\index{Scene\+Node@{Scene\+Node}!m\+Childs@{m\+Childs}}
+\index{m\+Childs@{m\+Childs}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Childs}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf Scene\+Node}$\ast$$>$ Scene\+Node\+::m\+Childs\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_ab6fe55f9975dfdcd9007ec9cd6dd2206}
+
+
+Childs of the node. 
+
+\hypertarget{class_scene_node_a7d96b292c5b46cdc1ffeae67811ae652}{\index{Scene\+Node@{Scene\+Node}!m\+Global\+Transform@{m\+Global\+Transform}}
+\index{m\+Global\+Transform@{m\+Global\+Transform}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Global\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Scene\+Node\+::m\+Global\+Transform\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_a7d96b292c5b46cdc1ffeae67811ae652}
+
+
+Global transform. 
+
+\hypertarget{class_scene_node_a747578d1cb21d8ee37071cbf7d2f4218}{\index{Scene\+Node@{Scene\+Node}!m\+Local\+Transform@{m\+Local\+Transform}}
+\index{m\+Local\+Transform@{m\+Local\+Transform}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Local\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 Scene\+Node\+::m\+Local\+Transform\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_a747578d1cb21d8ee37071cbf7d2f4218}
+
+
+Local transform. 
+
+\hypertarget{class_scene_node_aced6fad8487c27dad0f6ee1d1ec80b90}{\index{Scene\+Node@{Scene\+Node}!m\+Meshes@{m\+Meshes}}
+\index{m\+Meshes@{m\+Meshes}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Meshes}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf Mesh}$\ast$$>$ Scene\+Node\+::m\+Meshes\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_aced6fad8487c27dad0f6ee1d1ec80b90}
+
+
+Meshes of the node. 
+
+\hypertarget{class_scene_node_ad362c98f40bfd634a446a8074081ca00}{\index{Scene\+Node@{Scene\+Node}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Name}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Scene\+Node\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_ad362c98f40bfd634a446a8074081ca00}
+
+
+Name of the node. 
+
+\hypertarget{class_scene_node_a212fad91b1eeb3aad793101d81c1ba3e}{\index{Scene\+Node@{Scene\+Node}!m\+Number\+Of\+Polygons@{m\+Number\+Of\+Polygons}}
+\index{m\+Number\+Of\+Polygons@{m\+Number\+Of\+Polygons}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Number\+Of\+Polygons}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::m\+Number\+Of\+Polygons\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_a212fad91b1eeb3aad793101d81c1ba3e}
+
+
+Number of polygons. 
+
+\hypertarget{class_scene_node_a7c740b28389775b5df3a5a37af990c35}{\index{Scene\+Node@{Scene\+Node}!m\+Number\+Of\+Vertices@{m\+Number\+Of\+Vertices}}
+\index{m\+Number\+Of\+Vertices@{m\+Number\+Of\+Vertices}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Number\+Of\+Vertices}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+Node\+::m\+Number\+Of\+Vertices\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_a7c740b28389775b5df3a5a37af990c35}
+
+
+Number of vertices. 
+
+\hypertarget{class_scene_node_aa478ebb376c411801a004bcc2590046d}{\index{Scene\+Node@{Scene\+Node}!m\+Parent@{m\+Parent}}
+\index{m\+Parent@{m\+Parent}!Scene\+Node@{Scene\+Node}}
+\subsubsection[{m\+Parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\+Node}$\ast$ Scene\+Node\+::m\+Parent\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_node_aa478ebb376c411801a004bcc2590046d}
+
+
+Parent node. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_scene_node_8h}{Scene\+Node.\+h}\item 
+src/core/\hyperlink{_scene_node_8cpp}{Scene\+Node.\+cpp}\end{DoxyCompactItemize}

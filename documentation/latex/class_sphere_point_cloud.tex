@@ -1,0 +1,399 @@
+\hypertarget{class_sphere_point_cloud}{\section{Sphere\+Point\+Cloud Class Reference}
+\label{class_sphere_point_cloud}\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+}
+
+
+{\ttfamily \#include $<$Sphere\+Point\+Cloud.\+h$>$}
+
+Inheritance diagram for Sphere\+Point\+Cloud\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sphere_point_cloud}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sphere_point_cloud_a2b7e0b5989a455ec7986d9d536f3ce21}{Sphere\+Point\+Cloud} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_sphere_point_cloud_ac1d6c155589d2a2c5e1344461237370e}{Sphere\+Point\+Cloud} (const \hyperlink{class_sphere_point_cloud}{Sphere\+Point\+Cloud} \&p\+Sphere\+Point\+Cloud)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_sphere_point_cloud_a0257f3ce5bdc5ddd24bbb49c21d8a9f5}{$\sim$\+Sphere\+Point\+Cloud} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_a2653050cf6623de85dc67427b3a4145f}{Set\+To\+Uniform4} ()
+\begin{DoxyCompactList}\small\item\em Generates 4 points uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_a3ec027baeb8148420e9429beeb0f9083}{Set\+To\+Uniform6} ()
+\begin{DoxyCompactList}\small\item\em Generates 6 points uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_accc06313864eaa198971ef0108bcb3ca}{Set\+To\+Uniform8} ()
+\begin{DoxyCompactList}\small\item\em Generates 8 points uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_a91f91589cc74911158165b6adf46b428}{Set\+To\+Uniform12} ()
+\begin{DoxyCompactList}\small\item\em Generates 12 points uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_a22f25a4447052eb8c98dea4ace790c8b}{Set\+To\+Uniform20} ()
+\begin{DoxyCompactList}\small\item\em Generates 20 points uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_a1eff636a5b32f0951a33a9cf7598c1d9}{Set\+To\+Quasi\+Uniform} (unsigned char p\+Depth)
+\item 
+Q\+Vector$<$ unsigned int $>$ \hyperlink{class_sphere_point_cloud_a381347a4f912ecc8d2012086324e0d56}{Get\+Faces} () const 
+\begin{DoxyCompactList}\small\item\em Return the faces of the triangles. \end{DoxyCompactList}\item 
+Q\+Vector$<$ glm\+::vec3 $>$ \hyperlink{class_sphere_point_cloud_aa3cd921f38a53c64d3fb4833860fbd9c}{Get\+Vertices} () const 
+\begin{DoxyCompactList}\small\item\em Return the points in cartesian coordinates. \end{DoxyCompactList}\item 
+glm\+::vec3 \hyperlink{class_sphere_point_cloud_a4e076465c1f7f26970794e4c0f8e8adb}{Get\+Vertex} (unsigned int p\+I) const 
+\begin{DoxyCompactList}\small\item\em Return the vertex {\itshape p\+I}. \end{DoxyCompactList}\item 
+Q\+Vector$<$ Q\+Vector$<$ int $>$ $>$ \hyperlink{class_sphere_point_cloud_a0004a4d225831127eaafaa28dc13b416}{Get\+Neighbours} () const 
+\begin{DoxyCompactList}\small\item\em Return the neighbours of every point. \end{DoxyCompactList}\item 
+Q\+Vector$<$ int $>$ \hyperlink{class_sphere_point_cloud_ac83eb3eac8c51a2bbec28ff2a40a985c}{Get\+Neighbours} (unsigned int p\+I) const 
+\begin{DoxyCompactList}\small\item\em Return the neighbours of the point {\itshape p\+I}. \end{DoxyCompactList}\item 
+\hyperlink{class_geometry}{Geometry} $\ast$ \hyperlink{class_sphere_point_cloud_afb0abeffb85e483961fd08a7e58e3440}{Get\+Mesh} () const 
+\begin{DoxyCompactList}\small\item\em Return the 3\+D mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static glm\+::vec3 \hyperlink{class_sphere_point_cloud_a2182e6f3e31bb91347a4b3d15cf3ebbe}{Up} (const glm\+::vec3 \&p\+Viewpoint)
+\begin{DoxyCompactList}\small\item\em Retorna un vector cap amunt per al punt de vista passat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_sphere_point_cloud_a01bf0317e5a3b1229bdafc9f4ff92c37}{Set\+Mesh\+Information} ()
+\begin{DoxyCompactList}\small\item\em Configure the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_geometry}{Geometry} $\ast$ \hyperlink{class_sphere_point_cloud_a722ae327d20905a422c279bc0bc60258}{m\+Mesh}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_mesh}{Mesh} to paint the sphere point cloud. \end{DoxyCompactList}\item 
+int \hyperlink{class_sphere_point_cloud_a0579096387a36228a7167de55d131292}{m\+Number\+Of\+Points}
+\begin{DoxyCompactList}\small\item\em Number of points. \end{DoxyCompactList}\item 
+Q\+Vector$<$ unsigned int $>$ \hyperlink{class_sphere_point_cloud_a1493117ae52c168b3ca2dc0a395faf65}{m\+Faces}
+\begin{DoxyCompactList}\small\item\em Faces. \end{DoxyCompactList}\item 
+Q\+Vector$<$ glm\+::vec3 $>$ \hyperlink{class_sphere_point_cloud_a03bccf235a21adebdfcd6a8e4c407c72}{m\+Vertices}
+\begin{DoxyCompactList}\small\item\em Vertexs in cartesian coordinates. \end{DoxyCompactList}\item 
+Q\+Vector$<$ glm\+::vec3 $>$ \hyperlink{class_sphere_point_cloud_a01a10f53b2432af26235a1acc98391eb}{m\+Normals}
+\begin{DoxyCompactList}\small\item\em Normals of the vertexs. \end{DoxyCompactList}\item 
+Q\+Vector$<$ Q\+Vector$<$ int $>$ $>$ \hyperlink{class_sphere_point_cloud_a11b1736edb303b804dc0882edc8718a8}{m\+Neighbours}
+\begin{DoxyCompactList}\small\item\em Neighbours of the vertexs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_sphere_point_cloud_a3e0d3c60d70cfe99c2d6de29c73c03da}{Compute\+Quasi\+Uniform\+Neighbours} ()
+\begin{DoxyCompactList}\small\item\em Compute the neighbours of the quasi uniform distribution. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_a2b3f0d6a9ec362b7092d5d57db48a308}{Create\+Icosahedron} ()
+\begin{DoxyCompactList}\small\item\em Create the vertexs, faces and normals of an icosahedron (level 0) \end{DoxyCompactList}\item 
+bool \hyperlink{class_sphere_point_cloud_aa3b15e437f2985aba5cc4d25f6247f31}{Find\+Sphere\+Cloud\+Vertex} (const glm\+::vec3 \&p\+V, unsigned int \&p\+Position) const 
+\begin{DoxyCompactList}\small\item\em Find if a vertex already exists, if exists return the index. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_acbdfea7e32eb80be3f7f789a341aaee4}{Create\+Sphere\+Cloud\+Triangle} (const glm\+::vec3 \&p\+V1, const glm\+::vec3 \&p\+V2, const glm\+::vec3 \&p\+V3)
+\begin{DoxyCompactList}\small\item\em Create a new face with 3 vertex from the point cloud. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_point_cloud_ac6da28fe26729163facc32139595e758}{Subdivide} (glm\+::vec3 p\+V1, glm\+::vec3 p\+V2, glm\+::vec3 p\+V3, unsigned short p\+Depth)
+\begin{DoxyCompactList}\small\item\em Subdivide the point cloud recursively until {\itshape p\+Depth}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Sphere of points uniformly or quasi-\/uniformly distributed
+
+\begin{DoxyAuthor}{Author}
+Francisco González 
+
+Marc Ruiz 
+
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_sphere_point_cloud_a2b7e0b5989a455ec7986d9d536f3ce21}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Sphere\+Point\+Cloud}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+Point\+Cloud\+::\+Sphere\+Point\+Cloud (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a2b7e0b5989a455ec7986d9d536f3ce21}
+
+
+Constructor. 
+
+\hypertarget{class_sphere_point_cloud_ac1d6c155589d2a2c5e1344461237370e}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Sphere\+Point\+Cloud}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+Point\+Cloud\+::\+Sphere\+Point\+Cloud (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sphere\+Point\+Cloud} \&}]{p\+Sphere\+Point\+Cloud}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_ac1d6c155589d2a2c5e1344461237370e}
+
+
+Copy constructor. 
+
+\hypertarget{class_sphere_point_cloud_a0257f3ce5bdc5ddd24bbb49c21d8a9f5}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!````~Sphere\+Point\+Cloud@{$\sim$\+Sphere\+Point\+Cloud}}
+\index{````~Sphere\+Point\+Cloud@{$\sim$\+Sphere\+Point\+Cloud}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{$\sim$\+Sphere\+Point\+Cloud}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+Point\+Cloud\+::$\sim$\+Sphere\+Point\+Cloud (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a0257f3ce5bdc5ddd24bbb49c21d8a9f5}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_sphere_point_cloud_a3e0d3c60d70cfe99c2d6de29c73c03da}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Compute\+Quasi\+Uniform\+Neighbours@{Compute\+Quasi\+Uniform\+Neighbours}}
+\index{Compute\+Quasi\+Uniform\+Neighbours@{Compute\+Quasi\+Uniform\+Neighbours}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Compute\+Quasi\+Uniform\+Neighbours}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Compute\+Quasi\+Uniform\+Neighbours (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_sphere_point_cloud_a3e0d3c60d70cfe99c2d6de29c73c03da}
+
+
+Compute the neighbours of the quasi uniform distribution. 
+
+\hypertarget{class_sphere_point_cloud_a2b3f0d6a9ec362b7092d5d57db48a308}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Create\+Icosahedron@{Create\+Icosahedron}}
+\index{Create\+Icosahedron@{Create\+Icosahedron}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Create\+Icosahedron}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Create\+Icosahedron (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_sphere_point_cloud_a2b3f0d6a9ec362b7092d5d57db48a308}
+
+
+Create the vertexs, faces and normals of an icosahedron (level 0) 
+
+\hypertarget{class_sphere_point_cloud_acbdfea7e32eb80be3f7f789a341aaee4}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Create\+Sphere\+Cloud\+Triangle@{Create\+Sphere\+Cloud\+Triangle}}
+\index{Create\+Sphere\+Cloud\+Triangle@{Create\+Sphere\+Cloud\+Triangle}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Create\+Sphere\+Cloud\+Triangle}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Create\+Sphere\+Cloud\+Triangle (
+\begin{DoxyParamCaption}
+\item[{const glm\+::vec3 \&}]{p\+V1, }
+\item[{const glm\+::vec3 \&}]{p\+V2, }
+\item[{const glm\+::vec3 \&}]{p\+V3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_sphere_point_cloud_acbdfea7e32eb80be3f7f789a341aaee4}
+
+
+Create a new face with 3 vertex from the point cloud. 
+
+\hypertarget{class_sphere_point_cloud_aa3b15e437f2985aba5cc4d25f6247f31}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Find\+Sphere\+Cloud\+Vertex@{Find\+Sphere\+Cloud\+Vertex}}
+\index{Find\+Sphere\+Cloud\+Vertex@{Find\+Sphere\+Cloud\+Vertex}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Find\+Sphere\+Cloud\+Vertex}]{\setlength{\rightskip}{0pt plus 5cm}bool Sphere\+Point\+Cloud\+::\+Find\+Sphere\+Cloud\+Vertex (
+\begin{DoxyParamCaption}
+\item[{const glm\+::vec3 \&}]{p\+V, }
+\item[{unsigned int \&}]{p\+Position}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}}\label{class_sphere_point_cloud_aa3b15e437f2985aba5cc4d25f6247f31}
+
+
+Find if a vertex already exists, if exists return the index. 
+
+\hypertarget{class_sphere_point_cloud_a381347a4f912ecc8d2012086324e0d56}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Get\+Faces@{Get\+Faces}}
+\index{Get\+Faces@{Get\+Faces}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Get\+Faces}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ unsigned int $>$ Sphere\+Point\+Cloud\+::\+Get\+Faces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_point_cloud_a381347a4f912ecc8d2012086324e0d56}
+
+
+Return the faces of the triangles. 
+
+\hypertarget{class_sphere_point_cloud_afb0abeffb85e483961fd08a7e58e3440}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Get\+Mesh@{Get\+Mesh}}
+\index{Get\+Mesh@{Get\+Mesh}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Get\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Geometry} $\ast$ Sphere\+Point\+Cloud\+::\+Get\+Mesh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_point_cloud_afb0abeffb85e483961fd08a7e58e3440}
+
+
+Return the 3\+D mesh. 
+
+\hypertarget{class_sphere_point_cloud_a0004a4d225831127eaafaa28dc13b416}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Get\+Neighbours@{Get\+Neighbours}}
+\index{Get\+Neighbours@{Get\+Neighbours}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Get\+Neighbours}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ Q\+Vector$<$ int $>$ $>$ Sphere\+Point\+Cloud\+::\+Get\+Neighbours (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_point_cloud_a0004a4d225831127eaafaa28dc13b416}
+
+
+Return the neighbours of every point. 
+
+\hypertarget{class_sphere_point_cloud_ac83eb3eac8c51a2bbec28ff2a40a985c}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Get\+Neighbours@{Get\+Neighbours}}
+\index{Get\+Neighbours@{Get\+Neighbours}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Get\+Neighbours}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ int $>$ Sphere\+Point\+Cloud\+::\+Get\+Neighbours (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+I}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_point_cloud_ac83eb3eac8c51a2bbec28ff2a40a985c}
+
+
+Return the neighbours of the point {\itshape p\+I}. 
+
+\hypertarget{class_sphere_point_cloud_a4e076465c1f7f26970794e4c0f8e8adb}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Get\+Vertex@{Get\+Vertex}}
+\index{Get\+Vertex@{Get\+Vertex}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Get\+Vertex}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Sphere\+Point\+Cloud\+::\+Get\+Vertex (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+I}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_point_cloud_a4e076465c1f7f26970794e4c0f8e8adb}
+
+
+Return the vertex {\itshape p\+I}. 
+
+\hypertarget{class_sphere_point_cloud_aa3cd921f38a53c64d3fb4833860fbd9c}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Get\+Vertices@{Get\+Vertices}}
+\index{Get\+Vertices@{Get\+Vertices}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Get\+Vertices}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ glm\+::vec3 $>$ Sphere\+Point\+Cloud\+::\+Get\+Vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_point_cloud_aa3cd921f38a53c64d3fb4833860fbd9c}
+
+
+Return the points in cartesian coordinates. 
+
+\hypertarget{class_sphere_point_cloud_a01bf0317e5a3b1229bdafc9f4ff92c37}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+Mesh\+Information@{Set\+Mesh\+Information}}
+\index{Set\+Mesh\+Information@{Set\+Mesh\+Information}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+Mesh\+Information}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+Mesh\+Information (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a01bf0317e5a3b1229bdafc9f4ff92c37}
+
+
+Configure the mesh. 
+
+\hypertarget{class_sphere_point_cloud_a1eff636a5b32f0951a33a9cf7598c1d9}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+To\+Quasi\+Uniform@{Set\+To\+Quasi\+Uniform}}
+\index{Set\+To\+Quasi\+Uniform@{Set\+To\+Quasi\+Uniform}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+To\+Quasi\+Uniform}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+To\+Quasi\+Uniform (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{p\+Depth}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a1eff636a5b32f0951a33a9cf7598c1d9}
+Generate 10$\ast$4$^\wedge$depth+2 points quasi-\/uniformly distributed using the recursive subdivision of faces, starting from an icosahedron \hypertarget{class_sphere_point_cloud_a91f91589cc74911158165b6adf46b428}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+To\+Uniform12@{Set\+To\+Uniform12}}
+\index{Set\+To\+Uniform12@{Set\+To\+Uniform12}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+To\+Uniform12}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+To\+Uniform12 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a91f91589cc74911158165b6adf46b428}
+
+
+Generates 12 points uniformly distributed. 
+
+\hypertarget{class_sphere_point_cloud_a22f25a4447052eb8c98dea4ace790c8b}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+To\+Uniform20@{Set\+To\+Uniform20}}
+\index{Set\+To\+Uniform20@{Set\+To\+Uniform20}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+To\+Uniform20}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+To\+Uniform20 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a22f25a4447052eb8c98dea4ace790c8b}
+
+
+Generates 20 points uniformly distributed. 
+
+\hypertarget{class_sphere_point_cloud_a2653050cf6623de85dc67427b3a4145f}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+To\+Uniform4@{Set\+To\+Uniform4}}
+\index{Set\+To\+Uniform4@{Set\+To\+Uniform4}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+To\+Uniform4}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+To\+Uniform4 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a2653050cf6623de85dc67427b3a4145f}
+
+
+Generates 4 points uniformly distributed. 
+
+\hypertarget{class_sphere_point_cloud_a3ec027baeb8148420e9429beeb0f9083}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+To\+Uniform6@{Set\+To\+Uniform6}}
+\index{Set\+To\+Uniform6@{Set\+To\+Uniform6}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+To\+Uniform6}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+To\+Uniform6 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_a3ec027baeb8148420e9429beeb0f9083}
+
+
+Generates 6 points uniformly distributed. 
+
+\hypertarget{class_sphere_point_cloud_accc06313864eaa198971ef0108bcb3ca}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Set\+To\+Uniform8@{Set\+To\+Uniform8}}
+\index{Set\+To\+Uniform8@{Set\+To\+Uniform8}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Set\+To\+Uniform8}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Set\+To\+Uniform8 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_point_cloud_accc06313864eaa198971ef0108bcb3ca}
+
+
+Generates 8 points uniformly distributed. 
+
+\hypertarget{class_sphere_point_cloud_ac6da28fe26729163facc32139595e758}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Subdivide@{Subdivide}}
+\index{Subdivide@{Subdivide}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Subdivide}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Point\+Cloud\+::\+Subdivide (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec3}]{p\+V1, }
+\item[{glm\+::vec3}]{p\+V2, }
+\item[{glm\+::vec3}]{p\+V3, }
+\item[{unsigned short}]{p\+Depth}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_sphere_point_cloud_ac6da28fe26729163facc32139595e758}
+
+
+Subdivide the point cloud recursively until {\itshape p\+Depth}. 
+
+\hypertarget{class_sphere_point_cloud_a2182e6f3e31bb91347a4b3d15cf3ebbe}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!Up@{Up}}
+\index{Up@{Up}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{Up}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Sphere\+Point\+Cloud\+::\+Up (
+\begin{DoxyParamCaption}
+\item[{const glm\+::vec3 \&}]{p\+Viewpoint}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_sphere_point_cloud_a2182e6f3e31bb91347a4b3d15cf3ebbe}
+
+
+Retorna un vector cap amunt per al punt de vista passat. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_sphere_point_cloud_a1493117ae52c168b3ca2dc0a395faf65}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!m\+Faces@{m\+Faces}}
+\index{m\+Faces@{m\+Faces}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{m\+Faces}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ unsigned int $>$ Sphere\+Point\+Cloud\+::m\+Faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a1493117ae52c168b3ca2dc0a395faf65}
+
+
+Faces. 
+
+\hypertarget{class_sphere_point_cloud_a722ae327d20905a422c279bc0bc60258}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!m\+Mesh@{m\+Mesh}}
+\index{m\+Mesh@{m\+Mesh}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{m\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Geometry}$\ast$ Sphere\+Point\+Cloud\+::m\+Mesh\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a722ae327d20905a422c279bc0bc60258}
+
+
+\hyperlink{class_mesh}{Mesh} to paint the sphere point cloud. 
+
+\hypertarget{class_sphere_point_cloud_a11b1736edb303b804dc0882edc8718a8}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!m\+Neighbours@{m\+Neighbours}}
+\index{m\+Neighbours@{m\+Neighbours}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{m\+Neighbours}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ Q\+Vector$<$int$>$ $>$ Sphere\+Point\+Cloud\+::m\+Neighbours\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a11b1736edb303b804dc0882edc8718a8}
+
+
+Neighbours of the vertexs. 
+
+\hypertarget{class_sphere_point_cloud_a01a10f53b2432af26235a1acc98391eb}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!m\+Normals@{m\+Normals}}
+\index{m\+Normals@{m\+Normals}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{m\+Normals}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ glm\+::vec3 $>$ Sphere\+Point\+Cloud\+::m\+Normals\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a01a10f53b2432af26235a1acc98391eb}
+
+
+Normals of the vertexs. 
+
+\hypertarget{class_sphere_point_cloud_a0579096387a36228a7167de55d131292}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!m\+Number\+Of\+Points@{m\+Number\+Of\+Points}}
+\index{m\+Number\+Of\+Points@{m\+Number\+Of\+Points}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{m\+Number\+Of\+Points}]{\setlength{\rightskip}{0pt plus 5cm}int Sphere\+Point\+Cloud\+::m\+Number\+Of\+Points\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a0579096387a36228a7167de55d131292}
+
+
+Number of points. 
+
+\hypertarget{class_sphere_point_cloud_a03bccf235a21adebdfcd6a8e4c407c72}{\index{Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}!m\+Vertices@{m\+Vertices}}
+\index{m\+Vertices@{m\+Vertices}!Sphere\+Point\+Cloud@{Sphere\+Point\+Cloud}}
+\subsubsection[{m\+Vertices}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ glm\+::vec3 $>$ Sphere\+Point\+Cloud\+::m\+Vertices\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_point_cloud_a03bccf235a21adebdfcd6a8e4c407c72}
+
+
+Vertexs in cartesian coordinates. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\hyperlink{_sphere_point_cloud_8h}{Sphere\+Point\+Cloud.\+h}\item 
+src/\hyperlink{_sphere_point_cloud_8cpp}{Sphere\+Point\+Cloud.\+cpp}\end{DoxyCompactItemize}

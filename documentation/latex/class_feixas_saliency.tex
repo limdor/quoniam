@@ -1,0 +1,105 @@
+\hypertarget{class_feixas_saliency}{\section{Feixas\+Saliency Class Reference}
+\label{class_feixas_saliency}\index{Feixas\+Saliency@{Feixas\+Saliency}}
+}
+
+
+Class that implements the saliency of a viewpoint \mbox{[}Feixas et al. 2009\mbox{]}.  
+
+
+
+
+{\ttfamily \#include $<$Feixas\+Saliency.\+h$>$}
+
+Inheritance diagram for Feixas\+Saliency\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_feixas_saliency}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_feixas_saliency_afbdd06af8664181c0ede69cacbabb5e4}{Feixas\+Saliency} (const Q\+String \&p\+Name)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_feixas_saliency_ad9ed1bf2aa1a7bca65916c2e20724e14}{$\sim$\+Feixas\+Saliency} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_feixas_saliency_a86f01232be159669dc26b538c046b99c}{Compute} (const \hyperlink{class_scene_information_builder}{Scene\+Information\+Builder} $\ast$p\+Scene\+Information\+Builder)
+\begin{DoxyCompactList}\small\item\em Method that computes the measure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_feixas_saliency_a864ad3425a2544e74a139e48d58bac73}{Get\+Dissimilarity} (const \hyperlink{class_projected_areas_matrix}{Projected\+Areas\+Matrix} $\ast$p\+Projected\+Areas\+Matrix, int p\+Polygon\+I, int p\+Polygon\+J)
+\begin{DoxyCompactList}\small\item\em Return the dissimilarity between two polygons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class that implements the saliency of a viewpoint \mbox{[}Feixas et al. 2009\mbox{]}. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_feixas_saliency_afbdd06af8664181c0ede69cacbabb5e4}{\index{Feixas\+Saliency@{Feixas\+Saliency}!Feixas\+Saliency@{Feixas\+Saliency}}
+\index{Feixas\+Saliency@{Feixas\+Saliency}!Feixas\+Saliency@{Feixas\+Saliency}}
+\subsubsection[{Feixas\+Saliency}]{\setlength{\rightskip}{0pt plus 5cm}Feixas\+Saliency\+::\+Feixas\+Saliency (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{p\+Name}
+\end{DoxyParamCaption}
+)}}\label{class_feixas_saliency_afbdd06af8664181c0ede69cacbabb5e4}
+
+
+Constructor. 
+
+\hypertarget{class_feixas_saliency_ad9ed1bf2aa1a7bca65916c2e20724e14}{\index{Feixas\+Saliency@{Feixas\+Saliency}!````~Feixas\+Saliency@{$\sim$\+Feixas\+Saliency}}
+\index{````~Feixas\+Saliency@{$\sim$\+Feixas\+Saliency}!Feixas\+Saliency@{Feixas\+Saliency}}
+\subsubsection[{$\sim$\+Feixas\+Saliency}]{\setlength{\rightskip}{0pt plus 5cm}Feixas\+Saliency\+::$\sim$\+Feixas\+Saliency (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_feixas_saliency_ad9ed1bf2aa1a7bca65916c2e20724e14}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_feixas_saliency_a86f01232be159669dc26b538c046b99c}{\index{Feixas\+Saliency@{Feixas\+Saliency}!Compute@{Compute}}
+\index{Compute@{Compute}!Feixas\+Saliency@{Feixas\+Saliency}}
+\subsubsection[{Compute}]{\setlength{\rightskip}{0pt plus 5cm}void Feixas\+Saliency\+::\+Compute (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scene\+Information\+Builder} $\ast$}]{p\+Scene\+Information\+Builder}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_feixas_saliency_a86f01232be159669dc26b538c046b99c}
+
+
+Method that computes the measure. 
+
+
+
+Implements \hyperlink{class_measure_aed88fe46b2a609ab5948e5f3c891321d}{Measure}.
+
+\hypertarget{class_feixas_saliency_a864ad3425a2544e74a139e48d58bac73}{\index{Feixas\+Saliency@{Feixas\+Saliency}!Get\+Dissimilarity@{Get\+Dissimilarity}}
+\index{Get\+Dissimilarity@{Get\+Dissimilarity}!Feixas\+Saliency@{Feixas\+Saliency}}
+\subsubsection[{Get\+Dissimilarity}]{\setlength{\rightskip}{0pt plus 5cm}float Feixas\+Saliency\+::\+Get\+Dissimilarity (
+\begin{DoxyParamCaption}
+\item[{const {\bf Projected\+Areas\+Matrix} $\ast$}]{p\+Projected\+Areas\+Matrix, }
+\item[{int}]{p\+Polygon\+I, }
+\item[{int}]{p\+Polygon\+J}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_feixas_saliency_a864ad3425a2544e74a139e48d58bac73}
+
+
+Return the dissimilarity between two polygons. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/viewpoint-\/measures/\hyperlink{_feixas_saliency_8h}{Feixas\+Saliency.\+h}\item 
+src/viewpoint-\/measures/\hyperlink{_feixas_saliency_8cpp}{Feixas\+Saliency.\+cpp}\end{DoxyCompactItemize}

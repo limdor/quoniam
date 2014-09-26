@@ -1,0 +1,211 @@
+\hypertarget{class_scene}{\section{Scene Class Reference}
+\label{class_scene}\index{Scene@{Scene}}
+}
+
+
+Class representing a scene.  
+
+
+
+
+{\ttfamily \#include $<$Scene.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scene_ad9c0170e66dc0fccbd909198715f8dda}{Scene} (const Q\+String \&p\+Name, \hyperlink{class_scene_node}{Scene\+Node} $\ast$p\+Scene\+Root, const Q\+Vector$<$ \hyperlink{class_material}{Material} $\ast$ $>$ \&p\+Materials, const Q\+Vector$<$ \hyperlink{class_geometry}{Geometry} $\ast$ $>$ \&p\+Geometries, const Q\+Vector$<$ \hyperlink{class_mesh}{Mesh} $\ast$ $>$ \&p\+Meshes)
+\begin{DoxyCompactList}\small\item\em Create an scene given the name and the root scene node. \end{DoxyCompactList}\item 
+\hyperlink{class_scene_a21d9c54cb4b853fead9bdffb4af9a10f}{Scene} (const \hyperlink{class_scene}{Scene} \&p\+Scene)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_scene_a3b8cec2e32546713915f8c6303c951f1}{$\sim$\+Scene} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+Q\+String \hyperlink{class_scene_aeaf251862f521c36965af404fd7f5798}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the name of the scene. \end{DoxyCompactList}\item 
+const \hyperlink{class_scene_node}{Scene\+Node} $\ast$ \hyperlink{class_scene_ad498e6d055044b8893579df09b2aa07a}{Get\+Root\+Node} () const 
+\begin{DoxyCompactList}\small\item\em Get the root scene node. \end{DoxyCompactList}\item 
+const \hyperlink{class_bounding_sphere}{Bounding\+Sphere} $\ast$ \hyperlink{class_scene_aea4c84671689a7f137b295a20a906b4a}{Get\+Bounding\+Sphere} () const 
+\begin{DoxyCompactList}\small\item\em Get the bounding sphere. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_a91693a196849a5e4cf0e76b3544f5706}{Get\+Number\+Of\+Polygons} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of polygons. \end{DoxyCompactList}\item 
+int \hyperlink{class_scene_ab71588ebd8c5ec59745edef28cf63873}{Get\+Number\+Of\+Vertices} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of vertices. \end{DoxyCompactList}\item 
+void \hyperlink{class_scene_ad096283dfe60231b51703b768fb57753}{Show\+Information} () const 
+\begin{DoxyCompactList}\small\item\em Show the information of the scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \hyperlink{class_scene_acfce52e7dbef4c558420dcff71ebaea2}{m\+Name}
+\begin{DoxyCompactList}\small\item\em Name of the scene. \end{DoxyCompactList}\item 
+\hyperlink{class_scene_node}{Scene\+Node} $\ast$ \hyperlink{class_scene_a3852bae07cc9951aba145324ca8ff660}{m\+Scene\+Root}
+\begin{DoxyCompactList}\small\item\em Root scene node. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_material}{Material} $\ast$ $>$ \hyperlink{class_scene_a30c33e5924edf69d4509c25945e6176e}{m\+Materials}
+\begin{DoxyCompactList}\small\item\em List of materials used. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_geometry}{Geometry} $\ast$ $>$ \hyperlink{class_scene_a4113c0d9e9d7b98c7b883b2daa0fdd0a}{m\+Geometries}
+\begin{DoxyCompactList}\small\item\em List of geometries used. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_mesh}{Mesh} $\ast$ $>$ \hyperlink{class_scene_a9f78af49e4984a661cda648e6c211e0c}{m\+Meshes}
+\begin{DoxyCompactList}\small\item\em List of meshes used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class representing a scene. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Nicolau Sunyer 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scene_ad9c0170e66dc0fccbd909198715f8dda}{\index{Scene@{Scene}!Scene@{Scene}}
+\index{Scene@{Scene}!Scene@{Scene}}
+\subsubsection[{Scene}]{\setlength{\rightskip}{0pt plus 5cm}Scene\+::\+Scene (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{p\+Name, }
+\item[{{\bf Scene\+Node} $\ast$}]{p\+Scene\+Root, }
+\item[{const Q\+Vector$<$ {\bf Material} $\ast$ $>$ \&}]{p\+Materials, }
+\item[{const Q\+Vector$<$ {\bf Geometry} $\ast$ $>$ \&}]{p\+Geometries, }
+\item[{const Q\+Vector$<$ {\bf Mesh} $\ast$ $>$ \&}]{p\+Meshes}
+\end{DoxyParamCaption}
+)}}\label{class_scene_ad9c0170e66dc0fccbd909198715f8dda}
+
+
+Create an scene given the name and the root scene node. 
+
+\hypertarget{class_scene_a21d9c54cb4b853fead9bdffb4af9a10f}{\index{Scene@{Scene}!Scene@{Scene}}
+\index{Scene@{Scene}!Scene@{Scene}}
+\subsubsection[{Scene}]{\setlength{\rightskip}{0pt plus 5cm}Scene\+::\+Scene (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scene} \&}]{p\+Scene}
+\end{DoxyParamCaption}
+)}}\label{class_scene_a21d9c54cb4b853fead9bdffb4af9a10f}
+
+
+Copy constructor. 
+
+\hypertarget{class_scene_a3b8cec2e32546713915f8c6303c951f1}{\index{Scene@{Scene}!````~Scene@{$\sim$\+Scene}}
+\index{````~Scene@{$\sim$\+Scene}!Scene@{Scene}}
+\subsubsection[{$\sim$\+Scene}]{\setlength{\rightskip}{0pt plus 5cm}Scene\+::$\sim$\+Scene (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scene_a3b8cec2e32546713915f8c6303c951f1}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scene_aea4c84671689a7f137b295a20a906b4a}{\index{Scene@{Scene}!Get\+Bounding\+Sphere@{Get\+Bounding\+Sphere}}
+\index{Get\+Bounding\+Sphere@{Get\+Bounding\+Sphere}!Scene@{Scene}}
+\subsubsection[{Get\+Bounding\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Bounding\+Sphere} $\ast$ Scene\+::\+Get\+Bounding\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_aea4c84671689a7f137b295a20a906b4a}
+
+
+Get the bounding sphere. 
+
+\hypertarget{class_scene_aeaf251862f521c36965af404fd7f5798}{\index{Scene@{Scene}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Scene@{Scene}}
+\subsubsection[{Get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Scene\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_aeaf251862f521c36965af404fd7f5798}
+
+
+Get the name of the scene. 
+
+\hypertarget{class_scene_a91693a196849a5e4cf0e76b3544f5706}{\index{Scene@{Scene}!Get\+Number\+Of\+Polygons@{Get\+Number\+Of\+Polygons}}
+\index{Get\+Number\+Of\+Polygons@{Get\+Number\+Of\+Polygons}!Scene@{Scene}}
+\subsubsection[{Get\+Number\+Of\+Polygons}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+::\+Get\+Number\+Of\+Polygons (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_a91693a196849a5e4cf0e76b3544f5706}
+
+
+Get the number of polygons. 
+
+\hypertarget{class_scene_ab71588ebd8c5ec59745edef28cf63873}{\index{Scene@{Scene}!Get\+Number\+Of\+Vertices@{Get\+Number\+Of\+Vertices}}
+\index{Get\+Number\+Of\+Vertices@{Get\+Number\+Of\+Vertices}!Scene@{Scene}}
+\subsubsection[{Get\+Number\+Of\+Vertices}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+::\+Get\+Number\+Of\+Vertices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_ab71588ebd8c5ec59745edef28cf63873}
+
+
+Get the number of vertices. 
+
+\hypertarget{class_scene_ad498e6d055044b8893579df09b2aa07a}{\index{Scene@{Scene}!Get\+Root\+Node@{Get\+Root\+Node}}
+\index{Get\+Root\+Node@{Get\+Root\+Node}!Scene@{Scene}}
+\subsubsection[{Get\+Root\+Node}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Scene\+Node} $\ast$ Scene\+::\+Get\+Root\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_ad498e6d055044b8893579df09b2aa07a}
+
+
+Get the root scene node. 
+
+\hypertarget{class_scene_ad096283dfe60231b51703b768fb57753}{\index{Scene@{Scene}!Show\+Information@{Show\+Information}}
+\index{Show\+Information@{Show\+Information}!Scene@{Scene}}
+\subsubsection[{Show\+Information}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+::\+Show\+Information (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_scene_ad096283dfe60231b51703b768fb57753}
+
+
+Show the information of the scene. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_scene_a4113c0d9e9d7b98c7b883b2daa0fdd0a}{\index{Scene@{Scene}!m\+Geometries@{m\+Geometries}}
+\index{m\+Geometries@{m\+Geometries}!Scene@{Scene}}
+\subsubsection[{m\+Geometries}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf Geometry}$\ast$$>$ Scene\+::m\+Geometries\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_a4113c0d9e9d7b98c7b883b2daa0fdd0a}
+
+
+List of geometries used. 
+
+\hypertarget{class_scene_a30c33e5924edf69d4509c25945e6176e}{\index{Scene@{Scene}!m\+Materials@{m\+Materials}}
+\index{m\+Materials@{m\+Materials}!Scene@{Scene}}
+\subsubsection[{m\+Materials}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf Material}$\ast$$>$ Scene\+::m\+Materials\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_a30c33e5924edf69d4509c25945e6176e}
+
+
+List of materials used. 
+
+\hypertarget{class_scene_a9f78af49e4984a661cda648e6c211e0c}{\index{Scene@{Scene}!m\+Meshes@{m\+Meshes}}
+\index{m\+Meshes@{m\+Meshes}!Scene@{Scene}}
+\subsubsection[{m\+Meshes}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf Mesh}$\ast$$>$ Scene\+::m\+Meshes\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_a9f78af49e4984a661cda648e6c211e0c}
+
+
+List of meshes used. 
+
+\hypertarget{class_scene_acfce52e7dbef4c558420dcff71ebaea2}{\index{Scene@{Scene}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Scene@{Scene}}
+\subsubsection[{m\+Name}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Scene\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_acfce52e7dbef4c558420dcff71ebaea2}
+
+
+Name of the scene. 
+
+\hypertarget{class_scene_a3852bae07cc9951aba145324ca8ff660}{\index{Scene@{Scene}!m\+Scene\+Root@{m\+Scene\+Root}}
+\index{m\+Scene\+Root@{m\+Scene\+Root}!Scene@{Scene}}
+\subsubsection[{m\+Scene\+Root}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\+Node}$\ast$ Scene\+::m\+Scene\+Root\hspace{0.3cm}{\ttfamily [private]}}}\label{class_scene_a3852bae07cc9951aba145324ca8ff660}
+
+
+Root scene node. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_scene_8h}{Scene.\+h}\item 
+src/core/\hyperlink{_scene_8cpp}{Scene.\+cpp}\end{DoxyCompactItemize}

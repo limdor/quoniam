@@ -1,0 +1,36 @@
+//Definition include
+#include "DepthDistribution.h"
+
+//Dependency includes
+#include "glm/exponential.hpp"
+
+//Project includes
+#include "Tools.h"
+
+DepthDistribution::DepthDistribution(const QString &pName): Measure(pName, true)
+{
+
+}
+
+DepthDistribution::~DepthDistribution()
+{
+
+}
+
+void DepthDistribution::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+{
+    int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
+    mValues.fill( 0.0f, numberOfViewpoints );
+    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    {
+        QVector<float> depthDistribution = pSceneInformationBuilder->GetNormalizedDepthHistogram(currentViewpoint);
+        for( int i = 0; i < depthDistribution.size(); i++ )
+        {
+            mValues[currentViewpoint] += glm::pow(depthDistribution.at(i), 2.0f);
+        }
+        mValues[currentViewpoint] = 1.0f - mValues.at(currentViewpoint);
+    }
+    mSort = Tools::GetOrderedIndexes(mValues);
+    mPositions = Tools::GetPositions(mSort);
+    mComputed = true;
+}

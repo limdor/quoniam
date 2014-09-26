@@ -1,0 +1,177 @@
+\hypertarget{class_g_p_u_scene_node}{\section{G\+P\+U\+Scene\+Node Class Reference}
+\label{class_g_p_u_scene_node}\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+}
+
+
+{\ttfamily \#include $<$G\+P\+U\+Scene\+Node.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_g_p_u_scene_node_a64457c63e36283f684ee71ee29021599}{G\+P\+U\+Scene\+Node} (const \hyperlink{class_g_p_u_geometry}{G\+P\+U\+Geometry} $\ast$p\+Geometry, \hyperlink{class_material}{Material} $\ast$p\+Material)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_g_p_u_scene_node_a3cc52ef19aa33fe567ef07e4ed0a9ddf}{$\sim$\+G\+P\+U\+Scene\+Node} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_scene_node_a0bf685402f3717d885c9eab0bb9d8fdf}{Set\+Model\+Matrix} (const glm\+::mat4 \&p\+Model\+Matrix)
+\begin{DoxyCompactList}\small\item\em Set the model matrix. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_scene_node_a12181514ad8233033466be881cb7edbb}{Set\+Polygonal\+Offset} (int p\+Polygonal\+Offset)
+\begin{DoxyCompactList}\small\item\em Set the polygonal offset. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_g_p_u_scene_node_a5d932b7fb37ea771cae5d3c95d112869}{Get\+Model\+Matrix} () const 
+\begin{DoxyCompactList}\small\item\em Get the model matrix. \end{DoxyCompactList}\item 
+const \hyperlink{class_g_p_u_geometry}{G\+P\+U\+Geometry} $\ast$ \hyperlink{class_g_p_u_scene_node_aa4066ee90cac063e5eee6def5d6d9099}{Get\+Geometry} ()
+\begin{DoxyCompactList}\small\item\em Get the gpu geometry. \end{DoxyCompactList}\item 
+\hyperlink{class_material}{Material} $\ast$ \hyperlink{class_g_p_u_scene_node_a5969395762b1a85e2d937baa80d9d0e7}{Get\+Material} ()
+\begin{DoxyCompactList}\small\item\em Get the material. \end{DoxyCompactList}\item 
+int \hyperlink{class_g_p_u_scene_node_a13fcf7a78ef28888a9cce449de8b60b7}{Get\+Polygonal\+Offset} () const 
+\begin{DoxyCompactList}\small\item\em Get the polygonal offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::mat4 \hyperlink{class_g_p_u_scene_node_a44bf9ca8c8c92e4dce8498d0d1affd9d}{m\+Model\+Matrix}
+\begin{DoxyCompactList}\small\item\em Model matrix. \end{DoxyCompactList}\item 
+const \hyperlink{class_g_p_u_geometry}{G\+P\+U\+Geometry} $\ast$ \hyperlink{class_g_p_u_scene_node_a5b5aecbfe949586c29750fef629ef671}{m\+Geometry}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_geometry}{Geometry} in the gpu. \end{DoxyCompactList}\item 
+\hyperlink{class_material}{Material} $\ast$ \hyperlink{class_g_p_u_scene_node_af6fe090714f9a4d8ad409bed646a12a2}{m\+Material}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_material}{Material}. \end{DoxyCompactList}\item 
+int \hyperlink{class_g_p_u_scene_node_a4625ba124b15ebd9159a633b57c98165}{m\+Polygonal\+Offset}
+\begin{DoxyCompactList}\small\item\em Polygonal offset in the scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_g_p_u_scene_node_a64457c63e36283f684ee71ee29021599}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{G\+P\+U\+Scene\+Node}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Scene\+Node\+::\+G\+P\+U\+Scene\+Node (
+\begin{DoxyParamCaption}
+\item[{const {\bf G\+P\+U\+Geometry} $\ast$}]{p\+Geometry, }
+\item[{{\bf Material} $\ast$}]{p\+Material}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_node_a64457c63e36283f684ee71ee29021599}
+
+
+Constructor. 
+
+\hypertarget{class_g_p_u_scene_node_a3cc52ef19aa33fe567ef07e4ed0a9ddf}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!````~G\+P\+U\+Scene\+Node@{$\sim$\+G\+P\+U\+Scene\+Node}}
+\index{````~G\+P\+U\+Scene\+Node@{$\sim$\+G\+P\+U\+Scene\+Node}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{$\sim$\+G\+P\+U\+Scene\+Node}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Scene\+Node\+::$\sim$\+G\+P\+U\+Scene\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_node_a3cc52ef19aa33fe567ef07e4ed0a9ddf}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_g_p_u_scene_node_aa4066ee90cac063e5eee6def5d6d9099}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!Get\+Geometry@{Get\+Geometry}}
+\index{Get\+Geometry@{Get\+Geometry}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{Get\+Geometry}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf G\+P\+U\+Geometry} $\ast$ G\+P\+U\+Scene\+Node\+::\+Get\+Geometry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_node_aa4066ee90cac063e5eee6def5d6d9099}
+
+
+Get the gpu geometry. 
+
+\hypertarget{class_g_p_u_scene_node_a5969395762b1a85e2d937baa80d9d0e7}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!Get\+Material@{Get\+Material}}
+\index{Get\+Material@{Get\+Material}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{Get\+Material}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Material} $\ast$ G\+P\+U\+Scene\+Node\+::\+Get\+Material (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_node_a5969395762b1a85e2d937baa80d9d0e7}
+
+
+Get the material. 
+
+\hypertarget{class_g_p_u_scene_node_a5d932b7fb37ea771cae5d3c95d112869}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!Get\+Model\+Matrix@{Get\+Model\+Matrix}}
+\index{Get\+Model\+Matrix@{Get\+Model\+Matrix}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{Get\+Model\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 G\+P\+U\+Scene\+Node\+::\+Get\+Model\+Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_p_u_scene_node_a5d932b7fb37ea771cae5d3c95d112869}
+
+
+Get the model matrix. 
+
+\hypertarget{class_g_p_u_scene_node_a13fcf7a78ef28888a9cce449de8b60b7}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!Get\+Polygonal\+Offset@{Get\+Polygonal\+Offset}}
+\index{Get\+Polygonal\+Offset@{Get\+Polygonal\+Offset}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{Get\+Polygonal\+Offset}]{\setlength{\rightskip}{0pt plus 5cm}int G\+P\+U\+Scene\+Node\+::\+Get\+Polygonal\+Offset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_p_u_scene_node_a13fcf7a78ef28888a9cce449de8b60b7}
+
+
+Get the polygonal offset. 
+
+\hypertarget{class_g_p_u_scene_node_a0bf685402f3717d885c9eab0bb9d8fdf}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!Set\+Model\+Matrix@{Set\+Model\+Matrix}}
+\index{Set\+Model\+Matrix@{Set\+Model\+Matrix}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{Set\+Model\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Scene\+Node\+::\+Set\+Model\+Matrix (
+\begin{DoxyParamCaption}
+\item[{const glm\+::mat4 \&}]{p\+Model\+Matrix}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_node_a0bf685402f3717d885c9eab0bb9d8fdf}
+
+
+Set the model matrix. 
+
+\hypertarget{class_g_p_u_scene_node_a12181514ad8233033466be881cb7edbb}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!Set\+Polygonal\+Offset@{Set\+Polygonal\+Offset}}
+\index{Set\+Polygonal\+Offset@{Set\+Polygonal\+Offset}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{Set\+Polygonal\+Offset}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Scene\+Node\+::\+Set\+Polygonal\+Offset (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Polygonal\+Offset}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_node_a12181514ad8233033466be881cb7edbb}
+
+
+Set the polygonal offset. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_g_p_u_scene_node_a5b5aecbfe949586c29750fef629ef671}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!m\+Geometry@{m\+Geometry}}
+\index{m\+Geometry@{m\+Geometry}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{m\+Geometry}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf G\+P\+U\+Geometry}$\ast$ G\+P\+U\+Scene\+Node\+::m\+Geometry\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_scene_node_a5b5aecbfe949586c29750fef629ef671}
+
+
+\hyperlink{class_geometry}{Geometry} in the gpu. 
+
+\hypertarget{class_g_p_u_scene_node_af6fe090714f9a4d8ad409bed646a12a2}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!m\+Material@{m\+Material}}
+\index{m\+Material@{m\+Material}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{m\+Material}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Material}$\ast$ G\+P\+U\+Scene\+Node\+::m\+Material\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_scene_node_af6fe090714f9a4d8ad409bed646a12a2}
+
+
+\hyperlink{class_material}{Material}. 
+
+\hypertarget{class_g_p_u_scene_node_a44bf9ca8c8c92e4dce8498d0d1affd9d}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!m\+Model\+Matrix@{m\+Model\+Matrix}}
+\index{m\+Model\+Matrix@{m\+Model\+Matrix}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{m\+Model\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::mat4 G\+P\+U\+Scene\+Node\+::m\+Model\+Matrix\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_scene_node_a44bf9ca8c8c92e4dce8498d0d1affd9d}
+
+
+Model matrix. 
+
+\hypertarget{class_g_p_u_scene_node_a4625ba124b15ebd9159a633b57c98165}{\index{G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}!m\+Polygonal\+Offset@{m\+Polygonal\+Offset}}
+\index{m\+Polygonal\+Offset@{m\+Polygonal\+Offset}!G\+P\+U\+Scene\+Node@{G\+P\+U\+Scene\+Node}}
+\subsubsection[{m\+Polygonal\+Offset}]{\setlength{\rightskip}{0pt plus 5cm}int G\+P\+U\+Scene\+Node\+::m\+Polygonal\+Offset\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_scene_node_a4625ba124b15ebd9159a633b57c98165}
+
+
+Polygonal offset in the scene. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_g_p_u_scene_node_8h}{G\+P\+U\+Scene\+Node.\+h}\item 
+src/core/\hyperlink{_g_p_u_scene_node_8cpp}{G\+P\+U\+Scene\+Node.\+cpp}\end{DoxyCompactItemize}

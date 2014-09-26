@@ -1,0 +1,56 @@
+\hypertarget{_main_module_controller_8cpp}{\section{src/\+Main\+Module\+Controller.cpp File Reference}
+\label{_main_module_controller_8cpp}\index{src/\+Main\+Module\+Controller.\+cpp@{src/\+Main\+Module\+Controller.\+cpp}}
+}
+{\ttfamily \#include \char`\"{}Main\+Module\+Controller.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Color\+Dialog$>$}\\*
+{\ttfamily \#include $<$Q\+File\+Dialog$>$}\\*
+{\ttfamily \#include $<$Q\+Message\+Box$>$}\\*
+{\ttfamily \#include $<$Q\+Progress\+Dialog$>$}\\*
+{\ttfamily \#include $<$Q\+Text\+Stream$>$}\\*
+{\ttfamily \#include $<$Q\+Time$>$}\\*
+{\ttfamily \#include $<$Q\+Xml\+Stream\+Writer$>$}\\*
+{\ttfamily \#include \char`\"{}glm/exponential.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}glm/geometric.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}glm/trigonometric.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}glm/gtc/matrix\+\_\+transform.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}glm/gtx/rotate\+\_\+vector.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Curvature\+Entropy.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Debug.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Depth\+Based\+Visual\+Stability.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Depth\+Distribution.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Feixas\+Saliency.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Heuristic\+Measure.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I3.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Kullback\+Leibler.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Main\+Window.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Maximum\+Depth.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Number\+Of\+Visible\+Triangles.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Stoev\+Strasser.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Orthographic\+Camera.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Projected\+Area.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Saliency\+E\+V\+M\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Scene\+Information\+Builder.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Scene\+Loader.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Silhouette\+Curvature.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Silhouette\+Curvature\+Extrema.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Silhouette\+Entropy.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Silhouette\+Length.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Trackball\+Camera.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Tools.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Unstability.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Viewpoint\+Entropy.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Viewpoint\+Measure\+Slider.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Visibility\+Ratio.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}V\+M\+I.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_main_module_controller_8cpp_a816ab7d5c2ce1f0a01216042837beb93}{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_main_module_controller_8cpp_a816ab7d5c2ce1f0a01216042837beb93}{\index{Main\+Module\+Controller.\+cpp@{Main\+Module\+Controller.\+cpp}!G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S@{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S}}
+\index{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S@{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S}!Main\+Module\+Controller.\+cpp@{Main\+Module\+Controller.\+cpp}}
+\subsubsection[{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+N\+S}}\label{_main_module_controller_8cpp_a816ab7d5c2ce1f0a01216042837beb93}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <root name="."/>
+    <includedir>
+        <dir name="inc/"/>
+        <dir name="inc/core/"/>
+		<dir name="inc/viewpoint-measures/"/>
+    </includedir>
+    <paths>
+		<dir name="src/"/>
+        <dir name="src/core/"/>
+		<dir name="src/viewpoint-measures/"/>
+    </paths>
+    <exclude>
+        <path name="dependencies/"/>
+    </exclude>
+</project>

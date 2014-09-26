@@ -1,0 +1,264 @@
+\hypertarget{class_orthographic_camera}{\section{Orthographic\+Camera Class Reference}
+\label{class_orthographic_camera}\index{Orthographic\+Camera@{Orthographic\+Camera}}
+}
+
+
+\hyperlink{class_camera}{Camera} class with methods to configure an orthographic camera.  
+
+
+
+
+{\ttfamily \#include $<$Orthographic\+Camera.\+h$>$}
+
+Inheritance diagram for Orthographic\+Camera\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_orthographic_camera}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_orthographic_camera_a794762aa66ade1f025ca62304b2e8c40}{Orthographic\+Camera} (float p\+Near\+Plane, float p\+Far\+Plane, glm\+::vec3 p\+Look\+At, glm\+::vec3 p\+Up, glm\+::vec3 p\+Position, float p\+Top, float p\+Bottom, float p\+Left, float p\+Right)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_orthographic_camera_a889267a0f4815b523b07034d656986de}{Orthographic\+Camera} (const \hyperlink{class_orthographic_camera}{Orthographic\+Camera} \&p\+Orthographic\+Camera)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_orthographic_camera_a9c8a9cc81e87af987c6fcda276bdd52d}{$\sim$\+Orthographic\+Camera} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_orthographic_camera_abea153f1372b655f423679015d42af52}{Update\+Projection} ()
+\begin{DoxyCompactList}\small\item\em Update the projection matrix. \end{DoxyCompactList}\item 
+\hyperlink{class_orthographic_camera}{Orthographic\+Camera} $\ast$ \hyperlink{class_orthographic_camera_a31414e246ccb74590fe025a82f1f6bd5}{Clone} () const 
+\begin{DoxyCompactList}\small\item\em Method to clone the camera. \end{DoxyCompactList}\item 
+void \hyperlink{class_orthographic_camera_ad6f26cfe2311ed951562f6cb856f7b3a}{Set\+Top} (float p\+Top)
+\begin{DoxyCompactList}\small\item\em Set the top value. \end{DoxyCompactList}\item 
+void \hyperlink{class_orthographic_camera_aaa433e475cfbec1455f4dab5b3f5b224}{Set\+Bottom} (float p\+Bottom)
+\begin{DoxyCompactList}\small\item\em Set the bottom value. \end{DoxyCompactList}\item 
+void \hyperlink{class_orthographic_camera_addc3594ec0843b3936a6830de8f16a16}{Set\+Left} (float p\+Left)
+\begin{DoxyCompactList}\small\item\em Set the left value. \end{DoxyCompactList}\item 
+void \hyperlink{class_orthographic_camera_a361f95d002589579563791a2b6fcb1f0}{Set\+Right} (float p\+Right)
+\begin{DoxyCompactList}\small\item\em Set the right value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_orthographic_camera_a5edb0b3f645e77d086024157ef684eea}{Create\+Mesh} ()
+\begin{DoxyCompactList}\small\item\em Create the mesh of the gizmo with the indexs, positions and colors. \end{DoxyCompactList}\item 
+void \hyperlink{class_orthographic_camera_ad774f1e383f99a94e3f733ecaa814e80}{Update\+Positions} ()
+\begin{DoxyCompactList}\small\item\em Update the positions of the vertices of the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_orthographic_camera_adb391b0b57fa70a2eaadd661f8ab423d}{m\+Top}
+\begin{DoxyCompactList}\small\item\em Top value. \end{DoxyCompactList}\item 
+float \hyperlink{class_orthographic_camera_aa901bf30589a77235d3b583d7a549ea0}{m\+Bottom}
+\begin{DoxyCompactList}\small\item\em Bottom value. \end{DoxyCompactList}\item 
+float \hyperlink{class_orthographic_camera_a9a1ad18a4b2b39b4d3f7f09f53817d54}{m\+Left}
+\begin{DoxyCompactList}\small\item\em Left value. \end{DoxyCompactList}\item 
+float \hyperlink{class_orthographic_camera_a8ece912d753235b6f79f1607a19f892b}{m\+Right}
+\begin{DoxyCompactList}\small\item\em Right value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_camera}{Camera} class with methods to configure an orthographic camera. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Nicolau Sunyer 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_orthographic_camera_a794762aa66ade1f025ca62304b2e8c40}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Orthographic\+Camera@{Orthographic\+Camera}}
+\index{Orthographic\+Camera@{Orthographic\+Camera}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Orthographic\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}Orthographic\+Camera\+::\+Orthographic\+Camera (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Near\+Plane, }
+\item[{float}]{p\+Far\+Plane, }
+\item[{glm\+::vec3}]{p\+Look\+At, }
+\item[{glm\+::vec3}]{p\+Up, }
+\item[{glm\+::vec3}]{p\+Position, }
+\item[{float}]{p\+Top, }
+\item[{float}]{p\+Bottom, }
+\item[{float}]{p\+Left, }
+\item[{float}]{p\+Right}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_a794762aa66ade1f025ca62304b2e8c40}
+
+
+Constructor. 
+
+\hypertarget{class_orthographic_camera_a889267a0f4815b523b07034d656986de}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Orthographic\+Camera@{Orthographic\+Camera}}
+\index{Orthographic\+Camera@{Orthographic\+Camera}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Orthographic\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}Orthographic\+Camera\+::\+Orthographic\+Camera (
+\begin{DoxyParamCaption}
+\item[{const {\bf Orthographic\+Camera} \&}]{p\+Orthographic\+Camera}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_a889267a0f4815b523b07034d656986de}
+
+
+Copy constructor. 
+
+\hypertarget{class_orthographic_camera_a9c8a9cc81e87af987c6fcda276bdd52d}{\index{Orthographic\+Camera@{Orthographic\+Camera}!````~Orthographic\+Camera@{$\sim$\+Orthographic\+Camera}}
+\index{````~Orthographic\+Camera@{$\sim$\+Orthographic\+Camera}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{$\sim$\+Orthographic\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}Orthographic\+Camera\+::$\sim$\+Orthographic\+Camera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_a9c8a9cc81e87af987c6fcda276bdd52d}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_orthographic_camera_a31414e246ccb74590fe025a82f1f6bd5}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Clone@{Clone}}
+\index{Clone@{Clone}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Orthographic\+Camera} $\ast$ Orthographic\+Camera\+::\+Clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_orthographic_camera_a31414e246ccb74590fe025a82f1f6bd5}
+
+
+Method to clone the camera. 
+
+
+
+Implements \hyperlink{class_camera_a81df82c60ae1a1d32090433ebdd30628}{Camera}.
+
+\hypertarget{class_orthographic_camera_a5edb0b3f645e77d086024157ef684eea}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Create\+Mesh@{Create\+Mesh}}
+\index{Create\+Mesh@{Create\+Mesh}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Create\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Create\+Mesh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}}\label{class_orthographic_camera_a5edb0b3f645e77d086024157ef684eea}
+
+
+Create the mesh of the gizmo with the indexs, positions and colors. 
+
+Creation of the mesh
+
+Set the positions
+
+Set the colors
+
+Set the indexs 
+
+Implements \hyperlink{class_gizmo_a4ba36c75e6b8c2f729792de0161f5532}{Gizmo}.
+
+\hypertarget{class_orthographic_camera_aaa433e475cfbec1455f4dab5b3f5b224}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Set\+Bottom@{Set\+Bottom}}
+\index{Set\+Bottom@{Set\+Bottom}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Set\+Bottom}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Set\+Bottom (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Bottom}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_aaa433e475cfbec1455f4dab5b3f5b224}
+
+
+Set the bottom value. 
+
+\hypertarget{class_orthographic_camera_addc3594ec0843b3936a6830de8f16a16}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Set\+Left@{Set\+Left}}
+\index{Set\+Left@{Set\+Left}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Set\+Left}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Set\+Left (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Left}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_addc3594ec0843b3936a6830de8f16a16}
+
+
+Set the left value. 
+
+\hypertarget{class_orthographic_camera_a361f95d002589579563791a2b6fcb1f0}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Set\+Right@{Set\+Right}}
+\index{Set\+Right@{Set\+Right}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Set\+Right}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Set\+Right (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Right}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_a361f95d002589579563791a2b6fcb1f0}
+
+
+Set the right value. 
+
+\hypertarget{class_orthographic_camera_ad6f26cfe2311ed951562f6cb856f7b3a}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Set\+Top@{Set\+Top}}
+\index{Set\+Top@{Set\+Top}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Set\+Top}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Set\+Top (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Top}
+\end{DoxyParamCaption}
+)}}\label{class_orthographic_camera_ad6f26cfe2311ed951562f6cb856f7b3a}
+
+
+Set the top value. 
+
+\hypertarget{class_orthographic_camera_ad774f1e383f99a94e3f733ecaa814e80}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Update\+Positions@{Update\+Positions}}
+\index{Update\+Positions@{Update\+Positions}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Update\+Positions}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Update\+Positions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}}\label{class_orthographic_camera_ad774f1e383f99a94e3f733ecaa814e80}
+
+
+Update the positions of the vertices of the mesh. 
+
+
+
+Implements \hyperlink{class_gizmo_a30161525d80402eb0653f2612003a733}{Gizmo}.
+
+\hypertarget{class_orthographic_camera_abea153f1372b655f423679015d42af52}{\index{Orthographic\+Camera@{Orthographic\+Camera}!Update\+Projection@{Update\+Projection}}
+\index{Update\+Projection@{Update\+Projection}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{Update\+Projection}]{\setlength{\rightskip}{0pt plus 5cm}void Orthographic\+Camera\+::\+Update\+Projection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_orthographic_camera_abea153f1372b655f423679015d42af52}
+
+
+Update the projection matrix. 
+
+
+
+Implements \hyperlink{class_camera_a199f2379e1a1603da6cca9fe0162626d}{Camera}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_orthographic_camera_aa901bf30589a77235d3b583d7a549ea0}{\index{Orthographic\+Camera@{Orthographic\+Camera}!m\+Bottom@{m\+Bottom}}
+\index{m\+Bottom@{m\+Bottom}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{m\+Bottom}]{\setlength{\rightskip}{0pt plus 5cm}float Orthographic\+Camera\+::m\+Bottom\hspace{0.3cm}{\ttfamily [private]}}}\label{class_orthographic_camera_aa901bf30589a77235d3b583d7a549ea0}
+
+
+Bottom value. 
+
+\hypertarget{class_orthographic_camera_a9a1ad18a4b2b39b4d3f7f09f53817d54}{\index{Orthographic\+Camera@{Orthographic\+Camera}!m\+Left@{m\+Left}}
+\index{m\+Left@{m\+Left}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{m\+Left}]{\setlength{\rightskip}{0pt plus 5cm}float Orthographic\+Camera\+::m\+Left\hspace{0.3cm}{\ttfamily [private]}}}\label{class_orthographic_camera_a9a1ad18a4b2b39b4d3f7f09f53817d54}
+
+
+Left value. 
+
+\hypertarget{class_orthographic_camera_a8ece912d753235b6f79f1607a19f892b}{\index{Orthographic\+Camera@{Orthographic\+Camera}!m\+Right@{m\+Right}}
+\index{m\+Right@{m\+Right}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{m\+Right}]{\setlength{\rightskip}{0pt plus 5cm}float Orthographic\+Camera\+::m\+Right\hspace{0.3cm}{\ttfamily [private]}}}\label{class_orthographic_camera_a8ece912d753235b6f79f1607a19f892b}
+
+
+Right value. 
+
+\hypertarget{class_orthographic_camera_adb391b0b57fa70a2eaadd661f8ab423d}{\index{Orthographic\+Camera@{Orthographic\+Camera}!m\+Top@{m\+Top}}
+\index{m\+Top@{m\+Top}!Orthographic\+Camera@{Orthographic\+Camera}}
+\subsubsection[{m\+Top}]{\setlength{\rightskip}{0pt plus 5cm}float Orthographic\+Camera\+::m\+Top\hspace{0.3cm}{\ttfamily [private]}}}\label{class_orthographic_camera_adb391b0b57fa70a2eaadd661f8ab423d}
+
+
+Top value. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_orthographic_camera_8h}{Orthographic\+Camera.\+h}\item 
+src/core/\hyperlink{_orthographic_camera_8cpp}{Orthographic\+Camera.\+cpp}\end{DoxyCompactItemize}

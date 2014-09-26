@@ -1,0 +1,105 @@
+\hypertarget{class_saliency_e_v_m_i}{\section{Saliency\+E\+V\+M\+I Class Reference}
+\label{class_saliency_e_v_m_i}\index{Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}}
+}
+
+
+Class that implements the Saliency-\/based extended viewpoint mutual information \mbox{[}Feixas et al. 2009\mbox{]}.  
+
+
+
+
+{\ttfamily \#include $<$Saliency\+E\+V\+M\+I.\+h$>$}
+
+Inheritance diagram for Saliency\+E\+V\+M\+I\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_saliency_e_v_m_i}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_saliency_e_v_m_i_ab47f19aba9732cbc08ae7abf851dfce6}{Saliency\+E\+V\+M\+I} (const Q\+String \&p\+Name)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_saliency_e_v_m_i_ab8adfe2e935489fe5f96a66084a09c15}{$\sim$\+Saliency\+E\+V\+M\+I} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_saliency_e_v_m_i_a4263df7e95066a5c1b9fb1c6532aca97}{Compute} (const \hyperlink{class_scene_information_builder}{Scene\+Information\+Builder} $\ast$p\+Scene\+Information\+Builder)
+\begin{DoxyCompactList}\small\item\em Method that computes the measure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_saliency_e_v_m_i_aa27ea95b8cf35ec24014fa6ce8317b44}{Get\+Dissimilarity} (const \hyperlink{class_projected_areas_matrix}{Projected\+Areas\+Matrix} $\ast$p\+Projected\+Areas\+Matrix, int p\+Polygon\+I, int p\+Polygon\+J)
+\begin{DoxyCompactList}\small\item\em Return the dissimilarity between two polygons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class that implements the Saliency-\/based extended viewpoint mutual information \mbox{[}Feixas et al. 2009\mbox{]}. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_saliency_e_v_m_i_ab47f19aba9732cbc08ae7abf851dfce6}{\index{Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}!Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}}
+\index{Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}!Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}}
+\subsubsection[{Saliency\+E\+V\+M\+I}]{\setlength{\rightskip}{0pt plus 5cm}Saliency\+E\+V\+M\+I\+::\+Saliency\+E\+V\+M\+I (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{p\+Name}
+\end{DoxyParamCaption}
+)}}\label{class_saliency_e_v_m_i_ab47f19aba9732cbc08ae7abf851dfce6}
+
+
+Constructor. 
+
+\hypertarget{class_saliency_e_v_m_i_ab8adfe2e935489fe5f96a66084a09c15}{\index{Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}!````~Saliency\+E\+V\+M\+I@{$\sim$\+Saliency\+E\+V\+M\+I}}
+\index{````~Saliency\+E\+V\+M\+I@{$\sim$\+Saliency\+E\+V\+M\+I}!Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}}
+\subsubsection[{$\sim$\+Saliency\+E\+V\+M\+I}]{\setlength{\rightskip}{0pt plus 5cm}Saliency\+E\+V\+M\+I\+::$\sim$\+Saliency\+E\+V\+M\+I (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_saliency_e_v_m_i_ab8adfe2e935489fe5f96a66084a09c15}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_saliency_e_v_m_i_a4263df7e95066a5c1b9fb1c6532aca97}{\index{Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}!Compute@{Compute}}
+\index{Compute@{Compute}!Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}}
+\subsubsection[{Compute}]{\setlength{\rightskip}{0pt plus 5cm}void Saliency\+E\+V\+M\+I\+::\+Compute (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scene\+Information\+Builder} $\ast$}]{p\+Scene\+Information\+Builder}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_saliency_e_v_m_i_a4263df7e95066a5c1b9fb1c6532aca97}
+
+
+Method that computes the measure. 
+
+
+
+Implements \hyperlink{class_measure_aed88fe46b2a609ab5948e5f3c891321d}{Measure}.
+
+\hypertarget{class_saliency_e_v_m_i_aa27ea95b8cf35ec24014fa6ce8317b44}{\index{Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}!Get\+Dissimilarity@{Get\+Dissimilarity}}
+\index{Get\+Dissimilarity@{Get\+Dissimilarity}!Saliency\+E\+V\+M\+I@{Saliency\+E\+V\+M\+I}}
+\subsubsection[{Get\+Dissimilarity}]{\setlength{\rightskip}{0pt plus 5cm}float Saliency\+E\+V\+M\+I\+::\+Get\+Dissimilarity (
+\begin{DoxyParamCaption}
+\item[{const {\bf Projected\+Areas\+Matrix} $\ast$}]{p\+Projected\+Areas\+Matrix, }
+\item[{int}]{p\+Polygon\+I, }
+\item[{int}]{p\+Polygon\+J}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_saliency_e_v_m_i_aa27ea95b8cf35ec24014fa6ce8317b44}
+
+
+Return the dissimilarity between two polygons. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/viewpoint-\/measures/\hyperlink{_saliency_e_v_m_i_8h}{Saliency\+E\+V\+M\+I.\+h}\item 
+src/viewpoint-\/measures/\hyperlink{_saliency_e_v_m_i_8cpp}{Saliency\+E\+V\+M\+I.\+cpp}\end{DoxyCompactItemize}

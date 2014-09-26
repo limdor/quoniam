@@ -1,0 +1,114 @@
+\hypertarget{class_g_p_u_scene}{\section{G\+P\+U\+Scene Class Reference}
+\label{class_g_p_u_scene}\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+}
+
+
+{\ttfamily \#include $<$G\+P\+U\+Scene.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_g_p_u_scene_a3733fd483825d0c17168f140b0d6cf46}{G\+P\+U\+Scene} (const \hyperlink{class_scene}{Scene} $\ast$p\+Scene)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_g_p_u_scene_aee29d4f5c61c32c117074084b4402526}{$\sim$\+G\+P\+U\+Scene} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+int \hyperlink{class_g_p_u_scene_a8ad8c31a74460d3f224b3b62ba0b41b6}{Get\+Number\+Of\+Scene\+Nodes} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of scene nodes. \end{DoxyCompactList}\item 
+\hyperlink{class_g_p_u_scene_node}{G\+P\+U\+Scene\+Node} $\ast$ \hyperlink{class_g_p_u_scene_a71e3cc6ae949f991c841b834b9d8476e}{Get\+Scene\+Node} (int p\+Node) const 
+\begin{DoxyCompactList}\small\item\em Get the scene node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Vector$<$ \hyperlink{class_g_p_u_scene_node}{G\+P\+U\+Scene\+Node} $\ast$ $>$ \hyperlink{class_g_p_u_scene_afda8b3ecd86a2b3401179c6b840440dd}{Create\+G\+P\+U\+Scene\+Nodes} (const \hyperlink{class_scene_node}{Scene\+Node} $\ast$p\+Scene\+Node, int \&p\+Polygonal\+Offset)
+\begin{DoxyCompactList}\small\item\em Create the gpu scene nodes given a scene node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Vector$<$ \hyperlink{class_g_p_u_scene_node}{G\+P\+U\+Scene\+Node} $\ast$ $>$ \hyperlink{class_g_p_u_scene_a73dcf1d581c7c5624274aa0e89f61ae7}{m\+Scene\+Nodes}
+\begin{DoxyCompactList}\small\item\em List of gpu scene nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_g_p_u_scene_a3733fd483825d0c17168f140b0d6cf46}{\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\subsubsection[{G\+P\+U\+Scene}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Scene\+::\+G\+P\+U\+Scene (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scene} $\ast$}]{p\+Scene}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_a3733fd483825d0c17168f140b0d6cf46}
+
+
+Constructor. 
+
+\hypertarget{class_g_p_u_scene_aee29d4f5c61c32c117074084b4402526}{\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!````~G\+P\+U\+Scene@{$\sim$\+G\+P\+U\+Scene}}
+\index{````~G\+P\+U\+Scene@{$\sim$\+G\+P\+U\+Scene}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\subsubsection[{$\sim$\+G\+P\+U\+Scene}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Scene\+::$\sim$\+G\+P\+U\+Scene (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_scene_aee29d4f5c61c32c117074084b4402526}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_g_p_u_scene_afda8b3ecd86a2b3401179c6b840440dd}{\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!Create\+G\+P\+U\+Scene\+Nodes@{Create\+G\+P\+U\+Scene\+Nodes}}
+\index{Create\+G\+P\+U\+Scene\+Nodes@{Create\+G\+P\+U\+Scene\+Nodes}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\subsubsection[{Create\+G\+P\+U\+Scene\+Nodes}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ {\bf G\+P\+U\+Scene\+Node} $\ast$ $>$ G\+P\+U\+Scene\+::\+Create\+G\+P\+U\+Scene\+Nodes (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scene\+Node} $\ast$}]{p\+Scene\+Node, }
+\item[{int \&}]{p\+Polygonal\+Offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_scene_afda8b3ecd86a2b3401179c6b840440dd}
+
+
+Create the gpu scene nodes given a scene node. 
+
+\hypertarget{class_g_p_u_scene_a8ad8c31a74460d3f224b3b62ba0b41b6}{\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!Get\+Number\+Of\+Scene\+Nodes@{Get\+Number\+Of\+Scene\+Nodes}}
+\index{Get\+Number\+Of\+Scene\+Nodes@{Get\+Number\+Of\+Scene\+Nodes}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\subsubsection[{Get\+Number\+Of\+Scene\+Nodes}]{\setlength{\rightskip}{0pt plus 5cm}int G\+P\+U\+Scene\+::\+Get\+Number\+Of\+Scene\+Nodes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_p_u_scene_a8ad8c31a74460d3f224b3b62ba0b41b6}
+
+
+Get the number of scene nodes. 
+
+\hypertarget{class_g_p_u_scene_a71e3cc6ae949f991c841b834b9d8476e}{\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!Get\+Scene\+Node@{Get\+Scene\+Node}}
+\index{Get\+Scene\+Node@{Get\+Scene\+Node}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\subsubsection[{Get\+Scene\+Node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\+P\+U\+Scene\+Node} $\ast$ G\+P\+U\+Scene\+::\+Get\+Scene\+Node (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Node}
+\end{DoxyParamCaption}
+) const}}\label{class_g_p_u_scene_a71e3cc6ae949f991c841b834b9d8476e}
+
+
+Get the scene node. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_g_p_u_scene_a73dcf1d581c7c5624274aa0e89f61ae7}{\index{G\+P\+U\+Scene@{G\+P\+U\+Scene}!m\+Scene\+Nodes@{m\+Scene\+Nodes}}
+\index{m\+Scene\+Nodes@{m\+Scene\+Nodes}!G\+P\+U\+Scene@{G\+P\+U\+Scene}}
+\subsubsection[{m\+Scene\+Nodes}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<${\bf G\+P\+U\+Scene\+Node}$\ast$$>$ G\+P\+U\+Scene\+::m\+Scene\+Nodes\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_scene_a73dcf1d581c7c5624274aa0e89f61ae7}
+
+
+List of gpu scene nodes. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_g_p_u_scene_8h}{G\+P\+U\+Scene.\+h}\item 
+src/core/\hyperlink{_g_p_u_scene_8cpp}{G\+P\+U\+Scene.\+cpp}\end{DoxyCompactItemize}

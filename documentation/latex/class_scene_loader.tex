@@ -1,0 +1,180 @@
+\hypertarget{class_scene_loader}{\section{Scene\+Loader Class Reference}
+\label{class_scene_loader}\index{Scene\+Loader@{Scene\+Loader}}
+}
+
+
+Class to load scenes from files.  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Loader.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_scene}{Scene} $\ast$ \hyperlink{class_scene_loader_a2b8b239816e455607c90c6b3e9ffe937}{Load\+Scene} (const Q\+String \&p\+Path)
+\begin{DoxyCompactList}\small\item\em Create a scene from the given file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_scene_node}{Scene\+Node} $\ast$ \hyperlink{class_scene_loader_ad6583f2573153f2aff2bf32b8306fa37}{Load\+Scene\+Node} (const Q\+Vector$<$ \hyperlink{class_mesh}{Mesh} $\ast$ $>$ \&p\+Scene\+Meshes, const ai\+Node $\ast$p\+Node)
+\item 
+static Q\+Vector$<$ \hyperlink{class_material}{Material} $\ast$ $>$ \hyperlink{class_scene_loader_a70109946f3d24398944be25facb5ec85}{Load\+Materials} (const ai\+Scene $\ast$p\+Ai\+Scene, const Q\+String \&p\+Scene\+Path)
+\begin{DoxyCompactList}\small\item\em Load the materials in p\+Scene. \end{DoxyCompactList}\item 
+static \hyperlink{class_material}{Material} $\ast$ \hyperlink{class_scene_loader_a421f1c9ca296c902c747a916b96ab884}{Load\+Material} (const ai\+Material $\ast$p\+Ai\+Material, const Q\+String \&p\+Scene\+Path)
+\begin{DoxyCompactList}\small\item\em Convert a ai\+Material to a \hyperlink{class_material}{Material}. \end{DoxyCompactList}\item 
+static Q\+Vector$<$ \hyperlink{class_geometry}{Geometry} $\ast$ $>$ \hyperlink{class_scene_loader_a3bfad02ee655692106298834ac57c475}{Load\+Geometries} (const ai\+Scene $\ast$p\+Ai\+Scene)
+\begin{DoxyCompactList}\small\item\em Load the geometries in p\+Ai\+Scene. \end{DoxyCompactList}\item 
+static \hyperlink{class_geometry}{Geometry} $\ast$ \hyperlink{class_scene_loader_a4cde53be42d10e7220b46ddaf486b365}{Load\+Geometry} (const ai\+Mesh $\ast$p\+Ai\+Mesh)
+\begin{DoxyCompactList}\small\item\em Convert a ai\+Mesh to a \hyperlink{class_geometry}{Geometry}. \end{DoxyCompactList}\item 
+static Q\+Vector$<$ \hyperlink{class_mesh}{Mesh} $\ast$ $>$ \hyperlink{class_scene_loader_af01b36a657bd6f86b219f4c73d1eec62}{Load\+Meshes} (const ai\+Scene $\ast$p\+Ai\+Scene, const Q\+Vector$<$ \hyperlink{class_material}{Material} $\ast$ $>$ \&p\+Materials, const Q\+Vector$<$ \hyperlink{class_geometry}{Geometry} $\ast$ $>$ \&p\+Geometries)
+\begin{DoxyCompactList}\small\item\em Load the meshes in p\+Ai\+Scene. \end{DoxyCompactList}\item 
+static \hyperlink{class_mesh}{Mesh} $\ast$ \hyperlink{class_scene_loader_acee8157dee22c21533426a6faf83cd29}{Load\+Mesh} (const ai\+Mesh $\ast$p\+Ai\+Mesh, int p\+Ai\+Mesh\+Index, const Q\+Vector$<$ \hyperlink{class_material}{Material} $\ast$ $>$ \&p\+Materials, const Q\+Vector$<$ \hyperlink{class_geometry}{Geometry} $\ast$ $>$ \&p\+Geometries)
+\begin{DoxyCompactList}\small\item\em Convert a ai\+Mesh to a \hyperlink{class_mesh}{Mesh}. \end{DoxyCompactList}\item 
+static void \hyperlink{class_scene_loader_a5bd8ec07fe301c1b82dfe88dd65a4ece}{Show\+Material\+Information} (const ai\+Material $\ast$p\+Material)
+\begin{DoxyCompactList}\small\item\em Show the information of the material. \end{DoxyCompactList}\item 
+static void \hyperlink{class_scene_loader_a6095a2c3c0c5668408601312f51002c3}{Show\+Texture\+Information} (const ai\+Material $\ast$p\+Material, ai\+Texture\+Type p\+Type, unsigned int p\+Texture\+Number)
+\begin{DoxyCompactList}\small\item\em Show the information of the texture. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to load scenes from files. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scene_loader_a3bfad02ee655692106298834ac57c475}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Geometries@{Load\+Geometries}}
+\index{Load\+Geometries@{Load\+Geometries}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Geometries}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ {\bf Geometry} $\ast$ $>$ Scene\+Loader\+::\+Load\+Geometries (
+\begin{DoxyParamCaption}
+\item[{const ai\+Scene $\ast$}]{p\+Ai\+Scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_a3bfad02ee655692106298834ac57c475}
+
+
+Load the geometries in p\+Ai\+Scene. 
+
+\hypertarget{class_scene_loader_a4cde53be42d10e7220b46ddaf486b365}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Geometry@{Load\+Geometry}}
+\index{Load\+Geometry@{Load\+Geometry}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Geometry}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Geometry} $\ast$ Scene\+Loader\+::\+Load\+Geometry (
+\begin{DoxyParamCaption}
+\item[{const ai\+Mesh $\ast$}]{p\+Ai\+Mesh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_a4cde53be42d10e7220b46ddaf486b365}
+
+
+Convert a ai\+Mesh to a \hyperlink{class_geometry}{Geometry}. 
+
+\hypertarget{class_scene_loader_a421f1c9ca296c902c747a916b96ab884}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Material@{Load\+Material}}
+\index{Load\+Material@{Load\+Material}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Material}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Material} $\ast$ Scene\+Loader\+::\+Load\+Material (
+\begin{DoxyParamCaption}
+\item[{const ai\+Material $\ast$}]{p\+Ai\+Material, }
+\item[{const Q\+String \&}]{p\+Scene\+Path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_a421f1c9ca296c902c747a916b96ab884}
+
+
+Convert a ai\+Material to a \hyperlink{class_material}{Material}. 
+
+\hypertarget{class_scene_loader_a70109946f3d24398944be25facb5ec85}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Materials@{Load\+Materials}}
+\index{Load\+Materials@{Load\+Materials}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Materials}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ {\bf Material} $\ast$ $>$ Scene\+Loader\+::\+Load\+Materials (
+\begin{DoxyParamCaption}
+\item[{const ai\+Scene $\ast$}]{p\+Ai\+Scene, }
+\item[{const Q\+String \&}]{p\+Scene\+Path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_a70109946f3d24398944be25facb5ec85}
+
+
+Load the materials in p\+Scene. 
+
+\hypertarget{class_scene_loader_acee8157dee22c21533426a6faf83cd29}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Mesh@{Load\+Mesh}}
+\index{Load\+Mesh@{Load\+Mesh}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mesh} $\ast$ Scene\+Loader\+::\+Load\+Mesh (
+\begin{DoxyParamCaption}
+\item[{const ai\+Mesh $\ast$}]{p\+Ai\+Mesh, }
+\item[{int}]{p\+Ai\+Mesh\+Index, }
+\item[{const Q\+Vector$<$ {\bf Material} $\ast$ $>$ \&}]{p\+Materials, }
+\item[{const Q\+Vector$<$ {\bf Geometry} $\ast$ $>$ \&}]{p\+Geometries}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_acee8157dee22c21533426a6faf83cd29}
+
+
+Convert a ai\+Mesh to a \hyperlink{class_mesh}{Mesh}. 
+
+\hypertarget{class_scene_loader_af01b36a657bd6f86b219f4c73d1eec62}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Meshes@{Load\+Meshes}}
+\index{Load\+Meshes@{Load\+Meshes}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Meshes}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ {\bf Mesh} $\ast$ $>$ Scene\+Loader\+::\+Load\+Meshes (
+\begin{DoxyParamCaption}
+\item[{const ai\+Scene $\ast$}]{p\+Ai\+Scene, }
+\item[{const Q\+Vector$<$ {\bf Material} $\ast$ $>$ \&}]{p\+Materials, }
+\item[{const Q\+Vector$<$ {\bf Geometry} $\ast$ $>$ \&}]{p\+Geometries}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_af01b36a657bd6f86b219f4c73d1eec62}
+
+
+Load the meshes in p\+Ai\+Scene. 
+
+\hypertarget{class_scene_loader_a2b8b239816e455607c90c6b3e9ffe937}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Scene@{Load\+Scene}}
+\index{Load\+Scene@{Load\+Scene}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Scene}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene} $\ast$ Scene\+Loader\+::\+Load\+Scene (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{p\+Path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scene_loader_a2b8b239816e455607c90c6b3e9ffe937}
+
+
+Create a scene from the given file. 
+
+\hypertarget{class_scene_loader_ad6583f2573153f2aff2bf32b8306fa37}{\index{Scene\+Loader@{Scene\+Loader}!Load\+Scene\+Node@{Load\+Scene\+Node}}
+\index{Load\+Scene\+Node@{Load\+Scene\+Node}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Load\+Scene\+Node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scene\+Node} $\ast$ Scene\+Loader\+::\+Load\+Scene\+Node (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ {\bf Mesh} $\ast$ $>$ \&}]{p\+Scene\+Meshes, }
+\item[{const ai\+Node $\ast$}]{p\+Node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_ad6583f2573153f2aff2bf32b8306fa37}
+Create an \hyperlink{class_scene_node}{Scene\+Node} given an Assimp node 
+\begin{DoxyParams}{Parameters}
+{\em p\+Node} & Pointer to the Assimp node to be loaded \\
+\hline
+{\em p\+Scene\+Meshes} & List of the meshes used in the node \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_scene_loader_a5bd8ec07fe301c1b82dfe88dd65a4ece}{\index{Scene\+Loader@{Scene\+Loader}!Show\+Material\+Information@{Show\+Material\+Information}}
+\index{Show\+Material\+Information@{Show\+Material\+Information}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Show\+Material\+Information}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Loader\+::\+Show\+Material\+Information (
+\begin{DoxyParamCaption}
+\item[{const ai\+Material $\ast$}]{p\+Material}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_a5bd8ec07fe301c1b82dfe88dd65a4ece}
+
+
+Show the information of the material. 
+
+\hypertarget{class_scene_loader_a6095a2c3c0c5668408601312f51002c3}{\index{Scene\+Loader@{Scene\+Loader}!Show\+Texture\+Information@{Show\+Texture\+Information}}
+\index{Show\+Texture\+Information@{Show\+Texture\+Information}!Scene\+Loader@{Scene\+Loader}}
+\subsubsection[{Show\+Texture\+Information}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+Loader\+::\+Show\+Texture\+Information (
+\begin{DoxyParamCaption}
+\item[{const ai\+Material $\ast$}]{p\+Material, }
+\item[{ai\+Texture\+Type}]{p\+Type, }
+\item[{unsigned int}]{p\+Texture\+Number}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_scene_loader_a6095a2c3c0c5668408601312f51002c3}
+
+
+Show the information of the texture. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_scene_loader_8h}{Scene\+Loader.\+h}\item 
+src/core/\hyperlink{_scene_loader_8cpp}{Scene\+Loader.\+cpp}\end{DoxyCompactItemize}

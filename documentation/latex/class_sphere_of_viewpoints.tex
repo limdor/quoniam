@@ -1,0 +1,241 @@
+\hypertarget{class_sphere_of_viewpoints}{\section{Sphere\+Of\+Viewpoints Class Reference}
+\label{class_sphere_of_viewpoints}\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+}
+
+
+{\ttfamily \#include $<$Sphere\+Of\+Viewpoints.\+h$>$}
+
+Inheritance diagram for Sphere\+Of\+Viewpoints\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sphere_of_viewpoints}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sphere_of_viewpoints_a8025953ca2ac4d4c53664d1263d3c7c5}{Sphere\+Of\+Viewpoints} (float p\+Angle, float p\+Aspect\+Ratio)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_sphere_of_viewpoints_a97b38d25bd8b17e72951deb40a1198ea}{$\sim$\+Sphere\+Of\+Viewpoints} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a0cd05612e10d64749d27329bec1f25a2}{Set\+To\+Uniform4} ()
+\begin{DoxyCompactList}\small\item\em Generates 4 viewpoints uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a7b2fbc9bffe8548cd9005c4a9fa7e188}{Set\+To\+Uniform6} ()
+\begin{DoxyCompactList}\small\item\em Generates 6 viewpoints uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a4bd55d7b106b47750177c2dc263199a3}{Set\+To\+Uniform8} ()
+\begin{DoxyCompactList}\small\item\em Generates 8 viewpoints uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a0a37e67f77de4a8202ae4a3bb30f67e0}{Set\+To\+Uniform12} ()
+\begin{DoxyCompactList}\small\item\em Generates 12 viewpoints uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a5e3dcf71d581ccb0d2c03c847757b8a1}{Set\+To\+Uniform20} ()
+\begin{DoxyCompactList}\small\item\em Generates 20 viewpoints uniformly distributed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a1e8a20c0563d81f9c4967c197304ba71}{Set\+To\+Quasi\+Uniform} (unsigned char p\+Depth)
+\item 
+\hyperlink{class_camera}{Camera} $\ast$ \hyperlink{class_sphere_of_viewpoints_a92c90b14ca81d1515d1d5af098d99d74}{Get\+Viewpoint} (int p\+Index) const 
+\begin{DoxyCompactList}\small\item\em Get the p\+Index viewpoint. \end{DoxyCompactList}\item 
+int \hyperlink{class_sphere_of_viewpoints_a9a753963ecf71a6168f4a75e81ce63f8}{Get\+Number\+Of\+Viewpoints} () const 
+\begin{DoxyCompactList}\small\item\em Return the numer of viewpoints over the sphere. \end{DoxyCompactList}\item 
+float \hyperlink{class_sphere_of_viewpoints_a85872899ddc31206f7e6011b4a3b3957}{Get\+Aspect\+Ratio} () const 
+\begin{DoxyCompactList}\small\item\em Return the aspect ratio of the viewpoints. \end{DoxyCompactList}\item 
+void \hyperlink{class_sphere_of_viewpoints_a6a278cb96954c6ae0f7eba9525e43897}{Apply\+Transform} (float p\+Scene\+Radius, float p\+Sphere\+Radius, const glm\+::vec3 \&p\+Center)
+\begin{DoxyCompactList}\small\item\em Apply a transform acording to the radius and the center of the scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_sphere_of_viewpoints_a3c0cc59d511c0bf9e97fd7e10b0a9983}{Set\+Cameras} ()
+\begin{DoxyCompactList}\small\item\em Set a camera for every point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_sphere_of_viewpoints_a555d6ce55b40deec00939ee8704274a5}{m\+Angle}
+\begin{DoxyCompactList}\small\item\em Field of view. \end{DoxyCompactList}\item 
+float \hyperlink{class_sphere_of_viewpoints_a8adb7d9727efdc995bd5088df9ea6237}{m\+Aspect\+Ratio}
+\begin{DoxyCompactList}\small\item\em Aspect ratio. \end{DoxyCompactList}\item 
+Q\+Vector$<$ \hyperlink{class_camera}{Camera} $\ast$ $>$ \hyperlink{class_sphere_of_viewpoints_a7b0e47466c3a44bf5b1f47974cdbe032}{m\+Cameras}
+\begin{DoxyCompactList}\small\item\em Array of viewpoints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_sphere_of_viewpoints_a8025953ca2ac4d4c53664d1263d3c7c5}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Sphere\+Of\+Viewpoints}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+Of\+Viewpoints\+::\+Sphere\+Of\+Viewpoints (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Angle, }
+\item[{float}]{p\+Aspect\+Ratio}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a8025953ca2ac4d4c53664d1263d3c7c5}
+
+
+Constructor. 
+
+\hypertarget{class_sphere_of_viewpoints_a97b38d25bd8b17e72951deb40a1198ea}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!````~Sphere\+Of\+Viewpoints@{$\sim$\+Sphere\+Of\+Viewpoints}}
+\index{````~Sphere\+Of\+Viewpoints@{$\sim$\+Sphere\+Of\+Viewpoints}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{$\sim$\+Sphere\+Of\+Viewpoints}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+Of\+Viewpoints\+::$\sim$\+Sphere\+Of\+Viewpoints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a97b38d25bd8b17e72951deb40a1198ea}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_sphere_of_viewpoints_a6a278cb96954c6ae0f7eba9525e43897}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Apply\+Transform@{Apply\+Transform}}
+\index{Apply\+Transform@{Apply\+Transform}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Apply\+Transform}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Apply\+Transform (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Scene\+Radius, }
+\item[{float}]{p\+Sphere\+Radius, }
+\item[{const glm\+::vec3 \&}]{p\+Center}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a6a278cb96954c6ae0f7eba9525e43897}
+
+
+Apply a transform acording to the radius and the center of the scene. 
+
+\hypertarget{class_sphere_of_viewpoints_a85872899ddc31206f7e6011b4a3b3957}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Get\+Aspect\+Ratio@{Get\+Aspect\+Ratio}}
+\index{Get\+Aspect\+Ratio@{Get\+Aspect\+Ratio}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Get\+Aspect\+Ratio}]{\setlength{\rightskip}{0pt plus 5cm}float Sphere\+Of\+Viewpoints\+::\+Get\+Aspect\+Ratio (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_of_viewpoints_a85872899ddc31206f7e6011b4a3b3957}
+
+
+Return the aspect ratio of the viewpoints. 
+
+\hypertarget{class_sphere_of_viewpoints_a9a753963ecf71a6168f4a75e81ce63f8}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Get\+Number\+Of\+Viewpoints@{Get\+Number\+Of\+Viewpoints}}
+\index{Get\+Number\+Of\+Viewpoints@{Get\+Number\+Of\+Viewpoints}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Get\+Number\+Of\+Viewpoints}]{\setlength{\rightskip}{0pt plus 5cm}int Sphere\+Of\+Viewpoints\+::\+Get\+Number\+Of\+Viewpoints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_of_viewpoints_a9a753963ecf71a6168f4a75e81ce63f8}
+
+
+Return the numer of viewpoints over the sphere. 
+
+\hypertarget{class_sphere_of_viewpoints_a92c90b14ca81d1515d1d5af098d99d74}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Get\+Viewpoint@{Get\+Viewpoint}}
+\index{Get\+Viewpoint@{Get\+Viewpoint}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Get\+Viewpoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera} $\ast$ Sphere\+Of\+Viewpoints\+::\+Get\+Viewpoint (
+\begin{DoxyParamCaption}
+\item[{int}]{p\+Index}
+\end{DoxyParamCaption}
+) const}}\label{class_sphere_of_viewpoints_a92c90b14ca81d1515d1d5af098d99d74}
+
+
+Get the p\+Index viewpoint. 
+
+\hypertarget{class_sphere_of_viewpoints_a3c0cc59d511c0bf9e97fd7e10b0a9983}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+Cameras@{Set\+Cameras}}
+\index{Set\+Cameras@{Set\+Cameras}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+Cameras}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+Cameras (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_of_viewpoints_a3c0cc59d511c0bf9e97fd7e10b0a9983}
+
+
+Set a camera for every point. 
+
+\hypertarget{class_sphere_of_viewpoints_a1e8a20c0563d81f9c4967c197304ba71}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+To\+Quasi\+Uniform@{Set\+To\+Quasi\+Uniform}}
+\index{Set\+To\+Quasi\+Uniform@{Set\+To\+Quasi\+Uniform}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+To\+Quasi\+Uniform}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+To\+Quasi\+Uniform (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{p\+Depth}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a1e8a20c0563d81f9c4967c197304ba71}
+Generate 10$\ast$4$^\wedge$depth+2 viewpoints quasi-\/uniformly distributed using the recursive subdivision of faces, starting from an icosahedron \hypertarget{class_sphere_of_viewpoints_a0a37e67f77de4a8202ae4a3bb30f67e0}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+To\+Uniform12@{Set\+To\+Uniform12}}
+\index{Set\+To\+Uniform12@{Set\+To\+Uniform12}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+To\+Uniform12}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+To\+Uniform12 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a0a37e67f77de4a8202ae4a3bb30f67e0}
+
+
+Generates 12 viewpoints uniformly distributed. 
+
+\hypertarget{class_sphere_of_viewpoints_a5e3dcf71d581ccb0d2c03c847757b8a1}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+To\+Uniform20@{Set\+To\+Uniform20}}
+\index{Set\+To\+Uniform20@{Set\+To\+Uniform20}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+To\+Uniform20}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+To\+Uniform20 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a5e3dcf71d581ccb0d2c03c847757b8a1}
+
+
+Generates 20 viewpoints uniformly distributed. 
+
+\hypertarget{class_sphere_of_viewpoints_a0cd05612e10d64749d27329bec1f25a2}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+To\+Uniform4@{Set\+To\+Uniform4}}
+\index{Set\+To\+Uniform4@{Set\+To\+Uniform4}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+To\+Uniform4}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+To\+Uniform4 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a0cd05612e10d64749d27329bec1f25a2}
+
+
+Generates 4 viewpoints uniformly distributed. 
+
+\hypertarget{class_sphere_of_viewpoints_a7b2fbc9bffe8548cd9005c4a9fa7e188}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+To\+Uniform6@{Set\+To\+Uniform6}}
+\index{Set\+To\+Uniform6@{Set\+To\+Uniform6}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+To\+Uniform6}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+To\+Uniform6 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a7b2fbc9bffe8548cd9005c4a9fa7e188}
+
+
+Generates 6 viewpoints uniformly distributed. 
+
+\hypertarget{class_sphere_of_viewpoints_a4bd55d7b106b47750177c2dc263199a3}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!Set\+To\+Uniform8@{Set\+To\+Uniform8}}
+\index{Set\+To\+Uniform8@{Set\+To\+Uniform8}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{Set\+To\+Uniform8}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+Of\+Viewpoints\+::\+Set\+To\+Uniform8 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sphere_of_viewpoints_a4bd55d7b106b47750177c2dc263199a3}
+
+
+Generates 8 viewpoints uniformly distributed. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_sphere_of_viewpoints_a555d6ce55b40deec00939ee8704274a5}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!m\+Angle@{m\+Angle}}
+\index{m\+Angle@{m\+Angle}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{m\+Angle}]{\setlength{\rightskip}{0pt plus 5cm}float Sphere\+Of\+Viewpoints\+::m\+Angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_of_viewpoints_a555d6ce55b40deec00939ee8704274a5}
+
+
+Field of view. 
+
+\hypertarget{class_sphere_of_viewpoints_a8adb7d9727efdc995bd5088df9ea6237}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!m\+Aspect\+Ratio@{m\+Aspect\+Ratio}}
+\index{m\+Aspect\+Ratio@{m\+Aspect\+Ratio}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{m\+Aspect\+Ratio}]{\setlength{\rightskip}{0pt plus 5cm}float Sphere\+Of\+Viewpoints\+::m\+Aspect\+Ratio\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_of_viewpoints_a8adb7d9727efdc995bd5088df9ea6237}
+
+
+Aspect ratio. 
+
+\hypertarget{class_sphere_of_viewpoints_a7b0e47466c3a44bf5b1f47974cdbe032}{\index{Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}!m\+Cameras@{m\+Cameras}}
+\index{m\+Cameras@{m\+Cameras}!Sphere\+Of\+Viewpoints@{Sphere\+Of\+Viewpoints}}
+\subsubsection[{m\+Cameras}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ {\bf Camera} $\ast$ $>$ Sphere\+Of\+Viewpoints\+::m\+Cameras\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sphere_of_viewpoints_a7b0e47466c3a44bf5b1f47974cdbe032}
+
+
+Array of viewpoints. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\hyperlink{_sphere_of_viewpoints_8h}{Sphere\+Of\+Viewpoints.\+h}\item 
+src/\hyperlink{_sphere_of_viewpoints_8cpp}{Sphere\+Of\+Viewpoints.\+cpp}\end{DoxyCompactItemize}

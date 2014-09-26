@@ -1,0 +1,154 @@
+\hypertarget{class_g_l_s_l_shader}{\section{G\+L\+S\+L\+Shader Class Reference}
+\label{class_g_l_s_l_shader}\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+}
+
+
+Class to wrap the G\+L\+S\+L shaders used by Open\+G\+L.  
+
+
+
+
+{\ttfamily \#include $<$G\+L\+S\+L\+Shader.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_g_l_s_l_shader_a7a567ce5e28a03fd983014539f3d4292}{G\+L\+S\+L\+Shader} (Q\+String p\+Source\+File, G\+Lenum p\+Type)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_g_l_s_l_shader_a5e53dfa871c7b870fb8eb4734371ec73}{$\sim$\+G\+L\+S\+L\+Shader} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \hyperlink{class_g_l_s_l_shader_aed8ccd518a70a98065d146dfc8c64171}{Has\+Errors} () const 
+\begin{DoxyCompactList}\small\item\em Return if the shader has had errors during compilation. \end{DoxyCompactList}\item 
+Q\+String \hyperlink{class_g_l_s_l_shader_a4d7be187736e1ead154e6837803f0de0}{Get\+Log} () const 
+\begin{DoxyCompactList}\small\item\em Get the compilation log. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_l_s_l_shader_af0f91cbc0ec19068d5c1a2003ae9119a}{Show\+Log} () const 
+\begin{DoxyCompactList}\small\item\em Show the compilation log. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{class_g_l_s_l_shader_ad7c28f634e2627356d9b2a0b47ca74de}{Get\+Id} () const 
+\begin{DoxyCompactList}\small\item\em Get the shader id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\+Luint \hyperlink{class_g_l_s_l_shader_af22456e355c0071c62c4c0d39787bb2d}{m\+G\+L\+Id}
+\begin{DoxyCompactList}\small\item\em Shader id. \end{DoxyCompactList}\item 
+G\+Lenum \hyperlink{class_g_l_s_l_shader_ac781a779992807267591d0a549e61fe0}{m\+Type}
+\item 
+Q\+String \hyperlink{class_g_l_s_l_shader_a617a470477725b8b953da143cb2091fa}{m\+Log}
+\begin{DoxyCompactList}\small\item\em Compilation log. \end{DoxyCompactList}\item 
+bool \hyperlink{class_g_l_s_l_shader_af59206917b6cb53b26f1100eff9069ae}{m\+Has\+Errors}
+\begin{DoxyCompactList}\small\item\em Boolean to know if the compilation process has produced some errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to wrap the G\+L\+S\+L shaders used by Open\+G\+L. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_g_l_s_l_shader_a7a567ce5e28a03fd983014539f3d4292}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{G\+L\+S\+L\+Shader}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+S\+L\+Shader\+::\+G\+L\+S\+L\+Shader (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{p\+Source\+File, }
+\item[{G\+Lenum}]{p\+Type}
+\end{DoxyParamCaption}
+)}}\label{class_g_l_s_l_shader_a7a567ce5e28a03fd983014539f3d4292}
+
+
+Constructor. 
+
+\hypertarget{class_g_l_s_l_shader_a5e53dfa871c7b870fb8eb4734371ec73}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!````~G\+L\+S\+L\+Shader@{$\sim$\+G\+L\+S\+L\+Shader}}
+\index{````~G\+L\+S\+L\+Shader@{$\sim$\+G\+L\+S\+L\+Shader}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{$\sim$\+G\+L\+S\+L\+Shader}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+S\+L\+Shader\+::$\sim$\+G\+L\+S\+L\+Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_l_s_l_shader_a5e53dfa871c7b870fb8eb4734371ec73}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_g_l_s_l_shader_ad7c28f634e2627356d9b2a0b47ca74de}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!Get\+Id@{Get\+Id}}
+\index{Get\+Id@{Get\+Id}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{Get\+Id}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint G\+L\+S\+L\+Shader\+::\+Get\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_l_s_l_shader_ad7c28f634e2627356d9b2a0b47ca74de}
+
+
+Get the shader id. 
+
+\hypertarget{class_g_l_s_l_shader_a4d7be187736e1ead154e6837803f0de0}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!Get\+Log@{Get\+Log}}
+\index{Get\+Log@{Get\+Log}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{Get\+Log}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String G\+L\+S\+L\+Shader\+::\+Get\+Log (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_l_s_l_shader_a4d7be187736e1ead154e6837803f0de0}
+
+
+Get the compilation log. 
+
+\hypertarget{class_g_l_s_l_shader_aed8ccd518a70a98065d146dfc8c64171}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!Has\+Errors@{Has\+Errors}}
+\index{Has\+Errors@{Has\+Errors}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{Has\+Errors}]{\setlength{\rightskip}{0pt plus 5cm}bool G\+L\+S\+L\+Shader\+::\+Has\+Errors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_l_s_l_shader_aed8ccd518a70a98065d146dfc8c64171}
+
+
+Return if the shader has had errors during compilation. 
+
+\hypertarget{class_g_l_s_l_shader_af0f91cbc0ec19068d5c1a2003ae9119a}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!Show\+Log@{Show\+Log}}
+\index{Show\+Log@{Show\+Log}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{Show\+Log}]{\setlength{\rightskip}{0pt plus 5cm}void G\+L\+S\+L\+Shader\+::\+Show\+Log (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_l_s_l_shader_af0f91cbc0ec19068d5c1a2003ae9119a}
+
+
+Show the compilation log. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_g_l_s_l_shader_af22456e355c0071c62c4c0d39787bb2d}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!m\+G\+L\+Id@{m\+G\+L\+Id}}
+\index{m\+G\+L\+Id@{m\+G\+L\+Id}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{m\+G\+L\+Id}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint G\+L\+S\+L\+Shader\+::m\+G\+L\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_l_s_l_shader_af22456e355c0071c62c4c0d39787bb2d}
+
+
+Shader id. 
+
+\hypertarget{class_g_l_s_l_shader_af59206917b6cb53b26f1100eff9069ae}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!m\+Has\+Errors@{m\+Has\+Errors}}
+\index{m\+Has\+Errors@{m\+Has\+Errors}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{m\+Has\+Errors}]{\setlength{\rightskip}{0pt plus 5cm}bool G\+L\+S\+L\+Shader\+::m\+Has\+Errors\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_l_s_l_shader_af59206917b6cb53b26f1100eff9069ae}
+
+
+Boolean to know if the compilation process has produced some errors. 
+
+\hypertarget{class_g_l_s_l_shader_a617a470477725b8b953da143cb2091fa}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!m\+Log@{m\+Log}}
+\index{m\+Log@{m\+Log}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{m\+Log}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String G\+L\+S\+L\+Shader\+::m\+Log\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_l_s_l_shader_a617a470477725b8b953da143cb2091fa}
+
+
+Compilation log. 
+
+\hypertarget{class_g_l_s_l_shader_ac781a779992807267591d0a549e61fe0}{\index{G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}!m\+Type@{m\+Type}}
+\index{m\+Type@{m\+Type}!G\+L\+S\+L\+Shader@{G\+L\+S\+L\+Shader}}
+\subsubsection[{m\+Type}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lenum G\+L\+S\+L\+Shader\+::m\+Type\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_l_s_l_shader_ac781a779992807267591d0a549e61fe0}
+Shader type using the same values than Open\+G\+L (G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+E\+R, G\+L\+\_\+\+T\+E\+S\+S\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+S\+H\+A\+D\+E\+R, G\+L\+\_\+\+T\+E\+S\+S\+\_\+\+E\+V\+A\+L\+U\+A\+T\+I\+O\+N\+\_\+\+S\+H\+A\+D\+E\+R, G\+L\+\_\+\+G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+S\+H\+A\+D\+E\+R and G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+E\+R) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_g_l_s_l_shader_8h}{G\+L\+S\+L\+Shader.\+h}\item 
+src/core/\hyperlink{_g_l_s_l_shader_8cpp}{G\+L\+S\+L\+Shader.\+cpp}\end{DoxyCompactItemize}

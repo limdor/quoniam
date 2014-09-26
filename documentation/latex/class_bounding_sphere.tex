@@ -1,0 +1,207 @@
+\hypertarget{class_bounding_sphere}{\section{Bounding\+Sphere Class Reference}
+\label{class_bounding_sphere}\index{Bounding\+Sphere@{Bounding\+Sphere}}
+}
+
+
+Bounding\+Volume class with methods to use a bounding sphere.  
+
+
+
+
+{\ttfamily \#include $<$Bounding\+Sphere.\+h$>$}
+
+Inheritance diagram for Bounding\+Sphere\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bounding_sphere}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_bounding_sphere_a3cc5fe6a8e361c2330331713f69336c0}{Bounding\+Sphere} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_bounding_sphere_a0d6744fa169e5d5b884013da1237098c}{$\sim$\+Bounding\+Sphere} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+glm\+::vec3 \hyperlink{class_bounding_sphere_ae909e2e9e5c63654953b2a89ba7cd50b}{Get\+Center} () const 
+\begin{DoxyCompactList}\small\item\em Get the center. \end{DoxyCompactList}\item 
+float \hyperlink{class_bounding_sphere_a40d9116ac275d1528b9477620a17d0d0}{Get\+Radius} () const 
+\begin{DoxyCompactList}\small\item\em Get the radius. \end{DoxyCompactList}\item 
+void \hyperlink{class_bounding_sphere_a9b7220ef9a607a5c45b2f64d4694290e}{Set\+Center} (const glm\+::vec3 \&p\+Value)
+\begin{DoxyCompactList}\small\item\em Set the center. \end{DoxyCompactList}\item 
+void \hyperlink{class_bounding_sphere_a6cbd5fce30ae785ae4199715ff65c3d3}{Set\+Radius} (float p\+Value)
+\begin{DoxyCompactList}\small\item\em Set the radius. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_bounding_sphere}{Bounding\+Sphere} $\ast$ \hyperlink{class_bounding_sphere_a73c9f3282481a5717fb8a401bb0fd133}{Merge} (const \hyperlink{class_bounding_sphere}{Bounding\+Sphere} $\ast$p\+B\+S0, const \hyperlink{class_bounding_sphere}{Bounding\+Sphere} $\ast$p\+B\+S1)
+\begin{DoxyCompactList}\small\item\em Create the minimum bounding sphere that includes p\+B\+S0 and p\+B\+S1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_bounding_sphere_a8bed6b6f60b7676d09c45b41db2032e6}{Create\+Mesh} ()
+\begin{DoxyCompactList}\small\item\em Create the mesh of the gizmo with the indexs, positions and colors. \end{DoxyCompactList}\item 
+void \hyperlink{class_bounding_sphere_ab1d394277a8f79bc970765af75273319}{Update\+Positions} ()
+\begin{DoxyCompactList}\small\item\em Update the positions of the vertices of the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec3 \hyperlink{class_bounding_sphere_a9975e7a417553c4f425e050f198122a1}{m\+Center}
+\begin{DoxyCompactList}\small\item\em Center. \end{DoxyCompactList}\item 
+float \hyperlink{class_bounding_sphere_a305aa1ba8daf58a8834547d4e0c15e7b}{m\+Radius}
+\begin{DoxyCompactList}\small\item\em Radius. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Bounding\+Volume class with methods to use a bounding sphere. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_bounding_sphere_a3cc5fe6a8e361c2330331713f69336c0}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Bounding\+Sphere@{Bounding\+Sphere}}
+\index{Bounding\+Sphere@{Bounding\+Sphere}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Bounding\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}Bounding\+Sphere\+::\+Bounding\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bounding_sphere_a3cc5fe6a8e361c2330331713f69336c0}
+
+
+Constructor. 
+
+\hypertarget{class_bounding_sphere_a0d6744fa169e5d5b884013da1237098c}{\index{Bounding\+Sphere@{Bounding\+Sphere}!````~Bounding\+Sphere@{$\sim$\+Bounding\+Sphere}}
+\index{````~Bounding\+Sphere@{$\sim$\+Bounding\+Sphere}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{$\sim$\+Bounding\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}Bounding\+Sphere\+::$\sim$\+Bounding\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bounding_sphere_a0d6744fa169e5d5b884013da1237098c}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_bounding_sphere_a8bed6b6f60b7676d09c45b41db2032e6}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Create\+Mesh@{Create\+Mesh}}
+\index{Create\+Mesh@{Create\+Mesh}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Create\+Mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Bounding\+Sphere\+::\+Create\+Mesh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_bounding_sphere_a8bed6b6f60b7676d09c45b41db2032e6}
+
+
+Create the mesh of the gizmo with the indexs, positions and colors. 
+
+Resolution used to render the bounding sphere
+
+Creation of the mesh
+
+Set the positions
+
+Set the colors
+
+Set the indexs 
+
+Implements \hyperlink{class_gizmo_a4ba36c75e6b8c2f729792de0161f5532}{Gizmo}.
+
+\hypertarget{class_bounding_sphere_ae909e2e9e5c63654953b2a89ba7cd50b}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Get\+Center@{Get\+Center}}
+\index{Get\+Center@{Get\+Center}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Get\+Center}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Bounding\+Sphere\+::\+Get\+Center (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_bounding_sphere_ae909e2e9e5c63654953b2a89ba7cd50b}
+
+
+Get the center. 
+
+\hypertarget{class_bounding_sphere_a40d9116ac275d1528b9477620a17d0d0}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Get\+Radius@{Get\+Radius}}
+\index{Get\+Radius@{Get\+Radius}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Get\+Radius}]{\setlength{\rightskip}{0pt plus 5cm}float Bounding\+Sphere\+::\+Get\+Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_bounding_sphere_a40d9116ac275d1528b9477620a17d0d0}
+
+
+Get the radius. 
+
+\hypertarget{class_bounding_sphere_a73c9f3282481a5717fb8a401bb0fd133}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Merge@{Merge}}
+\index{Merge@{Merge}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Merge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bounding\+Sphere} $\ast$ Bounding\+Sphere\+::\+Merge (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounding\+Sphere} $\ast$}]{p\+B\+S0, }
+\item[{const {\bf Bounding\+Sphere} $\ast$}]{p\+B\+S1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_bounding_sphere_a73c9f3282481a5717fb8a401bb0fd133}
+
+
+Create the minimum bounding sphere that includes p\+B\+S0 and p\+B\+S1. 
+
+\hypertarget{class_bounding_sphere_a9b7220ef9a607a5c45b2f64d4694290e}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Set\+Center@{Set\+Center}}
+\index{Set\+Center@{Set\+Center}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Set\+Center}]{\setlength{\rightskip}{0pt plus 5cm}void Bounding\+Sphere\+::\+Set\+Center (
+\begin{DoxyParamCaption}
+\item[{const glm\+::vec3 \&}]{p\+Value}
+\end{DoxyParamCaption}
+)}}\label{class_bounding_sphere_a9b7220ef9a607a5c45b2f64d4694290e}
+
+
+Set the center. 
+
+\hypertarget{class_bounding_sphere_a6cbd5fce30ae785ae4199715ff65c3d3}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Set\+Radius@{Set\+Radius}}
+\index{Set\+Radius@{Set\+Radius}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Set\+Radius}]{\setlength{\rightskip}{0pt plus 5cm}void Bounding\+Sphere\+::\+Set\+Radius (
+\begin{DoxyParamCaption}
+\item[{float}]{p\+Value}
+\end{DoxyParamCaption}
+)}}\label{class_bounding_sphere_a6cbd5fce30ae785ae4199715ff65c3d3}
+
+
+Set the radius. 
+
+\hypertarget{class_bounding_sphere_ab1d394277a8f79bc970765af75273319}{\index{Bounding\+Sphere@{Bounding\+Sphere}!Update\+Positions@{Update\+Positions}}
+\index{Update\+Positions@{Update\+Positions}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{Update\+Positions}]{\setlength{\rightskip}{0pt plus 5cm}void Bounding\+Sphere\+::\+Update\+Positions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_bounding_sphere_ab1d394277a8f79bc970765af75273319}
+
+
+Update the positions of the vertices of the mesh. 
+
+
+
+Implements \hyperlink{class_gizmo_a30161525d80402eb0653f2612003a733}{Gizmo}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_bounding_sphere_a9975e7a417553c4f425e050f198122a1}{\index{Bounding\+Sphere@{Bounding\+Sphere}!m\+Center@{m\+Center}}
+\index{m\+Center@{m\+Center}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{m\+Center}]{\setlength{\rightskip}{0pt plus 5cm}glm\+::vec3 Bounding\+Sphere\+::m\+Center\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_bounding_sphere_a9975e7a417553c4f425e050f198122a1}
+
+
+Center. 
+
+\hypertarget{class_bounding_sphere_a305aa1ba8daf58a8834547d4e0c15e7b}{\index{Bounding\+Sphere@{Bounding\+Sphere}!m\+Radius@{m\+Radius}}
+\index{m\+Radius@{m\+Radius}!Bounding\+Sphere@{Bounding\+Sphere}}
+\subsubsection[{m\+Radius}]{\setlength{\rightskip}{0pt plus 5cm}float Bounding\+Sphere\+::m\+Radius\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_bounding_sphere_a305aa1ba8daf58a8834547d4e0c15e7b}
+
+
+Radius. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_bounding_sphere_8h}{Bounding\+Sphere.\+h}\item 
+src/core/\hyperlink{_bounding_sphere_8cpp}{Bounding\+Sphere.\+cpp}\end{DoxyCompactItemize}

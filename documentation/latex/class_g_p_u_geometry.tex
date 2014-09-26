@@ -1,0 +1,333 @@
+\hypertarget{class_g_p_u_geometry}{\section{G\+P\+U\+Geometry Class Reference}
+\label{class_g_p_u_geometry}\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+}
+
+
+Class to wrap a \hyperlink{class_mesh}{Mesh} that is stored into the G\+P\+U.  
+
+
+
+
+{\ttfamily \#include $<$G\+P\+U\+Geometry.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_g_p_u_geometry_aa4d74b9f6fd8775869ef55e9a12c58e1}{G\+P\+U\+Geometry} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_g_p_u_geometry_a2c669cbc3b1d05dd2f01785c3a82dac0}{$\sim$\+G\+P\+U\+Geometry} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_ad369af1cb7037c00c7bfc0dd90f20d58}{Set\+Vertices\+Data} (unsigned int p\+Size, unsigned int p\+Stride, const float $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the vertices of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a4d8cc365cfb6645e4a22eda3c7c00e6f}{Set\+Normals\+Data} (unsigned int p\+Size, const float $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the normals of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a735d8c8ce4d5bdeb792c973a26a2b874}{Set\+Color\+Data} (unsigned int p\+Size, unsigned int p\+Stride, const float $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the colors of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_af1424a2416716c4b0f1cd49e7d771c46}{Set\+Tangent\+Data} (unsigned int p\+Size, const float $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the tangents of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a0f7c708dd60f575de100c08aa4fdb19a}{Set\+Bitangent\+Data} (unsigned int p\+Size, const float $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the bitangents of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a2a6090698e67e390f3629ec169f45bc5}{Set\+Text\+Coords\+Data} (unsigned int p\+Size, const float $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the texture coordinates of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_ace267349b9bd22f4131b7635c8b5aa15}{Set\+Indexs\+Data} (unsigned int p\+Size, \hyperlink{class_geometry_af0136a3b268286ee5921cc6af5239293}{Geometry\+::\+Topology} p\+Topology, const unsigned int $\ast$p\+Data)
+\begin{DoxyCompactList}\small\item\em Set the information of connectivities between vertices of the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a5b53ace39a31fcd7694465903a7239fa}{Draw} () const 
+\begin{DoxyCompactList}\small\item\em Draw the mesh. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a7d1bee6693d669184dbb7c5e06f8d8a9}{Configure\+V\+A\+O} ()
+\begin{DoxyCompactList}\small\item\em Configure the vertex array object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_g_p_u_geometry_aee5a2f57e66ceb1e59aece9b98a6a525}{G\+P\+U\+Geometry} (\hyperlink{class_g_p_u_geometry}{G\+P\+U\+Geometry} const \&)
+\begin{DoxyCompactList}\small\item\em We don't want a default copy constructor because it will not work due to it will not duplicate the memory in the gpu. \end{DoxyCompactList}\item 
+void \hyperlink{class_g_p_u_geometry_a55595c292b333445165a5c7c016f49f0}{Fast\+Draw} (unsigned int p\+Size) const 
+\begin{DoxyCompactList}\small\item\em Draw the mesh given the number of elements to be drawn when the vertex array object is already binded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a23f035d901894a6a856f907f273787e6}{m\+Vao\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex array object. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_aec622b7cb70bdcbbe9fd124313caa4ba}{m\+Vertices\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex buffer object that stores the position of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a50f85b6aad31e8d9a5401c6030fbf7da}{m\+Vertices\+Stride}
+\begin{DoxyCompactList}\small\item\em Stride of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_af547189a739cd2eba9c525bffc191d90}{m\+Colors\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex buffer object that stores the color of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a1a53ddf5e03d98e274e55e463b8bedb2}{m\+Colors\+Stride}
+\begin{DoxyCompactList}\small\item\em Stride of the colors. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a90eb49a3475a9ee00e5efc8d3bb9d2f2}{m\+Normals\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex buffer object that stores the normal of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a73691872b73594e9adee41c5437e70bf}{m\+Tangents\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex buffer object that stores the tangent of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_ac5f70882b315385c4abd8e13c7d87c06}{m\+Bitangents\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex buffer object that stores the bitangent of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a47934d33be572e934ab7a06fbc822485}{m\+Text\+Coords\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the vertex buffer object that stores the texture coordinates of the vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a7528dbd5d745121f03c093adfa8aa9bc}{m\+Indexs\+Id}
+\begin{DoxyCompactList}\small\item\em Id of the buffer that stores the information of connectivities between vertices. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_g_p_u_geometry_a6dea12bd5a55b4f98b97cc77f0b1a6f3}{m\+Indexs\+Size}
+\begin{DoxyCompactList}\small\item\em Number of elements of the mesh. \end{DoxyCompactList}\item 
+\hyperlink{class_geometry_af0136a3b268286ee5921cc6af5239293}{Geometry\+::\+Topology} \hyperlink{class_g_p_u_geometry_a50c7b109148ff6a5218903bf7e848be3}{m\+Mesh\+Topology}
+\begin{DoxyCompactList}\small\item\em Topology of the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to wrap a \hyperlink{class_mesh}{Mesh} that is stored into the G\+P\+U. 
+
+\begin{DoxyAuthor}{Author}
+Xavier Bonaventura 
+
+Copyright\+: (c) Universitat de Girona 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_g_p_u_geometry_aa4d74b9f6fd8775869ef55e9a12c58e1}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{G\+P\+U\+Geometry}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Geometry\+::\+G\+P\+U\+Geometry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_aa4d74b9f6fd8775869ef55e9a12c58e1}
+
+
+Constructor. 
+
+\hypertarget{class_g_p_u_geometry_a2c669cbc3b1d05dd2f01785c3a82dac0}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!````~G\+P\+U\+Geometry@{$\sim$\+G\+P\+U\+Geometry}}
+\index{````~G\+P\+U\+Geometry@{$\sim$\+G\+P\+U\+Geometry}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{$\sim$\+G\+P\+U\+Geometry}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Geometry\+::$\sim$\+G\+P\+U\+Geometry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_a2c669cbc3b1d05dd2f01785c3a82dac0}
+
+
+Destructor. 
+
+\hypertarget{class_g_p_u_geometry_aee5a2f57e66ceb1e59aece9b98a6a525}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{G\+P\+U\+Geometry}]{\setlength{\rightskip}{0pt plus 5cm}G\+P\+U\+Geometry\+::\+G\+P\+U\+Geometry (
+\begin{DoxyParamCaption}
+\item[{{\bf G\+P\+U\+Geometry} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}}\label{class_g_p_u_geometry_aee5a2f57e66ceb1e59aece9b98a6a525}
+
+
+We don't want a default copy constructor because it will not work due to it will not duplicate the memory in the gpu. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_g_p_u_geometry_a7d1bee6693d669184dbb7c5e06f8d8a9}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Configure\+V\+A\+O@{Configure\+V\+A\+O}}
+\index{Configure\+V\+A\+O@{Configure\+V\+A\+O}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Configure\+V\+A\+O}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Configure\+V\+A\+O (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_a7d1bee6693d669184dbb7c5e06f8d8a9}
+
+
+Configure the vertex array object. 
+
+\hypertarget{class_g_p_u_geometry_a5b53ace39a31fcd7694465903a7239fa}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Draw@{Draw}}
+\index{Draw@{Draw}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_g_p_u_geometry_a5b53ace39a31fcd7694465903a7239fa}
+
+
+Draw the mesh. 
+
+\hypertarget{class_g_p_u_geometry_a55595c292b333445165a5c7c016f49f0}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Fast\+Draw@{Fast\+Draw}}
+\index{Fast\+Draw@{Fast\+Draw}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Fast\+Draw}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Fast\+Draw (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a55595c292b333445165a5c7c016f49f0}
+
+
+Draw the mesh given the number of elements to be drawn when the vertex array object is already binded. 
+
+\hypertarget{class_g_p_u_geometry_a0f7c708dd60f575de100c08aa4fdb19a}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Bitangent\+Data@{Set\+Bitangent\+Data}}
+\index{Set\+Bitangent\+Data@{Set\+Bitangent\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Bitangent\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Bitangent\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{const float $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_a0f7c708dd60f575de100c08aa4fdb19a}
+
+
+Set the bitangents of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_a735d8c8ce4d5bdeb792c973a26a2b874}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Color\+Data@{Set\+Color\+Data}}
+\index{Set\+Color\+Data@{Set\+Color\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Color\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Color\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{unsigned int}]{p\+Stride, }
+\item[{const float $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_a735d8c8ce4d5bdeb792c973a26a2b874}
+
+
+Set the colors of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_ace267349b9bd22f4131b7635c8b5aa15}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Indexs\+Data@{Set\+Indexs\+Data}}
+\index{Set\+Indexs\+Data@{Set\+Indexs\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Indexs\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Indexs\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{{\bf Geometry\+::\+Topology}}]{p\+Topology, }
+\item[{const unsigned int $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_ace267349b9bd22f4131b7635c8b5aa15}
+
+
+Set the information of connectivities between vertices of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_a4d8cc365cfb6645e4a22eda3c7c00e6f}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Normals\+Data@{Set\+Normals\+Data}}
+\index{Set\+Normals\+Data@{Set\+Normals\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Normals\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Normals\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{const float $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_a4d8cc365cfb6645e4a22eda3c7c00e6f}
+
+
+Set the normals of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_af1424a2416716c4b0f1cd49e7d771c46}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Tangent\+Data@{Set\+Tangent\+Data}}
+\index{Set\+Tangent\+Data@{Set\+Tangent\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Tangent\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Tangent\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{const float $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_af1424a2416716c4b0f1cd49e7d771c46}
+
+
+Set the tangents of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_a2a6090698e67e390f3629ec169f45bc5}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Text\+Coords\+Data@{Set\+Text\+Coords\+Data}}
+\index{Set\+Text\+Coords\+Data@{Set\+Text\+Coords\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Text\+Coords\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Text\+Coords\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{const float $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_a2a6090698e67e390f3629ec169f45bc5}
+
+
+Set the texture coordinates of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_ad369af1cb7037c00c7bfc0dd90f20d58}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!Set\+Vertices\+Data@{Set\+Vertices\+Data}}
+\index{Set\+Vertices\+Data@{Set\+Vertices\+Data}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{Set\+Vertices\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+U\+Geometry\+::\+Set\+Vertices\+Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\+Size, }
+\item[{unsigned int}]{p\+Stride, }
+\item[{const float $\ast$}]{p\+Data}
+\end{DoxyParamCaption}
+)}}\label{class_g_p_u_geometry_ad369af1cb7037c00c7bfc0dd90f20d58}
+
+
+Set the vertices of the mesh. 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_g_p_u_geometry_ac5f70882b315385c4abd8e13c7d87c06}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Bitangents\+Id@{m\+Bitangents\+Id}}
+\index{m\+Bitangents\+Id@{m\+Bitangents\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Bitangents\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Bitangents\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_ac5f70882b315385c4abd8e13c7d87c06}
+
+
+Id of the vertex buffer object that stores the bitangent of the vertices. 
+
+\hypertarget{class_g_p_u_geometry_af547189a739cd2eba9c525bffc191d90}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Colors\+Id@{m\+Colors\+Id}}
+\index{m\+Colors\+Id@{m\+Colors\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Colors\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Colors\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_af547189a739cd2eba9c525bffc191d90}
+
+
+Id of the vertex buffer object that stores the color of the vertices. 
+
+\hypertarget{class_g_p_u_geometry_a1a53ddf5e03d98e274e55e463b8bedb2}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Colors\+Stride@{m\+Colors\+Stride}}
+\index{m\+Colors\+Stride@{m\+Colors\+Stride}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Colors\+Stride}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Colors\+Stride\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a1a53ddf5e03d98e274e55e463b8bedb2}
+
+
+Stride of the colors. 
+
+\hypertarget{class_g_p_u_geometry_a7528dbd5d745121f03c093adfa8aa9bc}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Indexs\+Id@{m\+Indexs\+Id}}
+\index{m\+Indexs\+Id@{m\+Indexs\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Indexs\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Indexs\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a7528dbd5d745121f03c093adfa8aa9bc}
+
+
+Id of the buffer that stores the information of connectivities between vertices. 
+
+\hypertarget{class_g_p_u_geometry_a6dea12bd5a55b4f98b97cc77f0b1a6f3}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Indexs\+Size@{m\+Indexs\+Size}}
+\index{m\+Indexs\+Size@{m\+Indexs\+Size}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Indexs\+Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Indexs\+Size\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a6dea12bd5a55b4f98b97cc77f0b1a6f3}
+
+
+Number of elements of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_a50c7b109148ff6a5218903bf7e848be3}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Mesh\+Topology@{m\+Mesh\+Topology}}
+\index{m\+Mesh\+Topology@{m\+Mesh\+Topology}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Mesh\+Topology}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Geometry\+::\+Topology} G\+P\+U\+Geometry\+::m\+Mesh\+Topology\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a50c7b109148ff6a5218903bf7e848be3}
+
+
+Topology of the mesh. 
+
+\hypertarget{class_g_p_u_geometry_a90eb49a3475a9ee00e5efc8d3bb9d2f2}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Normals\+Id@{m\+Normals\+Id}}
+\index{m\+Normals\+Id@{m\+Normals\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Normals\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Normals\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a90eb49a3475a9ee00e5efc8d3bb9d2f2}
+
+
+Id of the vertex buffer object that stores the normal of the vertices. 
+
+\hypertarget{class_g_p_u_geometry_a73691872b73594e9adee41c5437e70bf}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Tangents\+Id@{m\+Tangents\+Id}}
+\index{m\+Tangents\+Id@{m\+Tangents\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Tangents\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Tangents\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a73691872b73594e9adee41c5437e70bf}
+
+
+Id of the vertex buffer object that stores the tangent of the vertices. 
+
+\hypertarget{class_g_p_u_geometry_a47934d33be572e934ab7a06fbc822485}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Text\+Coords\+Id@{m\+Text\+Coords\+Id}}
+\index{m\+Text\+Coords\+Id@{m\+Text\+Coords\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Text\+Coords\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Text\+Coords\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a47934d33be572e934ab7a06fbc822485}
+
+
+Id of the vertex buffer object that stores the texture coordinates of the vertices. 
+
+\hypertarget{class_g_p_u_geometry_a23f035d901894a6a856f907f273787e6}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Vao\+Id@{m\+Vao\+Id}}
+\index{m\+Vao\+Id@{m\+Vao\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Vao\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Vao\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a23f035d901894a6a856f907f273787e6}
+
+
+Id of the vertex array object. 
+
+\hypertarget{class_g_p_u_geometry_aec622b7cb70bdcbbe9fd124313caa4ba}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Vertices\+Id@{m\+Vertices\+Id}}
+\index{m\+Vertices\+Id@{m\+Vertices\+Id}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Vertices\+Id}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Vertices\+Id\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_aec622b7cb70bdcbbe9fd124313caa4ba}
+
+
+Id of the vertex buffer object that stores the position of the vertices. 
+
+\hypertarget{class_g_p_u_geometry_a50f85b6aad31e8d9a5401c6030fbf7da}{\index{G\+P\+U\+Geometry@{G\+P\+U\+Geometry}!m\+Vertices\+Stride@{m\+Vertices\+Stride}}
+\index{m\+Vertices\+Stride@{m\+Vertices\+Stride}!G\+P\+U\+Geometry@{G\+P\+U\+Geometry}}
+\subsubsection[{m\+Vertices\+Stride}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+U\+Geometry\+::m\+Vertices\+Stride\hspace{0.3cm}{\ttfamily [private]}}}\label{class_g_p_u_geometry_a50f85b6aad31e8d9a5401c6030fbf7da}
+
+
+Stride of the vertices. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/core/\hyperlink{_g_p_u_geometry_8h}{G\+P\+U\+Geometry.\+h}\item 
+src/core/\hyperlink{_g_p_u_geometry_8cpp}{G\+P\+U\+Geometry.\+cpp}\end{DoxyCompactItemize}
