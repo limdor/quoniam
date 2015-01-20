@@ -76,7 +76,7 @@ void SphereOfViewpoints::ApplyTransform(float pSceneRadius, float pSphereRadius,
         glm::vec3 cameraPosition= mVertices.at(i) * pSphereRadius + pCenter;
         mVertices[i] = mVertices.at(i) * pSceneRadius * 2.0f + pCenter;
         Camera* cam = mCameras.at(i);
-        cam->SetNearPlane(pSphereRadius - 2.0f * pSceneRadius);
+        cam->SetNearPlane(qMax(pSphereRadius - 2.0f * pSceneRadius, pSphereRadius / 1000.0f));
         cam->SetFarPlane(pSphereRadius * 2.0f);
         cam->SetLookAt(pCenter);
         cam->SetPosition(cameraPosition);
