@@ -26,7 +26,7 @@ public:
     /// Copy constructor
     Camera(const Camera& pCamera);
     /// Destructor
-    ~Camera();
+    virtual ~Camera();
 
     /// Get the view matrix
     glm::mat4 GetViewMatrix();
