@@ -43,7 +43,7 @@ private:
     ModuleTabWidget* mModuleTabWidget;
 
 private slots:
-    /// Method called when the user change from oune module to another
+    /// Method called when the user change from one module to another
     void ModuleChanged(int pIndex);
     /// Loads the main module
     void LoadMainModule();
