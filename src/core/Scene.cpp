@@ -9,6 +9,9 @@
 #include <QProgressDialog>
 #include <QTime>
 
+//Dependency includes
+#include "glm/vec3.hpp"
+
 //Project includes
 #include "Debug.h"
 #include "MainWindow.h"

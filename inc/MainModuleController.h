@@ -12,6 +12,9 @@
 //Qt includes
 #include <QSignalMapper>
 
+//Dependency includes
+#include "glm/vec3.hpp"
+
 //Project includes
 #include "DutagaciDialog.h"
 #include "GLCanvas.h"

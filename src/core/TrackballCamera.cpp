@@ -1,8 +1,8 @@
 #include "TrackballCamera.h"
 
-#define GLM_FORCE_RADIANS
 #include "glm/exponential.hpp"
 #include "glm/geometric.hpp"
+#include "glm/trigonometric.hpp"
 #include "glm/gtx/transform.hpp"
 
 TrackballCamera::TrackballCamera(GLCanvas *pGLCanvas, Camera *pCamera):CameraController(pGLCanvas, pCamera)

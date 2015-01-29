@@ -11,11 +11,12 @@
 #include <QXmlStreamWriter>
 
 //Dependency includes
-#define GLM_FORCE_RADIANS
-#include "glm/exponential.hpp"
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/vec4.hpp"
 #include "glm/geometric.hpp"
 #include "glm/trigonometric.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+#include "glm/exponential.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 
 //Project includes

@@ -13,6 +13,9 @@
 #include <QGLWidget>
 #include <QVector>
 
+//Dependency includes
+#include "glm/vec3.hpp"
+
 //Project includes
 #include "Camera.h"
 #include "Geometry.h"

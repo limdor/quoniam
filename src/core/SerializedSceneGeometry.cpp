@@ -5,9 +5,9 @@
 #include <QTime>
 
 //Dependency includes
-#define GLM_FORCE_RADIANS
 #include "glm/exponential.hpp"
 #include "glm/geometric.hpp"
+#include "glm/gtc/constants.hpp"
 #include "glm/gtx/norm.hpp"
 #include "glm/gtx/vector_angle.hpp"
 #include "Miniball.h"

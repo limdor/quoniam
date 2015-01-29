@@ -2,7 +2,8 @@
 #include "PerspectiveCamera.h"
 
 //Dependency includes
-#define GLM_FORCE_RADIANS
+#include "glm/geometric.hpp"
+#include "glm/trigonometric.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
 //Project includes

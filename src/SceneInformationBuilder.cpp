@@ -11,9 +11,12 @@
 #include <QVector>
 
 //Dependency includes
-#define GLM_FORCE_RADIANS
+#include "glm/mat4x4.hpp"
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
 #include "glm/common.hpp"
 #include "glm/geometric.hpp"
+#include "glm/trigonometric.hpp"
 #include "glm/gtx/vector_angle.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"

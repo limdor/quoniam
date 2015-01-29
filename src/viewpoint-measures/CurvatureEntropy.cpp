@@ -5,8 +5,8 @@
 #include <QSet>
 
 //Dependency includes
-#include <glm/glm.hpp>
-#include <glm/gtc/constants.hpp>
+#include "glm/exponential.hpp"
+#include "glm/gtc/constants.hpp"
 
 //Project includes
 #include "Tools.h"

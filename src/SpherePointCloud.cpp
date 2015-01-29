@@ -4,6 +4,7 @@
 //Dependency includes
 #include "glm/common.hpp"
 #include "glm/geometric.hpp"
+#include "glm/exponential.hpp"
 
 glm::vec3 SpherePointCloud::Up(const glm::vec3 &pViewpoint)
 {

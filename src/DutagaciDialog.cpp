@@ -5,7 +5,6 @@
 #include <QTextStream>
 
 //Dependency includes
-#include "glm/common.hpp"
 #include "glm/trigonometric.hpp"
 
 DutagaciDialog::DutagaciDialog(QWidget *parent): QDialog(parent),

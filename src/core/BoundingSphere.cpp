@@ -2,6 +2,8 @@
 #include "BoundingSphere.h"
 
 //Dependency includes
+#include "glm/exponential.hpp"
+#include "glm/trigonometric.hpp"
 #include "glm/gtx/norm.hpp"
 
 //Project includes

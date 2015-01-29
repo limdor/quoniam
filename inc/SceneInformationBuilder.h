@@ -7,6 +7,7 @@
 #define _SCENE_INFORMATION_BUILDER_H_
 
 //Dependency includes
+#include "glm/vec4.hpp"
 #include "opencv2/core/core.hpp"
 
 //Project includes

@@ -3,7 +3,7 @@
 -------------
 Assimp: 3.0                   http://assimp.sourceforge.net/main_downloads.html
 glew: 1.12.0                  http://glew.sourceforge.net/
-glm: 0.9.5.4                  http://glm.g-truc.net/download.html
+glm: 0.9.6.1                  http://glm.g-truc.net/download.html
 Miniball: 2.0                 http://www.inf.ethz.ch/personal/gaertner/miniball.html
 Qt: 5.3.1                     http://qt.nokia.com/products
 OpenCV: 2.4.9                 http://opencv.org/

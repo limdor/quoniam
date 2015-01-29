@@ -11,6 +11,9 @@
 //Qt includes
 #include <QVector>
 
+//Dependency includes
+#include "glm/vec3.hpp"
+
 //Project includes
 #include "Geometry.h"
 

@@ -2,7 +2,6 @@
 #include "Geometry.h"
 
 //Dependency includes
-#include "glm/vec2.hpp"
 #include "glm/exponential.hpp"
 #include "Miniball.h"
 

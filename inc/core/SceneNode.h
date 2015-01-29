@@ -11,6 +11,9 @@
 #include <QString>
 #include <QVector>
 
+//Dependency includes
+#include "glm/mat4x4.hpp"
+
 //Project includes
 #include "Camera.h"
 #include "Mesh.h"

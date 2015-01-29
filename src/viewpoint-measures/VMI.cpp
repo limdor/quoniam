@@ -2,7 +2,7 @@
 #include "VMI.h"
 
 //Dependency includes
-#include <glm/glm.hpp>
+#include "glm/exponential.hpp"
 
 //Project includes
 #include "Tools.h"

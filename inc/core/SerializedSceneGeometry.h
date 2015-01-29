@@ -7,6 +7,9 @@
 #ifndef _SERIALIZED_SCENE_GEOMETRY_H_
 #define _SERIALIZED_SCENE_GEOMETRY_H_
 
+//Dependency includes
+#include "glm/vec3.hpp"
+
 //Project includes
 #include "Scene.h"
 

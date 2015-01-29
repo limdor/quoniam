@@ -7,6 +7,9 @@
 #ifndef _PERSPECTIVE_CAMERA_H_
 #define _PERSPECTIVE_CAMERA_H_
 
+//Dependency includes
+#include "glm/vec3.hpp"
+
 //Project includes
 #include "Camera.h"
 
