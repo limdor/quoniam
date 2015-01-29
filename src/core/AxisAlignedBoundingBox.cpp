@@ -45,10 +45,8 @@ AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pA
 
     if( pAABB0 != NULL && pAABB1 != NULL )
     {
-        glm::vec3 minAABB0, minAABB1, maxAABB0, maxAABB1;
-
-        minAABB0 = pAABB0->GetMin();
-        minAABB1 = pAABB1->GetMin();
+        glm::vec3 minAABB0 = pAABB0->GetMin();
+        glm::vec3 minAABB1 = pAABB1->GetMin();
         newMin = minAABB1;
         if( minAABB0.x < minAABB1.x )
         {
@@ -63,8 +61,8 @@ AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pA
             newMin.z = minAABB0.z;
         }
 
-        maxAABB0 = pAABB0->GetMax();
-        maxAABB1 = pAABB1->GetMax();
+        glm::vec3 maxAABB0 = pAABB0->GetMax();
+        glm::vec3 maxAABB1 = pAABB1->GetMax();
         newMax = maxAABB1;
         if( maxAABB0.x > maxAABB1.x )
         {
@@ -110,11 +108,11 @@ void AxisAlignedBoundingBox::CreateMesh()
 
     /// Set the indexs
     QVector<unsigned int> indexs(24);
-    indexs[0] = 0; indexs[1] = 1;
-    indexs[2] = 0; indexs[3] = 2;
-    indexs[4] = 0; indexs[5] = 4;
-    indexs[6] = 1; indexs[7] = 3;
-    indexs[8] = 1; indexs[9] = 5;
+    indexs[0]  = 0; indexs[1]  = 1;
+    indexs[2]  = 0; indexs[3]  = 2;
+    indexs[4]  = 0; indexs[5]  = 4;
+    indexs[6]  = 1; indexs[7]  = 3;
+    indexs[8]  = 1; indexs[9]  = 5;
     indexs[10] = 2; indexs[11] = 6;
     indexs[12] = 2; indexs[13] = 3;
     indexs[14] = 4; indexs[15] = 6;

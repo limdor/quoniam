@@ -331,9 +331,9 @@ float Tools::TriangleArea(const glm::vec3& pA, const glm::vec3& pB, const glm::v
 
 QString Tools::GetProgramPath()
 {
-    QString picturesPath, programFolder, completePath;
+    QString picturesPath, completePath;
 
-    programFolder = QString("Quoniam");
+    QString programFolder = QString("Quoniam");
 #if defined(Q_OS_WIN32)
     picturesPath = QString( qgetenv("USERPROFILE") ) + QString("\\Pictures");
     completePath = picturesPath + "\\" + programFolder + "\\";
