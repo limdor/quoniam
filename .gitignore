@@ -1,0 +1,8 @@
+# Makefiles
+Makefile*
+
+# Temp files
+tmp
+
+# QtCreator generated files
+*.pro.user*
