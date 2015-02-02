@@ -34,6 +34,7 @@ win32 {
     # Copy supporting library DLLs
     QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\glew\\bin\\glew32.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
     equals(COMPILATION,debug){
+        LIBS += -L$$PWD/dependencies/vld/lib/ -lvld
         LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_core249d
         LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_imgproc249d
         LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_highgui249d
@@ -50,6 +51,8 @@ win32 {
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgetsd.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\release\\Assimp64.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\Assimp64d.dll" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\dbghelp.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\Microsoft.DTfW.DHL.manifest" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
     }
     else {
         LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_core249
@@ -77,6 +80,7 @@ INCLUDEPATH +=\
     $$PWD/dependencies/glm \
     $$PWD/dependencies/miniball \
     $$PWD/dependencies/opencv/include \
+    $$PWD/dependencies/vld/include \
     $$PWD/inc \
     $$PWD/inc/core \
     $$PWD/inc/viewpoint-measures
@@ -87,6 +91,7 @@ DEPENDPATH +=\
     $$PWD/dependencies/glm \
     $$PWD/dependencies/miniball \
     $$PWD/dependencies/opencv/include \
+    $$PWD/dependencies/vld/include \
     $$PWD/inc \
     $$PWD/inc/core \
     $$PWD/inc/viewpoint-measures
