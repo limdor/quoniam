@@ -41,7 +41,7 @@ void GLSLProgram::LinkProgram()
     GLint nUniforms, maxLen, nAttributes;
     glGetProgramiv( mId, GL_ACTIVE_UNIFORM_MAX_LENGTH, &maxLen);
     glGetProgramiv( mId, GL_ACTIVE_UNIFORMS, &nUniforms);
-    GLchar * name = (GLchar *) malloc( maxLen );
+    GLchar * name = new GLchar[maxLen];
     for( int i = 0; i < nUniforms; ++i )
     {
         GLint size;
@@ -51,13 +51,13 @@ void GLSLProgram::LinkProgram()
         GLint location = glGetUniformLocation(mId, name);
         mUniforms[QString(name)] = location;
     }
-    free(name);
+    delete [] name;
 
     // Get the location of every attribute
     mAttributes.clear();
     glGetProgramiv( mId, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxLen);
     glGetProgramiv( mId, GL_ACTIVE_ATTRIBUTES, &nAttributes);
-    name = (GLchar *) malloc( maxLen );
+    name = new GLchar[maxLen];
     for( int i = 0; i < nAttributes; ++i )
     {
         GLint size;
@@ -67,7 +67,7 @@ void GLSLProgram::LinkProgram()
         GLint location = glGetAttribLocation(mId, name);
         mAttributes[QString(name)] = location;
     }
-    free(name);
+    delete [] name;
 }
 
 void GLSLProgram::UseProgram() const
