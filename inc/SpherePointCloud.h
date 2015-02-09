@@ -17,9 +17,9 @@
 //Project includes
 #include "Geometry.h"
 
-/**
- * Sphere of points uniformly or quasi-uniformly distributed
- */
+///
+/// Sphere of points uniformly or quasi-uniformly distributed
+///
 class SpherePointCloud {
 
 public:

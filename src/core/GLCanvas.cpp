@@ -194,7 +194,7 @@ void GLCanvas::initializeGL()
         InitDualPeelingRenderTargets();
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        /* use z-buffer */
+        // use z-buffer
         glDisable(GL_CULL_FACE);
 
         glGenQueries(1, &mQueryId);
@@ -537,14 +537,14 @@ void GLCanvas::keyPressEvent(QKeyEvent *pEvent)
 
 void GLCanvas::DrawGeometryBoundingVolumes()
 {
-   /* for(int i = 0; i < mScene->GetNumberOfMeshes(); i++)
-    {
-        if(mDrawBoundingBox)
-            mScene->GetMesh(i)->GetGeometry()->GetBoundingBox()->Draw();
-        if(mDrawBoundingSphere)
-            mScene->GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
-    }
-    CHECK_GL_ERROR();*/
+//    for(int i = 0; i < mScene->GetNumberOfMeshes(); i++)
+//    {
+//        if(mDrawBoundingBox)
+//            mScene->GetMesh(i)->GetGeometry()->GetBoundingBox()->Draw();
+//        if(mDrawBoundingSphere)
+//            mScene->GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
+//    }
+//    CHECK_GL_ERROR();
 }
 
 void GLCanvas::RecomputeViewport()
