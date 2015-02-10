@@ -332,8 +332,11 @@ void MainModuleController::wheelEvent(QWheelEvent *pEvent)
 
         int numDegrees = pEvent->delta() / 8;
         float deltaFactor = (numDegrees / 360.0f) * 2.0f;
+        float farPlane = camera->GetFarPlane();
+        farPlane -= boundingSphere->GetRadius() * deltaFactor;
 
         glm::vec3 position = prevCamPosition + prevCamFrontVector * boundingSphere->GetRadius() * deltaFactor;
+        camera->SetFarPlane( farPlane );
         camera->SetPosition( position );
         mOpenGLCanvas->updateGL();
     }
