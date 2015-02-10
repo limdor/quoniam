@@ -24,7 +24,7 @@ DepthBasedVisualStability::~DepthBasedVisualStability()
 
 void DepthBasedVisualStability::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    float threshold = 0.87f;
+    const float threshold = 0.87f;
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
     mValues.fill( 0.0f, numberOfViewpoints );
     QString pathImage(".\\images\\DepthImage_%1.pgm");
