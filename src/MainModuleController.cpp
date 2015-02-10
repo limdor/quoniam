@@ -699,7 +699,7 @@ void MainModuleController::on_measureInViewpointSphereList_currentIndexChanged(i
 
         if( pValue < mViewpointMeasures.size() )
         {
-            colors = Tools::ConvertFloatsToColors(mViewpointMeasures.at(pValue)->GetValues(), false);
+            colors = Tools::ConvertFloatsToColors(mViewpointMeasures.at(pValue)->GetValues(), !mViewpointMeasures.at(pValue)->IsMaximumBest());
         }
         for( int i = 0; i < colors.size(); i++ )
         {
