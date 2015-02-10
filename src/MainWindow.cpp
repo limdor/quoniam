@@ -11,7 +11,7 @@
 #include "Debug.h"
 #include "MainModuleController.h"
 
-MainWindow* MainWindow::mInstance = NULL;
+MainWindow* MainWindow::mInstance;
 
 MainWindow* MainWindow::GetInstance()
 {

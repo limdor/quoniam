@@ -4,7 +4,7 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-QPlainTextEdit* Debug::mConsole = NULL;
+QPlainTextEdit* Debug::mConsole;
 
 void Debug::Log(const QString &pMessage)
 {
