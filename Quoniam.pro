@@ -10,7 +10,7 @@ TARGET = Quoniam
 TEMPLATE = app
 
 # Application version
-VERSION = 1.0.0
+VERSION = 1.0.1
 
 # Define the preprocessor macro to get the application version in our application
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"

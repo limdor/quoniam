@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Quoniam (64-bit)"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "University of Girona"
 #define MyAppURL "http://ima.udg.edu/~xavierb/quoniam"
 #define MyAppExeName "Quoniam.exe"
