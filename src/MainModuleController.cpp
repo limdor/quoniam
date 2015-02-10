@@ -193,16 +193,8 @@ MainModuleController::~MainModuleController()
     delete mSceneInformationBuilder;
     delete mOpenGLCanvas;
     delete mUi;
-
-    if( mSphereOfViewpoints != NULL )
-    {//Scene and mesh of viewpoints loaded
-        delete mSphereOfViewpoints;
-        delete mScene;
-    }
-    else if( mScene != NULL )
-    {//Only scene loaded
-        delete mScene;
-    }
+    delete mSphereOfViewpoints;
+    delete mScene;
 }
 
 void MainModuleController::CreateModuleMenus()
@@ -371,15 +363,9 @@ void MainModuleController::LoadScene(const QString &pFileName)
     mUi->applyMaterialsCheckBox->setChecked(true);
     mUi->rightTabWidget->show();
 
-    if( mSphereOfViewpoints != NULL )
-    {
-        delete mSphereOfViewpoints;
-        mSphereOfViewpoints = NULL;
-    }
-    if( mScene != NULL )
-    {
-        delete mScene;
-    }
+    delete mSphereOfViewpoints;
+    mSphereOfViewpoints = NULL;
+    delete mScene;
     mScene = SceneLoader::LoadScene(pFileName);
     mScene->ShowInformation();
     mOpenGLCanvas->LoadScene(mScene);
@@ -450,10 +436,7 @@ void MainModuleController::LoadViewpointsFromSphere(float pRadius, float pAngle,
     float radius = mScene->GetBoundingSphere()->GetRadius();
     glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
 
-    if( mSphereOfViewpoints != NULL )
-    {
-        delete mSphereOfViewpoints;
-    }
+    delete mSphereOfViewpoints;
     mSphereOfViewpoints = new SphereOfViewpoints(pAngle, pAspectRatio);
     mSphereOfViewpoints->SetToQuasiUniform(pSubdivision);
     mSphereOfViewpoints->ApplyTransform(radius, radius * pRadius, center);

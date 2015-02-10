@@ -344,10 +344,7 @@ const GPUGeometry *Geometry::GetGPUGeometry()
 {
     if(mGPUGeometry == NULL || mNeedGPUGeometryUpdate)
     {
-        if( mGPUGeometry != NULL )
-        {
-            delete mGPUGeometry;
-        }
+        delete mGPUGeometry;
         CHECK_GL_ERROR();
         mGPUGeometry = new GPUGeometry();
         mGPUGeometry->SetVerticesData( mVertexData.size(), mVertexStride, mVertexData.data() );

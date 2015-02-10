@@ -12,18 +12,9 @@ Material::Material(const QString &pName):
 
 Material::~Material()
 {
-    if( mKaTexture != NULL )
-    {
-        delete mKaTexture;
-    }
-    if( mKdTexture != NULL )
-    {
-        delete mKdTexture;
-    }
-    if( mKsTexture != NULL )
-    {
-        delete mKsTexture;
-    }
+    delete mKaTexture;
+    delete mKdTexture;
+    delete mKsTexture;
 }
 
 glm::vec3 Material::GetKa() const
@@ -43,10 +34,7 @@ Texture* Material::GetKaTexture() const
 
 void Material::SetKaTexture(QImage* pKaTexture)
 {
-    if(mKaTexture != NULL)
-    {
-        delete mKaTexture;
-    }
+    delete mKaTexture;
     mKaTexture = new Texture( new QImage( QGLWidget::convertToGLFormat(*pKaTexture) ) );
 }
 
@@ -72,10 +60,7 @@ Texture *Material::GetKdTexture() const
 
 void Material::SetKdTexture(QImage* pKdTexture)
 {
-    if(mKdTexture != NULL)
-    {
-        delete mKdTexture;
-    }
+    delete mKdTexture;
     mKdTexture = new Texture( new QImage( QGLWidget::convertToGLFormat(*pKdTexture) ) );
 }
 
@@ -101,10 +86,7 @@ Texture *Material::GetKsTexture() const
 
 void Material::SetKsTexture(QImage* pKsTexture)
 {
-    if( mKsTexture != NULL )
-    {
-        delete mKsTexture;
-    }
+    delete mKsTexture;
     mKsTexture = new Texture( new QImage( QGLWidget::convertToGLFormat(*pKsTexture) ) );
 }
 

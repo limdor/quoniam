@@ -66,10 +66,7 @@ void SceneNode::AddMesh(Mesh* pMesh)
     mNumberOfPolygons += geometry->GetNumFaces();
     BoundingSphere* previousBoundingSphere = mBoundingSphere;
     mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, geometry->GetBoundingSphere());
-    if(previousBoundingSphere != NULL)
-    {
-        delete previousBoundingSphere;
-    }
+    delete previousBoundingSphere;
     if(mParent != NULL)
     {
         mParent->UpdateGeometryInformation();
@@ -152,10 +149,7 @@ void SceneNode::UpdateGeometryInformation()
 {
     mNumberOfVertices = 0;
     mNumberOfPolygons = 0;
-    if(mBoundingSphere != NULL)
-    {
-        delete mBoundingSphere;
-    }
+    delete mBoundingSphere;
     mBoundingSphere = NULL;
     BoundingSphere* childBoundingSphere = new BoundingSphere();
     for( int i = 0; i < mChilds.size(); i++ )
@@ -173,10 +167,7 @@ void SceneNode::UpdateGeometryInformation()
 
             BoundingSphere* previousBoundingSphere = mBoundingSphere;
             mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, childBoundingSphere);
-            if(previousBoundingSphere != NULL)
-            {
-                delete previousBoundingSphere;
-            }
+            delete previousBoundingSphere;
         }
     }
     delete childBoundingSphere;

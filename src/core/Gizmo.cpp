@@ -26,10 +26,7 @@ Gizmo::Gizmo( const Gizmo& pGizmo ):
 
 Gizmo::~Gizmo()
 {
-    if(mGizmo != NULL)
-    {
-        delete mGizmo;
-    }
+    delete mGizmo;
 }
 
 void Gizmo::Draw()

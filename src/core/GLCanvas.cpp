@@ -52,28 +52,19 @@ GLCanvas::~GLCanvas()
     glDeleteQueries(1, &mQueryId);
 
     delete mMeshFullScreenQuad;
-    if(mGPUScene != NULL)
-    {
-        delete mGPUScene;
-        delete mFreeCamera;
-    }
+    delete mGPUScene;
+    delete mFreeCamera;
 }
 
 void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
 {
     makeCurrent();
     mScene = pScene;
-    if(mGPUScene != NULL)
-    {
-        delete mGPUScene;
-    }
+    delete mGPUScene;
     mGPUScene = new GPUScene(pScene);
     mPerVertexColorMeshes.clear();
 
-    if( mFreeCamera != NULL )
-    {
-        delete mFreeCamera;
-    }
+    delete mFreeCamera;
     if(pCamera != NULL)
     {
         mFreeCamera = pCamera->Clone();

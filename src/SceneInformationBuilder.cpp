@@ -53,11 +53,8 @@ SceneInformationBuilder::SceneInformationBuilder():
 
 SceneInformationBuilder::~SceneInformationBuilder()
 {
-    if(mProjectedAreasMatrix != NULL)
-    {
-        delete mSerializedScene;
-        delete mProjectedAreasMatrix;
-    }
+    delete mSerializedScene;
+    delete mProjectedAreasMatrix;
     delete mShaderColorPerFace;
     delete mBasicVS;
     delete mColorPerFaceFS;
@@ -139,11 +136,8 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
 
     glViewport( 0, 0, windowWidth, windowHeight );
 
-    if(mProjectedAreasMatrix != NULL)
-    {
-        delete mSerializedScene;
-        delete mProjectedAreasMatrix;
-    }
+    delete mSerializedScene;
+    delete mProjectedAreasMatrix;
     mViewpointNeighbours = pSphereOfViewpoints->GetNeighbours();
     mSerializedScene = new SerializedSceneGeometry(pScene);
     int numberOfPolygons = pScene->GetNumberOfPolygons();
