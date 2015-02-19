@@ -1,21 +1,11 @@
 //Definition include
 #include "Scene.h"
 
-//System includes
-#include <algorithm>
-
-//Qt includes
-#include <QApplication>
-#include <QProgressDialog>
-#include <QTime>
-
 //Dependency includes
 #include "glm/vec3.hpp"
 
 //Project includes
 #include "Debug.h"
-#include "MainWindow.h"
-#include "Tools.h"
 
 Scene::Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes ):
     mName(pName), mSceneRoot(pSceneRoot), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
