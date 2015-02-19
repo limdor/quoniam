@@ -10,7 +10,11 @@ ModuleTabWidget::ModuleTabWidget(QWidget *pParent): QTabWidget(pParent)
 
 ModuleTabWidget::~ModuleTabWidget()
 {
-
+    int numberOfModules = count();
+    for( int i = numberOfModules - 1; i >= 0; i-- )
+    {
+        RemoveModule( widget(i) );
+    }
 }
 
 void ModuleTabWidget::LoadModule(QWidget *pModule, const QString &pCaption, const QString &pModuleIdentifier)
@@ -32,23 +36,9 @@ void ModuleTabWidget::RemoveModule(QWidget *pModule)
     delete pModule;
 }
 
-void ModuleTabWidget::RemoveAllModules()
-{
-    int numberOfModules = count();
-    for( int i = numberOfModules - 1; i >= 0; i-- )
-    {
-        RemoveModule( widget(i) );
-    }
-}
-
 QMap<QWidget*, QString> ModuleTabWidget::GetLoadedModules() const
 {
     return mLoadedModules;
-}
-
-void ModuleTabWidget::CloseCurrentModule()
-{
-    RemoveModule(currentWidget());
 }
 
 void ModuleTabWidget::CreateConnections()
@@ -58,5 +48,9 @@ void ModuleTabWidget::CreateConnections()
 
 void ModuleTabWidget::CloseModuleByTabIndex(int pIndex)
 {
-    RemoveModule(widget(pIndex));
+    //Ensure at least one module loaded
+    if(mLoadedModules.size() > 1)
+    {
+        RemoveModule(widget(pIndex));
+    }
 }

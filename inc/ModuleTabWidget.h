@@ -22,12 +22,8 @@ public:
 
     void LoadModule(QWidget *pModule, const QString &pCaption, const QString &pModuleIdentifier);
     void RemoveModule(QWidget *pModule);
-    void RemoveAllModules();
 
     QMap<QWidget*, QString> GetLoadedModules() const;
-    
-public slots:
-    void CloseCurrentModule();
 
 private:
     void CreateConnections();

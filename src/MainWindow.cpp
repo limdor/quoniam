@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget *pParent): QMainWindow(pParent),
 MainWindow::~MainWindow()
 {
     delete mUi;
-    mModuleTabWidget->RemoveAllModules();
     delete mModuleTabWidget;
 }
 
