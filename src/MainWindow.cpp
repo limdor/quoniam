@@ -1,9 +1,6 @@
 //Definition include
 #include "MainWindow.h"
 
-//System includes
-#include <time.h>
-
 //Qt includes
 #include <QMessageBox>
 
@@ -26,8 +23,6 @@ MainWindow::MainWindow(QWidget *pParent): QMainWindow(pParent),
     mUi(new Ui::MainWindow)
 {
     mUi->setupUi(this);
-
-    srand( time(NULL) );
 
     mModuleTabWidget = mUi->moduleTabWidget;
     connect(mModuleTabWidget, SIGNAL(currentChanged(int)), this, SLOT(ModuleChanged(int)));
