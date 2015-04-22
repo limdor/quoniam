@@ -54,6 +54,7 @@ Source: "..\bin\win\release\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\win\release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\win\release\Qt5OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\win\release\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\win\release\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\shaders\*"; DestDir: "{app}\shaders"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\redist\vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

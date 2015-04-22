@@ -45,10 +45,13 @@ win32 {
 
         QT_INSTALL_BINS_WIN = $$[QT_INSTALL_BINS]
         QT_INSTALL_BINS_WIN = $$replace(QT_INSTALL_BINS_WIN,"/","\\")
+        QT_INSTALL_PLUGINS_WIN = $$[QT_INSTALL_PLUGINS]
+        QT_INSTALL_PLUGINS_WIN = $$replace(QT_INSTALL_PLUGINS_WIN,"/","\\")
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Cored.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Guid.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5OpenGLd.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgetsd.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindowsd.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\platforms\\" $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\release\\Assimp64.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\Assimp64d.dll" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\vld_x64.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
@@ -66,10 +69,13 @@ win32 {
 
         QT_INSTALL_BINS_WIN = $$[QT_INSTALL_BINS]
         QT_INSTALL_BINS_WIN = $$replace(QT_INSTALL_BINS_WIN,"/","\\")
+        QT_INSTALL_PLUGINS_WIN = $$[QT_INSTALL_PLUGINS]
+        QT_INSTALL_PLUGINS_WIN = $$replace(QT_INSTALL_PLUGINS_WIN,"/","\\")
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Core.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Gui.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5OpenGL.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgets.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindows.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\platforms\\" $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\$$COMPILATION\\Assimp64.dll" "$$PWD_WIN\\bin\\win\\$$COMPILATION\\" $$escape_expand(\\n))
     }
