@@ -199,7 +199,27 @@ void SpherePointCloud::SetToUniform12()
 
     mNormals = mVertices;
 
-    //TODO: Add faces
+    mFaces.resize(60);
+    mFaces[ 0] =  6; mFaces[ 1] = 10; mFaces[ 2] =  0;
+    mFaces[ 3] =  6; mFaces[ 4] =  0; mFaces[ 5] =  4;
+    mFaces[ 6] =  6; mFaces[ 7] =  4; mFaces[ 8] =  1;
+    mFaces[ 9] =  6; mFaces[10] =  1; mFaces[11] = 11;
+    mFaces[12] =  6; mFaces[13] = 11; mFaces[14] = 10;
+    mFaces[15] =  4; mFaces[16] =  0; mFaces[17] =  8;
+    mFaces[18] =  0; mFaces[19] = 10; mFaces[20] =  2;
+    mFaces[21] = 10; mFaces[22] = 11; mFaces[23] =  7;
+    mFaces[24] = 11; mFaces[25] =  1; mFaces[26] =  3;
+    mFaces[27] =  1; mFaces[28] =  4; mFaces[29] =  9;
+    mFaces[30] =  5; mFaces[31] =  8; mFaces[32] =  2;
+    mFaces[33] =  5; mFaces[34] =  2; mFaces[35] =  7;
+    mFaces[36] =  5; mFaces[37] =  7; mFaces[38] =  3;
+    mFaces[39] =  5; mFaces[40] =  3; mFaces[41] =  9;
+    mFaces[42] =  5; mFaces[43] =  9; mFaces[44] =  8;
+    mFaces[45] =  2; mFaces[46] =  8; mFaces[47] =  0;
+    mFaces[48] =  7; mFaces[49] =  2; mFaces[50] = 10;
+    mFaces[51] =  3; mFaces[52] =  7; mFaces[53] = 11;
+    mFaces[54] =  9; mFaces[55] =  3; mFaces[56] =  1;
+    mFaces[57] =  8; mFaces[58] =  9; mFaces[59] =  4;
 
     mNeighbours.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
