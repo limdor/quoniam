@@ -5,12 +5,12 @@ A Framework for Viewpoint Selection
 
 ## Quoniam contains the following third party libraries:
 
-* [Assimp](http://assimp.sourceforge.net/main_downloads.html): 3.0                   
+* [Assimp](http://assimp.sourceforge.net/main_downloads.html): 3.3.1                   
 * [glew](http://glew.sourceforge.net/): 1.12.0                  
 * [glm](http://glm.g-truc.net/download.html): 0.9.6.1                  
 * [Miniball](http://www.inf.ethz.ch/personal/gaertner/miniball.html): 2.0                 
-* [OpenCV](http://opencv.org/): 2.4.9
-* [Qt](http://qt.nokia.com/products): 5.3.1                     
+* [OpenCV](http://opencv.org/): 3.3.1
+* [Qt](http://qt.nokia.com/products): 5.9.2                     
 * [Visual Leak Detector](https://vld.codeplex.com/): 2.3
 
 ### Assimp
