@@ -14,7 +14,7 @@ class FeixasSaliency : public Measure
 {
 public:
     /// Constructor
-    FeixasSaliency(const QString& pName);
+    explicit FeixasSaliency(const QString& pName);
     /// Destructor
     ~FeixasSaliency();
 

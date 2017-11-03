@@ -14,7 +14,7 @@ class VMI : public Measure
 {
 public:
     /// Constructor
-    VMI(const QString &pName);
+    explicit VMI(const QString &pName);
     /// Destructor
     ~VMI();
 

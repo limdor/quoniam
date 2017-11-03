@@ -31,7 +31,7 @@ class GLCanvas : public QGLWidget
 
 public:
     /// Constructor
-    GLCanvas(QWidget *pParent = 0);
+    explicit GLCanvas(QWidget *pParent = 0);
     /// Destructor
     ~GLCanvas();
 

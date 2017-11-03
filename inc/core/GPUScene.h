@@ -14,7 +14,7 @@ class GPUScene
 {
 public:
     /// Constructor
-    GPUScene(const Scene *pScene);
+    explicit GPUScene(const Scene *pScene);
     /// Destructor
     ~GPUScene();
     /// Get the number of scene nodes

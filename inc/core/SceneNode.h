@@ -23,7 +23,7 @@ class SceneNode
 {
 public:
     /// Constructor with the name of the node
-    SceneNode(const QString &pName);
+    explicit SceneNode(const QString &pName);
     /// Destructor
     ~SceneNode();
 

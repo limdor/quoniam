@@ -14,7 +14,7 @@ class SilhouetteEntropy : public Measure
 {
 public:
     /// Constructor
-    SilhouetteEntropy(const QString &pName);
+    explicit SilhouetteEntropy(const QString &pName);
     /// Destructor
     ~SilhouetteEntropy();
 

@@ -22,7 +22,7 @@ class Material
 public:
     /// Constructor
     /// \param pName Name of the material
-    Material(const QString &pName);
+    explicit Material(const QString &pName);
     /// Destructor
     ~Material();
 

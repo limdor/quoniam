@@ -14,7 +14,7 @@ class SaliencyEVMI : public Measure
 {
 public:
     /// Constructor
-    SaliencyEVMI(const QString &pName);
+    explicit SaliencyEVMI(const QString &pName);
     /// Destructor
     ~SaliencyEVMI();
 

@@ -14,7 +14,7 @@ class ViewpointEntropy : public Measure
 {
 public:
     /// Constructor
-    ViewpointEntropy(const QString &pName);
+    explicit ViewpointEntropy(const QString &pName);
     /// Destructor
     ~ViewpointEntropy();
 

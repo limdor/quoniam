@@ -27,7 +27,7 @@ class GLSLProgram
 {
 public:
     /// Constructor
-    GLSLProgram(const QString& pName);
+    explicit GLSLProgram(const QString& pName);
     /// Destructor
     ~GLSLProgram();
 

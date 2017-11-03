@@ -14,7 +14,7 @@ class I3 : public Measure
 {
 public:
     /// Constructor
-    I3(const QString &pName);
+    explicit I3(const QString &pName);
     /// Destructor
     ~I3();
 

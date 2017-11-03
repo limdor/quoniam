@@ -14,7 +14,7 @@ class Unstability : public Measure
 {
 public:
     /// Constructor
-    Unstability(const QString &pName);
+    explicit Unstability(const QString &pName);
     /// Destructor
     ~Unstability();
 

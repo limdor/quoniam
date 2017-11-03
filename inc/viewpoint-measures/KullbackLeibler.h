@@ -14,7 +14,7 @@ class KullbackLeibler : public Measure
 {
 public:
     /// Constructor
-    KullbackLeibler(const QString &pName);
+    explicit KullbackLeibler(const QString &pName);
     /// Destructor
     ~KullbackLeibler();
 

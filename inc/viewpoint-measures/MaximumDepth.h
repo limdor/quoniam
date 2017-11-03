@@ -14,7 +14,7 @@ class MaximumDepth : public Measure
 {
 public:
     /// Constructor
-    MaximumDepth(const QString &pName);
+    explicit MaximumDepth(const QString &pName);
     /// Destructor
     ~MaximumDepth();
 

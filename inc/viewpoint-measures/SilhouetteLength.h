@@ -14,7 +14,7 @@ class SilhouetteLength : public Measure
 {
 public:
     /// Constructor
-    SilhouetteLength(const QString &pName);
+    explicit SilhouetteLength(const QString &pName);
     /// Destructor
     ~SilhouetteLength();
 

@@ -14,7 +14,7 @@ class DepthDistribution : public Measure
 {
 public:
     /// Constructor
-    DepthDistribution(const QString &pName);
+    explicit DepthDistribution(const QString &pName);
     /// Destructor
     ~DepthDistribution();
 

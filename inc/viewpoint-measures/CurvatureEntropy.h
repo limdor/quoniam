@@ -14,7 +14,7 @@ class CurvatureEntropy : public Measure
 {
 public:
     /// Constructor
-    CurvatureEntropy(const QString &pName);
+    explicit CurvatureEntropy(const QString &pName);
     /// Destructor
     ~CurvatureEntropy();
 
