@@ -30,7 +30,7 @@ GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
             GLsizei slen = 0;
 
             const char *constCode = code.data();
-            glShaderSource( mGLId, 1, &constCode, NULL );
+            glShaderSource( mGLId, 1, &constCode, nullptr );
             glCompileShader(mGLId);
             CHECK_GL_ERROR();
             glGetShaderiv(mGLId, GL_COMPILE_STATUS, &blen);
@@ -48,7 +48,7 @@ GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
                 if (blen > 1)
                 {
                     char * compilerLog = new char[blen];
-                    if ( compilerLog != (char*) NULL )
+                    if ( compilerLog != nullptr )
                     {
                         glGetShaderInfoLog(mGLId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();

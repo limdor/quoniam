@@ -47,7 +47,7 @@ void GLSLProgram::LinkProgram()
         GLint size;
         GLenum type;
 
-        glGetActiveUniform( mId, i, maxLen, NULL, &size, &type, name );
+        glGetActiveUniform( mId, i, maxLen, nullptr, &size, &type, name );
         GLint location = glGetUniformLocation(mId, name);
         mUniforms[QString(name)] = location;
     }
@@ -63,7 +63,7 @@ void GLSLProgram::LinkProgram()
         GLint size;
         GLenum type;
 
-        glGetActiveAttrib( mId, i, maxLen, NULL, &size, &type, name );
+        glGetActiveAttrib( mId, i, maxLen, nullptr, &size, &type, name );
         GLint location = glGetAttribLocation(mId, name);
         mAttributes[QString(name)] = location;
     }

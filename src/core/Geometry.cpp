@@ -11,7 +11,7 @@
 #include "Scene.h"
 
 Geometry::Geometry(const QString &pName, Topology pT):
-    mTopology(pT), mBoundingBox(NULL), mBoundingSphere(NULL), mGPUGeometry(NULL), mName(pName), mNeedGPUGeometryUpdate(false)
+    mTopology(pT), mBoundingBox(nullptr), mBoundingSphere(nullptr), mGPUGeometry(nullptr), mName(pName), mNeedGPUGeometryUpdate(false)
 {
 
 }
@@ -22,24 +22,24 @@ Geometry::Geometry(const Geometry& pGeometry):
     mTangentData(pGeometry.mTangentData), mBitangentData(pGeometry.mBitangentData), mIndexData(pGeometry.mIndexData),
     mName(pGeometry.mName), mTopology(pGeometry.mTopology), mNeedGPUGeometryUpdate(true)
 {
-    if(pGeometry.mBoundingBox != NULL)
+    if(pGeometry.mBoundingBox != nullptr)
     {
         mBoundingBox = new AxisAlignedBoundingBox(*pGeometry.mBoundingBox);
     }
     else
     {
-        mBoundingBox = NULL;
+        mBoundingBox = nullptr;
     }
 
-    if(pGeometry.mBoundingSphere != NULL)
+    if(pGeometry.mBoundingSphere != nullptr)
     {
         mBoundingSphere = new BoundingSphere(*pGeometry.mBoundingSphere);
     }
     else
     {
-        mBoundingSphere = NULL;
+        mBoundingSphere = nullptr;
     }
-    mGPUGeometry = NULL;
+    mGPUGeometry = nullptr;
 }
 
 Geometry::~Geometry()
@@ -248,11 +248,11 @@ void Geometry::ComputeBoundingVolumes()
         }
     }
     mb.build();
-    if(mBoundingBox == NULL)
+    if(mBoundingBox == nullptr)
     {
         mBoundingBox = new AxisAlignedBoundingBox();
     }
-    if(mBoundingSphere == NULL)
+    if(mBoundingSphere == nullptr)
     {
         mBoundingSphere = new BoundingSphere();
     }
@@ -342,7 +342,7 @@ Geometry::Topology Geometry::GetTopology() const
 
 const GPUGeometry *Geometry::GetGPUGeometry()
 {
-    if(mGPUGeometry == NULL || mNeedGPUGeometryUpdate)
+    if(mGPUGeometry == nullptr || mNeedGPUGeometryUpdate)
     {
         delete mGPUGeometry;
         CHECK_GL_ERROR();

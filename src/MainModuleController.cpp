@@ -51,9 +51,9 @@
 #include "VMI.h"
 
 MainModuleController::MainModuleController(QWidget *pParent): ModuleController(pParent),
-    mUi(new Ui::MainModule), mDutagaciDialog(NULL),
+    mUi(new Ui::MainModule), mDutagaciDialog(nullptr),
     mUpdateView(false),
-    mScene(NULL), mSphereOfViewpoints(NULL),
+    mScene(nullptr), mSphereOfViewpoints(nullptr),
     mCurrentViewpoint(0)
 {
     mUi->setupUi(this);
@@ -257,7 +257,7 @@ void MainModuleController::ActiveModule()
 
 void MainModuleController::keyPressEvent(QKeyEvent *pEvent)
 {
-    if( pEvent->key() == Qt::Key_N && mSphereOfViewpoints != NULL )
+    if( pEvent->key() == Qt::Key_N && mSphereOfViewpoints != nullptr )
     {
         int viewpoint = NextViewpoint();
         Debug::Log(QString("Viewpoint %1 selected").arg(mSphereOfViewpoints->GetViewpoint(viewpoint)->mName));
@@ -271,7 +271,7 @@ void MainModuleController::keyPressEvent(QKeyEvent *pEvent)
 
         pEvent->accept();
     }
-    else if( pEvent->key() == Qt::Key_I && mSphereOfViewpoints != NULL )
+    else if( pEvent->key() == Qt::Key_I && mSphereOfViewpoints != nullptr )
     {
         ShowViewpointInformation(mCurrentViewpoint);
     }
@@ -287,7 +287,7 @@ void MainModuleController::mouseMoveEvent(QMouseEvent *pEvent)
 {
     Camera* camera = mOpenGLCanvas->GetCamera();
     Scene* scene = mOpenGLCanvas->GetScene();
-    if( camera != NULL && scene != NULL )
+    if( camera != nullptr && scene != nullptr )
     {
         if( pEvent->buttons() & Qt::RightButton )
         {
@@ -324,7 +324,7 @@ void MainModuleController::wheelEvent(QWheelEvent *pEvent)
 {
     Camera* camera = mOpenGLCanvas->GetCamera();
     Scene* scene = mOpenGLCanvas->GetScene();
-    if( camera != NULL && scene != NULL && mOpenGLCanvas->hasFocus() )
+    if( camera != nullptr && scene != nullptr && mOpenGLCanvas->hasFocus() )
     {
         const BoundingSphere* boundingSphere = scene->GetBoundingSphere();
         glm::vec3 prevCamPosition = camera->GetPosition();
@@ -367,7 +367,7 @@ void MainModuleController::LoadScene(const QString &pFileName)
     mUi->rightTabWidget->show();
 
     delete mSphereOfViewpoints;
-    mSphereOfViewpoints = NULL;
+    mSphereOfViewpoints = nullptr;
     delete mScene;
     mScene = SceneLoader::LoadScene(pFileName);
     mScene->ShowInformation();
@@ -634,7 +634,7 @@ void MainModuleController::ExportInformation()
 
 void MainModuleController::WillDrawViewpointsSphere(bool pDraw)
 {
-    if(mSphereOfViewpoints != NULL)
+    if(mSphereOfViewpoints != nullptr)
     {
         //mSphereOfViewpoints->GetMesh()->SetVisible(pDraw);
         mOpenGLCanvas->updateGL();
@@ -643,7 +643,7 @@ void MainModuleController::WillDrawViewpointsSphere(bool pDraw)
 
 void MainModuleController::RunDutagaciBenchmark()
 {
-    if(mDutagaciDialog == NULL)
+    if(mDutagaciDialog == nullptr)
     {
         mDutagaciDialog = new DutagaciDialog(this);
         LoadDutagaciViewpoints();
@@ -693,7 +693,7 @@ void MainModuleController::RunDutagaciBenchmark()
 
 void MainModuleController::on_measureInViewpointSphereList_currentIndexChanged(int pValue)
 {
-    if( mSphereOfViewpoints != NULL )
+    if( mSphereOfViewpoints != nullptr )
     {
         QVector<glm::vec4> colors;
 

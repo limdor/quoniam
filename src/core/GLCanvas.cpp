@@ -15,9 +15,9 @@
 
 GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent),
     mDrawBoundingBox(false), mDrawBoundingSphere(false), mDrawWireframe(false), mApplyMaterials(true),
-    mFreeCamera(NULL), mWinWidth(0), mWinHeight(0),
-    mScene(NULL), mGPUScene(NULL),
-    mShaderDualInit(NULL), mShaderDualPeel(NULL), mShaderDualPeelPerVertexColor(NULL), mShaderDualBlend(NULL), mShaderDualFinal(NULL),
+    mFreeCamera(nullptr), mWinWidth(0), mWinHeight(0),
+    mScene(nullptr), mGPUScene(nullptr),
+    mShaderDualInit(nullptr), mShaderDualPeel(nullptr), mShaderDualPeelPerVertexColor(nullptr), mShaderDualBlend(nullptr), mShaderDualFinal(nullptr),
     mBackgroundColor(0.5f, 0.5f, 0.5f)
 {
     //Inicialització dels draw buffers
@@ -65,7 +65,7 @@ void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
     mPerVertexColorMeshes.clear();
 
     delete mFreeCamera;
-    if(pCamera != NULL)
+    if(pCamera != nullptr)
     {
         mFreeCamera = pCamera->Clone();
     }
@@ -117,7 +117,7 @@ QString GLCanvas::SaveScreenshot( const QString &pFileName )
 void GLCanvas::SetCamera(const Camera* pCamera)
 {
     makeCurrent();
-    if( mFreeCamera != NULL )
+    if( mFreeCamera != nullptr )
     {
         delete mFreeCamera;
     }
@@ -194,7 +194,7 @@ void GLCanvas::initializeGL()
 
 void GLCanvas::paintGL()
 {
-    if(mScene != NULL)
+    if(mScene != nullptr)
     {
         const float MAX_DEPTH = 1.0f;
 
@@ -301,7 +301,7 @@ void GLCanvas::paintGL()
                 Material* currentMaterial = sceneNode->GetMaterial();
                 glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
                 mShaderDualPeel->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
-                if(mApplyMaterials && currentMaterial != NULL)
+                if(mApplyMaterials && currentMaterial != nullptr)
                 {
                     bool hasTexture = currentMaterial->HasKdTexture();
                     if( hasTexture )
@@ -411,7 +411,7 @@ void GLCanvas::resizeGL(int pWidth, int pHeight)
         mWinHeight = pHeight;
         mWinWidth = pWidth;
 
-        if( mFreeCamera != NULL )
+        if( mFreeCamera != nullptr )
         {
             RecomputeViewport();
         }

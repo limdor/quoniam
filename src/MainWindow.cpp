@@ -12,7 +12,7 @@ MainWindow* MainWindow::mInstance;
 
 MainWindow* MainWindow::GetInstance()
 {
-    if(mInstance == NULL)
+    if(mInstance == nullptr)
     {
         mInstance = new MainWindow();
     }
@@ -38,7 +38,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::ModuleChanged(int pIndex)
 {
-    Debug::SetConsole(NULL);
+    Debug::SetConsole(nullptr);
     menuBar()->clear();
     if(pIndex >= 0)
     {
