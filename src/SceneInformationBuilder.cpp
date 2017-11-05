@@ -45,8 +45,8 @@ SceneInformationBuilder::SceneInformationBuilder():
     }
 
     mShaderColorPerFace = new GLSLProgram("ShaderColorPerFace");
-    mShaderColorPerFace->AttachShader(mBasicVS);
-    mShaderColorPerFace->AttachShader(mColorPerFaceFS);
+    mShaderColorPerFace->AttachShader(*mBasicVS);
+    mShaderColorPerFace->AttachShader(*mColorPerFaceFS);
     mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
     mShaderColorPerFace->LinkProgram();
 }

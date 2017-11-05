@@ -10,9 +10,7 @@
 #include "glew.h"
 
 //Qt includes
-#include <QHash>
 #include <QString>
-#include <QVector>
 
 //Dependency includes
 #include "glm/mat4x4.hpp"
@@ -21,6 +19,8 @@
 
 //Project includes
 #include "GLSLShader.h"
+//STD
+#include <map>
 
 /// Class to wrap the GLSL programs used by OpenGL
 class GLSLProgram
@@ -32,10 +32,10 @@ public:
     ~GLSLProgram();
 
     /// Get the name of the program
-    QString GetName() const;
+    const QString& GetName() const;
 
     /// Attach the shader \param pShader to the program
-    void AttachShader(GLSLShader* pShader);
+    void AttachShader(const GLSLShader& pShader);
     /// Links the program
     void LinkProgram();
     /// Set the program as the current program
@@ -68,14 +68,12 @@ public:
 
 private:
     /// Id of the program
-    GLuint mId;
+    const GLuint mId;
     /// Name of the program
-    QString mName;
-    /// List of shaders used by the program
-    QVector<GLSLShader *> mShaders;
+    const QString mName;
     /// Hash table that associates each uniform name to the correspoinding uniform location
-    QHash<QString, GLint> mUniforms;
+    std::map<QString, GLint> mUniforms;
     /// Hash table that associates each attribute name to the correspoinding attribute location
-    QHash<QString, GLint> mAttributes;
+    std::map<QString, GLint> mAttributes;
 };
 #endif

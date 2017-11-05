@@ -9,7 +9,7 @@
 //Project includes
 #include "Debug.h"
 
-GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
+GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
     mType(pType)
 {
     // Load shader's source text.
@@ -17,10 +17,10 @@ GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
     if (file.open(QIODevice::ReadOnly))
     {
         QTextStream stream (&file);
-        QString text = stream.readAll();
+        const QString text = stream.readAll();
         file.close();
 
-        QByteArray code = text.toLocal8Bit();
+        const QByteArray code = text.toLocal8Bit();
 
         // Create the shader from a text file.
         mGLId = glCreateShader(pType);
@@ -84,7 +84,7 @@ bool GLSLShader::HasErrors() const
     return mHasErrors;
 }
 
-QString GLSLShader::GetLog() const
+const QString& GLSLShader::GetLog() const
 {
     return mLog;
 }

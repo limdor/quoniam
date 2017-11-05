@@ -17,14 +17,14 @@ class GLSLShader
 {
 public:
     /// Constructor
-    GLSLShader(QString pSourceFile, GLenum pType);
+    GLSLShader(const QString& pSourceFile, GLenum pType);
     /// Destructor
     ~GLSLShader();
 
     /// Return if the shader has had errors during compilation
     bool HasErrors() const;
     /// Get the compilation log
-    QString GetLog() const;
+    const QString& GetLog() const;
     /// Show the compilation log
     void ShowLog() const;
     /// Get the shader id

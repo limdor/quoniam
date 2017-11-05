@@ -560,45 +560,45 @@ void GLCanvas::RecomputeViewport()
 
 void GLCanvas::LoadShaders()
 {
-    GLSLShader* basicVS = new GLSLShader("shaders/Basic.vert", GL_VERTEX_SHADER);
-    if( basicVS->HasErrors() )
+    const GLSLShader basicVS("shaders/Basic.vert", GL_VERTEX_SHADER);
+    if( basicVS.HasErrors() )
     {
-        Debug::Error( QString("shaders/Basic.vert: %1").arg( basicVS->GetLog( )) );
+        Debug::Error( QString("shaders/Basic.vert: %1").arg( basicVS.GetLog( )) );
     }
-    GLSLShader* dualPeelingInitFS = new GLSLShader("shaders/DualPeelingInit.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingInitFS->HasErrors() )
+    const GLSLShader dualPeelingInitFS("shaders/DualPeelingInit.frag", GL_FRAGMENT_SHADER);
+    if( dualPeelingInitFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingInit.frag: %1").arg(dualPeelingInitFS->GetLog()) );
+        Debug::Error( QString("shaders/DualPeelingInit.frag: %1").arg(dualPeelingInitFS.GetLog()) );
     }
-    GLSLShader* dualPeelingPeelVS = new GLSLShader("shaders/DualPeelingPeel.vert", GL_VERTEX_SHADER);
-    if( dualPeelingPeelVS->HasErrors() )
+    const GLSLShader dualPeelingPeelVS("shaders/DualPeelingPeel.vert", GL_VERTEX_SHADER);
+    if( dualPeelingPeelVS.HasErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingPeel.vert: %1").arg(dualPeelingPeelVS->GetLog()) );
+        Debug::Error( QString("shaders/DualPeelingPeel.vert: %1").arg(dualPeelingPeelVS.GetLog()) );
     }
-    GLSLShader* dualPeelingPeelFS = new GLSLShader("shaders/DualPeelingPeel.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingPeelFS->HasErrors() )
+    const GLSLShader dualPeelingPeelFS("shaders/DualPeelingPeel.frag", GL_FRAGMENT_SHADER);
+    if( dualPeelingPeelFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingPeel.frag: %1").arg(dualPeelingPeelFS->GetLog()) );
+        Debug::Error( QString("shaders/DualPeelingPeel.frag: %1").arg(dualPeelingPeelFS.GetLog()) );
     }
-    GLSLShader* shadeFragmentFS = new GLSLShader("shaders/ShadeFragment.frag", GL_FRAGMENT_SHADER);
-    if( shadeFragmentFS->HasErrors() )
+    const GLSLShader shadeFragmentFS("shaders/ShadeFragment.frag", GL_FRAGMENT_SHADER);
+    if( shadeFragmentFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/ShadeFragment.frag: %1").arg(shadeFragmentFS->GetLog()) );
+        Debug::Error( QString("shaders/ShadeFragment.frag: %1").arg(shadeFragmentFS.GetLog()) );
     }
-    GLSLShader* shadePerVertexColorFS = new GLSLShader("shaders/ShadePerVertexColor.frag", GL_FRAGMENT_SHADER);
-    if( shadePerVertexColorFS->HasErrors() )
+    const GLSLShader shadePerVertexColorFS("shaders/ShadePerVertexColor.frag", GL_FRAGMENT_SHADER);
+    if( shadePerVertexColorFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/ShadePerVertexColor.frag: %1").arg(shadePerVertexColorFS->GetLog()) );
+        Debug::Error( QString("shaders/ShadePerVertexColor.frag: %1").arg(shadePerVertexColorFS.GetLog()) );
     }
-    GLSLShader* dualPeelingBlendFS = new GLSLShader("shaders/DualPeelingBlend.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingBlendFS->HasErrors() )
+    const GLSLShader dualPeelingBlendFS("shaders/DualPeelingBlend.frag", GL_FRAGMENT_SHADER);
+    if( dualPeelingBlendFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingBlend.frag: %1").arg(dualPeelingBlendFS->GetLog()) );
+        Debug::Error( QString("shaders/DualPeelingBlend.frag: %1").arg(dualPeelingBlendFS.GetLog()) );
     }
-    GLSLShader* dualPeelingFinalFS = new GLSLShader("shaders/DualPeelingFinal.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingFinalFS->HasErrors() )
+    const GLSLShader dualPeelingFinalFS("shaders/DualPeelingFinal.frag", GL_FRAGMENT_SHADER);
+    if( dualPeelingFinalFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingFinal.frag: %1").arg(dualPeelingFinalFS->GetLog()) );
+        Debug::Error( QString("shaders/DualPeelingFinal.frag: %1").arg(dualPeelingFinalFS.GetLog()) );
     }
 
     mShaderDualInit = new GLSLProgram("ShaderDualInit");
@@ -627,15 +627,6 @@ void GLCanvas::LoadShaders()
     mShaderDualFinal->AttachShader(basicVS);
     mShaderDualFinal->AttachShader(dualPeelingFinalFS);
     mShaderDualFinal->LinkProgram();
-
-    delete basicVS;
-    delete dualPeelingInitFS;
-    delete dualPeelingPeelVS;
-    delete dualPeelingPeelFS;
-    delete shadeFragmentFS;
-    delete shadePerVertexColorFS;
-    delete dualPeelingBlendFS;
-    delete dualPeelingFinalFS;
 }
 
 void GLCanvas::DeleteShaders()
