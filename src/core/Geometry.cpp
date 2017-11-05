@@ -88,7 +88,7 @@ void Geometry::SetVerticesData(unsigned int pSize, const glm::vec2 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-QVector<float> Geometry::GetVerticesData() const
+const std::vector<float>& Geometry::GetVerticesData() const
 {
     return mVertexData;
 }
@@ -182,7 +182,7 @@ void Geometry::SetIndexsData(unsigned int pSize, const unsigned int *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-QVector<unsigned int> Geometry::GetIndexsData() const
+const std::vector<unsigned int>& Geometry::GetIndexsData() const
 {
     return mIndexData;
 }
@@ -296,12 +296,12 @@ void Geometry::Draw()
     GetGPUGeometry()->Draw();
 }
 
-int Geometry::GetNumIndices() const
+size_t Geometry::GetNumIndices() const
 {
     return mIndexData.size();
 }
 
-int Geometry::GetNumFaces() const
+size_t Geometry::GetNumFaces() const
 {
     if( mTopology == Triangles )
     {
@@ -330,7 +330,7 @@ int Geometry::GetNumFaces() const
     }
 }
 
-int Geometry::GetNumVertices() const
+size_t Geometry::GetNumVertices() const
 {
     return mVertexData.size() / mVertexStride;
 }
@@ -347,18 +347,18 @@ const GPUGeometry *Geometry::GetGPUGeometry()
         delete mGPUGeometry;
         CHECK_GL_ERROR();
         mGPUGeometry = new GPUGeometry();
-        mGPUGeometry->SetVerticesData( mVertexData.size(), mVertexStride, mVertexData.data() );
+        mGPUGeometry->SetVerticesData( mVertexData, mVertexStride );
         if(mNormalData.size() > 0)
-            mGPUGeometry->SetNormalsData(mNormalData.size(), mNormalData.data() );
-        mGPUGeometry->SetIndexsData(mIndexData.size(), mTopology, mIndexData.data() );
+            mGPUGeometry->SetNormalsData(mNormalData);
+        mGPUGeometry->SetIndexsData(mIndexData, mTopology);
         if(mColorData.size() > 0)
-            mGPUGeometry->SetColorData(mColorData.size(), mColorStride, mColorData.data() );
+            mGPUGeometry->SetColorData(mColorData, mColorStride );
         if(mTextCoordsData.size() > 0)
-            mGPUGeometry->SetTextCoordsData(mTextCoordsData.size(), mTextCoordsData.data() );
+            mGPUGeometry->SetTextCoordsData(mTextCoordsData);
         if(mTangentData.size() > 0)
-            mGPUGeometry->SetTangentData(mTangentData.size(), mTangentData.data() );
+            mGPUGeometry->SetTangentData(mTangentData);
         if(mBitangentData.size() > 0)
-            mGPUGeometry->SetBitangentData(mBitangentData.size(), mBitangentData.data() );
+            mGPUGeometry->SetBitangentData(mBitangentData);
         mGPUGeometry->ConfigureVAO();
         mNeedGPUGeometryUpdate = false;
     }

@@ -22,19 +22,19 @@ public:
     ~GPUGeometry();
 
     /// Set the vertices of the mesh
-    void SetVerticesData(unsigned int pSize, unsigned int pStride, const float *pData);
+    void SetVerticesData(const std::vector<float> &pVertices, unsigned int pStride);
     /// Set the normals of the mesh
-    void SetNormalsData(unsigned int pSize, const float *pData);
+    void SetNormalsData(const std::vector<float> &pNormals);
     /// Set the colors of the mesh
-    void SetColorData(unsigned int pSize, unsigned int pStride, const float *pData);
+    void SetColorData(const std::vector<float> &pColors, unsigned int pStride);
     /// Set the tangents of the mesh
-    void SetTangentData(unsigned int pSize, const float *pData);
+    void SetTangentData(const std::vector<float> &pTangents);
     /// Set the bitangents of the mesh
-    void SetBitangentData(unsigned int pSize, const float *pData);
+    void SetBitangentData(const std::vector<float> &pBitangents);
     /// Set the texture coordinates of the mesh
-    void SetTextCoordsData(unsigned int pSize, const float *pData);
+    void SetTextCoordsData(const std::vector<float> &pTextCoords);
     /// Set the information of connectivities between vertices of the mesh
-    void SetIndexsData(unsigned int pSize, Geometry::Topology pTopology, const unsigned int *pData);
+    void SetIndexsData(const std::vector<unsigned int> &pIndexs, Geometry::Topology pTopology);
 
     /// Draw the mesh
     void Draw() const;
@@ -44,7 +44,7 @@ public:
 
 private:
     /// We don't want a default copy constructor because it will not work due to it will not duplicate the memory in the gpu
-    GPUGeometry(GPUGeometry const&){}
+    GPUGeometry(GPUGeometry const&) = delete;
 
     /// Draw the mesh given the number of elements to be drawn when the vertex array object is already binded
     void FastDraw(unsigned int pSize) const;
@@ -70,7 +70,7 @@ private:
     /// Id of the buffer that stores the information of connectivities between vertices
     unsigned int mIndexsId;
     /// Number of elements of the mesh
-    unsigned int mIndexsSize;
+    size_t mIndexsSize;
     /// Topology of the mesh
     Geometry::Topology mMeshTopology;
 };

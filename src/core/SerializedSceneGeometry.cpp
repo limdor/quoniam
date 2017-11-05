@@ -236,7 +236,7 @@ void SerializedSceneGeometry::SerializeSceneNodes(const SceneNode *pSceneNode)
         if(geom->GetTopology() == Geometry::Triangles)
         {
             int facesOffset = mNumberOfVertexs;
-            QVector<float> vertices = geom->GetVerticesData();
+            const std::vector<float>& vertices = geom->GetVerticesData();
             for( int j = 0; j < vertices.size(); j += geom->GetVertexStride() )
             {
                 glm::vec4 vertex(vertices.at(j), vertices.at(j+1), vertices.at(j+2), 1.0f);
@@ -244,7 +244,7 @@ void SerializedSceneGeometry::SerializeSceneNodes(const SceneNode *pSceneNode)
                 mVertexs[mNumberOfVertexs] = glm::vec3(vertex[0], vertex[1], vertex[2]);
                 mNumberOfVertexs++;
             }
-            QVector<unsigned int> indexs = geom->GetIndexsData();
+            const std::vector<unsigned int> indexs = geom->GetIndexsData();
             for( int j = 0; j < indexs.size(); j += 3 )
             {
                 glm::ivec3 face( indexs.at(j) + facesOffset, indexs.at(j+1) + facesOffset, indexs.at(j+2) + facesOffset );

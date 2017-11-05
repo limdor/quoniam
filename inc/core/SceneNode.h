@@ -85,9 +85,9 @@ private:
     glm::mat4 mGlobalTransform;
 
     /// Number of vertices
-    int mNumberOfVertices;
+    size_t mNumberOfVertices;
     /// Number of polygons
-    int mNumberOfPolygons;
+    size_t mNumberOfPolygons;
     /// Bounding sphere
     BoundingSphere* mBoundingSphere;
 
