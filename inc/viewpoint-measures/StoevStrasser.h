@@ -14,7 +14,7 @@ class StoevStrasser : public Measure
 {
 public:
     /// Constructor
-    StoevStrasser(const QString &pName);
+    explicit StoevStrasser(const QString &pName);
     /// Destructor
     ~StoevStrasser();
 

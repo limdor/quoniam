@@ -10,21 +10,21 @@ Mesh::Mesh(Geometry * pGeometry, Material * pMaterial):
 Mesh::Mesh(const Mesh &pMesh):
     mName(pMesh.mName), mVisible(pMesh.mVisible)
 {
-    if(pMesh.mMaterial != NULL)
+    if(pMesh.mMaterial != nullptr)
     {
         mMaterial = new Material(*pMesh.mMaterial);
     }
     else
     {
-        mMaterial = NULL;
+        mMaterial = nullptr;
     }
-    if(pMesh.mGeometry != NULL)
+    if(pMesh.mGeometry != nullptr)
     {
         mGeometry = new Geometry(*pMesh.mGeometry);
     }
     else
     {
-        mGeometry = NULL;
+        mGeometry = nullptr;
     }
 }
 

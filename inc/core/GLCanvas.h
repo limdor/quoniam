@@ -31,12 +31,12 @@ class GLCanvas : public QGLWidget
 
 public:
     /// Constructor
-    GLCanvas(QWidget *pParent = 0);
+    explicit GLCanvas(QWidget *pParent = 0);
     /// Destructor
     ~GLCanvas();
 
     /// Load an scene
-    void LoadScene(Scene* pScene , const Camera* pCamera = NULL);
+    void LoadScene(Scene* pScene , const Camera* pCamera = nullptr);
     /// Initialize the list of meshes that will be render with the color per vertex with the parameter
     void SetPerVertexMesh(Geometry* pPerVertexMesh);
     /// Add a mesh that will be render with the color per vertex

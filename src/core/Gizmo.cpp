@@ -6,7 +6,7 @@
 #include "Geometry.h"
 
 Gizmo::Gizmo():
-    mGizmo(NULL), mPositionOfVertices()
+    mGizmo(nullptr), mPositionOfVertices()
 {
 
 }
@@ -14,13 +14,13 @@ Gizmo::Gizmo():
 Gizmo::Gizmo( const Gizmo& pGizmo ):
     mPositionOfVertices(pGizmo.mPositionOfVertices)
 {
-    if(pGizmo.mGizmo != NULL)
+    if(pGizmo.mGizmo != nullptr)
     {
         mGizmo = new Geometry(*pGizmo.mGizmo);
     }
     else
     {
-        mGizmo = NULL;
+        mGizmo = nullptr;
     }
 }
 
@@ -31,7 +31,7 @@ Gizmo::~Gizmo()
 
 void Gizmo::Draw()
 {
-    if(mGizmo != NULL)
+    if(mGizmo != nullptr)
     {
         mGizmo->Draw();
     }

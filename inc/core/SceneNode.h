@@ -23,7 +23,7 @@ class SceneNode
 {
 public:
     /// Constructor with the name of the node
-    SceneNode(const QString &pName);
+    explicit SceneNode(const QString &pName);
     /// Destructor
     ~SceneNode();
 
@@ -85,9 +85,9 @@ private:
     glm::mat4 mGlobalTransform;
 
     /// Number of vertices
-    int mNumberOfVertices;
+    size_t mNumberOfVertices;
     /// Number of polygons
-    int mNumberOfPolygons;
+    size_t mNumberOfPolygons;
     /// Bounding sphere
     BoundingSphere* mBoundingSphere;
 

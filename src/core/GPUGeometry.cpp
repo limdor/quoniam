@@ -7,6 +7,9 @@
 //Project includes
 #include "Debug.h"
 
+//STD
+#include <type_traits>
+
 GPUGeometry::GPUGeometry():
     mVerticesId(0), mVerticesStride(0),
     mColorsId(0), mColorsStride(0),
@@ -32,7 +35,7 @@ GPUGeometry::~GPUGeometry()
 }
 
 //Methods for setting the data
-void GPUGeometry::SetVerticesData(unsigned int pSize, unsigned int pStride, const float *pData)
+void GPUGeometry::SetVerticesData(const std::vector<float>& pVertices, unsigned int pStride)
 {
     if(mVerticesId == 0)
     {
@@ -40,22 +43,22 @@ void GPUGeometry::SetVerticesData(unsigned int pSize, unsigned int pStride, cons
     }
     mVerticesStride = pStride;
     glBindBuffer(GL_ARRAY_BUFFER, mVerticesId);
-    glBufferData(GL_ARRAY_BUFFER, pSize * sizeof(float), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pVertices.size() * sizeof(std::decay_t<decltype(pVertices)>::value_type), pVertices.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetNormalsData(unsigned int pSize, const float *pData)
+void GPUGeometry::SetNormalsData(const std::vector<float>& pNormals)
 {
     if(mNormalsId == 0)
     {
         glGenBuffers(1, &mNormalsId);
     }
     glBindBuffer(GL_ARRAY_BUFFER, mNormalsId);
-    glBufferData(GL_ARRAY_BUFFER, pSize * sizeof(float), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pNormals.size() * sizeof(std::decay_t<decltype(pNormals)>::value_type), pNormals.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetColorData(unsigned int pSize, unsigned int pStride, const float *pData)
+void GPUGeometry::SetColorData(const std::vector<float> &pColors, unsigned int pStride)
 {
     if(mColorsId == 0)
     {
@@ -63,53 +66,53 @@ void GPUGeometry::SetColorData(unsigned int pSize, unsigned int pStride, const f
     }
     mColorsStride = pStride;
     glBindBuffer(GL_ARRAY_BUFFER, mColorsId);
-    glBufferData(GL_ARRAY_BUFFER, pSize * sizeof(float), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pColors.size() * sizeof(std::decay_t<decltype(pColors)>::value_type), pColors.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetTangentData(unsigned int pSize, const float *pData)
+void GPUGeometry::SetTangentData(const std::vector<float>& pTangents)
 {
     if(mTangentsId == 0)
     {
         glGenBuffers(1, &mTangentsId);
     }
     glBindBuffer(GL_ARRAY_BUFFER, mTangentsId);
-    glBufferData(GL_ARRAY_BUFFER, pSize * sizeof(float), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pTangents.size() * sizeof(std::decay_t<decltype(pTangents)>::value_type), pTangents.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetBitangentData(unsigned int pSize, const float *pData)
+void GPUGeometry::SetBitangentData(const std::vector<float>& pBitangents)
 {
     if(mBitangentsId == 0)
     {
         glGenBuffers(1, &mBitangentsId);
     }
     glBindBuffer(GL_ARRAY_BUFFER, mBitangentsId);
-    glBufferData(GL_ARRAY_BUFFER, pSize * sizeof(float), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pBitangents.size() * sizeof(std::decay_t<decltype(pBitangents)>::value_type), pBitangents.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetTextCoordsData(unsigned int pSize, const float *pData)
+void GPUGeometry::SetTextCoordsData(const std::vector<float>& pTextCoords)
 {
     if(mTextCoordsId == 0)
     {
         glGenBuffers(1, &mTextCoordsId);
     }
     glBindBuffer(GL_ARRAY_BUFFER, mTextCoordsId);
-    glBufferData(GL_ARRAY_BUFFER, pSize * sizeof(float), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pTextCoords.size() * sizeof(std::decay_t<decltype(pTextCoords)>::value_type), pTextCoords.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetIndexsData(unsigned int pSize, Geometry::Topology pTopology, const unsigned int *pData)
+void GPUGeometry::SetIndexsData(const std::vector<unsigned int>& pIndexs, Geometry::Topology pTopology)
 {
     if(mIndexsId == 0)
     {
         glGenBuffers(1, &mIndexsId);
     }
-    mIndexsSize = pSize;
+    mIndexsSize = pIndexs.size();
     mMeshTopology = pTopology;
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexsId);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, pSize * sizeof(unsigned int), pData, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexsSize * sizeof(std::decay_t<decltype(pIndexs)>::value_type), pIndexs.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 

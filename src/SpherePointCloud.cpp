@@ -36,13 +36,13 @@ SpherePointCloud::SpherePointCloud():
 
 SpherePointCloud::SpherePointCloud( const SpherePointCloud& pSpherePointCloud )
 {
-    if(pSpherePointCloud.mMesh != NULL)
+    if(pSpherePointCloud.mMesh != nullptr)
     {
         mMesh = new Geometry(*pSpherePointCloud.mMesh);
     }
     else
     {
-        mMesh = NULL;
+        mMesh = nullptr;
     }
     mNumberOfPoints = pSpherePointCloud.mNumberOfPoints;
     mFaces = pSpherePointCloud.mFaces;

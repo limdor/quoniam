@@ -13,7 +13,7 @@ class ProjectedAreasMatrix
 {
 public:
     ProjectedAreasMatrix(int pNumberOfViewpoints, int pNumberOfPolygons);
-    ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjectedAreasMatrix);
+    explicit ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjectedAreasMatrix);
     int GetNumberOfViewpoints() const;
     int GetNumberOfPolygons() const;
     unsigned int GetSumPerViewpoint(int pViewpoint) const;

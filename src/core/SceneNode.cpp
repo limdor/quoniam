@@ -6,8 +6,8 @@
 
 SceneNode::SceneNode(const QString &pName):
     mName(pName), mLocalTransform(), mGlobalTransform(),
-    mNumberOfVertices(0), mNumberOfPolygons(0), mBoundingSphere(NULL),
-    mParent(NULL)
+    mNumberOfVertices(0), mNumberOfPolygons(0), mBoundingSphere(nullptr),
+    mParent(nullptr)
 {
 
 }
@@ -67,7 +67,7 @@ void SceneNode::AddMesh(Mesh* pMesh)
     BoundingSphere* previousBoundingSphere = mBoundingSphere;
     mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, geometry->GetBoundingSphere());
     delete previousBoundingSphere;
-    if(mParent != NULL)
+    if(mParent != nullptr)
     {
         mParent->UpdateGeometryInformation();
     }
@@ -93,7 +93,7 @@ void SceneNode::SetParent(SceneNode *pParent)
 {
     mParent = pParent;
     UpdateGlobalTransform();
-    if(mParent != NULL)
+    if(mParent != nullptr)
     {
         mParent->UpdateGeometryInformation();
     }
@@ -131,7 +131,7 @@ const SceneNode* SceneNode::GetChild(int pPosition) const
 
 void SceneNode::UpdateGlobalTransform()
 {
-    if(mParent != NULL)
+    if(mParent != nullptr)
     {
         mGlobalTransform = mParent->GetGlobalTransform() * mLocalTransform;
     }
@@ -150,7 +150,7 @@ void SceneNode::UpdateGeometryInformation()
     mNumberOfVertices = 0;
     mNumberOfPolygons = 0;
     delete mBoundingSphere;
-    mBoundingSphere = NULL;
+    mBoundingSphere = nullptr;
     BoundingSphere* childBoundingSphere = new BoundingSphere();
     for( int i = 0; i < mChilds.size(); i++ )
     {
@@ -171,7 +171,7 @@ void SceneNode::UpdateGeometryInformation()
         }
     }
     delete childBoundingSphere;
-    if(mParent != NULL)
+    if(mParent != nullptr)
     {
         mParent->UpdateGeometryInformation();
     }

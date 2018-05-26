@@ -8,9 +8,9 @@
 #include "Debug.h"
 
 GLSLProgram::GLSLProgram(const QString& pName):
-    mName(pName)
+    mName(pName),
+    mId(glCreateProgram())
 {
-    mId = glCreateProgram();
     CHECK_GL_ERROR();
 }
 
@@ -19,15 +19,14 @@ GLSLProgram::~GLSLProgram()
     glDeleteProgram(mId);
 }
 
-QString GLSLProgram::GetName() const
+const QString& GLSLProgram::GetName() const
 {
     return mName;
 }
 
-void GLSLProgram::AttachShader(GLSLShader* pShader)
+void GLSLProgram::AttachShader(const GLSLShader& pShader)
 {
-    GLuint shaderId = pShader->GetId();
-    glAttachShader(mId, shaderId);
+    glAttachShader(mId, pShader.GetId());
     CHECK_GL_ERROR();
 }
 
@@ -38,16 +37,16 @@ void GLSLProgram::LinkProgram()
 
     // Get the location of every uniform
     mUniforms.clear();
-    GLint nUniforms, maxLen, nAttributes;
+    GLint nUniforms, maxLen;
     glGetProgramiv( mId, GL_ACTIVE_UNIFORM_MAX_LENGTH, &maxLen);
     glGetProgramiv( mId, GL_ACTIVE_UNIFORMS, &nUniforms);
     GLchar * name = new GLchar[maxLen];
-    for( int i = 0; i < nUniforms; ++i )
+    for( GLint i = 0; i < nUniforms; ++i )
     {
         GLint size;
         GLenum type;
 
-        glGetActiveUniform( mId, i, maxLen, NULL, &size, &type, name );
+        glGetActiveUniform( mId, i, maxLen, nullptr, &size, &type, name );
         GLint location = glGetUniformLocation(mId, name);
         mUniforms[QString(name)] = location;
     }
@@ -56,14 +55,15 @@ void GLSLProgram::LinkProgram()
     // Get the location of every attribute
     mAttributes.clear();
     glGetProgramiv( mId, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxLen);
+    GLint nAttributes;
     glGetProgramiv( mId, GL_ACTIVE_ATTRIBUTES, &nAttributes);
     name = new GLchar[maxLen];
-    for( int i = 0; i < nAttributes; ++i )
+    for( GLint i = 0; i < nAttributes; ++i )
     {
         GLint size;
         GLenum type;
 
-        glGetActiveAttrib( mId, i, maxLen, NULL, &size, &type, name );
+        glGetActiveAttrib( mId, i, maxLen, nullptr, &size, &type, name );
         GLint location = glGetAttribLocation(mId, name);
         mAttributes[QString(name)] = location;
     }
@@ -83,31 +83,34 @@ void GLSLProgram::ShowInformation() const
     // Show uniforms information
     Debug::Log("Uniforms:");
     Debug::Log(" Name | Location");
-    Debug::Log("------------------------------------------------");
-    QHash<QString, GLint>::const_iterator it;
-    for( it = mUniforms.begin(); it != mUniforms.end(); ++it )
+    Debug::Log("------------------------------------------------");;
+    for( auto it = mUniforms.cbegin(); it != mUniforms.cend(); ++it )
     {
-        Debug::Log( QString(" %1 | %2").arg(it.key()).arg(it.value()) );
+        Debug::Log( QString(" %1 | %2").arg(it->first).arg(it->second) );
     }
 
     // Show attributes information
     Debug::Log("Attributes:");
     Debug::Log(" Name | Location");
     Debug::Log("------------------------------------------------");
-    for( it = mAttributes.begin(); it != mAttributes.end(); ++it )
+    for( auto it = mAttributes.cbegin(); it != mAttributes.cend(); ++it )
     {
-        Debug::Log( QString(" %1 | %2").arg(it.key()).arg(it.value()) );
+        Debug::Log( QString(" %1 | %2").arg(it->first).arg(it->second) );
     }
 }
 
 GLint GLSLProgram::GetUniformLocation(const QString& pName) const
 {
-    GLint location = mUniforms.value(pName, -1);
-    if( location == -1 )
+    const auto it = mUniforms.find(pName);
+    if( it == mUniforms.end() )
     {
         Debug::Warning( QString("Invalid uniform: %1").arg(pName) );
+        return -1;
     }
-    return location;
+    else
+    {
+        return it->second;
+    }
 }
 
 void GLSLProgram::SetUniform(const QString &pName, const glm::mat4 &pValue) const
@@ -142,17 +145,21 @@ void GLSLProgram::SetUniform(const QString& pName, bool pValue) const
 
 GLint GLSLProgram::GetAttribLocation(const QString& pName) const
 {
-    GLint location = mAttributes.value(pName, -1);
-    if( location == -1 )
+    const auto it = mAttributes.find(pName);
+    if( it == mAttributes.end() )
     {
         Debug::Warning( QString("Invalid attribute: %1").arg(pName) );
+        return -1;
     }
-    return location;
+    else
+    {
+        return it->second;
+    }
 }
 
 void GLSLProgram::BindFragDataLocation(GLuint pLocation, const QString& pName)
 {
-    QByteArray bAName = pName.toLocal8Bit();
+    const QByteArray bAName = pName.toLocal8Bit();
     const char *constName = bAName.data();
     glBindFragDataLocation( mId, pLocation, constName );
     CHECK_GL_ERROR();

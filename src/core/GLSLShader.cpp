@@ -9,7 +9,7 @@
 //Project includes
 #include "Debug.h"
 
-GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
+GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
     mType(pType)
 {
     // Load shader's source text.
@@ -17,10 +17,10 @@ GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
     if (file.open(QIODevice::ReadOnly))
     {
         QTextStream stream (&file);
-        QString text = stream.readAll();
+        const QString text = stream.readAll();
         file.close();
 
-        QByteArray code = text.toLocal8Bit();
+        const QByteArray code = text.toLocal8Bit();
 
         // Create the shader from a text file.
         mGLId = glCreateShader(pType);
@@ -30,7 +30,7 @@ GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
             GLsizei slen = 0;
 
             const char *constCode = code.data();
-            glShaderSource( mGLId, 1, &constCode, NULL );
+            glShaderSource( mGLId, 1, &constCode, nullptr );
             glCompileShader(mGLId);
             CHECK_GL_ERROR();
             glGetShaderiv(mGLId, GL_COMPILE_STATUS, &blen);
@@ -48,7 +48,7 @@ GLSLShader::GLSLShader(QString pSourceFile, GLenum pType):
                 if (blen > 1)
                 {
                     char * compilerLog = new char[blen];
-                    if ( compilerLog != (char*) NULL )
+                    if ( compilerLog != nullptr )
                     {
                         glGetShaderInfoLog(mGLId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();
@@ -84,7 +84,7 @@ bool GLSLShader::HasErrors() const
     return mHasErrors;
 }
 
-QString GLSLShader::GetLog() const
+const QString& GLSLShader::GetLog() const
 {
     return mLog;
 }

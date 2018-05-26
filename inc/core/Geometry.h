@@ -6,9 +6,9 @@
 #ifndef _GEOMETRY_H_
 #define _GEOMETRY_H_
 
-//Qt includes
-#include <QPair>
-#include <QString>
+//Project includes
+#include "AxisAlignedBoundingBox.h"
+#include "BoundingSphere.h"
 
 //Dependency includes
 #include "glew.h"
@@ -16,11 +16,12 @@
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
-//Project includes
-#include "AxisAlignedBoundingBox.h"
-#include "BoundingSphere.h"
+//Qt includes
+#include <QString>
 
-class Scene;
+//STD
+#include <vector>
+
 class GPUGeometry;
 
 /// Class to wrap the geometry of a 3d mesh that is not stored into the GPU until the GetGPUGeometry method is called.
@@ -50,7 +51,7 @@ public:
     /// Set the vertices of the geometry
     void SetVerticesData(unsigned int pSize, const glm::vec2 *pData);
     /// Get the vertices of the geometry
-    QVector<float> GetVerticesData() const;
+    const std::vector<float>& GetVerticesData() const;
     /// Get vertex stride
     unsigned int GetVertexStride() const;
     /// Set the normals of the geometry
@@ -69,7 +70,7 @@ public:
     /// Set the information of connectivities between vertices of the geometry
     void SetIndexsData(unsigned int pSize, const unsigned int *pData);
     /// Get the information of connectivities between vertices of the geometry
-    QVector<unsigned int> GetIndexsData() const;
+    const std::vector<unsigned int>& GetIndexsData() const;
 
     /// Set the name of the geometry
     void SetName(const QString &pName);
@@ -90,11 +91,11 @@ public:
     void Draw();
 
     /// Get the number of indexes
-    int GetNumIndices() const;
+    size_t GetNumIndices() const;
     /// Get the number of faces
-    int GetNumFaces() const;
+    size_t GetNumFaces() const;
     /// Get the number of vertices
-    int GetNumVertices() const;
+    size_t GetNumVertices() const;
     /// Get the topology
     Topology GetTopology() const;
 
@@ -103,24 +104,24 @@ public:
 
 private:
     /// Data of the positions of the vertices
-    QVector<float> mVertexData;
+    std::vector<float> mVertexData;
     /// Stride of the vertices
     unsigned int mVertexStride;
     /// Data of the normals of the vertices
-    QVector<float> mNormalData;
+    std::vector<float> mNormalData;
     /// Data of the colors of the vertices
-    QVector<float> mColorData;
+    std::vector<float> mColorData;
     /// Stride of the colors
     unsigned int mColorStride;
     /// Data of the texture coordinates of the vertices
-    QVector<float> mTextCoordsData;
+    std::vector<float> mTextCoordsData;
     /// Data of the tangents of the vertices
-    QVector<float> mTangentData;
+    std::vector<float> mTangentData;
     /// Data of the bitangents of the vertices
-    QVector<float> mBitangentData;
+    std::vector<float> mBitangentData;
 
     /// Data of the connectivity between vertices
-    QVector<unsigned int> mIndexData;
+    std::vector<unsigned int> mIndexData;
 
     /// Name of the geometry
     QString mName;

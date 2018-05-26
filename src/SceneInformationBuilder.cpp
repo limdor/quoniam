@@ -30,7 +30,7 @@
 #include "MainWindow.h"
 
 SceneInformationBuilder::SceneInformationBuilder():
-    mSerializedScene(NULL), mProjectedAreasMatrix(NULL), mWidthResolution(640), mAspectRatio(1.0f),
+    mSerializedScene(nullptr), mProjectedAreasMatrix(nullptr), mWidthResolution(640), mAspectRatio(1.0f),
     mPreviousDepthTest(true), mPreviousCullFace(true), mPreviousBlend(false)
 {
     mBasicVS = new GLSLShader("shaders/Basic.vert", GL_VERTEX_SHADER);
@@ -45,8 +45,8 @@ SceneInformationBuilder::SceneInformationBuilder():
     }
 
     mShaderColorPerFace = new GLSLProgram("ShaderColorPerFace");
-    mShaderColorPerFace->AttachShader(mBasicVS);
-    mShaderColorPerFace->AttachShader(mColorPerFaceFS);
+    mShaderColorPerFace->AttachShader(*mBasicVS);
+    mShaderColorPerFace->AttachShader(*mColorPerFaceFS);
     mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
     mShaderColorPerFace->LinkProgram();
 }
@@ -238,7 +238,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
 
         //Compute the maximum depth
         double maximum;
-        cv::minMaxLoc(imageDepth, NULL, &maximum, NULL, NULL, image);
+        cv::minMaxLoc(imageDepth, nullptr, &maximum, nullptr, nullptr, image);
         mMaxDepths[i] = (float)maximum / 255;
 
         //Compute the silhouette length and the silhouette curvature

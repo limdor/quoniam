@@ -14,7 +14,7 @@ class VisibilityRatio : public Measure
 {
 public:
     /// Constructor
-    VisibilityRatio(const QString &pName);
+    explicit VisibilityRatio(const QString &pName);
     /// Destructor
     ~VisibilityRatio();
 

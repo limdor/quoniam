@@ -46,7 +46,7 @@ BoundingSphere* BoundingSphere::Merge(const BoundingSphere *pBS0, const Bounding
 {
     BoundingSphere* result = new BoundingSphere();
 
-    if( pBS0 != NULL && pBS1 != NULL )
+    if( pBS0 != nullptr && pBS1 != nullptr )
     {
         //Bibliography: 3D Game Engine Design: A Practical Approach to Real-Time Computer Graphics (p.149)
         glm::vec3 C0 = pBS0->GetCenter();
@@ -78,12 +78,12 @@ BoundingSphere* BoundingSphere::Merge(const BoundingSphere *pBS0, const Bounding
             result->SetRadius( ( L + r1 + r0 ) / 2.0f );
         }
     }
-    else if( pBS0 != NULL )
+    else if( pBS0 != nullptr )
     {
         result->SetCenter(pBS0->GetCenter());
         result->SetRadius(pBS0->GetRadius());
     }
-    else if( pBS1 != NULL )
+    else if( pBS1 != nullptr )
     {
         result->SetCenter(pBS1->GetCenter());
         result->SetRadius(pBS1->GetRadius());

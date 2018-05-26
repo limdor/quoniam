@@ -43,7 +43,7 @@ AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pA
 
     AxisAlignedBoundingBox* result = new AxisAlignedBoundingBox();
 
-    if( pAABB0 != NULL && pAABB1 != NULL )
+    if( pAABB0 != nullptr && pAABB1 != nullptr )
     {
         glm::vec3 minAABB0 = pAABB0->GetMin();
         glm::vec3 minAABB1 = pAABB1->GetMin();
@@ -77,12 +77,12 @@ AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pA
             newMax.z = maxAABB0.z;
         }
     }
-    else if( pAABB0 != NULL )
+    else if( pAABB0 != nullptr )
     {
         newMax = pAABB0->GetMax();
         newMin = pAABB0->GetMin();
     }
-    else if( pAABB1 != NULL )
+    else if( pAABB1 != nullptr )
     {
         newMax = pAABB1->GetMax();
         newMin = pAABB1->GetMin();

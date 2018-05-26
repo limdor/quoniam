@@ -14,7 +14,7 @@ class SilhouetteCurvature : public Measure
 {
 public:
     /// Constructor
-    SilhouetteCurvature(const QString &pName);
+    explicit SilhouetteCurvature(const QString &pName);
     /// Destructor
     ~SilhouetteCurvature();
 

@@ -13,7 +13,7 @@ class DepthBasedVisualStability : public Measure
 {
 public:
     /// Constructor
-    DepthBasedVisualStability(const QString &pName);
+    explicit DepthBasedVisualStability(const QString &pName);
     /// Destructor
     ~DepthBasedVisualStability();
 

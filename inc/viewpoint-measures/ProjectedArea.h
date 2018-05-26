@@ -14,7 +14,7 @@ class ProjectedArea : public Measure
 {
 public:
     /// Constructor
-    ProjectedArea(const QString &pName);
+    explicit ProjectedArea(const QString &pName);
     /// Destructor
     ~ProjectedArea();
 

@@ -5,7 +5,7 @@
 #include <QGLWidget>
 
 Material::Material(const QString &pName):
-    mName(pName), mKa(0.2f), mKaTexture(NULL), mKd(0.8f), mKdTexture(NULL), mKs(1.0f), mKsTexture(NULL), mShininess(0.0f)
+    mName(pName), mKa(0.2f), mKaTexture(nullptr), mKd(0.8f), mKdTexture(nullptr), mKs(1.0f), mKsTexture(nullptr), mShininess(0.0f)
 {
 
 }
@@ -40,7 +40,7 @@ void Material::SetKaTexture(QImage* pKaTexture)
 
 bool Material::HasKaTexture() const
 {
-    return ( mKaTexture != NULL );
+    return ( mKaTexture != nullptr );
 }
 
 glm::vec3 Material::GetKd() const
@@ -66,7 +66,7 @@ void Material::SetKdTexture(QImage* pKdTexture)
 
 bool Material::HasKdTexture() const
 {
-    return ( mKdTexture != NULL );
+    return ( mKdTexture != nullptr );
 }
 
 glm::vec3 Material::GetKs() const
@@ -92,7 +92,7 @@ void Material::SetKsTexture(QImage* pKsTexture)
 
 bool Material::HasKsTexture() const
 {
-    return ( mKsTexture != NULL );
+    return ( mKsTexture != nullptr );
 }
 
 float Material::GetShininess() const

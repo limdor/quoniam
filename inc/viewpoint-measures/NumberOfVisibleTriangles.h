@@ -14,7 +14,7 @@ class NumberOfVisibleTriangles : public Measure
 {
 public:
     /// Constructor
-    NumberOfVisibleTriangles(const QString &pName);
+    explicit NumberOfVisibleTriangles(const QString &pName);
     /// Destructor
     ~NumberOfVisibleTriangles();
 

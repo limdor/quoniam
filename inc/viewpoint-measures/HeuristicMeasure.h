@@ -14,7 +14,7 @@ class HeuristicMeasure : public Measure
 {
 public:
     /// Constructor
-    HeuristicMeasure(const QString &pName);
+    explicit HeuristicMeasure(const QString &pName);
     /// Destructor
     ~HeuristicMeasure();
 

@@ -11,7 +11,7 @@
 #include "Scene.h"
 
 Geometry::Geometry(const QString &pName, Topology pT):
-    mTopology(pT), mBoundingBox(NULL), mBoundingSphere(NULL), mGPUGeometry(NULL), mName(pName), mNeedGPUGeometryUpdate(false)
+    mTopology(pT), mBoundingBox(nullptr), mBoundingSphere(nullptr), mGPUGeometry(nullptr), mName(pName), mNeedGPUGeometryUpdate(false)
 {
 
 }
@@ -22,24 +22,24 @@ Geometry::Geometry(const Geometry& pGeometry):
     mTangentData(pGeometry.mTangentData), mBitangentData(pGeometry.mBitangentData), mIndexData(pGeometry.mIndexData),
     mName(pGeometry.mName), mTopology(pGeometry.mTopology), mNeedGPUGeometryUpdate(true)
 {
-    if(pGeometry.mBoundingBox != NULL)
+    if(pGeometry.mBoundingBox != nullptr)
     {
         mBoundingBox = new AxisAlignedBoundingBox(*pGeometry.mBoundingBox);
     }
     else
     {
-        mBoundingBox = NULL;
+        mBoundingBox = nullptr;
     }
 
-    if(pGeometry.mBoundingSphere != NULL)
+    if(pGeometry.mBoundingSphere != nullptr)
     {
         mBoundingSphere = new BoundingSphere(*pGeometry.mBoundingSphere);
     }
     else
     {
-        mBoundingSphere = NULL;
+        mBoundingSphere = nullptr;
     }
-    mGPUGeometry = NULL;
+    mGPUGeometry = nullptr;
 }
 
 Geometry::~Geometry()
@@ -88,7 +88,7 @@ void Geometry::SetVerticesData(unsigned int pSize, const glm::vec2 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-QVector<float> Geometry::GetVerticesData() const
+const std::vector<float>& Geometry::GetVerticesData() const
 {
     return mVertexData;
 }
@@ -182,7 +182,7 @@ void Geometry::SetIndexsData(unsigned int pSize, const unsigned int *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-QVector<unsigned int> Geometry::GetIndexsData() const
+const std::vector<unsigned int>& Geometry::GetIndexsData() const
 {
     return mIndexData;
 }
@@ -248,11 +248,11 @@ void Geometry::ComputeBoundingVolumes()
         }
     }
     mb.build();
-    if(mBoundingBox == NULL)
+    if(mBoundingBox == nullptr)
     {
         mBoundingBox = new AxisAlignedBoundingBox();
     }
-    if(mBoundingSphere == NULL)
+    if(mBoundingSphere == nullptr)
     {
         mBoundingSphere = new BoundingSphere();
     }
@@ -296,12 +296,12 @@ void Geometry::Draw()
     GetGPUGeometry()->Draw();
 }
 
-int Geometry::GetNumIndices() const
+size_t Geometry::GetNumIndices() const
 {
     return mIndexData.size();
 }
 
-int Geometry::GetNumFaces() const
+size_t Geometry::GetNumFaces() const
 {
     if( mTopology == Triangles )
     {
@@ -330,7 +330,7 @@ int Geometry::GetNumFaces() const
     }
 }
 
-int Geometry::GetNumVertices() const
+size_t Geometry::GetNumVertices() const
 {
     return mVertexData.size() / mVertexStride;
 }
@@ -342,23 +342,23 @@ Geometry::Topology Geometry::GetTopology() const
 
 const GPUGeometry *Geometry::GetGPUGeometry()
 {
-    if(mGPUGeometry == NULL || mNeedGPUGeometryUpdate)
+    if(mGPUGeometry == nullptr || mNeedGPUGeometryUpdate)
     {
         delete mGPUGeometry;
         CHECK_GL_ERROR();
         mGPUGeometry = new GPUGeometry();
-        mGPUGeometry->SetVerticesData( mVertexData.size(), mVertexStride, mVertexData.data() );
+        mGPUGeometry->SetVerticesData( mVertexData, mVertexStride );
         if(mNormalData.size() > 0)
-            mGPUGeometry->SetNormalsData(mNormalData.size(), mNormalData.data() );
-        mGPUGeometry->SetIndexsData(mIndexData.size(), mTopology, mIndexData.data() );
+            mGPUGeometry->SetNormalsData(mNormalData);
+        mGPUGeometry->SetIndexsData(mIndexData, mTopology);
         if(mColorData.size() > 0)
-            mGPUGeometry->SetColorData(mColorData.size(), mColorStride, mColorData.data() );
+            mGPUGeometry->SetColorData(mColorData, mColorStride );
         if(mTextCoordsData.size() > 0)
-            mGPUGeometry->SetTextCoordsData(mTextCoordsData.size(), mTextCoordsData.data() );
+            mGPUGeometry->SetTextCoordsData(mTextCoordsData);
         if(mTangentData.size() > 0)
-            mGPUGeometry->SetTangentData(mTangentData.size(), mTangentData.data() );
+            mGPUGeometry->SetTangentData(mTangentData);
         if(mBitangentData.size() > 0)
-            mGPUGeometry->SetBitangentData(mBitangentData.size(), mBitangentData.data() );
+            mGPUGeometry->SetBitangentData(mBitangentData);
         mGPUGeometry->ConfigureVAO();
         mNeedGPUGeometryUpdate = false;
     }

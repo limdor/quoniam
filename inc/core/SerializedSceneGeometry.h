@@ -17,7 +17,7 @@ class SerializedSceneGeometry
 {
 public:
     /// Constructor
-    SerializedSceneGeometry(const Scene *pScene);
+    explicit SerializedSceneGeometry(const Scene *pScene);
     /// Destructor
     ~SerializedSceneGeometry();
 
