@@ -1,5 +1,7 @@
 Quoniam
 =======
+[![Build status](https://ci.appveyor.com/api/projects/status/hio6d5x99rvb9jg4?svg=true)](https://ci.appveyor.com/project/limdor/quoniam)
+
 
 **quaniam** is a framework for viewpoint selection of 3D models.
 It is the implementation of the [paper published in the Entropy journal on 2018](http://www.mdpi.com/1099-4300/20/5/370).
