@@ -8,4 +8,5 @@ init:
   - set PATH=C:\Qt\%QT_VERSION%\bin;C:\Qt\Tools\QtCreator\bin;%PATH%;
 build_script:
   - qmake Quoniam.pro
+  - jom
  
