@@ -56,7 +56,7 @@ win32 {
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Guid.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5OpenGLd.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgetsd.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindowsd.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(xcopy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindowsd.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\release\\assimp.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\vld_x64.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
@@ -82,7 +82,7 @@ win32 {
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Gui.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5OpenGL.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgets.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindows.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(xcopy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindows.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\$$COMPILATION\\assimp.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
     }
