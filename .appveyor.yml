@@ -1,0 +1,12 @@
+environment:
+  APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  QT_VERSION: 5.9.5\msvc2017_64
+  VCVARSALLPATH: C:\"Program Files (x86)\Microsoft Visual Studio"\2017\Community\VC\Auxiliary\Build\vcvarsall.bat
+  VCVARSALL: x64
+init:
+  - call %VCVARSALLPATH% %VCVARSALL%
+  - set PATH=C:\Qt\%QT_VERSION%\bin;C:\Qt\Tools\QtCreator\bin;%PATH%;
+build_script:
+  - qmake Quoniam.pro
+  - jom
+ 
