@@ -11,8 +11,8 @@ init:
 build_script:
   - qmake Quoniam.pro
   - jom
- 
- after_build:
+
+after_build:
   - set ARTIFACT_NAME=%APPVEYOR_REPO_BRANCH%
   - if defined APPVEYOR_REPO_TAG_NAME set ARTIFACT_NAME=%APPVEYOR_REPO_TAG_NAME%
   - 7z a quoniam-%ARTIFACT_NAME%.zip .\bin\*
