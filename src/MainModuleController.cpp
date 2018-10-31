@@ -616,7 +616,7 @@ QString MainModuleController::GetScreenshotName(int pViewpoint)
 
 void MainModuleController::OpenModel()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Choose a model"), "./", tr("Supported models (*.3ds *.dae *.off *.ply *.obj);;3ds Max 3DS (*.3ds);;Collada (*.dae);;Object File Format (*.off);;Stanford Polygon Library (*.ply);;Wavefront Object (*.obj);;All files (*.*)"));
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Choose a model"), "./", tr("Supported models (*.3ds *.dae *.off *.ply *.obj);;3ds Max 3DS (*.3ds);;Collada (*.dae);;Object File Format (*.off);;Stanford Polygon Library (*.ply);;Wavefront Object (*.obj);;All files (*.*)"));
     if(!fileName.isEmpty())
     {
         LoadScene(fileName);
@@ -625,7 +625,7 @@ void MainModuleController::OpenModel()
 
 void MainModuleController::ExportInformation()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Choose a file to export"), "./", tr("XML file (*.xml);;All files (*.*)"));
+    const QString fileName = QFileDialog::getSaveFileName(this, tr("Choose a file to export"), "./", tr("XML file (*.xml);;All files (*.*)"));
     if(!fileName.isEmpty())
     {
         SaveViewpointMeasuresInformation(fileName);

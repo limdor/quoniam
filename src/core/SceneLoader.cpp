@@ -43,7 +43,7 @@ Scene * SceneLoader::LoadScene(const QString &pPath)
 
     if(scene)
     {
-        QFileInfo fileInfo(pPath);
+        const QFileInfo fileInfo(pPath);
 
         QVector<Material*> materials = LoadMaterials(scene, fileInfo.absolutePath());
         QVector<Geometry*> geometries = LoadGeometries(scene);
@@ -139,7 +139,7 @@ Material* SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString
         aiString actualAiTexturePath;
 
         pAiMaterial->GetTexture( aiTextureType_DIFFUSE, 0, &actualAiTexturePath );
-        QString actualTexturePath( actualAiTexturePath.data );
+        const QString actualTexturePath( actualAiTexturePath.data );
 
         QString finalTexturePath = pScenePath;
         finalTexturePath.append("/").append(actualTexturePath);
