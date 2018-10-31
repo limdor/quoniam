@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _DEBUG_H_
-#define _DEBUG_H_
+#ifndef DEBUG_H
+#define DEBUG_H
 
 //Qt includes
 #include <QPlainTextEdit>

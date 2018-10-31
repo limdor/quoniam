@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _STOEV_STRASSER_H_
-#define _STOEV_STRASSER_H_
+#ifndef STOEV_STRASSER_H
+#define STOEV_STRASSER_H
 
 //Project includes
 #include "Measure.h"

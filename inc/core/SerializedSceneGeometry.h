@@ -4,8 +4,8 @@
 /// \author Nicolau Sunyer
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SERIALIZED_SCENE_GEOMETRY_H_
-#define _SERIALIZED_SCENE_GEOMETRY_H_
+#ifndef SERIALIZED_SCENE_GEOMETRY_H
+#define SERIALIZED_SCENE_GEOMETRY_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

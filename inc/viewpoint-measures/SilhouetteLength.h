@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SILHOUETTE_LENGTH_H_
-#define _SILHOUETTE_LENGTH_H_
+#ifndef SILHOUETTE_LENGTH_H
+#define SILHOUETTE_LENGTH_H
 
 //Project includes
 #include "Measure.h"

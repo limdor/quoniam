@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _AXIS_ALIGNED_BOUNDING_BOX_H_
-#define _AXIS_ALIGNED_BOUNDING_BOX_H_
+#ifndef AXIS_ALIGNED_BOUNDING_BOX_H
+#define AXIS_ALIGNED_BOUNDING_BOX_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

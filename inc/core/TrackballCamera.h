@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _TRACKBALL_CAMERA_H_
-#define _TRACKBALL_CAMERA_H_
+#ifndef TRACKBALL_CAMERA_H
+#define TRACKBALL_CAMERA_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

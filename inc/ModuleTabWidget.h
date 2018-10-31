@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MODULE_TAB_WIDGET_H_
-#define _MODULE_TAB_WIDGET_H_
+#ifndef MODULE_TAB_WIDGET_H
+#define MODULE_TAB_WIDGET_H
 
 //Qt includes
 #include <QMap>

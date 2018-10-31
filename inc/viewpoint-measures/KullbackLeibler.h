@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _KULLBACK_LEIBLER_H_
-#define _KULLBACK_LEIBLER_H_
+#ifndef KULLBACK_LEIBLER_H
+#define KULLBACK_LEIBLER_H
 
 //Project includes
 #include "Measure.h"

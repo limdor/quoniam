@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MATERIAL_H_
-#define _MATERIAL_H_
+#ifndef MATERIAL_H
+#define MATERIAL_H
 
 //Qt includes
 #include <QString>

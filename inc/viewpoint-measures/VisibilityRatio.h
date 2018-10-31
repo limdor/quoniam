@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _VISIBILITY_RATIO_H_
-#define _VISIBILITY_RATIO_H_
+#ifndef VISIBILITY_RATIO_H
+#define VISIBILITY_RATIO_H
 
 //Project includes
 #include "Measure.h"

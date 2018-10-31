@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _TOOLS_H_
-#define _TOOLS_H_
+#ifndef TOOLS_H
+#define TOOLS_H
 
 //Qt includes
 #include <QPair>

@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GL_CANVAS_H_
-#define _GL_CANVAS_H_
+#ifndef GL_CANVAS_H
+#define GL_CANVAS_H
 
 //GLEW has to be included before any OpenGL include
 #include "glew.h"

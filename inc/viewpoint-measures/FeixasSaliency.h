@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _FEIXAS_SALIENCY_H_
-#define _FEIXAS_SALIENCY_H_
+#ifndef FEIXAS_SALIENCY_H
+#define FEIXAS_SALIENCY_H
 
 //Project includes
 #include "Measure.h"

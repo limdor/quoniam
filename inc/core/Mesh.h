@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MESH_H_
-#define _MESH_H_
+#ifndef MESH_H
+#define MESH_H
 
 //Qt includes
 #include <QString>

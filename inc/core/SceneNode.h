@@ -4,8 +4,8 @@
 /// \author Nicolau Sunyer
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SCENE_NODE_H_
-#define _SCENE_NODE_H_
+#ifndef SCENE_NODE_H
+#define SCENE_NODE_H
 
 //Qt includes
 #include <QString>

@@ -4,8 +4,8 @@
 /// \author Nicolau Sunyer
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#ifndef CAMERA_H
+#define CAMERA_H
 
 //Qt includes
 #include <QString>

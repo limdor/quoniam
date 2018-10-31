@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MEASURE_H_
-#define _MEASURE_H_
+#ifndef MEASURE_H
+#define MEASURE_H
 
 //Qt includes
 #include <QString>

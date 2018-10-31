@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GIZMO_H_
-#define _GIZMO_H_
+#ifndef GIZMO_H
+#define GIZMO_H
 
 //Qt includes
 #include <QVector>

@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _VIEWPOINT_MEASURE_SLIDER_H_
-#define _VIEWPOINT_MEASURE_SLIDER_H_
+#ifndef VIEWPOINT_MEASURE_SLIDER_H
+#define VIEWPOINT_MEASURE_SLIDER_H
 
 //Qt includes
 #include <QSlider>

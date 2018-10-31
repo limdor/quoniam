@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _DEPTH_DISTRIBUTION_H_
-#define _DEPTH_DISTRIBUTION_H_
+#ifndef DEPTH_DISTRIBUTION_H
+#define DEPTH_DISTRIBUTION_H
 
 //Project includes
 #include "Measure.h"

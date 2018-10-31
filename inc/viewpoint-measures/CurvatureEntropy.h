@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _CURVATURE_ENTROPY_H_
-#define _CURVATURE_ENTROPY_H_
+#ifndef CURVATURE_ENTROPY_H
+#define CURVATURE_ENTROPY_H
 
 //Project includes
 #include "Measure.h"

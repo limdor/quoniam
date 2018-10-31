@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _PROJECTED_AREA_H_
-#define _PROJECTED_AREA_H_
+#ifndef PROJECTED_AREA_H
+#define PROJECTED_AREA_H
 
 //Project includes
 #include "Measure.h"
