@@ -13,12 +13,7 @@
 #include "OrthographicCamera.h"
 #include "Tools.h"
 
-GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent),
-    mDrawBoundingBox(false), mDrawBoundingSphere(false), mDrawWireframe(false), mApplyMaterials(true),
-    mFreeCamera(nullptr), mWinWidth(0), mWinHeight(0),
-    mScene(nullptr), mGPUScene(nullptr),
-    mShaderDualInit(nullptr), mShaderDualPeel(nullptr), mShaderDualPeelPerVertexColor(nullptr), mShaderDualBlend(nullptr), mShaderDualFinal(nullptr),
-    mBackgroundColor(0.5f, 0.5f, 0.5f)
+GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
 {
     //Inicialització dels draw buffers
     mDrawBuffers[0] = GL_COLOR_ATTACHMENT0;
@@ -105,8 +100,8 @@ GLSLProgram* GLCanvas::GetShaderProgram() const
 QString GLCanvas::SaveScreenshot( const QString &pFileName )
 {
     makeCurrent();
-    QString completePath = Tools::GetProgramPath();
-    QImage image = grabFrameBuffer();
+    const QString completePath = Tools::GetProgramPath();
+    const QImage image = grabFrameBuffer();
     if(!image.save( completePath + pFileName ))
     {
         Debug::Warning( QString("Screenshot have not been saved: %1").arg( completePath + pFileName ) );

@@ -19,7 +19,7 @@ class Gizmo
 {
 public:
     /// Constructor
-    Gizmo();
+    Gizmo() = default;
     /// Copy constructor
     Gizmo( const Gizmo& pGizmo );
     /// Destructor
@@ -31,7 +31,7 @@ public:
 
 protected:
     /// Mesh that represents the gizmo
-    Geometry* mGizmo;
+    Geometry* mGizmo = nullptr;
 
     /// Position of the vertices of the gizmo
     QVector<glm::vec4> mPositionOfVertices;

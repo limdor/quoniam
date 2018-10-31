@@ -90,34 +90,34 @@ private:
     void DeleteDualPeelingRenderTargets();
 
     /// Boolean to know if the bounding boxes will be drawn
-    bool mDrawBoundingBox;
+    bool mDrawBoundingBox = false;
     /// Boolean to know if the bounding spheres will be drawn
-    bool mDrawBoundingSphere;
+    bool mDrawBoundingSphere = false;
     /// Boolean to know if the sphere of viewpoints will be drawn in wireframe mode
-    bool mDrawWireframe;
+    bool mDrawWireframe = false;
     /// Boolean to know if the materials will be applied for the rendering
-    bool mApplyMaterials;
+    bool mApplyMaterials = true;
 
     /// Camera used for the rendering
-    Camera* mFreeCamera;
+    Camera* mFreeCamera = nullptr;
 
     /// Scene
-    Scene* mScene;
+    Scene* mScene = nullptr;
     /// Scene that will be used for the rendering
-    GPUScene* mGPUScene;
+    GPUScene* mGPUScene = nullptr;
     /// Meshes that will be rendered by per vertex color
     QVector<Geometry*> mPerVertexColorMeshes;
 
     /// Shader used to initialize the min-max depth buffer for the dual depth peeling
-    GLSLProgram *mShaderDualInit;
+    GLSLProgram* mShaderDualInit = nullptr;
     /// Shader used to do the main pass of the renderer
-    GLSLProgram *mShaderDualPeel;
+    GLSLProgram* mShaderDualPeel = nullptr;
     /// Shader used to do the main pass of the renderer for the gizmos
-    GLSLProgram *mShaderDualPeelPerVertexColor;
+    GLSLProgram* mShaderDualPeelPerVertexColor = nullptr;
     /// Shader used to alpha-blend the back color for the dual depth peeling
-    GLSLProgram *mShaderDualBlend;
+    GLSLProgram* mShaderDualBlend = nullptr;
     /// Shader used to combinte the color of the front and the back buffer for the dual depth peeling
-    GLSLProgram *mShaderDualFinal;
+    GLSLProgram* mShaderDualFinal = nullptr;
 
     /// Variable used for the dual deep peeling
     GLuint mQueryId;
@@ -137,15 +137,15 @@ private:
     GLenum mDrawBuffers[7];
 
     /// Background color
-    glm::vec3 mBackgroundColor;
+    glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
 
     /// Full screen quad mesh used for the rendering
     Geometry* mMeshFullScreenQuad;
 
     /// Width of the canvas
-    int mWinWidth;
+    int mWinWidth = 0;
     /// Height of the canvas
-    int mWinHeight;
+    int mWinHeight = 0;
     /// Area of the canvas that will be used for the rendering
     QRect mViewport;
 };

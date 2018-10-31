@@ -1,17 +1,12 @@
 #include "Measure.h"
 
 Measure::Measure(const QString &pName, bool pMaximumBest):
-    mName(pName), mMaximumBest(pMaximumBest), mComputed(false)
+    mName{pName}, mMaximumBest{pMaximumBest}, mComputed{false}
 {
 
 }
 
-Measure::~Measure()
-{
-
-}
-
-QString Measure::GetName() const
+const QString& Measure::GetName() const
 {
     return mName;
 }

@@ -671,7 +671,7 @@ void MainModuleController::RunDutagaciBenchmark()
         }
         for( int i = 0; i < mViewpointMeasures.size(); i++ )
         {
-            QString fileName = mViewpointMeasures.at(i)->GetName().replace("|","_").replace("/","_") + ".txt";
+            QString fileName = QString{mViewpointMeasures.at(i)->GetName()}.replace("|","_").replace("/","_") + ".txt";
             QFile file(fileName);
             if( file.open(QFile::WriteOnly) )
             {
