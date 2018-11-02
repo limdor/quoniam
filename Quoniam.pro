@@ -23,6 +23,7 @@ else {
 }
 
 include(assimp_dependency.pri)
+include(opencv_dependency.pri)
 
 win32 {
     RC_FILE = Quoniam.rc
@@ -39,15 +40,6 @@ win32 {
     QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\glew\\bin\\glew32.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
     equals(COMPILATION,debug){
         LIBS += -L$$PWD/dependencies/vld/lib/ -lvld
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_core331d
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_imgproc331d
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_imgcodecs331d
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_highgui331d
-
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_core331d.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_imgproc331d.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_imgcodecs331d.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_highgui331d.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
 
         QT_INSTALL_BINS_WIN = $$[QT_INSTALL_BINS]
         QT_INSTALL_BINS_WIN = $$replace(QT_INSTALL_BINS_WIN,"/","\\")
@@ -64,16 +56,6 @@ win32 {
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\Microsoft.DTfW.DHL.manifest" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
     }
     else {
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_core331
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_imgproc331
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_imgcodecs331
-        LIBS += -L$$PWD/dependencies/opencv/lib/$$COMPILATION/ -lopencv_highgui331
-
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_core331.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_imgproc331.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_imgcodecs331.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\opencv\\bin\\$$COMPILATION\\opencv_highgui331.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-
         QT_INSTALL_BINS_WIN = $$[QT_INSTALL_BINS]
         QT_INSTALL_BINS_WIN = $$replace(QT_INSTALL_BINS_WIN,"/","\\")
         QT_INSTALL_PLUGINS_WIN = $$[QT_INSTALL_PLUGINS]
@@ -91,7 +73,6 @@ INCLUDEPATH +=\
     $$PWD/dependencies/glew/include \
     $$PWD/dependencies/glm \
     $$PWD/dependencies/miniball \
-    $$PWD/dependencies/opencv/include \
     $$PWD/dependencies/vld/include \
     $$PWD/src \
     $$PWD/src/core \
