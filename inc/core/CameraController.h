@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _CAMERA_CONTROLLER_H_
-#define _CAMERA_CONTROLLER_H_
+#ifndef CAMERA_CONTROLLER_H
+#define CAMERA_CONTROLLER_H
 
 //Project includes
 #include "Camera.h"

@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MODULE_CONTROLLER_H_
-#define _MODULE_CONTROLLER_H_
+#ifndef MODULE_CONTROLLER_H
+#define MODULE_CONTROLLER_H
 
 //Qt includes
 #include <QMenu>

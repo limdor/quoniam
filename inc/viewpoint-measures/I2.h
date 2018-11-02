@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _I2_H_
-#define _I2_H_
+#ifndef I2_H
+#define I2_H
 
 //Project includes
 #include "Measure.h"

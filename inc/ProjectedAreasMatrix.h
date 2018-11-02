@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _PROJECTED_AREAS_MATRIX_H_
-#define _PROJECTED_AREAS_MATRIX_H_
+#ifndef PROJECTED_AREAS_MATRIX_H
+#define PROJECTED_AREAS_MATRIX_H
 
 //Qt includes
 #include <QVector>

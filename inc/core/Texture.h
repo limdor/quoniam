@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _TEXTURE_H_
-#define _TEXTURE_H_
+#ifndef TEXTURE_H
+#define TEXTURE_H
 
 //GLEW has to be included before any OpenGL include
 #include "glew.h"

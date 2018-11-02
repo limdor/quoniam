@@ -4,8 +4,8 @@
 /// \author Nicolau Sunyer
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _PERSPECTIVE_CAMERA_H_
-#define _PERSPECTIVE_CAMERA_H_
+#ifndef PERSPECTIVE_CAMERA_H
+#define PERSPECTIVE_CAMERA_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

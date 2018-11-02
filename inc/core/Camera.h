@@ -4,8 +4,8 @@
 /// \author Nicolau Sunyer
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#ifndef CAMERA_H
+#define CAMERA_H
 
 //Qt includes
 #include <QString>
@@ -24,9 +24,11 @@ public:
     /// Constructor
     Camera(float pNearPlane, float pFarPlane, const glm::vec3 &pLookAt, const glm::vec3 &pUp, const glm::vec3 &pPosition, float pAspectRatio);
     /// Copy constructor
-    Camera(const Camera& pCamera);
+    Camera(const Camera& pCamera) = default;
+    /// Move constructor
+    Camera(Camera&& pCamera) = default;
     /// Destructor
-    virtual ~Camera();
+    virtual ~Camera() = default;
 
     /// Get the view matrix
     glm::mat4 GetViewMatrix();

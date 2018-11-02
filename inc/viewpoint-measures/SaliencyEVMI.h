@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SALIENCY_EVMI_H_
-#define _SALIENCY_EVMI_H_
+#ifndef SALIENCY_EVMI_H
+#define SALIENCY_EVMI_H
 
 //Project includes
 #include "Measure.h"

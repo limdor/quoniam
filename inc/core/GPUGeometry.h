@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GPU_GEOMETRY_H_
-#define _GPU_GEOMETRY_H_
+#ifndef GPU_GEOMETRY_H
+#define GPU_GEOMETRY_H
 
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
@@ -17,9 +17,16 @@ class GPUGeometry
 {
 public:
     /// Constructor
-    GPUGeometry();
+    GPUGeometry() = default;
     /// Destructor
     ~GPUGeometry();
+    /// Remove copy constructor
+    GPUGeometry(GPUGeometry const&) = delete;
+    /// Allow move constructor
+    GPUGeometry(GPUGeometry&&) = default;
+
+    GPUGeometry& operator =(const GPUGeometry&) = delete;
+    GPUGeometry& operator =(GPUGeometry&&) = default;
 
     /// Set the vertices of the mesh
     void SetVerticesData(const std::vector<float> &pVertices, unsigned int pStride);
@@ -44,7 +51,7 @@ public:
 
 private:
     /// We don't want a default copy constructor because it will not work due to it will not duplicate the memory in the gpu
-    GPUGeometry(GPUGeometry const&) = delete;
+
 
     /// Draw the mesh given the number of elements to be drawn when the vertex array object is already binded
     void FastDraw(unsigned int pSize) const;
@@ -52,26 +59,26 @@ private:
     /// Id of the vertex array object
     unsigned int mVaoId;
     /// Id of the vertex buffer object that stores the position of the vertices
-    unsigned int mVerticesId;
+    unsigned int mVerticesId = 0;
     /// Stride of the vertices
-    unsigned int mVerticesStride;
+    unsigned int mVerticesStride = 0;
     /// Id of the vertex buffer object that stores the color of the vertices
-    unsigned int mColorsId;
+    unsigned int mColorsId = 0;
     /// Stride of the colors
-    unsigned int mColorsStride;
+    unsigned int mColorsStride = 0;
     /// Id of the vertex buffer object that stores the normal of the vertices
-    unsigned int mNormalsId;
+    unsigned int mNormalsId = 0;
     /// Id of the vertex buffer object that stores the tangent of the vertices
-    unsigned int mTangentsId;
+    unsigned int mTangentsId = 0;
     /// Id of the vertex buffer object that stores the bitangent of the vertices
-    unsigned int mBitangentsId;
+    unsigned int mBitangentsId = 0;
     /// Id of the vertex buffer object that stores the texture coordinates of the vertices
-    unsigned int mTextCoordsId;
+    unsigned int mTextCoordsId = 0;
     /// Id of the buffer that stores the information of connectivities between vertices
-    unsigned int mIndexsId;
+    unsigned int mIndexsId = 0;
     /// Number of elements of the mesh
-    size_t mIndexsSize;
+    size_t mIndexsSize = 0;
     /// Topology of the mesh
-    Geometry::Topology mMeshTopology;
+    Geometry::Topology mMeshTopology = Geometry::Triangles;
 };
 #endif

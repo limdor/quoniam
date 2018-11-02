@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MAXIMUM_DEPTH_H_
-#define _MAXIMUM_DEPTH_H_
+#ifndef MAXIMUM_DEPTH_H
+#define MAXIMUM_DEPTH_H
 
 //Project includes
 #include "Measure.h"

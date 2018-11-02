@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MAIN_WINDOW_H_
-#define _MAIN_WINDOW_H_
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
 
 //UI include
 #include "ui_MainWindow.h"

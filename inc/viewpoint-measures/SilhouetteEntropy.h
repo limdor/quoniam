@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SILHOUETTE_ENTROPY_H_
-#define _SILHOUETTE_ENTROPY_H_
+#ifndef SILHOUETTE_ENTROPY_H
+#define SILHOUETTE_ENTROPY_H
 
 //Project includes
 #include "Measure.h"

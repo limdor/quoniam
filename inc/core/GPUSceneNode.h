@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GPU_SCENE_NODE_H_
-#define _GPU_SCENE_NODE_H_
+#ifndef GPU_SCENE_NODE_H
+#define GPU_SCENE_NODE_H
 
 //GLEW has to be included before any OpenGL include
 #include "glew.h"

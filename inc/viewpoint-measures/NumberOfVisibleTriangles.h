@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _NUMBER_OF_VISIBLE_TRIANGLES_H_
-#define _NUMBER_OF_VISIBLE_TRIANGLES_H_
+#ifndef NUMBER_OF_VISIBLE_TRIANGLES_H
+#define NUMBER_OF_VISIBLE_TRIANGLES_H
 
 //Project includes
 #include "Measure.h"

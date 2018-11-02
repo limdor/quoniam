@@ -4,8 +4,8 @@
 /// \author Nicolau Sunyer
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _ORTHOGRAPHIC_CAMERA_H_
-#define _ORTHOGRAPHIC_CAMERA_H_
+#ifndef ORTHOGRAPHIC_CAMERA_H
+#define ORTHOGRAPHIC_CAMERA_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

@@ -5,8 +5,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SPHERE_POINT_CLOUD_H_
-#define _SPHERE_POINT_CLOUD_H_
+#ifndef SPHERE_POINT_CLOUD_H
+#define SPHERE_POINT_CLOUD_H
 
 //Qt includes
 #include <QVector>

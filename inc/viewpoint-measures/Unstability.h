@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _UNSTABILITY_H_
-#define _UNSTABILITY_H_
+#ifndef UNSTABILITY_H
+#define UNSTABILITY_H
 
 //Project includes
 #include "Measure.h"

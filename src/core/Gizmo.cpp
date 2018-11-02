@@ -5,12 +5,6 @@
 #include "GPUGeometry.h"
 #include "Geometry.h"
 
-Gizmo::Gizmo():
-    mGizmo(nullptr), mPositionOfVertices()
-{
-
-}
-
 Gizmo::Gizmo( const Gizmo& pGizmo ):
     mPositionOfVertices(pGizmo.mPositionOfVertices)
 {

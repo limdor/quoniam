@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SCENE_LOADER_H_
-#define _SCENE_LOADER_H_
+#ifndef SCENE_LOADER_H
+#define SCENE_LOADER_H
 
 //Qt includes
 #include <QString>

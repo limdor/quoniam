@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _BOUNDING_SPHERE_H_
-#define _BOUNDING_SPHERE_H_
+#ifndef BOUNDING_SPHERE_H
+#define BOUNDING_SPHERE_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

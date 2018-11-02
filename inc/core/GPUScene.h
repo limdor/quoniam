@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GPU_SCENE_H_
-#define _GPU_SCENE_H_
+#ifndef GPU_SCENE_H
+#define GPU_SCENE_H
 
 //Project includes
 #include "GPUSceneNode.h"

@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SPHERE_OF_VIEWPOINTS_H_
-#define _SPHERE_OF_VIEWPOINTS_H_
+#ifndef SPHERE_OF_VIEWPOINTS_H
+#define SPHERE_OF_VIEWPOINTS_H
 
 //Dependency includes
 #include "glm/vec3.hpp"

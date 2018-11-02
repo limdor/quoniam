@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GIZMO_H_
-#define _GIZMO_H_
+#ifndef GIZMO_H
+#define GIZMO_H
 
 //Qt includes
 #include <QVector>
@@ -19,7 +19,7 @@ class Gizmo
 {
 public:
     /// Constructor
-    Gizmo();
+    Gizmo() = default;
     /// Copy constructor
     Gizmo( const Gizmo& pGizmo );
     /// Destructor
@@ -31,7 +31,7 @@ public:
 
 protected:
     /// Mesh that represents the gizmo
-    Geometry* mGizmo;
+    Geometry* mGizmo = nullptr;
 
     /// Position of the vertices of the gizmo
     QVector<glm::vec4> mPositionOfVertices;

@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SCENE_INFORMATION_BUILDER_H_
-#define _SCENE_INFORMATION_BUILDER_H_
+#ifndef SCENE_INFORMATION_BUILDER_H
+#define SCENE_INFORMATION_BUILDER_H
 
 //Dependency includes
 #include "glm/vec4.hpp"

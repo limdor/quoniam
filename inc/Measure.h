@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _MEASURE_H_
-#define _MEASURE_H_
+#ifndef MEASURE_H
+#define MEASURE_H
 
 //Qt includes
 #include <QString>
@@ -19,10 +19,10 @@ public:
     /// Constructor
     Measure(const QString& pName, bool pMaximumBest);
     /// Destructor
-    ~Measure();
+    virtual ~Measure() = default;
 
     /// Get the name of the measure
-    QString GetName() const;
+    const QString& GetName() const;
     /// Get a list of the values of the measures for every viewpoint
     QVector<float> GetValues() const;
     /// Get the value of the measure given a viewpoint
@@ -39,10 +39,13 @@ public:
 
 protected:
     /// Name of the measure
-    QString mName;
+    const QString mName;
+    /// Wheter a high value is a good measure or not
+    const bool mMaximumBest;
+
     /// Boolean to know if the measure is computed
     bool mComputed;
-    bool mMaximumBest;
+
     QVector<float> mValues;
     QVector<int> mSort;
     QVector<int> mPositions;

@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _SILHOUETTE_CURVATURE_H_
-#define _SILHOUETTE_CURVATURE_H_
+#ifndef SILHOUETTE_CURVATURE_H
+#define SILHOUETTE_CURVATURE_H
 
 //Project includes
 #include "Measure.h"

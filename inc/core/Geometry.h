@@ -3,8 +3,8 @@
 /// \author Xavier Bonaventura
 /// \author Copyright: (c) Universitat de Girona
 
-#ifndef _GEOMETRY_H_
-#define _GEOMETRY_H_
+#ifndef GEOMETRY_H
+#define GEOMETRY_H
 
 //Project includes
 #include "AxisAlignedBoundingBox.h"

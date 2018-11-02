@@ -43,7 +43,7 @@ Scene * SceneLoader::LoadScene(const QString &pPath)
 
     if(scene)
     {
-        QFileInfo fileInfo(pPath);
+        const QFileInfo fileInfo(pPath);
 
         QVector<Material*> materials = LoadMaterials(scene, fileInfo.absolutePath());
         QVector<Geometry*> geometries = LoadGeometries(scene);
@@ -139,7 +139,7 @@ Material* SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString
         aiString actualAiTexturePath;
 
         pAiMaterial->GetTexture( aiTextureType_DIFFUSE, 0, &actualAiTexturePath );
-        QString actualTexturePath( actualAiTexturePath.data );
+        const QString actualTexturePath( actualAiTexturePath.data );
 
         QString finalTexturePath = pScenePath;
         finalTexturePath.append("/").append(actualTexturePath);
@@ -181,7 +181,7 @@ Material* SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString
 
 QVector<Geometry*> SceneLoader::LoadGeometries(const aiScene* pAiScene)
 {
-    int numberOfGeometries = (int)pAiScene->mNumMeshes;
+    unsigned int numberOfGeometries = pAiScene->mNumMeshes;
     QVector<Geometry*> geometries(numberOfGeometries);
     for( int i = 0; i < numberOfGeometries; i++ )
     {
@@ -198,30 +198,43 @@ Geometry* SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
 
     if( pAiMesh->mPrimitiveTypes == aiPrimitiveType_TRIANGLE )
     {
-        QVector< glm::vec3 > vertexData(numberOfVertices);
-        QVector< glm::vec3 > normalData;
-        QVector< glm::vec3 > tangentData;
-        QVector< glm::vec3 > bitangentData;
-
-        // Guardem els vertexs, normals, tangents i bitangents
-        for( unsigned int j = 0; j < numberOfVertices; j++ )
+        std::vector< glm::vec3 > vertexData;
+        vertexData.reserve(numberOfVertices);
+        for( unsigned int j = 0; j < numberOfVertices; ++j )
         {
             aiVector3D tmp = pAiMesh->mVertices[j];
-            vertexData[j] = glm::vec3(tmp.x, tmp.y, tmp.z);
+            vertexData.emplace_back(tmp.x, tmp.y, tmp.z);
+        }
+        geometry->SetVerticesData(vertexData.size(), vertexData.data());
 
-            if( pAiMesh->HasNormals() )
+        if( pAiMesh->HasNormals() )
+        {
+            std::vector< glm::vec3 > normalData;
+            normalData.reserve(numberOfVertices);
+            for( unsigned int j = 0; j < numberOfVertices; ++j )
             {
-                tmp = pAiMesh->mNormals[j];
-                normalData.push_back(glm::vec3(tmp.x, tmp.y, tmp.z));
+                aiVector3D tmp = pAiMesh->mNormals[j];
+                normalData.emplace_back(tmp.x, tmp.y, tmp.z);
             }
-            if( pAiMesh->HasTangentsAndBitangents() )
+            geometry->SetNormalsData(normalData.size(), normalData.data());
+        }
+
+        if( pAiMesh->HasTangentsAndBitangents() )
+        {
+            std::vector< glm::vec3 > tangentData;
+            std::vector< glm::vec3 > bitangentData;
+            tangentData.reserve(numberOfVertices);
+            bitangentData.reserve(numberOfVertices);
+            for( unsigned int j = 0; j < numberOfVertices; ++j )
             {
-                tmp = pAiMesh->mTangents[j];
-                tangentData.push_back(glm::vec3(tmp.x, tmp.y, tmp.z));
+                aiVector3D tmp = pAiMesh->mTangents[j];
+                tangentData.emplace_back(tmp.x, tmp.y, tmp.z);
 
                 tmp = pAiMesh->mBitangents[j];
-                bitangentData.push_back(glm::vec3(tmp.x, tmp.y, tmp.z));
+                bitangentData.emplace_back(tmp.x, tmp.y, tmp.z);
             }
+            geometry->SetTangentData(tangentData.size(), tangentData.data());
+            geometry->SetBitangentData(bitangentData.size(), bitangentData.data());
         }
 
         if( pAiMesh->GetNumUVChannels() > 0 )
@@ -231,10 +244,11 @@ Geometry* SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
                 if( pAiMesh->mNumUVComponents[0] == 2 )
                 {
                     // Guardem les coordenades de textura
-                    QVector< glm::vec2 > textCoordData(numberOfVertices);
+                    std::vector< glm::vec2 > textCoordData;
+                    textCoordData.reserve(numberOfVertices);
                     for( unsigned int j = 0; j < numberOfVertices; j++ )
                     {
-                        textCoordData[j] = glm::vec2( pAiMesh->mTextureCoords[0][j].x, pAiMesh->mTextureCoords[0][j].y );
+                        textCoordData.emplace_back( pAiMesh->mTextureCoords[0][j].x, pAiMesh->mTextureCoords[0][j].y );
                     }
                     geometry->SetTextCoordsData( textCoordData.size(), textCoordData.data() );
                 }
@@ -246,23 +260,16 @@ Geometry* SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
         }
 
         unsigned int numberOfFaces = pAiMesh->mNumFaces;
-        QVector< unsigned int > indexData(numberOfFaces * 3);
-        for( unsigned int j = 0; j < numberOfFaces; j++ )
+        std::vector< unsigned int > indexData;
+        indexData.reserve(numberOfFaces * 3);
+        for( unsigned int j = 0; j < numberOfFaces; ++j )
         {
             struct aiFace tmpFace = pAiMesh->mFaces[j];
-            indexData[3 * j] = tmpFace.mIndices[0];
-            indexData[3 * j + 1] = tmpFace.mIndices[1];
-            indexData[3 * j + 2] = tmpFace.mIndices[2];
+            indexData.emplace_back(tmpFace.mIndices[0]);
+            indexData.emplace_back(tmpFace.mIndices[1]);
+            indexData.emplace_back(tmpFace.mIndices[2]);
         }
-        geometry->SetVerticesData(vertexData.size(), vertexData.data());
         geometry->SetIndexsData(indexData.size(), indexData.data());
-        geometry->SetNormalsData(normalData.size(), normalData.data());
-
-        if((tangentData.size() > 0) && (bitangentData.size() > 0))
-        {
-            geometry->SetTangentData(tangentData.size(), tangentData.data());
-            geometry->SetBitangentData(bitangentData.size(), bitangentData.data());
-        }
 
         geometry->ComputeBoundingVolumes();
     }
