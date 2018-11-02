@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2011-02-09T17:08:35
-#
-#-------------------------------------------------
-
 QT += opengl #core and gui are already included
 
 TARGET = Quoniam
@@ -37,14 +31,10 @@ win32 {
 
     PWD_WIN = $$replace(PWD,"/","\\")
     OUT_PWD_WIN = $$replace(OUT_PWD,"/","\\")
-    # Copy supporting library DLLs
+
     QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\glew\\bin\\glew32.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
     equals(COMPILATION,debug){
-        LIBS += -L$$PWD/dependencies/vld/lib/ -lvld
-
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\vld_x64.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\dbghelp.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\Microsoft.DTfW.DHL.manifest" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
+        include(vld_dependency.pri)
     }
 }
 
@@ -53,7 +43,6 @@ INCLUDEPATH +=\
     $$PWD/dependencies/glew/include \
     $$PWD/dependencies/glm \
     $$PWD/dependencies/miniball \
-    $$PWD/dependencies/vld/include \
     $$PWD/src \
     $$PWD/src/core \
     $$PWD/src/viewpoint-measures
