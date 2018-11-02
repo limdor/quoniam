@@ -56,7 +56,7 @@ win32 {
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Guid.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5OpenGLd.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgetsd.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(xcopy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindowsd.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(xcopy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindowsd.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" /Y $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\release\\assimp.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\vld\\bin\\vld_x64.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
@@ -82,33 +82,23 @@ win32 {
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Gui.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5OpenGL.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
         QMAKE_POST_LINK += $$quote(copy "$$QT_INSTALL_BINS_WIN\\Qt5Widgets.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
-        QMAKE_POST_LINK += $$quote(xcopy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindows.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" $$escape_expand(\\n))
+        QMAKE_POST_LINK += $$quote(xcopy "$$QT_INSTALL_PLUGINS_WIN\\platforms\\qwindows.dll" "$$OUT_PWD_WIN\\bin\\platforms\\" /Y $$escape_expand(\\n))
 
         QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\assimp\\bin\\$$COMPILATION\\assimp.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
     }
 }
 
 INCLUDEPATH +=\
+    $$PWD/dependencies/ \
     $$PWD/dependencies/assimp/include \
     $$PWD/dependencies/glew/include \
     $$PWD/dependencies/glm \
     $$PWD/dependencies/miniball \
     $$PWD/dependencies/opencv/include \
     $$PWD/dependencies/vld/include \
-    $$PWD/inc \
-    $$PWD/inc/core \
-    $$PWD/inc/viewpoint-measures
-
-DEPENDPATH +=\
-    $$PWD/dependencies/assimp/include \
-    $$PWD/dependencies/glew/include \
-    $$PWD/dependencies/glm \
-    $$PWD/dependencies/miniball \
-    $$PWD/dependencies/opencv/include \
-    $$PWD/dependencies/vld/include \
-    $$PWD/inc \
-    $$PWD/inc/core \
-    $$PWD/inc/viewpoint-measures
+    $$PWD/src \
+    $$PWD/src/core \
+    $$PWD/src/viewpoint-measures
 
 OBJECTS_DIR = $$OUT_PWD/tmp/$$COMPILATION
 RCC_DIR = $$OUT_PWD/tmp/$$COMPILATION
@@ -176,67 +166,67 @@ SOURCES +=\
     src/ViewpointMeasureSlider.cpp
 
 HEADERS  += \
-    inc/core/AxisAlignedBoundingBox.h \
-    inc/core/BoundingSphere.h \
-    inc/core/Camera.h \
-    inc/core/CameraController.h \
-    inc/core/Debug.h \
-    inc/core/Geometry.h \
-    inc/core/Gizmo.h \
-    inc/core/GLCanvas.h \
-    inc/core/GLSLProgram.h \
-    inc/core/GLSLShader.h \
-    inc/core/GPUGeometry.h \
-    inc/core/GPUScene.h \
-    inc/core/GPUSceneNode.h \
-    inc/core/Material.h \
-    inc/core/Mesh.h \
-    inc/core/OrthographicCamera.h \
-    inc/core/PerspectiveCamera.h \
-    inc/core/Scene.h \
-    inc/core/SceneLoader.h \
-    inc/core/SceneNode.h \
-    inc/core/SerializedSceneGeometry.h \
-    inc/core/Texture.h \
-    inc/core/TrackballCamera.h \
-    inc/viewpoint-measures/CurvatureEntropy.h \
-    inc/viewpoint-measures/DepthBasedVisualStability.h \
-    inc/viewpoint-measures/DepthDistribution.h \
-    inc/viewpoint-measures/FeixasSaliency.h \
-    inc/viewpoint-measures/HeuristicMeasure.h \
-    inc/viewpoint-measures/I2.h \
-    inc/viewpoint-measures/I3.h \
-    inc/viewpoint-measures/KullbackLeibler.h \
-    inc/viewpoint-measures/MaximumDepth.h \
-    inc/viewpoint-measures/NumberOfVisibleTriangles.h \
-    inc/viewpoint-measures/ProjectedArea.h \
-    inc/viewpoint-measures/SaliencyEVMI.h \
-    inc/viewpoint-measures/SilhouetteCurvature.h \
-    inc/viewpoint-measures/SilhouetteCurvatureExtrema.h \
-    inc/viewpoint-measures/SilhouetteEntropy.h \
-    inc/viewpoint-measures/SilhouetteLength.h \
-    inc/viewpoint-measures/StoevStrasser.h \
-    inc/viewpoint-measures/Unstability.h \
-    inc/viewpoint-measures/ViewpointEntropy.h \
-    inc/viewpoint-measures/VisibilityRatio.h \
-    inc/viewpoint-measures/VMI.h \
-    inc/DutagaciDialog.h \
-    inc/MainModuleController.h \
-    inc/MainWindow.h \
-    inc/Measure.h \
-    inc/ModuleController.h \
-    inc/ModuleTabWidget.h \
-    inc/ProjectedAreasMatrix.h \
-    inc/SceneInformationBuilder.h \
-    inc/SphereOfViewpoints.h \
-    inc/SpherePointCloud.h \
-    inc/Tools.h \
-    inc/ViewpointMeasureSlider.h
+    src/core/AxisAlignedBoundingBox.h \
+    src/core/BoundingSphere.h \
+    src/core/Camera.h \
+    src/core/CameraController.h \
+    src/core/Debug.h \
+    src/core/Geometry.h \
+    src/core/Gizmo.h \
+    src/core/GLCanvas.h \
+    src/core/GLSLProgram.h \
+    src/core/GLSLShader.h \
+    src/core/GPUGeometry.h \
+    src/core/GPUScene.h \
+    src/core/GPUSceneNode.h \
+    src/core/Material.h \
+    src/core/Mesh.h \
+    src/core/OrthographicCamera.h \
+    src/core/PerspectiveCamera.h \
+    src/core/Scene.h \
+    src/core/SceneLoader.h \
+    src/core/SceneNode.h \
+    src/core/SerializedSceneGeometry.h \
+    src/core/Texture.h \
+    src/core/TrackballCamera.h \
+    src/viewpoint-measures/CurvatureEntropy.h \
+    src/viewpoint-measures/DepthBasedVisualStability.h \
+    src/viewpoint-measures/DepthDistribution.h \
+    src/viewpoint-measures/FeixasSaliency.h \
+    src/viewpoint-measures/HeuristicMeasure.h \
+    src/viewpoint-measures/I2.h \
+    src/viewpoint-measures/I3.h \
+    src/viewpoint-measures/KullbackLeibler.h \
+    src/viewpoint-measures/MaximumDepth.h \
+    src/viewpoint-measures/NumberOfVisibleTriangles.h \
+    src/viewpoint-measures/ProjectedArea.h \
+    src/viewpoint-measures/SaliencyEVMI.h \
+    src/viewpoint-measures/SilhouetteCurvature.h \
+    src/viewpoint-measures/SilhouetteCurvatureExtrema.h \
+    src/viewpoint-measures/SilhouetteEntropy.h \
+    src/viewpoint-measures/SilhouetteLength.h \
+    src/viewpoint-measures/StoevStrasser.h \
+    src/viewpoint-measures/Unstability.h \
+    src/viewpoint-measures/ViewpointEntropy.h \
+    src/viewpoint-measures/VisibilityRatio.h \
+    src/viewpoint-measures/VMI.h \
+    src/DutagaciDialog.h \
+    src/MainModuleController.h \
+    src/MainWindow.h \
+    src/Measure.h \
+    src/ModuleController.h \
+    src/ModuleTabWidget.h \
+    src/ProjectedAreasMatrix.h \
+    src/SceneInformationBuilder.h \
+    src/SphereOfViewpoints.h \
+    src/SpherePointCloud.h \
+    src/Tools.h \
+    src/ViewpointMeasureSlider.h
 
 FORMS    += \
-    forms/DutagaciView.ui \
-    forms/MainModule.ui \
-    forms/MainWindow.ui
+    src/DutagaciView.ui \
+    src/MainModule.ui \
+    src/MainWindow.ui
 
 OTHER_FILES += \
     shaders/Basic.vert \
