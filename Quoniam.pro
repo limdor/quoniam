@@ -19,30 +19,24 @@ else {
 include(assimp_dependency.pri)
 include(opencv_dependency.pri)
 include(qt_installation.pri)
+include(glm_dependency.pri)
+include(miniball_dependency.pri)
+include(glew_dependency.pri)
 
 win32 {
     RC_FILE = Quoniam.rc
 
     DESTDIR = $$OUT_PWD/bin/
 
-    LIBS += -L$$PWD/dependencies/glew/lib/ -lglew32
     LIBS += opengl32.lib
     LIBS += glu32.lib
 
-    PWD_WIN = $$replace(PWD,"/","\\")
-    OUT_PWD_WIN = $$replace(OUT_PWD,"/","\\")
-
-    QMAKE_POST_LINK += $$quote(copy "$$PWD_WIN\\dependencies\\glew\\bin\\glew32.dll" "$$OUT_PWD_WIN\\bin\\" $$escape_expand(\\n))
     equals(COMPILATION,debug){
         include(vld_dependency.pri)
     }
 }
 
 INCLUDEPATH +=\
-    $$PWD/dependencies/ \
-    $$PWD/dependencies/glew/include \
-    $$PWD/dependencies/glm \
-    $$PWD/dependencies/miniball \
     $$PWD/src \
     $$PWD/src/core \
     $$PWD/src/viewpoint-measures
