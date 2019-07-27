@@ -3,10 +3,19 @@ environment:
   QT_VERSION: 5.9.7\msvc2017_64
   VCVARSALLPATH: C:\"Program Files (x86)\Microsoft Visual Studio"\2017\Community\VC\Auxiliary\Build\vcvarsall.bat
   VCVARSALL: x64
+
 init:
   - call %VCVARSALLPATH% %VCVARSALL%
   - set PATH=C:\Qt\%QT_VERSION%\bin;C:\Qt\Tools\QtCreator\bin;%PATH%;
+
 build_script:
   - qmake Quoniam.pro
   - jom
- 
+
+after_build:
+  - set ARTIFACT_NAME=%APPVEYOR_REPO_BRANCH%
+  - if defined APPVEYOR_REPO_TAG_NAME set ARTIFACT_NAME=%APPVEYOR_REPO_TAG_NAME%
+  - 7z a quoniam-%ARTIFACT_NAME%.zip .\bin\*
+
+artifacts:
+  - path: quoniam-$(ARTIFACT_NAME).zip

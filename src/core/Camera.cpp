@@ -11,18 +11,6 @@ Camera::Camera(float pNearPlane, float pFarPlane, const glm::vec3 &pLookAt, cons
 
 }
 
-Camera::Camera(const Camera& pCamera): Gizmo(pCamera),
-    mNearPlane(pCamera.mNearPlane), mFarPlane(pCamera.mFarPlane), mLookAt(pCamera.mLookAt), mUp(pCamera.mUp), mPosition(pCamera.mPosition), mAspectRatio(pCamera.mAspectRatio),
-    mUpdatedView(pCamera.mUpdatedView), mUpdatedProjection(pCamera.mUpdatedProjection),
-    mViewMatrix(pCamera.mViewMatrix), mProjectionMatrix(pCamera.mProjectionMatrix)
-{
-
-}
-
-Camera::~Camera()
-{
-}
-
 glm::mat4 Camera::GetViewMatrix()
 {
     if(!mUpdatedView)

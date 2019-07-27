@@ -10,17 +10,6 @@
 //STD
 #include <type_traits>
 
-GPUGeometry::GPUGeometry():
-    mVerticesId(0), mVerticesStride(0),
-    mColorsId(0), mColorsStride(0),
-    mNormalsId(0), mTangentsId(0), mBitangentsId(0),
-    mTextCoordsId(0),
-    mIndexsId(0), mIndexsSize(0), mMeshTopology(Geometry::Triangles)
-{
-    //VAO Generation
-    glGenVertexArrays(1, &mVaoId);
-}
-
 GPUGeometry::~GPUGeometry()
 {
     glDeleteBuffers(1, &mVerticesId);
@@ -137,6 +126,10 @@ void GPUGeometry::ConfigureVAO()
     const unsigned int TANGENT   = 4;
     const unsigned int BITANGENT = 5;
 
+    if(mVaoId == 0)
+    {
+        glGenVertexArrays(1, &mVaoId);
+    }
     glBindVertexArray(mVaoId);
     if(mVerticesId != 0)
     {
