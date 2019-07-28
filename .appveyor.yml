@@ -13,6 +13,7 @@ build_script:
   - jom
 
 after_build:
+  - windeployqt --release .\bin\Quoniam.exe
   - set ARTIFACT_NAME=%APPVEYOR_REPO_BRANCH%
   - if defined APPVEYOR_REPO_TAG_NAME set ARTIFACT_NAME=%APPVEYOR_REPO_TAG_NAME%
   - 7z a quoniam-%ARTIFACT_NAME%.zip .\bin\*
