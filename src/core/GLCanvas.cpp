@@ -15,7 +15,7 @@
 
 GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
 {
-    //Inicialització dels draw buffers
+    //Draw buffers initialization
     mDrawBuffers[0] = GL_COLOR_ATTACHMENT0;
     mDrawBuffers[1] = GL_COLOR_ATTACHMENT1;
     mDrawBuffers[2] = GL_COLOR_ATTACHMENT2;
@@ -24,7 +24,7 @@ GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), p
     mDrawBuffers[5] = GL_COLOR_ATTACHMENT5;
     mDrawBuffers[6] = GL_COLOR_ATTACHMENT6;
 
-    //Inicialització del quad on es pinta l'escena
+    //Initialize quad where the scene is painted
     mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
     glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
                              glm::vec2(1.0f, 0.0f),
@@ -38,10 +38,9 @@ GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), p
 
 GLCanvas::~GLCanvas()
 {
-    //Destrucció dels framebuffers i textures per fer el dual depth peeling
+    //Delete framebuffers and textures needed for the dual depth peeling
     DeleteDualPeelingRenderTargets();
 
-    //Destrucció dels shaders
     DeleteShaders();
 
     glDeleteQueries(1, &mQueryId);
