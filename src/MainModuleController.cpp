@@ -58,10 +58,10 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
 {
     mUi->setupUi(this);
 
-    //Configuració de la consola
+    //Console configuration
     Debug::SetConsole(mUi->console);
 
-    //Inicialització del GLCanvas
+    //GLCanvas initialization
     mOpenGLCanvas = mUi->Canvas;
     mOpenGLCanvas->show();
     mOpenGLCanvas->updateGL();
@@ -76,7 +76,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
 
     qApp->processEvents();
 
-    //Inicialització dels uniforms dels shaders
+    //Shader uniforms initialization
     QColor light1InitialColor = Qt::lightGray;
     QColor light2InitialColor = Qt::lightGray;
 
@@ -167,14 +167,14 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     widget->setLayout(verticalLayout);
     mUi->leftTabWidget->addTab(widget, "Mesures");
 
-    //Afegim els diferents nombres de punts de vista en el combo box
+    //Add the possible amount of viewpoints in the combo box
     for( int i = 0; i < 4; i++ )
     {
         mUi->numberOfViewpoints->addItem( QString("%1").arg( glm::pow( 2.0f, 2.0f * mUi->numberOfViewpoints->count() ) * 10 + 2 ) );
     }
     mUi->numberOfViewpoints->setCurrentIndex(3);
 
-    //Amagem les parts d'interficie que no es necessiten
+    //Hide the part of the interfaces that we don't need
     mUi->leftTabWidget->hide();
     mUi->rightTabWidget->hide();
 
@@ -354,7 +354,7 @@ void MainModuleController::LoadScene(const QString &pFileName)
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
     t.start();
-    Debug::Log(QString("Carregant %1").arg(pFileName));
+    Debug::Log(QString("Loading %1").arg(pFileName));
 
     mUpdateView = true;
     mUi->leftTabWidget->hide();
@@ -382,7 +382,7 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
 {
     QTime t;
 
-    //Creació del canal d'informació
+    //Creation of the information channel
     mSceneInformationBuilder->CreateHistogram(mScene, mSphereOfViewpoints, pWidthResolution, pFaceCulling, true);
 
     mOpenGLCanvas->SetPerVertexMesh(mSphereOfViewpoints->GetMesh());
@@ -399,12 +399,12 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     progress.show();
     progress.setValue(0);
     qApp->processEvents();
-    //Reinicialitzem les mesures
+    //Reinitialize the measures
     for( int i = 0; i < mViewpointMeasures.size(); i++ )
     {
         mViewpointMeasures.at(i)->SetComputed(false);
     }
-    //Les calculem i només es recalculen si no s'ha fet abans a traves de dependències
+    //Compute the viewpoint measures only if they have not being caluclated before through dependencies
     for( int i = 0; i < mViewpointMeasures.size(); i++ )
     {
         if(!mViewpointMeasures.at(i)->Computed())
@@ -449,7 +449,7 @@ void MainModuleController::LoadViewpointsFromSphere(float pRadius, float pAngle,
 
 void MainModuleController::ChangeNumberOfViewpoints(int pNumberOfViewpoints)
 {
-    //Modifiquem el rang dels sliders en funció del nombre de viewpoints
+    //Modify the range of the sliders depending of the amount of viewpoints
     for( int i = 0; i < mViewpointMeasuresSliders.size(); i++ )
     {
         mViewpointMeasuresSliders.at(i)->setRange(0, pNumberOfViewpoints - 1);
@@ -489,11 +489,11 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
         stream.writeEndElement();
         stream.writeEndDocument();
         file.close();
-        Debug::Log(QString("Informacio escrita al fitxer: %1").arg(pFileName));
+        Debug::Log(QString("Information written to file: %1").arg(pFileName));
     }
     else
     {
-        Debug::Error(QString("Impossible escriure a fitxer: %1").arg(pFileName));
+        Debug::Error(QString("Impossible to write to file: %1").arg(pFileName));
     }
     QApplication::restoreOverrideCursor();
 }
@@ -681,11 +681,11 @@ void MainModuleController::RunDutagaciBenchmark()
                     out << bestViewpoints.at(i).at(j).x << " " << bestViewpoints.at(i).at(j).y << " " << bestViewpoints.at(i).at(j).z << "\n";
                 }
                 file.close();
-                Debug::Log( QString("Informacio escrita al fitxer: %1").arg(fileName) );
+                Debug::Log( QString("Information written to file: %1").arg(fileName) );
             }
             else
             {
-                Debug::Error( QString("Impossible escriure a fitxer: %1").arg(fileName) );
+                Debug::Error( QString("Impossible to write a file: %1").arg(fileName) );
             }
         }
     }

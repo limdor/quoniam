@@ -73,15 +73,11 @@ protected:
     void keyPressEvent(QKeyEvent *pEvent);
 
 private:
-    /// Draw the bounding volumes
     void DrawGeometryBoundingVolumes();
 
-    /// Recompute the viewport
     void RecomputeViewport();
 
-    /// Load the shaders
     void LoadShaders();
-    /// Delete the shaders
     void DeleteShaders();
 
     /// Initialize the dual depth peeling render targets
@@ -89,9 +85,7 @@ private:
     /// Delete the dual depth peeling render targets
     void DeleteDualPeelingRenderTargets();
 
-    /// Boolean to know if the bounding boxes will be drawn
     bool mDrawBoundingBox = false;
-    /// Boolean to know if the bounding spheres will be drawn
     bool mDrawBoundingSphere = false;
     /// Boolean to know if the sphere of viewpoints will be drawn in wireframe mode
     bool mDrawWireframe = false;

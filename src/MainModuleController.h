@@ -83,7 +83,6 @@ private:
     QVector<Measure*> mViewpointMeasures;
     QVector<QSlider*> mViewpointMeasuresSliders;
 
-    /// Posició del mouse
     QPoint mLastMousePosition;
 
 private slots:
