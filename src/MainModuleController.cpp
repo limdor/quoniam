@@ -65,7 +65,6 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     //GLCanvas initialization
     mOpenGLCanvas = mUi->Canvas;
     mOpenGLCanvas->show();
-    mOpenGLCanvas->updateGL();
 
     QWidget* parent = mOpenGLCanvas;
     while(parent != nullptr)
@@ -74,8 +73,6 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
         parent = parent->parentWidget();
     }
     CreateModuleMenus();
-
-    qApp->processEvents();
 
     //Shader uniforms initialization
     const QColor light1InitialColor{Qt::lightGray};
