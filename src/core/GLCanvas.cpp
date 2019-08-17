@@ -15,25 +15,6 @@
 
 GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
 {
-    //Draw buffers initialization
-    mDrawBuffers[0] = GL_COLOR_ATTACHMENT0;
-    mDrawBuffers[1] = GL_COLOR_ATTACHMENT1;
-    mDrawBuffers[2] = GL_COLOR_ATTACHMENT2;
-    mDrawBuffers[3] = GL_COLOR_ATTACHMENT3;
-    mDrawBuffers[4] = GL_COLOR_ATTACHMENT4;
-    mDrawBuffers[5] = GL_COLOR_ATTACHMENT5;
-    mDrawBuffers[6] = GL_COLOR_ATTACHMENT6;
-
-    //Initialize quad where the scene is painted
-    mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
-    glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
-                             glm::vec2(1.0f, 0.0f),
-                             glm::vec2(1.0f, 1.0f),
-                             glm::vec2(0.0f, 1.0f)};
-    unsigned int indices[6] = {0, 1, 2,
-                               2, 3, 0};
-    mMeshFullScreenQuad->SetVerticesData(4, &vertices[0]);
-    mMeshFullScreenQuad->SetIndexsData(6, &indices[0]);
 }
 
 GLCanvas::~GLCanvas()
@@ -150,6 +131,26 @@ void GLCanvas::ApplyMaterials(bool pApplyMaterials)
 
 void GLCanvas::initializeGL()
 {
+    //Draw buffers initialization
+    mDrawBuffers[0] = GL_COLOR_ATTACHMENT0;
+    mDrawBuffers[1] = GL_COLOR_ATTACHMENT1;
+    mDrawBuffers[2] = GL_COLOR_ATTACHMENT2;
+    mDrawBuffers[3] = GL_COLOR_ATTACHMENT3;
+    mDrawBuffers[4] = GL_COLOR_ATTACHMENT4;
+    mDrawBuffers[5] = GL_COLOR_ATTACHMENT5;
+    mDrawBuffers[6] = GL_COLOR_ATTACHMENT6;
+
+    //Initialize quad where the scene is painted
+    mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
+    glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
+                             glm::vec2(1.0f, 0.0f),
+                             glm::vec2(1.0f, 1.0f),
+                             glm::vec2(0.0f, 1.0f)};
+    unsigned int indices[6] = {0, 1, 2,
+                               2, 3, 0};
+    mMeshFullScreenQuad->SetVerticesData(4, &vertices[0]);
+    mMeshFullScreenQuad->SetIndexsData(6, &indices[0]);
+
     mWinWidth = width();
     mWinHeight = height();
 
