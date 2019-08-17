@@ -87,16 +87,15 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     glDisable(GL_BLEND);
 
     GLuint renderBuffer, frameBuffer, depthRenderTexture;
-    //Creació del RenderBuffer
+    //Create RenderBuffer
     glGenRenderbuffers( 1, &renderBuffer );
     glGenTextures( 1, &depthRenderTexture );
-    //Creació del FrameBuffer
+    //Create FrameBuffer
     glGenFramebuffers( 1, &frameBuffer );
-    //Creació del FrameBuffer
     glBindFramebuffer( GL_FRAMEBUFFER, frameBuffer );
     CHECK_GL_ERROR();
 
-    //Inicialització per pintar
+    //Initialization to be able to draw
     mShaderColorPerFace->UseProgram();
     mShaderColorPerFace->SetUniform("ignoreNormals", pIgnoreNormals);
     glDrawBuffer(GL_COLOR_ATTACHMENT0);
@@ -108,7 +107,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     int windowWidth = pWidthResolution;
     int windowHeight = (int)(windowWidth / mAspectRatio);
 
-    //Configuració del RenderBuffer
+    //RenderBuffer configurations
     glBindRenderbuffer( GL_RENDERBUFFER, renderBuffer );
     glRenderbufferStorage( GL_RENDERBUFFER, GL_R32F, windowWidth, windowHeight );
     CHECK_GL_ERROR();
@@ -126,10 +125,10 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
         CHECK_GL_ERROR();
 #endif
 
-    //Calculem el nombre total de píxels
+    //Compute the total number of pixels
     unsigned int totalNumberOfPixels = ((unsigned int)windowWidth * (unsigned int)windowHeight);
 
-    //Espai on guardarem els pixels de cada draw
+    //Storage for the pixels on every draw
     float* valuePerFaceImage = new float [totalNumberOfPixels];
     GLubyte* depthImage = new GLubyte [totalNumberOfPixels];
     unsigned char* projectionMask = new unsigned char[totalNumberOfPixels];
@@ -223,7 +222,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
         mDepthImages[i] = imageDepth.clone();
 
         //Compute the normalized depth histogram
-        //TODO: Assegurar que està ben ajustada les profunditat
+        //TODO: Make sure that the depth is properly adjusted
         cv::Mat hist;
         int histSize = 256;
         float range[] = { 0, 256 } ;
@@ -297,7 +296,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     delete[] valuePerFaceImage;
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    //Eliminacio del frambuffer i els 2 renderbuffer
+    //Delete framebuffer and the two render buffers
     glDeleteFramebuffers( 1, &frameBuffer);
     glDeleteRenderbuffers( 1, &depthRenderTexture);
     glDeleteRenderbuffers( 1, &renderBuffer );
