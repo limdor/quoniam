@@ -140,7 +140,7 @@ void GPUGeometry::ConfigureVAO()
     if(mNormalsId != 0)
     {
         glBindBuffer(GL_ARRAY_BUFFER, mNormalsId);
-        glVertexAttribPointer(NORMAL, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(NORMAL, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
         glEnableVertexAttribArray(NORMAL);
     }
     if(mColorsId != 0)
@@ -152,19 +152,19 @@ void GPUGeometry::ConfigureVAO()
     if(mTextCoordsId != 0)
     {
         glBindBuffer(GL_ARRAY_BUFFER, mTextCoordsId);
-        glVertexAttribPointer(TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
         glEnableVertexAttribArray(TEXTCOORD);
     }
     if(mTangentsId != 0)
     {
         glBindBuffer(GL_ARRAY_BUFFER, mTangentsId);
-        glVertexAttribPointer(TANGENT, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(TANGENT, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
         glEnableVertexAttribArray(TANGENT);
     }
     if(mBitangentsId != 0)
     {
         glBindBuffer(GL_ARRAY_BUFFER, mBitangentsId);
-        glVertexAttribPointer(BITANGENT, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(BITANGENT, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
         glEnableVertexAttribArray(BITANGENT);
     }
     if(mIndexsId != 0)

@@ -68,7 +68,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     mOpenGLCanvas->updateGL();
 
     QWidget* parent = mOpenGLCanvas;
-    while(parent != 0)
+    while(parent != nullptr)
     {
         parent->setMouseTracking(true);
         parent = parent->parentWidget();
