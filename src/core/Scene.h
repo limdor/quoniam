@@ -25,15 +25,10 @@ public:
     /// Destructor
     ~Scene();
 
-    /// Get the name of the scene
     QString GetName() const;
-    /// Get the root scene node
     const SceneNode* GetRootNode() const;
-    /// Get the bounding sphere
     const BoundingSphere* GetBoundingSphere() const;
-    /// Get the number of polygons
     int GetNumberOfPolygons() const;
-    /// Get the number of vertices
     int GetNumberOfVertices() const;
     /// Show the information of the scene
     void ShowInformation() const;
