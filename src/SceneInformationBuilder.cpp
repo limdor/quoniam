@@ -105,7 +105,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     mAspectRatio = pSphereOfViewpoints->GetAspectRatio();
     mWidthResolution = pWidthResolution;
     int windowWidth = pWidthResolution;
-    int windowHeight = (int)(windowWidth / mAspectRatio);
+    int windowHeight = static_cast<int>(windowWidth / mAspectRatio);
 
     //RenderBuffer configurations
     glBindRenderbuffer( GL_RENDERBUFFER, renderBuffer );
