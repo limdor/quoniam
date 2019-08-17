@@ -33,20 +33,20 @@ SceneInformationBuilder::SceneInformationBuilder():
     mSerializedScene(nullptr), mProjectedAreasMatrix(nullptr), mWidthResolution(640), mAspectRatio(1.0f),
     mPreviousDepthTest(true), mPreviousCullFace(true), mPreviousBlend(false)
 {
-    mBasicVS = new GLSLShader("shaders/Basic.vert", GL_VERTEX_SHADER);
-    if( mBasicVS->HasErrors() )
+    GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
+    if( basicVS.HasErrors() )
     {
-        Debug::Error( QString("shaders/Basic.vert: %1").arg(mBasicVS->GetLog()) );
+        Debug::Error( QString("shaders/Basic.vert: %1").arg(basicVS.GetLog()) );
     }
-    mColorPerFaceFS = new GLSLShader("shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER);
-    if( mColorPerFaceFS->HasErrors() )
+    GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
+    if( colorPerFaceFS.HasErrors() )
     {
-        Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(mColorPerFaceFS->GetLog()) );
+        Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(colorPerFaceFS.GetLog()) );
     }
 
     mShaderColorPerFace = new GLSLProgram("ShaderColorPerFace");
-    mShaderColorPerFace->AttachShader(*mBasicVS);
-    mShaderColorPerFace->AttachShader(*mColorPerFaceFS);
+    mShaderColorPerFace->AttachShader(basicVS);
+    mShaderColorPerFace->AttachShader(colorPerFaceFS);
     mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
     mShaderColorPerFace->LinkProgram();
 }
@@ -55,9 +55,6 @@ SceneInformationBuilder::~SceneInformationBuilder()
 {
     delete mSerializedScene;
     delete mProjectedAreasMatrix;
-    delete mShaderColorPerFace;
-    delete mBasicVS;
-    delete mColorPerFaceFS;
 }
 
 void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints* pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)

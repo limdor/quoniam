@@ -63,11 +63,7 @@ protected:
     int mWidthResolution;
     float mAspectRatio;
     /// Program used to paint a different color per face
-    GLSLProgram* mShaderColorPerFace;
-    /// Shader to do the fixed vertex shader pipeline
-    GLSLShader* mBasicVS;
-    /// Shader used to paint a different color per face
-    GLSLShader* mColorPerFaceFS;
+    std::unique_ptr<GLSLProgram> mShaderColorPerFace = nullptr;
     /// Clear color that was present when the OpenGL stats have been saved
     glm::vec4 mPreviousClearColor;
     /// Viewport that was present when the OpenGL stats have been saved
