@@ -78,7 +78,6 @@ private:
     void RecomputeViewport();
 
     void LoadShaders();
-    void DeleteShaders();
 
     /// Initialize the dual depth peeling render targets
     void InitDualPeelingRenderTargets();
@@ -102,15 +101,15 @@ private:
     QVector<Geometry*> mPerVertexColorMeshes;
 
     /// Shader used to initialize the min-max depth buffer for the dual depth peeling
-    GLSLProgram* mShaderDualInit = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualInit = nullptr;
     /// Shader used to do the main pass of the renderer
-    GLSLProgram* mShaderDualPeel = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualPeel = nullptr;
     /// Shader used to do the main pass of the renderer for the gizmos
-    GLSLProgram* mShaderDualPeelPerVertexColor = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualPeelPerVertexColor = nullptr;
     /// Shader used to alpha-blend the back color for the dual depth peeling
-    GLSLProgram* mShaderDualBlend = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualBlend = nullptr;
     /// Shader used to combinte the color of the front and the back buffer for the dual depth peeling
-    GLSLProgram* mShaderDualFinal = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualFinal = nullptr;
 
     /// Variable used for the dual deep peeling
     GLuint mQueryId;

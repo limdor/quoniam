@@ -22,8 +22,6 @@ GLCanvas::~GLCanvas()
     //Delete framebuffers and textures needed for the dual depth peeling
     DeleteDualPeelingRenderTargets();
 
-    DeleteShaders();
-
     glDeleteQueries(1, &mQueryId);
 
     delete mMeshFullScreenQuad;
@@ -74,7 +72,7 @@ void GLCanvas::AddPerVertexMesh(Geometry* pPerVertexMesh)
 
 GLSLProgram* GLCanvas::GetShaderProgram() const
 {
-    return mShaderDualPeel;
+    return mShaderDualPeel.get();
 }
 
 QString GLCanvas::SaveScreenshot( const QString &pFileName )
@@ -412,7 +410,6 @@ void GLCanvas::keyPressEvent(QKeyEvent *pEvent)
     if(pEvent->key() == Qt::Key_R)
     {
         pEvent->accept();
-        DeleteShaders();
         LoadShaders();
         updateGL();
     }
@@ -586,7 +583,7 @@ void GLCanvas::LoadShaders()
 
     if(!basicVS.HasErrors() && !dualPeelingInitFS.HasErrors())
     {
-        mShaderDualInit = new GLSLProgram("ShaderDualInit");
+        mShaderDualInit = std::make_unique<GLSLProgram>("ShaderDualInit");
         mShaderDualInit->AttachShader(basicVS);
         mShaderDualInit->AttachShader(dualPeelingInitFS);
         mShaderDualInit->LinkProgram();
@@ -599,7 +596,7 @@ void GLCanvas::LoadShaders()
 
     if(!dualPeelingPeelVS.HasErrors() && !dualPeelingPeelFS.HasErrors() && !shadeFragmentFS.HasErrors())
     {
-        mShaderDualPeel = new GLSLProgram("ShaderDualPeel");
+        mShaderDualPeel = std::make_unique<GLSLProgram>("ShaderDualPeel");
         mShaderDualPeel->AttachShader(dualPeelingPeelVS);
         mShaderDualPeel->AttachShader(dualPeelingPeelFS);
         mShaderDualPeel->AttachShader(shadeFragmentFS);
@@ -613,7 +610,7 @@ void GLCanvas::LoadShaders()
 
     if(!dualPeelingPeelVS.HasErrors() && !dualPeelingPeelFS.HasErrors() && !shadePerVertexColorFS.HasErrors())
     {
-        mShaderDualPeelPerVertexColor = new GLSLProgram("ShaderDualPeelPerVertexColor");
+        mShaderDualPeelPerVertexColor = std::make_unique<GLSLProgram>("ShaderDualPeelPerVertexColor");
         mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelVS);
         mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelFS);
         mShaderDualPeelPerVertexColor->AttachShader(shadePerVertexColorFS);
@@ -627,7 +624,7 @@ void GLCanvas::LoadShaders()
 
     if(!basicVS.HasErrors() && !dualPeelingBlendFS.HasErrors())
     {
-        mShaderDualBlend = new GLSLProgram("ShaderDualBlend");
+        mShaderDualBlend = std::make_unique<GLSLProgram>("ShaderDualBlend");
         mShaderDualBlend->AttachShader(basicVS);
         mShaderDualBlend->AttachShader(dualPeelingBlendFS);
         mShaderDualBlend->LinkProgram();
@@ -640,7 +637,7 @@ void GLCanvas::LoadShaders()
 
     if(!basicVS.HasErrors() && !dualPeelingFinalFS.HasErrors())
     {
-        mShaderDualFinal = new GLSLProgram("ShaderDualFinal");
+        mShaderDualFinal = std::make_unique<GLSLProgram>("ShaderDualFinal");
         mShaderDualFinal->AttachShader(basicVS);
         mShaderDualFinal->AttachShader(dualPeelingFinalFS);
         mShaderDualFinal->LinkProgram();
@@ -650,15 +647,6 @@ void GLCanvas::LoadShaders()
         mShaderDualFinal = nullptr;
         Debug::Error(QString("Could not load ShaderDualFinal"));
     }
-}
-
-void GLCanvas::DeleteShaders()
-{
-    delete mShaderDualInit;
-    delete mShaderDualPeel;
-    delete mShaderDualPeelPerVertexColor;
-    delete mShaderDualBlend;
-    delete mShaderDualFinal;
 }
 
 void GLCanvas::InitDualPeelingRenderTargets()
