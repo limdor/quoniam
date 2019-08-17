@@ -108,6 +108,7 @@ void GLCanvas::ConfigureFirstLight(const LightSettings& settings)
 {
     if(mOpenGLInitialized)
     {
+        mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("light1.enabled", settings.enabled);
         mShaderDualPeel->SetUniform("light1.lookAt", settings.look_at_vector);
         mShaderDualPeel->SetUniform("light1.irradiance", settings.color);
@@ -124,6 +125,7 @@ void GLCanvas::ConfigureSecondLight(const LightSettings& settings)
 {
     if(mOpenGLInitialized)
     {
+        mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("light2.enabled", settings.enabled);
         mShaderDualPeel->SetUniform("light2.lookAt", settings.look_at_vector);
         mShaderDualPeel->SetUniform("light2.irradiance", settings.color);
@@ -140,6 +142,7 @@ void GLCanvas::ApplyIllumination(bool enabled)
 {
     if(mOpenGLInitialized)
     {
+        mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("applyIllumination", enabled);
     }
     mApplyIllumination = enabled;
@@ -149,6 +152,7 @@ void GLCanvas::ApplyFaceCulling(bool enabled)
 {
     if(mOpenGLInitialized)
     {
+        mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("faceCulling", enabled);
     }
     mApplyFaceCulling = enabled;
@@ -158,6 +162,7 @@ void GLCanvas::SetAmbientLightIntensity(float intensity)
 {
     if(mOpenGLInitialized)
     {
+        mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("ambientLightAmount", intensity);
     }
     mAmbientLightIntensity = intensity;
