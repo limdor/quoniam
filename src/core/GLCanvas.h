@@ -21,6 +21,7 @@
 #include "Geometry.h"
 #include "GLSLProgram.h"
 #include "GPUScene.h"
+#include "LightSettings.h"
 #include "PerspectiveCamera.h"
 #include "Scene.h"
 
@@ -42,8 +43,6 @@ public:
     /// Add a mesh that will be render with the color per vertex
     void AddPerVertexMesh(Geometry* pPerVertexMesh);
 
-    /// Get the program used to do the rendering
-    GLSLProgram* GetShaderProgram() const;
     /// Save a screenshot of the renderer
     QString SaveScreenshot( const QString &pFileName );
 
@@ -53,6 +52,14 @@ public:
     Camera *GetCamera();
     /// Get the scene rendered
     Scene* GetScene();
+
+    void ConfigureFirstLight(const LightSettings& settings);
+    const LightSettings& GetFirstLightConfiguration() const;
+    void ConfigureSecondLight(const LightSettings& settings);
+    const LightSettings& GetSecondLightConfiguration() const;
+    void ApplyIllumination(bool enabled);
+    void ApplyFaceCulling(bool enabled);
+    void SetAmbientLightIntensity(float intensity);
 
 public slots:
     /// Set if the bounding boxes will be drawn
@@ -84,11 +91,18 @@ private:
     /// Delete the dual depth peeling render targets
     void DeleteDualPeelingRenderTargets();
 
+    bool mOpenGLInitialized = false;
     bool mDrawBoundingBox = false;
     bool mDrawBoundingSphere = false;
     bool mDrawViewpointSphereInWireframe = false;
     /// Boolean to know if the materials will be applied for the rendering
     bool mApplyMaterials = true;
+
+    LightSettings mFirstLightSettings = {false, glm::vec3(), glm::vec3()};
+    LightSettings mSecondLightSettings = {false, glm::vec3(), glm::vec3()};
+    bool mApplyIllumination = true;
+    bool mApplyFaceCulling = true;
+    float mAmbientLightIntensity = 1.0f;
 
     /// Camera used for the rendering
     Camera* mFreeCamera = nullptr;

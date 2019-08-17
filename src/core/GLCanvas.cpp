@@ -70,11 +70,6 @@ void GLCanvas::AddPerVertexMesh(Geometry* pPerVertexMesh)
     mPerVertexColorMeshes.push_back(pPerVertexMesh);
 }
 
-GLSLProgram* GLCanvas::GetShaderProgram() const
-{
-    return mShaderDualPeel.get();
-}
-
 QString GLCanvas::SaveScreenshot( const QString &pFileName )
 {
     makeCurrent();
@@ -107,6 +102,65 @@ Camera* GLCanvas::GetCamera()
 Scene* GLCanvas::GetScene()
 {
     return mScene;
+}
+
+void GLCanvas::ConfigureFirstLight(const LightSettings& settings)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->SetUniform("light1.enabled", settings.enabled);
+        mShaderDualPeel->SetUniform("light1.lookAt", settings.look_at_vector);
+        mShaderDualPeel->SetUniform("light1.irradiance", settings.color);
+    }
+    mFirstLightSettings = settings;
+}
+
+const LightSettings& GLCanvas::GetFirstLightConfiguration() const
+{
+    return mFirstLightSettings;
+}
+
+void GLCanvas::ConfigureSecondLight(const LightSettings& settings)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->SetUniform("light2.enabled", settings.enabled);
+        mShaderDualPeel->SetUniform("light2.lookAt", settings.look_at_vector);
+        mShaderDualPeel->SetUniform("light2.irradiance", settings.color);
+    }
+    mSecondLightSettings = settings;
+}
+
+const LightSettings& GLCanvas::GetSecondLightConfiguration() const
+{
+    return mSecondLightSettings;
+}
+
+void GLCanvas::ApplyIllumination(bool enabled)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->SetUniform("applyIllumination", enabled);
+    }
+    mApplyIllumination = enabled;
+ }
+
+void GLCanvas::ApplyFaceCulling(bool enabled)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->SetUniform("faceCulling", enabled);
+    }
+    mApplyFaceCulling = enabled;
+}
+
+void GLCanvas::SetAmbientLightIntensity(float intensity)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->SetUniform("ambientLightAmount", intensity);
+    }
+    mAmbientLightIntensity = intensity;
 }
 
 void GLCanvas::WillDrawBoundingBox(bool pDraw)
@@ -170,6 +224,12 @@ void GLCanvas::initializeGL()
         glDisable(GL_CULL_FACE);
 
         glGenQueries(1, &mQueryId);
+        mOpenGLInitialized = true;
+        ConfigureFirstLight(mFirstLightSettings);
+        ConfigureSecondLight(mSecondLightSettings);
+        ApplyIllumination(mApplyIllumination);
+        ApplyFaceCulling(mApplyFaceCulling);
+        SetAmbientLightIntensity(mAmbientLightIntensity);
     }
 }
 
