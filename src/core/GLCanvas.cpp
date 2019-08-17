@@ -158,23 +158,20 @@ void GLCanvas::initializeGL()
     if(GLEW_OK != err)
     {
         const GLubyte* sError = glewGetErrorString(err);
-        Debug::Log(QString("Impossible to initialize GLEW!: %1").arg(QString((const char*)sError)));
+        Debug::Log(QString("Impossible to initialize GLEW!: %1").arg(QString(reinterpret_cast<const char*>(sError))));
     }
     else
     {
+        const QString gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
+        const QString gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
+        const QString gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
+        const QString gl_shading_language_version{reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))};
+        Debug::Log(QString("GL_VENDOR: %1").arg(gl_vendor));
+        Debug::Log(QString("GL_RENDERER: %1").arg(gl_renderer));
+        Debug::Log(QString("GL_VERSION: %1").arg(gl_version));
+        Debug::Log(QString("GL_SHADING_LANGUAGE_VERSION: %1").arg(gl_shading_language_version));
+
         LoadShaders();
-        Debug::Log(QString("GL_VENDOR: %1").arg(QString((const char *)glGetString(GL_VENDOR))));
-        Debug::Log(QString("GL_RENDERER: %1").arg(QString((const char *)glGetString(GL_RENDERER))));
-        Debug::Log(QString("GL_VERSION: %1").arg(QString((const char *)glGetString(GL_VERSION))));
-        Debug::Log(QString("GL_SHADING_LANGUAGE_VERSION: %1").arg(QString((const char *)glGetString(GL_SHADING_LANGUAGE_VERSION))));
-        //GLint numberOfExtensions;
-        //glGetIntegerv(GL_NUM_EXTENSIONS, &numberOfExtensions);
-        //QString extensions = "";
-        //for( int i = 0; i < numberOfExtensions; i++ )
-        //{
-        //    extensions += QString("%1, ").arg((const char *)glGetStringi(GL_EXTENSIONS, i));
-        //}
-        //Debug::Log(QString("GL_EXTENSIONS: %1").arg(extensions));
 
         // Allocate render targets first
         InitDualPeelingRenderTargets();
