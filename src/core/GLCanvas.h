@@ -127,7 +127,13 @@ private:
     /// Variable used for the dual deep peeling
     GLuint mDualBackBlenderTexId;
     /// Variable used for the dual deep peeling
-    GLenum mDrawBuffers[7];
+    const GLenum mDrawBuffers[7] = {GL_COLOR_ATTACHMENT0,
+                                    GL_COLOR_ATTACHMENT1,
+                                    GL_COLOR_ATTACHMENT2,
+                                    GL_COLOR_ATTACHMENT3,
+                                    GL_COLOR_ATTACHMENT4,
+                                    GL_COLOR_ATTACHMENT5,
+                                    GL_COLOR_ATTACHMENT6};
 
     /// Background color
     glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
