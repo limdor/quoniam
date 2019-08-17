@@ -52,7 +52,7 @@ void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
         glm::vec3 front = center - position;
         glm::vec3 right = glm::cross( front, up );
         up = glm::cross( right, front );
-        mFreeCamera = new PerspectiveCamera(0.05f * radius, radius * 50.0f, center, up, position, 60.0f, mWinWidth/(float)mWinHeight);
+        mFreeCamera = new PerspectiveCamera(0.05f * radius, radius * 50.0f, center, up, position, 60.0f, mWinWidth/static_cast<float>(mWinHeight));
     }
 
     RecomputeViewport();
