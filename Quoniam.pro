@@ -120,6 +120,7 @@ HEADERS  += \
     src/core/GPUGeometry.h \
     src/core/GPUScene.h \
     src/core/GPUSceneNode.h \
+    src/core/LightSettings.h \
     src/core/Material.h \
     src/core/Mesh.h \
     src/core/OrthographicCamera.h \
