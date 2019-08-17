@@ -33,22 +33,6 @@ SceneInformationBuilder::SceneInformationBuilder():
     mSerializedScene(nullptr), mProjectedAreasMatrix(nullptr), mWidthResolution(640), mAspectRatio(1.0f),
     mPreviousDepthTest(true), mPreviousCullFace(true), mPreviousBlend(false)
 {
-    GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
-    if( basicVS.HasErrors() )
-    {
-        Debug::Error( QString("shaders/Basic.vert: %1").arg(basicVS.GetLog()) );
-    }
-    GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
-    if( colorPerFaceFS.HasErrors() )
-    {
-        Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(colorPerFaceFS.GetLog()) );
-    }
-
-    mShaderColorPerFace = new GLSLProgram("ShaderColorPerFace");
-    mShaderColorPerFace->AttachShader(basicVS);
-    mShaderColorPerFace->AttachShader(colorPerFaceFS);
-    mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
-    mShaderColorPerFace->LinkProgram();
 }
 
 SceneInformationBuilder::~SceneInformationBuilder()
@@ -91,6 +75,26 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     glGenFramebuffers( 1, &frameBuffer );
     glBindFramebuffer( GL_FRAMEBUFFER, frameBuffer );
     CHECK_GL_ERROR();
+
+    if(mShaderColorPerFace == nullptr)
+    {
+        GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
+        if( basicVS.HasErrors() )
+        {
+            Debug::Error( QString("shaders/Basic.vert: %1").arg(basicVS.GetLog()) );
+        }
+        GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
+        if( colorPerFaceFS.HasErrors() )
+        {
+            Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(colorPerFaceFS.GetLog()) );
+        }
+
+        mShaderColorPerFace = std::make_unique<GLSLProgram>("ShaderColorPerFace");
+        mShaderColorPerFace->AttachShader(basicVS);
+        mShaderColorPerFace->AttachShader(colorPerFaceFS);
+        mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
+        mShaderColorPerFace->LinkProgram();
+    }
 
     //Initialization to be able to draw
     mShaderColorPerFace->UseProgram();
