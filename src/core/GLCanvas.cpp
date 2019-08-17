@@ -233,7 +233,7 @@ void GLCanvas::paintGL()
         }
         for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
         {
-            if( mDrawWireframe )
+            if( mDrawViewpointSphereInWireframe )
             {
                 glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
             }
@@ -329,7 +329,7 @@ void GLCanvas::paintGL()
             DrawGeometryBoundingVolumes();
             for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
             {
-                if( mDrawWireframe )
+                if( mDrawViewpointSphereInWireframe )
                 {
                     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
                 }
@@ -429,7 +429,7 @@ void GLCanvas::keyPressEvent(QKeyEvent *pEvent)
     if(pEvent->key() == Qt::Key_F5)
     {
         pEvent->accept();
-        mDrawWireframe = !mDrawWireframe;
+        mDrawViewpointSphereInWireframe = !mDrawViewpointSphereInWireframe;
         updateGL();
     }
     if(pEvent->key() == Qt::Key_W)

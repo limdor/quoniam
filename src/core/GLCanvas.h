@@ -87,8 +87,7 @@ private:
 
     bool mDrawBoundingBox = false;
     bool mDrawBoundingSphere = false;
-    /// Boolean to know if the sphere of viewpoints will be drawn in wireframe mode
-    bool mDrawWireframe = false;
+    bool mDrawViewpointSphereInWireframe = false;
     /// Boolean to know if the materials will be applied for the rendering
     bool mApplyMaterials = true;
 
