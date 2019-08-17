@@ -69,7 +69,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     t.start();
     QProgressDialog progress(MainWindow::GetInstance());
     progress.setLabelText("Projecting scene to viewpoint sphere...");
-    progress.setCancelButton(0);
+    progress.setCancelButton(nullptr);
     progress.setRange(0, numberOfViewpoints);
     progress.show();
 
@@ -113,7 +113,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     CHECK_GL_ERROR();
 
     glBindTexture( GL_TEXTURE_2D, depthRenderTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, windowWidth, windowHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, windowWidth, windowHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nullptr);
     CHECK_GL_ERROR();
 
     glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderBuffer);
