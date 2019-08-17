@@ -136,7 +136,7 @@ private:
                                     GL_COLOR_ATTACHMENT6};
 
     /// Background color
-    glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
+    const glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
 
     /// Full screen quad mesh used for the rendering
     Geometry* mMeshFullScreenQuad;

@@ -77,8 +77,8 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     qApp->processEvents();
 
     //Shader uniforms initialization
-    QColor light1InitialColor = Qt::lightGray;
-    QColor light2InitialColor = Qt::lightGray;
+    const QColor light1InitialColor{Qt::lightGray};
+    const QColor light2InitialColor{Qt::lightGray};
 
     mUi->light1ColorLabel->setPalette(QPalette(light1InitialColor));
     mUi->light1ColorLabel->setAutoFillBackground(true);
