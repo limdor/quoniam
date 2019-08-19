@@ -33,31 +33,12 @@ SceneInformationBuilder::SceneInformationBuilder():
     mSerializedScene(nullptr), mProjectedAreasMatrix(nullptr), mWidthResolution(640), mAspectRatio(1.0f),
     mPreviousDepthTest(true), mPreviousCullFace(true), mPreviousBlend(false)
 {
-    mBasicVS = new GLSLShader("shaders/Basic.vert", GL_VERTEX_SHADER);
-    if( mBasicVS->HasErrors() )
-    {
-        Debug::Error( QString("shaders/Basic.vert: %1").arg(mBasicVS->GetLog()) );
-    }
-    mColorPerFaceFS = new GLSLShader("shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER);
-    if( mColorPerFaceFS->HasErrors() )
-    {
-        Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(mColorPerFaceFS->GetLog()) );
-    }
-
-    mShaderColorPerFace = new GLSLProgram("ShaderColorPerFace");
-    mShaderColorPerFace->AttachShader(*mBasicVS);
-    mShaderColorPerFace->AttachShader(*mColorPerFaceFS);
-    mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
-    mShaderColorPerFace->LinkProgram();
 }
 
 SceneInformationBuilder::~SceneInformationBuilder()
 {
     delete mSerializedScene;
     delete mProjectedAreasMatrix;
-    delete mShaderColorPerFace;
-    delete mBasicVS;
-    delete mColorPerFaceFS;
 }
 
 void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints* pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)
@@ -69,7 +50,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     t.start();
     QProgressDialog progress(MainWindow::GetInstance());
     progress.setLabelText("Projecting scene to viewpoint sphere...");
-    progress.setCancelButton(0);
+    progress.setCancelButton(nullptr);
     progress.setRange(0, numberOfViewpoints);
     progress.show();
 
@@ -87,16 +68,35 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     glDisable(GL_BLEND);
 
     GLuint renderBuffer, frameBuffer, depthRenderTexture;
-    //Creació del RenderBuffer
+    //Create RenderBuffer
     glGenRenderbuffers( 1, &renderBuffer );
     glGenTextures( 1, &depthRenderTexture );
-    //Creació del FrameBuffer
+    //Create FrameBuffer
     glGenFramebuffers( 1, &frameBuffer );
-    //Creació del FrameBuffer
     glBindFramebuffer( GL_FRAMEBUFFER, frameBuffer );
     CHECK_GL_ERROR();
 
-    //Inicialització per pintar
+    if(mShaderColorPerFace == nullptr)
+    {
+        GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
+        if( basicVS.HasErrors() )
+        {
+            Debug::Error( QString("shaders/Basic.vert: %1").arg(basicVS.GetLog()) );
+        }
+        GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
+        if( colorPerFaceFS.HasErrors() )
+        {
+            Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(colorPerFaceFS.GetLog()) );
+        }
+
+        mShaderColorPerFace = std::make_unique<GLSLProgram>("ShaderColorPerFace");
+        mShaderColorPerFace->AttachShader(basicVS);
+        mShaderColorPerFace->AttachShader(colorPerFaceFS);
+        mShaderColorPerFace->BindFragDataLocation(0, "outputColor");
+        mShaderColorPerFace->LinkProgram();
+    }
+
+    //Initialization to be able to draw
     mShaderColorPerFace->UseProgram();
     mShaderColorPerFace->SetUniform("ignoreNormals", pIgnoreNormals);
     glDrawBuffer(GL_COLOR_ATTACHMENT0);
@@ -106,15 +106,15 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     mAspectRatio = pSphereOfViewpoints->GetAspectRatio();
     mWidthResolution = pWidthResolution;
     int windowWidth = pWidthResolution;
-    int windowHeight = (int)(windowWidth / mAspectRatio);
+    int windowHeight = static_cast<int>(windowWidth / mAspectRatio);
 
-    //Configuració del RenderBuffer
+    //RenderBuffer configurations
     glBindRenderbuffer( GL_RENDERBUFFER, renderBuffer );
     glRenderbufferStorage( GL_RENDERBUFFER, GL_R32F, windowWidth, windowHeight );
     CHECK_GL_ERROR();
 
     glBindTexture( GL_TEXTURE_2D, depthRenderTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, windowWidth, windowHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, windowWidth, windowHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nullptr);
     CHECK_GL_ERROR();
 
     glFramebufferRenderbuffer( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderBuffer);
@@ -126,10 +126,10 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
         CHECK_GL_ERROR();
 #endif
 
-    //Calculem el nombre total de píxels
+    //Compute the total number of pixels
     unsigned int totalNumberOfPixels = ((unsigned int)windowWidth * (unsigned int)windowHeight);
 
-    //Espai on guardarem els pixels de cada draw
+    //Storage for the pixels on every draw
     float* valuePerFaceImage = new float [totalNumberOfPixels];
     GLubyte* depthImage = new GLubyte [totalNumberOfPixels];
     unsigned char* projectionMask = new unsigned char[totalNumberOfPixels];
@@ -223,7 +223,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
         mDepthImages[i] = imageDepth.clone();
 
         //Compute the normalized depth histogram
-        //TODO: Assegurar que està ben ajustada les profunditat
+        //TODO: Make sure that the depth is properly adjusted
         cv::Mat hist;
         int histSize = 256;
         float range[] = { 0, 256 } ;
@@ -297,7 +297,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     delete[] valuePerFaceImage;
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    //Eliminacio del frambuffer i els 2 renderbuffer
+    //Delete framebuffer and the two render buffers
     glDeleteFramebuffers( 1, &frameBuffer);
     glDeleteRenderbuffers( 1, &depthRenderTexture);
     glDeleteRenderbuffers( 1, &renderBuffer );

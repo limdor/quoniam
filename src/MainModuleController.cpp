@@ -29,6 +29,7 @@
 #include "I2.h"
 #include "I3.h"
 #include "KullbackLeibler.h"
+#include "LightSettings.h"
 #include "MainWindow.h"
 #include "MaximumDepth.h"
 #include "NumberOfVisibleTriangles.h"
@@ -64,37 +65,41 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     //GLCanvas initialization
     mOpenGLCanvas = mUi->Canvas;
     mOpenGLCanvas->show();
-    mOpenGLCanvas->updateGL();
 
     QWidget* parent = mOpenGLCanvas;
-    while(parent != 0)
+    while(parent != nullptr)
     {
         parent->setMouseTracking(true);
         parent = parent->parentWidget();
     }
     CreateModuleMenus();
 
-    qApp->processEvents();
-
     //Shader uniforms initialization
-    QColor light1InitialColor = Qt::lightGray;
-    QColor light2InitialColor = Qt::lightGray;
+    const QColor light1InitialColor{Qt::lightGray};
+    const QColor light2InitialColor{Qt::lightGray};
 
     mUi->light1ColorLabel->setPalette(QPalette(light1InitialColor));
     mUi->light1ColorLabel->setAutoFillBackground(true);
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light1.enabled", mUi->light1GroupBox->isChecked());
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light1.lookAt", glm::vec3(1.0f, 1.0f, 0.0f));
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light1.irradiance", glm::vec3(light1InitialColor.redF(), light1InitialColor.greenF(), light1InitialColor.blueF()));
+
     mUi->light2ColorLabel->setPalette(QPalette(light2InitialColor));
     mUi->light2ColorLabel->setAutoFillBackground(true);
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light2.enabled", mUi->light2GroupBox->isChecked());
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light2.lookAt", glm::vec3(0.0f, -1.0f, 0.0f));
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light2.irradiance", glm::vec3(light2InitialColor.redF(), light2InitialColor.greenF(), light2InitialColor.blueF()));
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("applyIllumination", mUi->applyIlluminationCheckBox->isChecked());
 
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("faceCulling", mUi->backfaceCullingCheckBox->isChecked());
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("ambientLightAmount", (float)mUi->ambientLightAmountSpinBox->value());
+    const LightSettings light_1_settings{
+        mUi->light1GroupBox->isChecked(),
+        glm::vec3(1.0f, 1.0f, 0.0f),
+        glm::vec3(light1InitialColor.redF(), light1InitialColor.greenF(), light1InitialColor.blueF())
+    };
+
+    const LightSettings light_2_settings{
+        mUi->light2GroupBox->isChecked(),
+        glm::vec3(0.0f, -1.0f, 0.0f),
+        glm::vec3(light2InitialColor.redF(), light2InitialColor.greenF(), light2InitialColor.blueF())
+    };
+    mOpenGLCanvas->ConfigureFirstLight(light_1_settings);
+    mOpenGLCanvas->ConfigureSecondLight(light_2_settings);
+    mOpenGLCanvas->ApplyIllumination(mUi->applyIlluminationCheckBox->isChecked());
+    mOpenGLCanvas->ApplyFaceCulling(mUi->backfaceCullingCheckBox->isChecked());
+    mOpenGLCanvas->SetAmbientLightIntensity(static_cast<float>(mUi->ambientLightAmountSpinBox->value()));
 
     mSceneInformationBuilder = new SceneInformationBuilder();
 
@@ -386,8 +391,7 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     mSceneInformationBuilder->CreateHistogram(mScene, mSphereOfViewpoints, pWidthResolution, pFaceCulling, true);
 
     mOpenGLCanvas->SetPerVertexMesh(mSphereOfViewpoints->GetMesh());
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("faceCulling", pFaceCulling);
+    mOpenGLCanvas->ApplyFaceCulling(pFaceCulling);
     mActionViewpointsSphere->setEnabled(true);
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
@@ -750,32 +754,26 @@ void MainModuleController::on_computeCameraAngleButton_clicked()
 
 void MainModuleController::on_applyMaterialsCheckBox_clicked(bool pChecked)
 {
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
     mOpenGLCanvas->ApplyMaterials(pChecked);
     UpdateRenderingGUI();
-    mOpenGLCanvas->updateGL();
 }
 
 void MainModuleController::on_backfaceCullingCheckBox_clicked(bool pChecked)
 {
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("faceCulling", pChecked);
-    mOpenGLCanvas->updateGL();
+    mOpenGLCanvas->ApplyFaceCulling(pChecked);
 }
 
 void MainModuleController::on_applyIlluminationCheckBox_clicked(bool pChecked)
 {
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("applyIllumination", pChecked);
+    mOpenGLCanvas->ApplyIllumination(pChecked);
     UpdateRenderingGUI();
-    mOpenGLCanvas->updateGL();
 }
 
 void MainModuleController::on_light1GroupBox_toggled(bool pChecked)
 {
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light1.enabled", pChecked);
-    mOpenGLCanvas->updateGL();
+    LightSettings settings = mOpenGLCanvas->GetFirstLightConfiguration();
+    settings.enabled = pChecked;
+    mOpenGLCanvas->ConfigureFirstLight(settings);
 }
 
 void MainModuleController::on_light1ColorButton_clicked()
@@ -786,16 +784,16 @@ void MainModuleController::on_light1ColorButton_clicked()
         mUi->light1ColorLabel->setPalette(QPalette(color));
         mUi->light1ColorLabel->setAutoFillBackground(true);
     }
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light1.irradiance", glm::vec3(color.redF(), color.greenF(), color.blueF()));
-    mOpenGLCanvas->updateGL();
+    LightSettings settings = mOpenGLCanvas->GetFirstLightConfiguration();
+    settings.color = glm::vec3(color.redF(), color.greenF(), color.blueF());
+    mOpenGLCanvas->ConfigureFirstLight(settings);
 }
 
 void MainModuleController::on_light2GroupBox_toggled(bool pChecked)
 {
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light2.enabled", pChecked);
-    mOpenGLCanvas->updateGL();
+    LightSettings settings = mOpenGLCanvas->GetSecondLightConfiguration();
+    settings.enabled = pChecked;
+    mOpenGLCanvas->ConfigureSecondLight(settings);
 }
 
 void MainModuleController::on_light2ColorButton_clicked()
@@ -806,16 +804,14 @@ void MainModuleController::on_light2ColorButton_clicked()
         mUi->light2ColorLabel->setPalette(QPalette(color));
         mUi->light2ColorLabel->setAutoFillBackground(true);
     }
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("light2.irradiance", glm::vec3(color.redF(), color.greenF(), color.blueF()));
-    mOpenGLCanvas->updateGL();
+    LightSettings settings = mOpenGLCanvas->GetSecondLightConfiguration();
+    settings.color = glm::vec3(color.redF(), color.greenF(), color.blueF());
+    mOpenGLCanvas->ConfigureSecondLight(settings);
 }
 
 void MainModuleController::on_ambientLightAmountSpinBox_valueChanged(double pValue)
 {
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("ambientLightAmount", (float)pValue);
-    mOpenGLCanvas->updateGL();
+    mOpenGLCanvas->SetAmbientLightIntensity(static_cast<float>(pValue));
 }
 
 void MainModuleController::on_bestAndWorstViewsButton_clicked()
@@ -823,9 +819,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
     QString sceneName = mScene->GetName();
 
     mUi->applyIlluminationCheckBox->setChecked(true);
-    mOpenGLCanvas->GetShaderProgram()->UseProgram();
-    mOpenGLCanvas->GetShaderProgram()->SetUniform("applyIllumination", true);
-    mOpenGLCanvas->updateGL();
+    mOpenGLCanvas->ApplyIllumination(true);
     mUi->applyMaterialsCheckBox->setChecked(true);
     on_applyMaterialsCheckBox_clicked(true);
     mUi->alphaSpinBox->setValue( 0.01f );

@@ -92,6 +92,7 @@ void Debug::ConsoleOutput(QtMsgType pType, const QMessageLogContext &, const QSt
 {
     switch(pType)
     {
+        case QtInfoMsg:
         case QtDebugMsg:
             mConsole->appendHtml( QString("<FONT color=black>%1</FONT>").arg( QString(pMessage).replace(" ","&nbsp;") ) );
             fprintf(stdout, "Log: %s\n", pMessage.toLocal8Bit().constData());
@@ -103,6 +104,7 @@ void Debug::ConsoleOutput(QtMsgType pType, const QMessageLogContext &, const QSt
             fflush(stderr);
             break;
         case QtCriticalMsg:
+        case QtFatalMsg:
             mConsole->appendHtml( QString("<FONT color=red>%1</FONT>").arg( QString(pMessage).replace(" ","&nbsp;") ) );
             fprintf(stderr, "Error: %s\n", pMessage.toLocal8Bit().constData());
             fflush(stderr);

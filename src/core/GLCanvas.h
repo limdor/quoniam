@@ -21,6 +21,7 @@
 #include "Geometry.h"
 #include "GLSLProgram.h"
 #include "GPUScene.h"
+#include "LightSettings.h"
 #include "PerspectiveCamera.h"
 #include "Scene.h"
 
@@ -31,7 +32,7 @@ class GLCanvas : public QGLWidget
 
 public:
     /// Constructor
-    explicit GLCanvas(QWidget *pParent = 0);
+    explicit GLCanvas(QWidget *pParent = nullptr);
     /// Destructor
     ~GLCanvas();
 
@@ -42,8 +43,6 @@ public:
     /// Add a mesh that will be render with the color per vertex
     void AddPerVertexMesh(Geometry* pPerVertexMesh);
 
-    /// Get the program used to do the rendering
-    GLSLProgram* GetShaderProgram() const;
     /// Save a screenshot of the renderer
     QString SaveScreenshot( const QString &pFileName );
 
@@ -53,6 +52,14 @@ public:
     Camera *GetCamera();
     /// Get the scene rendered
     Scene* GetScene();
+
+    void ConfigureFirstLight(const LightSettings& settings);
+    const LightSettings& GetFirstLightConfiguration() const;
+    void ConfigureSecondLight(const LightSettings& settings);
+    const LightSettings& GetSecondLightConfiguration() const;
+    void ApplyIllumination(bool enabled);
+    void ApplyFaceCulling(bool enabled);
+    void SetAmbientLightIntensity(float intensity);
 
 public slots:
     /// Set if the bounding boxes will be drawn
@@ -78,19 +85,24 @@ private:
     void RecomputeViewport();
 
     void LoadShaders();
-    void DeleteShaders();
 
     /// Initialize the dual depth peeling render targets
     void InitDualPeelingRenderTargets();
     /// Delete the dual depth peeling render targets
     void DeleteDualPeelingRenderTargets();
 
+    bool mOpenGLInitialized = false;
     bool mDrawBoundingBox = false;
     bool mDrawBoundingSphere = false;
-    /// Boolean to know if the sphere of viewpoints will be drawn in wireframe mode
-    bool mDrawWireframe = false;
+    bool mDrawViewpointSphereInWireframe = false;
     /// Boolean to know if the materials will be applied for the rendering
     bool mApplyMaterials = true;
+
+    LightSettings mFirstLightSettings = {false, glm::vec3(), glm::vec3()};
+    LightSettings mSecondLightSettings = {false, glm::vec3(), glm::vec3()};
+    bool mApplyIllumination = true;
+    bool mApplyFaceCulling = true;
+    float mAmbientLightIntensity = 1.0f;
 
     /// Camera used for the rendering
     Camera* mFreeCamera = nullptr;
@@ -103,15 +115,15 @@ private:
     QVector<Geometry*> mPerVertexColorMeshes;
 
     /// Shader used to initialize the min-max depth buffer for the dual depth peeling
-    GLSLProgram* mShaderDualInit = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualInit = nullptr;
     /// Shader used to do the main pass of the renderer
-    GLSLProgram* mShaderDualPeel = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualPeel = nullptr;
     /// Shader used to do the main pass of the renderer for the gizmos
-    GLSLProgram* mShaderDualPeelPerVertexColor = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualPeelPerVertexColor = nullptr;
     /// Shader used to alpha-blend the back color for the dual depth peeling
-    GLSLProgram* mShaderDualBlend = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualBlend = nullptr;
     /// Shader used to combinte the color of the front and the back buffer for the dual depth peeling
-    GLSLProgram* mShaderDualFinal = nullptr;
+    std::unique_ptr<GLSLProgram> mShaderDualFinal = nullptr;
 
     /// Variable used for the dual deep peeling
     GLuint mQueryId;
@@ -128,10 +140,16 @@ private:
     /// Variable used for the dual deep peeling
     GLuint mDualBackBlenderTexId;
     /// Variable used for the dual deep peeling
-    GLenum mDrawBuffers[7];
+    const GLenum mDrawBuffers[7] = {GL_COLOR_ATTACHMENT0,
+                                    GL_COLOR_ATTACHMENT1,
+                                    GL_COLOR_ATTACHMENT2,
+                                    GL_COLOR_ATTACHMENT3,
+                                    GL_COLOR_ATTACHMENT4,
+                                    GL_COLOR_ATTACHMENT5,
+                                    GL_COLOR_ATTACHMENT6};
 
     /// Background color
-    glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
+    const glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
 
     /// Full screen quad mesh used for the rendering
     Geometry* mMeshFullScreenQuad;

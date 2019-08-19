@@ -15,33 +15,12 @@
 
 GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
 {
-    //Draw buffers initialization
-    mDrawBuffers[0] = GL_COLOR_ATTACHMENT0;
-    mDrawBuffers[1] = GL_COLOR_ATTACHMENT1;
-    mDrawBuffers[2] = GL_COLOR_ATTACHMENT2;
-    mDrawBuffers[3] = GL_COLOR_ATTACHMENT3;
-    mDrawBuffers[4] = GL_COLOR_ATTACHMENT4;
-    mDrawBuffers[5] = GL_COLOR_ATTACHMENT5;
-    mDrawBuffers[6] = GL_COLOR_ATTACHMENT6;
-
-    //Initialize quad where the scene is painted
-    mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
-    glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
-                             glm::vec2(1.0f, 0.0f),
-                             glm::vec2(1.0f, 1.0f),
-                             glm::vec2(0.0f, 1.0f)};
-    unsigned int indices[6] = {0, 1, 2,
-                               2, 3, 0};
-    mMeshFullScreenQuad->SetVerticesData(4, &vertices[0]);
-    mMeshFullScreenQuad->SetIndexsData(6, &indices[0]);
 }
 
 GLCanvas::~GLCanvas()
 {
     //Delete framebuffers and textures needed for the dual depth peeling
     DeleteDualPeelingRenderTargets();
-
-    DeleteShaders();
 
     glDeleteQueries(1, &mQueryId);
 
@@ -73,7 +52,7 @@ void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
         glm::vec3 front = center - position;
         glm::vec3 right = glm::cross( front, up );
         up = glm::cross( right, front );
-        mFreeCamera = new PerspectiveCamera(0.05f * radius, radius * 50.0f, center, up, position, 60.0f, mWinWidth/(float)mWinHeight);
+        mFreeCamera = new PerspectiveCamera(0.05f * radius, radius * 50.0f, center, up, position, 60.0f, mWinWidth/static_cast<float>(mWinHeight));
     }
 
     RecomputeViewport();
@@ -89,11 +68,6 @@ void GLCanvas::SetPerVertexMesh(Geometry *pPerVertexMesh)
 void GLCanvas::AddPerVertexMesh(Geometry* pPerVertexMesh)
 {
     mPerVertexColorMeshes.push_back(pPerVertexMesh);
-}
-
-GLSLProgram* GLCanvas::GetShaderProgram() const
-{
-    return mShaderDualPeel;
 }
 
 QString GLCanvas::SaveScreenshot( const QString &pFileName )
@@ -130,6 +104,70 @@ Scene* GLCanvas::GetScene()
     return mScene;
 }
 
+void GLCanvas::ConfigureFirstLight(const LightSettings& settings)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->UseProgram();
+        mShaderDualPeel->SetUniform("light1.enabled", settings.enabled);
+        mShaderDualPeel->SetUniform("light1.lookAt", settings.look_at_vector);
+        mShaderDualPeel->SetUniform("light1.irradiance", settings.color);
+    }
+    mFirstLightSettings = settings;
+}
+
+const LightSettings& GLCanvas::GetFirstLightConfiguration() const
+{
+    return mFirstLightSettings;
+}
+
+void GLCanvas::ConfigureSecondLight(const LightSettings& settings)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->UseProgram();
+        mShaderDualPeel->SetUniform("light2.enabled", settings.enabled);
+        mShaderDualPeel->SetUniform("light2.lookAt", settings.look_at_vector);
+        mShaderDualPeel->SetUniform("light2.irradiance", settings.color);
+    }
+    mSecondLightSettings = settings;
+}
+
+const LightSettings& GLCanvas::GetSecondLightConfiguration() const
+{
+    return mSecondLightSettings;
+}
+
+void GLCanvas::ApplyIllumination(bool enabled)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->UseProgram();
+        mShaderDualPeel->SetUniform("applyIllumination", enabled);
+    }
+    mApplyIllumination = enabled;
+ }
+
+void GLCanvas::ApplyFaceCulling(bool enabled)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->UseProgram();
+        mShaderDualPeel->SetUniform("faceCulling", enabled);
+    }
+    mApplyFaceCulling = enabled;
+}
+
+void GLCanvas::SetAmbientLightIntensity(float intensity)
+{
+    if(mOpenGLInitialized)
+    {
+        mShaderDualPeel->UseProgram();
+        mShaderDualPeel->SetUniform("ambientLightAmount", intensity);
+    }
+    mAmbientLightIntensity = intensity;
+}
+
 void GLCanvas::WillDrawBoundingBox(bool pDraw)
 {
     mDrawBoundingBox = pDraw;
@@ -150,6 +188,17 @@ void GLCanvas::ApplyMaterials(bool pApplyMaterials)
 
 void GLCanvas::initializeGL()
 {
+    //Initialize quad where the scene is painted
+    mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
+    glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
+                             glm::vec2(1.0f, 0.0f),
+                             glm::vec2(1.0f, 1.0f),
+                             glm::vec2(0.0f, 1.0f)};
+    unsigned int indices[6] = {0, 1, 2,
+                               2, 3, 0};
+    mMeshFullScreenQuad->SetVerticesData(4, &vertices[0]);
+    mMeshFullScreenQuad->SetIndexsData(6, &indices[0]);
+
     mWinWidth = width();
     mWinHeight = height();
 
@@ -157,23 +206,20 @@ void GLCanvas::initializeGL()
     if(GLEW_OK != err)
     {
         const GLubyte* sError = glewGetErrorString(err);
-        Debug::Log(QString("Impossible to initialize GLEW!: %1").arg(QString((const char*)sError)));
+        Debug::Log(QString("Impossible to initialize GLEW!: %1").arg(QString(reinterpret_cast<const char*>(sError))));
     }
     else
     {
+        const QString gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
+        const QString gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
+        const QString gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
+        const QString gl_shading_language_version{reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))};
+        Debug::Log(QString("GL_VENDOR: %1").arg(gl_vendor));
+        Debug::Log(QString("GL_RENDERER: %1").arg(gl_renderer));
+        Debug::Log(QString("GL_VERSION: %1").arg(gl_version));
+        Debug::Log(QString("GL_SHADING_LANGUAGE_VERSION: %1").arg(gl_shading_language_version));
+
         LoadShaders();
-        Debug::Log(QString("GL_VENDOR: %1").arg(QString((const char *)glGetString(GL_VENDOR))));
-        Debug::Log(QString("GL_RENDERER: %1").arg(QString((const char *)glGetString(GL_RENDERER))));
-        Debug::Log(QString("GL_VERSION: %1").arg(QString((const char *)glGetString(GL_VERSION))));
-        Debug::Log(QString("GL_SHADING_LANGUAGE_VERSION: %1").arg(QString((const char *)glGetString(GL_SHADING_LANGUAGE_VERSION))));
-        //GLint numberOfExtensions;
-        //glGetIntegerv(GL_NUM_EXTENSIONS, &numberOfExtensions);
-        //QString extensions = "";
-        //for( int i = 0; i < numberOfExtensions; i++ )
-        //{
-        //    extensions += QString("%1, ").arg((const char *)glGetStringi(GL_EXTENSIONS, i));
-        //}
-        //Debug::Log(QString("GL_EXTENSIONS: %1").arg(extensions));
 
         // Allocate render targets first
         InitDualPeelingRenderTargets();
@@ -183,6 +229,12 @@ void GLCanvas::initializeGL()
         glDisable(GL_CULL_FACE);
 
         glGenQueries(1, &mQueryId);
+        mOpenGLInitialized = true;
+        ConfigureFirstLight(mFirstLightSettings);
+        ConfigureSecondLight(mSecondLightSettings);
+        ApplyIllumination(mApplyIllumination);
+        ApplyFaceCulling(mApplyFaceCulling);
+        SetAmbientLightIntensity(mAmbientLightIntensity);
     }
 }
 
@@ -235,7 +287,7 @@ void GLCanvas::paintGL()
         }
         for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
         {
-            if( mDrawWireframe )
+            if( mDrawViewpointSphereInWireframe )
             {
                 glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
             }
@@ -331,7 +383,7 @@ void GLCanvas::paintGL()
             DrawGeometryBoundingVolumes();
             for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
             {
-                if( mDrawWireframe )
+                if( mDrawViewpointSphereInWireframe )
                 {
                     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
                 }
@@ -423,7 +475,6 @@ void GLCanvas::keyPressEvent(QKeyEvent *pEvent)
     if(pEvent->key() == Qt::Key_R)
     {
         pEvent->accept();
-        DeleteShaders();
         LoadShaders();
         updateGL();
     }
@@ -431,7 +482,7 @@ void GLCanvas::keyPressEvent(QKeyEvent *pEvent)
     if(pEvent->key() == Qt::Key_F5)
     {
         pEvent->accept();
-        mDrawWireframe = !mDrawWireframe;
+        mDrawViewpointSphereInWireframe = !mDrawViewpointSphereInWireframe;
         updateGL();
     }
     if(pEvent->key() == Qt::Key_W)
@@ -595,41 +646,72 @@ void GLCanvas::LoadShaders()
         Debug::Error( QString("shaders/DualPeelingFinal.frag: %1").arg(dualPeelingFinalFS.GetLog()) );
     }
 
-    mShaderDualInit = new GLSLProgram("ShaderDualInit");
-    mShaderDualInit->AttachShader(basicVS);
-    mShaderDualInit->AttachShader(dualPeelingInitFS);
-    mShaderDualInit->LinkProgram();
+    if(!basicVS.HasErrors() && !dualPeelingInitFS.HasErrors())
+    {
+        mShaderDualInit = std::make_unique<GLSLProgram>("ShaderDualInit");
+        mShaderDualInit->AttachShader(basicVS);
+        mShaderDualInit->AttachShader(dualPeelingInitFS);
+        mShaderDualInit->LinkProgram();
+    }
+    else
+    {
+        mShaderDualInit = nullptr;
+        Debug::Error(QString("Could not load ShaderDualInit"));
+    }
 
-    mShaderDualPeel = new GLSLProgram("ShaderDualPeel");
-    mShaderDualPeel->AttachShader(dualPeelingPeelVS);
-    mShaderDualPeel->AttachShader(dualPeelingPeelFS);
-    mShaderDualPeel->AttachShader(shadeFragmentFS);
-    mShaderDualPeel->LinkProgram();
+    if(!dualPeelingPeelVS.HasErrors() && !dualPeelingPeelFS.HasErrors() && !shadeFragmentFS.HasErrors())
+    {
+        mShaderDualPeel = std::make_unique<GLSLProgram>("ShaderDualPeel");
+        mShaderDualPeel->AttachShader(dualPeelingPeelVS);
+        mShaderDualPeel->AttachShader(dualPeelingPeelFS);
+        mShaderDualPeel->AttachShader(shadeFragmentFS);
+        mShaderDualPeel->LinkProgram();
+    }
+    else
+    {
+        mShaderDualPeel = nullptr;
+        Debug::Error(QString("Could not load ShaderDualPeel"));
+    }
 
-    mShaderDualPeelPerVertexColor = new GLSLProgram("ShaderDualPeelPerVertexColor");
-    mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelVS);
-    mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelFS);
-    mShaderDualPeelPerVertexColor->AttachShader(shadePerVertexColorFS);
-    mShaderDualPeelPerVertexColor->LinkProgram();
+    if(!dualPeelingPeelVS.HasErrors() && !dualPeelingPeelFS.HasErrors() && !shadePerVertexColorFS.HasErrors())
+    {
+        mShaderDualPeelPerVertexColor = std::make_unique<GLSLProgram>("ShaderDualPeelPerVertexColor");
+        mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelVS);
+        mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelFS);
+        mShaderDualPeelPerVertexColor->AttachShader(shadePerVertexColorFS);
+        mShaderDualPeelPerVertexColor->LinkProgram();
+    }
+    else
+    {
+        mShaderDualPeelPerVertexColor = nullptr;
+        Debug::Error(QString("Could not load ShaderDualPeelPerVertexColor"));
+    }
 
-    mShaderDualBlend = new GLSLProgram("ShaderDualBlend");
-    mShaderDualBlend->AttachShader(basicVS);
-    mShaderDualBlend->AttachShader(dualPeelingBlendFS);
-    mShaderDualBlend->LinkProgram();
+    if(!basicVS.HasErrors() && !dualPeelingBlendFS.HasErrors())
+    {
+        mShaderDualBlend = std::make_unique<GLSLProgram>("ShaderDualBlend");
+        mShaderDualBlend->AttachShader(basicVS);
+        mShaderDualBlend->AttachShader(dualPeelingBlendFS);
+        mShaderDualBlend->LinkProgram();
+    }
+    else
+    {
+        mShaderDualBlend = nullptr;
+        Debug::Error(QString("Could not load ShaderDualBlend"));
+    }
 
-    mShaderDualFinal = new GLSLProgram("ShaderDualFinal");
-    mShaderDualFinal->AttachShader(basicVS);
-    mShaderDualFinal->AttachShader(dualPeelingFinalFS);
-    mShaderDualFinal->LinkProgram();
-}
-
-void GLCanvas::DeleteShaders()
-{
-    delete mShaderDualInit;
-    delete mShaderDualPeel;
-    delete mShaderDualPeelPerVertexColor;
-    delete mShaderDualBlend;
-    delete mShaderDualFinal;
+    if(!basicVS.HasErrors() && !dualPeelingFinalFS.HasErrors())
+    {
+        mShaderDualFinal = std::make_unique<GLSLProgram>("ShaderDualFinal");
+        mShaderDualFinal->AttachShader(basicVS);
+        mShaderDualFinal->AttachShader(dualPeelingFinalFS);
+        mShaderDualFinal->LinkProgram();
+    }
+    else
+    {
+        mShaderDualFinal = nullptr;
+        Debug::Error(QString("Could not load ShaderDualFinal"));
+    }
 }
 
 void GLCanvas::InitDualPeelingRenderTargets()
