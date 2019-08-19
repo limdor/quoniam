@@ -14,15 +14,12 @@
 #include "BoundingSphere.h"
 #include "SceneNode.h"
 
-/// Class representing a scene
 class Scene
 {
 public:
     /// Create an scene given the name and the root scene node
     Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes );
-    /// Copy constructor
     Scene(const Scene& pScene);
-    /// Destructor
     ~Scene();
 
     QString GetName() const;
@@ -30,14 +27,11 @@ public:
     const BoundingSphere* GetBoundingSphere() const;
     int GetNumberOfPolygons() const;
     int GetNumberOfVertices() const;
-    /// Show the information of the scene
     void ShowInformation() const;
 
 private:
-    /// Name of the scene
     QString mName;
-    /// Root scene node
-    SceneNode* mSceneRoot;
+    SceneNode* mRootNode;
     /// List of materials used
     QVector<Material*> mMaterials;
     /// List of geometries used
