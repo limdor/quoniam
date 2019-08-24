@@ -14,9 +14,54 @@
 #include "BoundingSphere.h"
 #include "SceneNode.h"
 
+#include <stack>
+#include <cassert>
+#include <iterator>
+
 class Scene
 {
 public:
+    class const_iterator: std::iterator<std::forward_iterator_tag, const SceneNode>
+    {
+        const SceneNode* mCurrentNode = nullptr;
+        std::stack<int> mChildIndexFromParent;
+
+    public:
+        const_iterator(const SceneNode* currentNode = nullptr):
+            mCurrentNode{currentNode}, mChildIndexFromParent{} {}
+        const_iterator& operator++() {
+            if(mCurrentNode) {
+                if(mCurrentNode->GetNumChilds() > 0) {
+                    mCurrentNode = mCurrentNode->GetChild(0);
+                    mChildIndexFromParent.push(0);
+                }
+                else{
+                    bool nextFound = false;
+                    while(!nextFound && mCurrentNode->GetParent() != nullptr && !mChildIndexFromParent.empty())
+                    {
+                        mCurrentNode = mCurrentNode->GetParent();
+                        int nextChild = mChildIndexFromParent.top() + 1;
+                        mChildIndexFromParent.pop();
+                        if(nextChild < mCurrentNode->GetNumChilds())
+                        {
+                            mCurrentNode = mCurrentNode->GetChild(nextChild);
+                            mChildIndexFromParent.push(nextChild);
+                            nextFound = true;
+                        }
+                    }
+                    if(!nextFound)
+                    {
+                        mCurrentNode = nullptr;
+                        assert(mChildIndexFromParent.empty());
+                    }
+                }
+            }
+            return *this;
+            }
+        bool operator==(const_iterator other) const {return mCurrentNode == other.mCurrentNode;}
+        bool operator!=(const_iterator other) const {return !(*this == other);}
+        reference operator*() const {return *mCurrentNode;}
+    };
     /// Create an scene given the name and the root scene node
     Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes );
     Scene(const Scene& pScene);
