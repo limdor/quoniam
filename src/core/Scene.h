@@ -14,30 +14,71 @@
 #include "BoundingSphere.h"
 #include "SceneNode.h"
 
-/// Class representing a scene
+#include <stack>
+#include <cassert>
+#include <iterator>
+
 class Scene
 {
 public:
+    class const_iterator: std::iterator<std::forward_iterator_tag, const SceneNode>
+    {
+        const SceneNode* mCurrentNode = nullptr;
+        std::stack<int> mChildIndexFromParent;
+
+    public:
+        const_iterator(const SceneNode* currentNode = nullptr):
+            mCurrentNode{currentNode}, mChildIndexFromParent{} {}
+        const_iterator& operator++() {
+            if(mCurrentNode) {
+                if(mCurrentNode->GetNumChilds() > 0) {
+                    mCurrentNode = mCurrentNode->GetChild(0);
+                    mChildIndexFromParent.push(0);
+                }
+                else{
+                    bool nextFound = false;
+                    while(!nextFound && mCurrentNode->GetParent() != nullptr && !mChildIndexFromParent.empty())
+                    {
+                        mCurrentNode = mCurrentNode->GetParent();
+                        int nextChild = mChildIndexFromParent.top() + 1;
+                        mChildIndexFromParent.pop();
+                        if(nextChild < mCurrentNode->GetNumChilds())
+                        {
+                            mCurrentNode = mCurrentNode->GetChild(nextChild);
+                            mChildIndexFromParent.push(nextChild);
+                            nextFound = true;
+                        }
+                    }
+                    if(!nextFound)
+                    {
+                        mCurrentNode = nullptr;
+                        assert(mChildIndexFromParent.empty());
+                    }
+                }
+            }
+            return *this;
+            }
+        bool operator==(const_iterator other) const {return mCurrentNode == other.mCurrentNode;}
+        bool operator!=(const_iterator other) const {return !(*this == other);}
+        reference operator*() const {return *mCurrentNode;}
+    };
     /// Create an scene given the name and the root scene node
     Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes );
-    /// Copy constructor
-    Scene(const Scene& pScene);
-    /// Destructor
+    Scene(const Scene& pScene) = delete;
     ~Scene();
 
+    inline const_iterator cbegin() const{return const_iterator{mRootNode};}
+    inline const_iterator cend() const{return const_iterator{nullptr};}
     QString GetName() const;
     const SceneNode* GetRootNode() const;
     const BoundingSphere* GetBoundingSphere() const;
     int GetNumberOfPolygons() const;
     int GetNumberOfVertices() const;
-    /// Show the information of the scene
     void ShowInformation() const;
 
 private:
-    /// Name of the scene
     QString mName;
-    /// Root scene node
-    SceneNode* mSceneRoot;
+    SceneNode* mRootNode;
     /// List of materials used
     QVector<Material*> mMaterials;
     /// List of geometries used

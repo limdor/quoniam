@@ -8,20 +8,14 @@
 #include "Debug.h"
 
 Scene::Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes ):
-    mName(pName), mSceneRoot(pSceneRoot), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
+    mName(pName), mRootNode(pSceneRoot), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
 {
 
-}
-
-Scene::Scene(const Scene& pScene):
-    mName(pScene.mName)
-{
-    mSceneRoot = new SceneNode(*pScene.mSceneRoot);
 }
 
 Scene::~Scene()
 {
-    delete mSceneRoot;
+    delete mRootNode;
     for(int i = 0; i < mMeshes.size(); i++)
     {
         delete mMeshes.at(i);
@@ -43,22 +37,22 @@ QString Scene::GetName() const
 
 const SceneNode* Scene::GetRootNode() const
 {
-    return mSceneRoot;
+    return mRootNode;
 }
 
 const BoundingSphere* Scene::GetBoundingSphere() const
 {
-    return mSceneRoot->GetBoundingSphere();
+    return mRootNode->GetBoundingSphere();
 }
 
 int Scene::GetNumberOfPolygons() const
 {
-    return mSceneRoot->GetNumberOfPolygons();
+    return mRootNode->GetNumberOfPolygons();
 }
 
 int Scene::GetNumberOfVertices() const
 {
-    return mSceneRoot->GetNumberOfVertices();
+    return mRootNode->GetNumberOfVertices();
 }
 
 void Scene::ShowInformation() const

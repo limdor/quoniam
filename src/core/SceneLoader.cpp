@@ -22,7 +22,7 @@ Scene * SceneLoader::LoadScene(const QString &pPath)
     importer.SetPropertyInteger(AI_CONFIG_PP_SBP_REMOVE,
                                 aiPrimitiveType_POINT |			//remove points and
                                 aiPrimitiveType_LINE );			//lines
-    // Impotem l'escena amb els següents paràmetres:
+    // Import the scene with the following parameters
     //   aiProcess_GenNormals
     //   aiProcess_CalcTangentSpace
     //   aiProcess_Triangulate
@@ -54,7 +54,7 @@ Scene * SceneLoader::LoadScene(const QString &pPath)
     }
     else
     {
-        Debug::Error(QString("Impossible carregar amb l'AssimpLoader: %1").arg(importer.GetErrorString()));
+        Debug::Error(QString("Impossible to load with AssimpLoader: %1").arg(importer.GetErrorString()));
         sceneLoaded = new Scene("Default", new SceneNode("Default"), QVector<Material*>(), QVector<Geometry*>(), QVector<Mesh*>());
     }
     return sceneLoaded;
@@ -67,7 +67,7 @@ SceneNode* SceneLoader::LoadSceneNode(const QVector<Mesh*>& pSceneMeshes, const 
 
     // Load the transformation matrix.
     aiMatrix4x4 mat = pNode->mTransformation;
-    // Es transposa la matriu per passar de row-major a column major
+    // Transpose matrix to go from row-major to column major
     nodeLoaded->SetLocalTransform( glm::transpose( glm::make_mat4(&mat[0][0]) ) );
 
     // For each mesh
