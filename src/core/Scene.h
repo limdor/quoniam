@@ -67,6 +67,8 @@ public:
     Scene(const Scene& pScene) = delete;
     ~Scene();
 
+    inline const_iterator cbegin() const{return const_iterator{mRootNode};}
+    inline const_iterator cend() const{return const_iterator{nullptr};}
     QString GetName() const;
     const SceneNode* GetRootNode() const;
     const BoundingSphere* GetBoundingSphere() const;
