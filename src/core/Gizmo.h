@@ -23,7 +23,7 @@ public:
     /// Copy constructor
     Gizmo( const Gizmo& pGizmo );
     /// Destructor
-    ~Gizmo();
+    virtual ~Gizmo();
     /// Draw the gizmo
     void Draw();
     /// Get mesh
