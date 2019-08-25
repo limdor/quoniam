@@ -13,12 +13,6 @@ Scene::Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material
 
 }
 
-Scene::Scene(const Scene& pScene):
-    mName(pScene.mName)
-{
-    mRootNode = new SceneNode(*pScene.mRootNode);
-}
-
 Scene::~Scene()
 {
     delete mRootNode;

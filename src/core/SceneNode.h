@@ -24,6 +24,7 @@ class SceneNode
 public:
     /// Constructor with the name of the node
     explicit SceneNode(const QString &pName);
+    explicit SceneNode(const SceneNode& sceneNode) = delete;
     /// Destructor
     ~SceneNode();
 

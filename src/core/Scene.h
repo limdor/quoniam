@@ -64,7 +64,7 @@ public:
     };
     /// Create an scene given the name and the root scene node
     Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes );
-    Scene(const Scene& pScene);
+    Scene(const Scene& pScene) = delete;
     ~Scene();
 
     QString GetName() const;
