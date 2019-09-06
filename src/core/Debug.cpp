@@ -27,22 +27,14 @@ void Debug::SetConsole(QPlainTextEdit * pConsole)
 
     if(mConsole)
     {
-#if QT_VERSION < 0x50000
-        qInstallMsgHandler(Debug::ConsoleOutput);
-#else
         qInstallMessageHandler(Debug::ConsoleOutput);
-#endif
         QPalette p = mConsole->palette();
         p.setColor(QPalette::Base, Qt::lightGray);
         mConsole->setPalette(p);
     }
     else
     {
-#if QT_VERSION < 0x50000
-        qInstallMsgHandler(0);
-#else
         qInstallMessageHandler(0);
-#endif
     }
 
 }
@@ -65,29 +57,7 @@ bool Debug::CheckGLError(const char *pFile, int pLine)
     }
     return retCode;
 }
-#if QT_VERSION < 0x50000
-void Debug::ConsoleOutput(QtMsgType pType, const char *pMessage)
-{
-    switch(pType)
-    {
-        case QtDebugMsg:
-            mConsole->appendHtml( QString("<FONT color=black>%1</FONT>").arg( QString(pMessage).replace(" ","&nbsp;") ) );
-            fprintf(stdout, "Log: %s\n", pMessage);
-            fflush(stdout);
-            break;
-        case QtWarningMsg:
-            mConsole->appendHtml( QString("<FONT color=yellow>%1</FONT>").arg( QString(pMessage).replace(" ","&nbsp;") ) );
-            fprintf(stderr, "Warning: %s\n", pMessage);
-            fflush(stderr);
-            break;
-        case QtCriticalMsg:
-            mConsole->appendHtml( QString("<FONT color=red>%1</FONT>").arg( QString(pMessage).replace(" ","&nbsp;") ) );
-            fprintf(stderr, "Error: %s\n", pMessage);
-            fflush(stderr);
-            break;
-    }
-}
-#else
+
 void Debug::ConsoleOutput(QtMsgType pType, const QMessageLogContext &, const QString &pMessage)
 {
     switch(pType)
@@ -111,4 +81,3 @@ void Debug::ConsoleOutput(QtMsgType pType, const QMessageLogContext &, const QSt
             break;
     }
 }
-#endif
