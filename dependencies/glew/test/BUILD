@@ -5,4 +5,5 @@ cc_test(
         "//dependencies/catch2",
         "//dependencies/glew",
     ],
+    size = "small",
 )

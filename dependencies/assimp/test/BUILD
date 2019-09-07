@@ -5,4 +5,5 @@ cc_test(
         "//dependencies/catch2",
         "//dependencies/assimp",
     ],
+    size = "small",
 )
