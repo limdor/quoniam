@@ -31,12 +31,7 @@ public:
     #define CHECK_GL_ERROR()
 #endif
 private:
-    /// Message handler
-#if QT_VERSION < 0x50000
-    static void ConsoleOutput(QtMsgType pType, const char *pMessage);
-#else
     static void ConsoleOutput(QtMsgType pType, const QMessageLogContext &, const QString &pMessage);
-#endif
 
     /// Console
     static QPlainTextEdit* mConsole;
