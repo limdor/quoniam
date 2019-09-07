@@ -1,2 +1,2 @@
 INCLUDEPATH +=\
-    $$PWD/dependencies/glm
+    $$PWD

@@ -6,7 +6,6 @@ else {
 }
 
 win32 {
-    PWD_WIN = $$replace(PWD,"/","\\")
     OUT_PWD_WIN = $$replace(OUT_PWD,"/","\\")
 
     equals(COMPILATION,debug){

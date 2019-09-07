@@ -1,2 +1,2 @@
 INCLUDEPATH +=\
-    $$PWD/dependencies/miniball
+    $$PWD
