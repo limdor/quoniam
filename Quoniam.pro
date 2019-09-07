@@ -16,12 +16,12 @@ else {
     COMPILATION = release
 }
 
-include(assimp_dependency.pri)
-include(opencv_dependency.pri)
-include(qt_installation.pri)
-include(glm_dependency.pri)
-include(miniball_dependency.pri)
-include(glew_dependency.pri)
+include(dependencies/assimp/assimp_dependency.pri)
+include(dependencies/opencv/opencv_dependency.pri)
+include(dependencies/qt/qt_installation.pri)
+include(dependencies/glm/glm_dependency.pri)
+include(dependencies/miniball/miniball_dependency.pri)
+include(dependencies/glew/glew_dependency.pri)
 
 win32 {
     RC_FILE = Quoniam.rc
@@ -32,7 +32,7 @@ win32 {
     LIBS += glu32.lib
 
     equals(COMPILATION,debug){
-        include(vld_dependency.pri)
+        include(dependencies/vld/vld_dependency.pri)
     }
 }
 
