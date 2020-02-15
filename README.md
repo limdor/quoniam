@@ -29,5 +29,5 @@ If you find this framework useful, please considering citing the paper:
 * [glm](http://glm.g-truc.net/download.html): 0.9.6.1                  
 * [Miniball](http://www.inf.ethz.ch/personal/gaertner/miniball.html): 2.0                 
 * [OpenCV](http://opencv.org/): 3.3.1
-* [Qt](http://qt.nokia.com/products): 5.9.2                     
+* [Qt](http://qt.nokia.com/products): 5.9.9                     
 * [Visual Leak Detector](https://vld.codeplex.com/): 2.3
