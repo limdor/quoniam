@@ -1,14 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_import", "cc_library")
+
 cc_library(
     name = "assimp",
-    hdrs = glob(["include/assimp/*.h", "include/assimp/*.hpp"]),
+    hdrs = glob([
+        "include/assimp/*.h",
+        "include/assimp/*.hpp",
+    ]),
     includes = ["include"],
-    deps = [":assimp_import"],
     visibility = ["//visibility:public"],
+    deps = [":assimp_import"],
 )
 
 cc_import(
     name = "assimp_import",
-    hdrs = glob(["include/assimp/*.h", "include/assimp/*.hpp"]),
+    hdrs = glob([
+        "include/assimp/*.h",
+        "include/assimp/*.hpp",
+    ]),
     interface_library = select({
         "//config:release": "lib/release/assimp.lib",
         "//config:debug": "lib/debug/assimp.lib",
