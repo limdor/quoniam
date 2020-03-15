@@ -1,0 +1,14 @@
+cc_import(
+  name = "qt_core_private",
+  hdrs = glob(["include/QtCore/**"]),
+  interface_library = "lib/Qt5Core.lib",
+  shared_library = "bin/Qt5Core.dll",
+)
+
+cc_library(
+  name = "qt_core",
+  hdrs = glob(["include/QtCore/**"]),
+  includes = ["include"],
+  deps = [":qt_core_private"],
+  visibility = ["//visibility:public"],
+)
