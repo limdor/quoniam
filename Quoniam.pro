@@ -39,6 +39,7 @@ win32 {
 INCLUDEPATH +=\
     $$PWD/src \
     $$PWD/src/core \
+    $$PWD/src/utils \
     $$PWD/src/viewpoint-measures
 
 OBJECTS_DIR = $$OUT_PWD/tmp/$$COMPILATION
@@ -52,7 +53,6 @@ SOURCES +=\
     src/core/BoundingSphere.cpp \
     src/core/Camera.cpp \
     src/core/CameraController.cpp \
-    src/core/Debug.cpp \
     src/core/Geometry.cpp \
     src/core/Gizmo.cpp \
     src/core/GLCanvas.cpp \
@@ -71,6 +71,8 @@ SOURCES +=\
     src/core/SerializedSceneGeometry.cpp \
     src/core/Texture.cpp \
     src/core/TrackballCamera.cpp \
+    src/utils/Debug.cpp \
+    src/utils/Tools.cpp \
     src/viewpoint-measures/CurvatureEntropy.cpp \
     src/viewpoint-measures/DepthBasedVisualStability.cpp \
     src/viewpoint-measures/DepthDistribution.cpp \
@@ -103,7 +105,6 @@ SOURCES +=\
     src/SceneInformationBuilder.cpp \
     src/SphereOfViewpoints.cpp \
     src/SpherePointCloud.cpp \
-    src/Tools.cpp \
     src/ViewpointMeasureSlider.cpp
 
 HEADERS  += \
@@ -111,7 +112,6 @@ HEADERS  += \
     src/core/BoundingSphere.h \
     src/core/Camera.h \
     src/core/CameraController.h \
-    src/core/Debug.h \
     src/core/Geometry.h \
     src/core/Gizmo.h \
     src/core/GLCanvas.h \
@@ -131,6 +131,8 @@ HEADERS  += \
     src/core/SerializedSceneGeometry.h \
     src/core/Texture.h \
     src/core/TrackballCamera.h \
+    src/utils/Debug.h \
+    src/utils/Tools.h \
     src/viewpoint-measures/CurvatureEntropy.h \
     src/viewpoint-measures/DepthBasedVisualStability.h \
     src/viewpoint-measures/DepthDistribution.h \
@@ -162,7 +164,6 @@ HEADERS  += \
     src/SceneInformationBuilder.h \
     src/SphereOfViewpoints.h \
     src/SpherePointCloud.h \
-    src/Tools.h \
     src/ViewpointMeasureSlider.h
 
 FORMS    += \
