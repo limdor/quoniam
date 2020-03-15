@@ -12,3 +12,48 @@ cc_library(
   deps = [":qt_core_private"],
   visibility = ["//visibility:public"],
 )
+
+cc_import(
+  name = "qt_widgets_private",
+  hdrs = glob(["include/QtWidgets/**"]),
+  interface_library = "lib/Qt5Widgets.lib",
+  shared_library = "bin/Qt5Widgets.dll",
+)
+
+cc_library(
+  name = "qt_widgets",
+  hdrs = glob(["include/QtWidgets/**"]),
+  includes = ["include"],
+  deps = [":qt_widgets_private"],
+  visibility = ["//visibility:public"],
+)
+
+cc_import(
+  name = "qt_opengl_private",
+  hdrs = glob(["include/QtOpenGL/**"]),
+  interface_library = "lib/Qt5OpenGL.lib",
+  shared_library = "bin/Qt5OpenGL.dll",
+)
+
+cc_library(
+  name = "qt_opengl",
+  hdrs = glob(["include/QtOpenGL/**"]),
+  includes = ["include"],
+  deps = [":qt_opengl_private"],
+  visibility = ["//visibility:public"],
+)
+
+cc_import(
+  name = "qt_gui_private",
+  hdrs = glob(["include/QtGui/**"]),
+  interface_library = "lib/Qt5Gui.lib",
+  shared_library = "bin/Qt5Gui.dll",
+)
+
+cc_library(
+  name = "qt_gui",
+  hdrs = glob(["include/QtGui/**"]),
+  includes = ["include"],
+  deps = [":qt_gui_private"],
+  visibility = ["//visibility:public"],
+)
