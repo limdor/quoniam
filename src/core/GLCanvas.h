@@ -25,6 +25,8 @@
 #include "PerspectiveCamera.h"
 #include "Scene.h"
 
+#include <memory>
+
 /// Class to do the OpenGL render
 class GLCanvas : public QGLWidget
 {
