@@ -6,11 +6,9 @@
 #ifndef BOUNDING_SPHERE_H
 #define BOUNDING_SPHERE_H
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Gizmo.h"
+
+#include "glm/vec3.hpp"
 
 /// BoundingVolume class with methods to use a bounding sphere
 class BoundingSphere : public Gizmo

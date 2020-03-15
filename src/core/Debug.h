@@ -6,7 +6,6 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-//Qt includes
 #include <QtWidgets/QPlainTextEdit>
 
 /// Class to output log, warning and error messages through a console

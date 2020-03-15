@@ -1,20 +1,17 @@
-//Definition include
 #include "SerializedSceneGeometry.h"
 
-//Qt includes
+#include "Debug.h"
+#include "Tools.h"
+
 #include <QtCore/QTime>
 
-//Dependency includes
 #include "glm/exponential.hpp"
 #include "glm/geometric.hpp"
 #include "glm/gtc/constants.hpp"
 #include "glm/gtx/norm.hpp"
 #include "glm/gtx/vector_angle.hpp"
-#include "Miniball.h"
 
-//Project includes
-#include "Debug.h"
-#include "Tools.h"
+#include "Miniball.h"
 
 SerializedSceneGeometry::SerializedSceneGeometry(const Scene *pScene):
     mNumberOfVertexs(0), mNumberOfFaces(0)

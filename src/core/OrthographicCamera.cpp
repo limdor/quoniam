@@ -1,12 +1,9 @@
-//Definition include
 #include "OrthographicCamera.h"
 
-//Dependency includes
+#include "Geometry.h"
+
 #include "glm/geometric.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-
-//Project includes
-#include "Geometry.h"
 
 OrthographicCamera::OrthographicCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp, glm::vec3 pPosition, float pTop, float pBottom, float pLeft, float pRight): Camera(pNearPlane, pFarPlane, pLookAt, pUp, pPosition, (pRight - pLeft) / (pTop - pBottom)),
     mTop(pTop), mBottom(pBottom), mLeft(pLeft), mRight(pRight)

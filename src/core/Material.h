@@ -6,15 +6,12 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-//Qt includes
+#include "Texture.h"
+
 #include <QtCore/QString>
 #include <QtGui/QImage>
 
-//Dependency includes
 #include "glm/vec3.hpp"
-
-//Project includes
-#include "Texture.h"
 
 /// Class to wrap the material of a mesh
 class Material

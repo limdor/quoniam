@@ -1,7 +1,5 @@
-//Definition include
 #include "AxisAlignedBoundingBox.h"
 
-//Project includes
 #include "Geometry.h"
 
 AxisAlignedBoundingBox::AxisAlignedBoundingBox(): Gizmo(),

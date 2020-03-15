@@ -9,12 +9,10 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-//Dependency includes
-#include "glm/mat4x4.hpp"
-
-//Project includes
 #include "GPUGeometry.h"
 #include "Material.h"
+
+#include "glm/mat4x4.hpp"
 
 class GPUSceneNode
 {

@@ -1,4 +1,3 @@
-//Definition include
 #include "GPUSceneNode.h"
 
 GPUSceneNode::GPUSceneNode(const GPUGeometry *pGeometry, Material* pMaterial):

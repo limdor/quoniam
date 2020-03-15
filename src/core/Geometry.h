@@ -6,20 +6,18 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-//Project includes
+//GLEW has to be included before any OpenGL include
+#include "glew.h"
+
 #include "AxisAlignedBoundingBox.h"
 #include "BoundingSphere.h"
 
-//Dependency includes
-#include "glew.h"
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
-//Qt includes
 #include <QtCore/QString>
 
-//STD
 #include <vector>
 
 class GPUGeometry;

@@ -6,7 +6,6 @@
 #ifndef CAMERA_CONTROLLER_H
 #define CAMERA_CONTROLLER_H
 
-//Project includes
 #include "Camera.h"
 #include "GLCanvas.h"
 

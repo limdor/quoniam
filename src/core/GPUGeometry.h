@@ -9,7 +9,6 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-//Project includes
 #include "Geometry.h"
 
 /// Class to wrap a Mesh that is stored into the GPU

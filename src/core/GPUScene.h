@@ -6,7 +6,6 @@
 #ifndef GPU_SCENE_H
 #define GPU_SCENE_H
 
-//Project includes
 #include "GPUSceneNode.h"
 #include "Scene.h"
 

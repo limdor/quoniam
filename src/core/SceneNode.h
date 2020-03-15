@@ -7,16 +7,13 @@
 #ifndef SCENE_NODE_H
 #define SCENE_NODE_H
 
-//Qt includes
+#include "Camera.h"
+#include "Mesh.h"
+
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
-//Dependency includes
 #include "glm/mat4x4.hpp"
-
-//Project includes
-#include "Camera.h"
-#include "Mesh.h"
 
 /// Class for a node of a scene
 class SceneNode

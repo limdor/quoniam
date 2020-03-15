@@ -1,13 +1,10 @@
-//Definition include
 #include "BoundingSphere.h"
 
-//Dependency includes
+#include "Geometry.h"
+
 #include "glm/exponential.hpp"
 #include "glm/trigonometric.hpp"
 #include "glm/gtx/norm.hpp"
-
-//Project includes
-#include "Geometry.h"
 
 BoundingSphere::BoundingSphere(): Gizmo(),
     mCenter(0.0f), mRadius(0.0f)

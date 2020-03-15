@@ -1,13 +1,9 @@
-//Definition include
 #include "GPUGeometry.h"
 
-//Qt includes
-#include <QtOpenGL/QGLWidget>
-
-//Project includes
 #include "Debug.h"
 
-//STD
+#include <QtOpenGL/QGLWidget>
+
 #include <type_traits>
 
 GPUGeometry::~GPUGeometry()

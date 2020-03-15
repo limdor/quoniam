@@ -1,18 +1,15 @@
-//Definition include
 #include "SceneLoader.h"
 
-//Qt includes
+#include "Debug.h"
+
 #include <QtCore/QFileInfo>
 #include <QtGui/QImageReader>
 
-//Dependency includes
 #include "assimp/Importer.hpp"
 #include "assimp/postprocess.h"
+
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/matrix.hpp"
-
-//Project includes
-#include "Debug.h"
 
 Scene * SceneLoader::LoadScene(const QString &pPath)
 {

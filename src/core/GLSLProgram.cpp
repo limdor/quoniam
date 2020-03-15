@@ -1,11 +1,8 @@
-//Definition include
 #include "GLSLProgram.h"
 
-//Dependency includes
-#include "glm/gtc/type_ptr.hpp"
-
-//Project includes
 #include "Debug.h"
+
+#include "glm/gtc/type_ptr.hpp"
 
 GLSLProgram::GLSLProgram(const QString& pName):
     mName(pName),

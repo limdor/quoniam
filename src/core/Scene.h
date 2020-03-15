@@ -7,12 +7,10 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-//Qt includes
-#include <QtCore/QString>
-
-//Project includes
 #include "BoundingSphere.h"
 #include "SceneNode.h"
+
+#include <QtCore/QString>
 
 #include <stack>
 #include <cassert>

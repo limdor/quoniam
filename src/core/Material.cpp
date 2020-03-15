@@ -1,7 +1,5 @@
-//Definition include
 #include "Material.h"
 
-//Qt includes
 #include <QtOpenGL/QGLWidget>
 
 Material::Material(const QString &pName):

@@ -9,7 +9,6 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-//Qt includes
 #include <QtCore/QString>
 
 /// Class to wrap the GLSL shaders used by OpenGL

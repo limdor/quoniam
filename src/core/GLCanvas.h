@@ -9,14 +9,6 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-//Qt includes
-#include <QtOpenGL/QGLWidget>
-#include <QtCore/QVector>
-
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Camera.h"
 #include "Geometry.h"
 #include "GLSLProgram.h"
@@ -24,6 +16,11 @@
 #include "LightSettings.h"
 #include "PerspectiveCamera.h"
 #include "Scene.h"
+
+#include <QtOpenGL/QGLWidget>
+#include <QtCore/QVector>
+
+#include "glm/vec3.hpp"
 
 #include <memory>
 

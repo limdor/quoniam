@@ -1,13 +1,10 @@
-//Definition include
 #include "PerspectiveCamera.h"
 
-//Dependency includes
+#include "Geometry.h"
+
 #include "glm/geometric.hpp"
 #include "glm/trigonometric.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-
-//Project includes
-#include "Geometry.h"
 
 PerspectiveCamera::PerspectiveCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp, glm::vec3 pPosition, float pAngle, float pAspectRatio): Camera(pNearPlane, pFarPlane, pLookAt, pUp, pPosition, pAspectRatio),
     mAngle(pAngle)

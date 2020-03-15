@@ -1,8 +1,7 @@
-//Definition include
-#include "Debug.h"
-
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
+
+#include "Debug.h"
 
 QPlainTextEdit* Debug::mConsole;
 

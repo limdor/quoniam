@@ -6,19 +6,16 @@
 #ifndef SCENE_LOADER_H
 #define SCENE_LOADER_H
 
-//Qt includes
-#include <QtCore/QString>
-#include <QtCore/QVector>
-
-//Dependency includes
-#include "assimp/material.h"
-#include "assimp/scene.h"
-
-//Project includes
 #include "Geometry.h"
 #include "Material.h"
 #include "Mesh.h"
 #include "Scene.h"
+
+#include <QtCore/QString>
+#include <QtCore/QVector>
+
+#include "assimp/material.h"
+#include "assimp/scene.h"
 
 /// Class to load scenes from files
 class SceneLoader

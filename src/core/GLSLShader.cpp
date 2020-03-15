@@ -1,13 +1,10 @@
-//Definition include
 #include "GLSLShader.h"
 
-//Qt includes
+#include "Debug.h"
+
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
-
-//Project includes
-#include "Debug.h"
 
 GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
     mType(pType)
