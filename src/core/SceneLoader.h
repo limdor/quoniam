@@ -7,8 +7,8 @@
 #define SCENE_LOADER_H
 
 //Qt includes
-#include <QString>
-#include <QVector>
+#include <QtCore/QString>
+#include <QtCore/QVector>
 
 //Dependency includes
 #include "assimp/material.h"

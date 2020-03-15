@@ -2,8 +2,8 @@
 #include "SceneLoader.h"
 
 //Qt includes
-#include <QFileInfo>
-#include <QImageReader>
+#include <QtCore/QFileInfo>
+#include <QtGui/QImageReader>
 
 //Dependency includes
 #include "assimp/Importer.hpp"

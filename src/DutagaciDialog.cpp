@@ -2,7 +2,7 @@
 #include "DutagaciDialog.h"
 
 //Qt includes
-#include <QTextStream>
+#include <QtCore/QTextStream>
 
 //Dependency includes
 #include "glm/trigonometric.hpp"

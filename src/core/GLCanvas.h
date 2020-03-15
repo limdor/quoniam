@@ -10,8 +10,8 @@
 #include "glew.h"
 
 //Qt includes
-#include <QGLWidget>
-#include <QVector>
+#include <QtOpenGL/QGLWidget>
+#include <QtCore/QVector>
 
 //Dependency includes
 #include "glm/vec3.hpp"

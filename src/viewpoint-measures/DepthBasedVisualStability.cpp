@@ -2,8 +2,8 @@
 #include "DepthBasedVisualStability.h"
 
 //Qt includes
-#include <QFileInfo>
-#include <QProcess>
+#include <QtCore/QFileInfo>
+#include <QtCore/QProcess>
 
 //Dependency includes
 #include "opencv2/highgui/highgui.hpp"

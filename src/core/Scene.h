@@ -8,7 +8,7 @@
 #define SCENE_H
 
 //Qt includes
-#include <QString>
+#include <QtCore/QString>
 
 //Project includes
 #include "BoundingSphere.h"

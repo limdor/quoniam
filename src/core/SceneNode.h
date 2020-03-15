@@ -8,8 +8,8 @@
 #define SCENE_NODE_H
 
 //Qt includes
-#include <QString>
-#include <QVector>
+#include <QtCore/QString>
+#include <QtCore/QVector>
 
 //Dependency includes
 #include "glm/mat4x4.hpp"

@@ -10,7 +10,7 @@
 #include "glew.h"
 
 //Qt includes
-#include <QString>
+#include <QtCore/QString>
 
 /// Class to wrap the GLSL shaders used by OpenGL
 class GLSLShader

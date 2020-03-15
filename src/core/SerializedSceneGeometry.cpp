@@ -2,7 +2,7 @@
 #include "SerializedSceneGeometry.h"
 
 //Qt includes
-#include <QTime>
+#include <QtCore/QTime>
 
 //Dependency includes
 #include "glm/exponential.hpp"

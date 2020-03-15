@@ -7,8 +7,8 @@
 #define MATERIAL_H
 
 //Qt includes
-#include <QString>
-#include <QImage>
+#include <QtCore/QString>
+#include <QtGui/QImage>
 
 //Dependency includes
 #include "glm/vec3.hpp"

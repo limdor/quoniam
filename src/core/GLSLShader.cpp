@@ -2,9 +2,9 @@
 #include "GLSLShader.h"
 
 //Qt includes
-#include <QFile>
-#include <QString>
-#include <QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
 
 //Project includes
 #include "Debug.h"

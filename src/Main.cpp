@@ -3,7 +3,7 @@
 #endif
 
 //Qt includes
-#include <QApplication>
+#include <QtWidgets/QApplication>
 
 //Project includes
 #include "MainWindow.h"

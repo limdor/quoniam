@@ -8,7 +8,7 @@
 #define CAMERA_H
 
 //Qt includes
-#include <QString>
+#include <QtCore/QString>
 
 //Dependency includes
 #include "glm/mat4x4.hpp"

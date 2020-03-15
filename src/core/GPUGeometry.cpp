@@ -2,7 +2,7 @@
 #include "GPUGeometry.h"
 
 //Qt includes
-#include <QGLWidget>
+#include <QtOpenGL/QGLWidget>
 
 //Project includes
 #include "Debug.h"

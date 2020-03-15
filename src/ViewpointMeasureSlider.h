@@ -7,7 +7,7 @@
 #define VIEWPOINT_MEASURE_SLIDER_H
 
 //Qt includes
-#include <QSlider>
+#include <QtWidgets/QSlider>
 
 class ViewpointMeasureSlider : public QSlider
 {

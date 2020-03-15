@@ -17,7 +17,7 @@
 #include "glm/vec4.hpp"
 
 //Qt includes
-#include <QString>
+#include <QtCore/QString>
 
 //STD
 #include <vector>

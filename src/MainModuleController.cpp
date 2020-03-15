@@ -2,13 +2,13 @@
 #include "MainModuleController.h"
 
 //Qt includes
-#include <QColorDialog>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QProgressDialog>
-#include <QTextStream>
-#include <QTime>
-#include <QXmlStreamWriter>
+#include <QtWidgets/QColorDialog>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QProgressDialog>
+#include <QtCore/QTextStream>
+#include <QtCore/QTime>
+#include <QtCore/QXmlStreamWriter>
 
 //Dependency includes
 #include "glm/vec2.hpp"

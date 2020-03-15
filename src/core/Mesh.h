@@ -7,7 +7,7 @@
 #define MESH_H
 
 //Qt includes
-#include <QString>
+#include <QtCore/QString>
 
 //Project includes
 #include "Geometry.h"

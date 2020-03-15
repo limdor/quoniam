@@ -5,10 +5,10 @@
 #include "glew.h"
 
 //Qt includes
-#include <QApplication>
-#include <QProgressDialog>
-#include <QTime>
-#include <QVector>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QProgressDialog>
+#include <QtCore/QTime>
+#include <QtCore/QVector>
 
 //Dependency includes
 #include "glm/mat4x4.hpp"
