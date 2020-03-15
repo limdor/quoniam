@@ -7,7 +7,7 @@
 #define PROJECTED_AREAS_MATRIX_H
 
 //Qt includes
-#include <QVector>
+#include <QtCore/QVector>
 
 class ProjectedAreasMatrix
 {

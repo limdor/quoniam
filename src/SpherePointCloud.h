@@ -9,7 +9,7 @@
 #define SPHERE_POINT_CLOUD_H
 
 //Qt includes
-#include <QVector>
+#include <QtCore/QVector>
 
 //Dependency includes
 #include "glm/vec3.hpp"

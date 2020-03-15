@@ -7,11 +7,9 @@
 #ifndef SERIALIZED_SCENE_GEOMETRY_H
 #define SERIALIZED_SCENE_GEOMETRY_H
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Scene.h"
+
+#include "glm/vec3.hpp"
 
 class SerializedSceneGeometry
 {

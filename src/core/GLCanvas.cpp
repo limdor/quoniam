@@ -1,17 +1,14 @@
-//Definition include
 #include "GLCanvas.h"
 
-//Dependency includes
-#include "glm/mat4x4.hpp"
-#include "glm/vec2.hpp"
-#include "glm/geometric.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-
-//Project includes
 #include "Debug.h"
 #include "GPUGeometry.h"
 #include "OrthographicCamera.h"
 #include "Tools.h"
+
+#include "glm/mat4x4.hpp"
+#include "glm/vec2.hpp"
+#include "glm/geometric.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
 {

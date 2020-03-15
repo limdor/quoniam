@@ -7,11 +7,9 @@
 #ifndef ORTHOGRAPHIC_CAMERA_H
 #define ORTHOGRAPHIC_CAMERA_H
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Camera.h"
+
+#include "glm/vec3.hpp"
 
 /// Camera class with methods to configure an orthographic camera
 class OrthographicCamera : public Camera

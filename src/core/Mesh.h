@@ -6,12 +6,10 @@
 #ifndef MESH_H
 #define MESH_H
 
-//Qt includes
-#include <QString>
-
-//Project includes
 #include "Geometry.h"
 #include "Material.h"
+
+#include <QtCore/QString>
 
 /// Class to wrap a 3d mesh
 class Mesh

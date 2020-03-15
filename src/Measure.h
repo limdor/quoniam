@@ -7,7 +7,7 @@
 #define MEASURE_H
 
 //Qt includes
-#include <QString>
+#include <QtCore/QString>
 
 //Project includes
 #include "SceneInformationBuilder.h"

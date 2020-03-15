@@ -1,9 +1,8 @@
-//Definition include
 #include "Gizmo.h"
 
-//Project includes
 #include "GPUGeometry.h"
 #include "Geometry.h"
+#include "Debug.h"
 
 Gizmo::Gizmo( const Gizmo& pGizmo ):
     mPositionOfVertices(pGizmo.mPositionOfVertices)

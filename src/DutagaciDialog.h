@@ -10,8 +10,8 @@
 #include "ui_DutagaciView.h"
 
 //Qt includes
-#include <QDialog>
-#include <QFileDialog>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QFileDialog>
 
 namespace Ui {
     class DutagaciView;

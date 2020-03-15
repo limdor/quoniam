@@ -1,14 +1,12 @@
-//Definition include
 #include "Geometry.h"
 
-//Dependency includes
-#include "glm/exponential.hpp"
-#include "Miniball.h"
-
-//Project includes
 #include "Debug.h"
 #include "GPUGeometry.h"
 #include "Scene.h"
+
+#include "Miniball.h"
+
+#include "glm/exponential.hpp"
 
 Geometry::Geometry(const QString &pName, Topology pT):
     mTopology(pT), mBoundingBox(nullptr), mBoundingSphere(nullptr), mGPUGeometry(nullptr), mName(pName), mNeedGPUGeometryUpdate(false)

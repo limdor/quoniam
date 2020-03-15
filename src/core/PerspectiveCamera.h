@@ -7,11 +7,9 @@
 #ifndef PERSPECTIVE_CAMERA_H
 #define PERSPECTIVE_CAMERA_H
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Camera.h"
+
+#include "glm/vec3.hpp"
 
 /// Camera class with methods to configure a perspective camera
 class PerspectiveCamera : public Camera

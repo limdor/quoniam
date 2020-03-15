@@ -9,8 +9,7 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-//Qt includes
-#include <QImage>
+#include <QtGui/QImage>
 
 /// Class to wrap an OpenGL texture
 class Texture

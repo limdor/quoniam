@@ -6,10 +6,8 @@
 #ifndef GIZMO_H
 #define GIZMO_H
 
-//Qt includes
-#include <QVector>
+#include <QtCore/QVector>
 
-//Dependency includes
 #include "glm/vec4.hpp"
 
 class Geometry;

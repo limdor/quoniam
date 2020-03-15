@@ -1,7 +1,7 @@
 #include "ProjectedAreasMatrix.h"
 
-#include <QFile>
-#include <QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 
 #include "Debug.h"
 

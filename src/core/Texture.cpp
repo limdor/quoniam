@@ -1,4 +1,3 @@
-//Definition include
 #include "Texture.h"
 
 Texture::Texture(QImage *pTexture, bool pRectangle):

@@ -1,11 +1,8 @@
-//Definition include
 #include "Scene.h"
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Debug.h"
+
+#include "glm/vec3.hpp"
 
 Scene::Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes ):
     mName(pName), mRootNode(pSceneRoot), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)

@@ -9,17 +9,14 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-//Qt includes
-#include <QString>
+#include "GLSLShader.h"
 
-//Dependency includes
+#include <QtCore/QString>
+
 #include "glm/mat4x4.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
-//Project includes
-#include "GLSLShader.h"
-//STD
 #include <map>
 
 /// Class to wrap the GLSL programs used by OpenGL

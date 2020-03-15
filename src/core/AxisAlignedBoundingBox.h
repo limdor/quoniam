@@ -6,11 +6,9 @@
 #ifndef AXIS_ALIGNED_BOUNDING_BOX_H
 #define AXIS_ALIGNED_BOUNDING_BOX_H
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "Gizmo.h"
+
+#include "glm/vec3.hpp"
 
 /// BoundingVolume class with methods to use an axis-aligned bounding box
 class AxisAlignedBoundingBox : public Gizmo

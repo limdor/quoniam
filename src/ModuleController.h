@@ -7,8 +7,8 @@
 #define MODULE_CONTROLLER_H
 
 //Qt includes
-#include <QMenu>
-#include <QWidget>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QWidget>
 
 class ModuleController : public QWidget
 {

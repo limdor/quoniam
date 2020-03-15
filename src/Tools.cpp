@@ -5,9 +5,9 @@
 #include <math.h>
 
 //Qt includes
-#include <QDir>
-#include <QPair>
-#include <QtAlgorithms>
+#include <QtCore/QDir>
+#include <QtCore/QPair>
+#include <QtCore/QtAlgorithms>
 
 //Dependency includes
 #include "glm/common.hpp"

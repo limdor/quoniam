@@ -7,15 +7,12 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-//Qt includes
-#include <QString>
+#include "Gizmo.h"
 
-//Dependency includes
+#include <QtCore/QString>
+
 #include "glm/mat4x4.hpp"
 #include "glm/vec3.hpp"
-
-//Project includes
-#include "Gizmo.h"
 
 /// Abstract camera class with methods to configure a generic camera
 class Camera : public Gizmo

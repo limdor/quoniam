@@ -7,8 +7,8 @@
 #define MODULE_TAB_WIDGET_H
 
 //Qt includes
-#include <QMap>
-#include <QTabWidget>
+#include <QtCore/QMap>
+#include <QtWidgets/QTabWidget>
 
 /// Class to handle the different moudles that you can load in the program using different tabs
 class ModuleTabWidget : public QTabWidget

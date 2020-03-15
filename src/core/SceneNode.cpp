@@ -1,7 +1,5 @@
-//Definition include
 #include "SceneNode.h"
 
-//Project includes
 #include "Debug.h"
 
 SceneNode::SceneNode(const QString &pName):

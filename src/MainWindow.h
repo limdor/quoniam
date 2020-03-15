@@ -10,7 +10,7 @@
 #include "ui_MainWindow.h"
 
 //Qt includes
-#include <QMainWindow>
+#include <QtWidgets/QMainWindow>
 
 //Project includes
 #include "ModuleTabWidget.h"

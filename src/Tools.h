@@ -7,8 +7,8 @@
 #define TOOLS_H
 
 //Qt includes
-#include <QPair>
-#include <QVector>
+#include <QtCore/QPair>
+#include <QtCore/QVector>
 
 //Dependency includes
 #include "glm/vec3.hpp"

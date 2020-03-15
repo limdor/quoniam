@@ -10,7 +10,7 @@
 #include "ui_MainModule.h"
 
 //Qt includes
-#include <QSignalMapper>
+#include <QtCore/QSignalMapper>
 
 //Dependency includes
 #include "glm/vec3.hpp"

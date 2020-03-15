@@ -1,7 +1,5 @@
-//Definition include
 #include "GPUScene.h"
 
-//Dependency includes
 #include "glm/mat4x4.hpp"
 
 GPUScene::GPUScene(const Scene *pScene)

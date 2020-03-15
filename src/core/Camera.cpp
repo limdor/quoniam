@@ -1,7 +1,5 @@
-//Definition include
 #include "Camera.h"
 
-//Dependency includes
 #include <glm/gtc/matrix_transform.hpp>
 
 Camera::Camera(float pNearPlane, float pFarPlane, const glm::vec3 &pLookAt, const glm::vec3 &pUp, const glm::vec3 &pPosition, float pAspectRatio): Gizmo(),

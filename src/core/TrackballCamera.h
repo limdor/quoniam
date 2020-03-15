@@ -6,11 +6,9 @@
 #ifndef TRACKBALL_CAMERA_H
 #define TRACKBALL_CAMERA_H
 
-//Dependency includes
-#include "glm/vec3.hpp"
-
-//Project includes
 #include "CameraController.h"
+
+#include "glm/vec3.hpp"
 
 class TrackballCamera : public CameraController
 {

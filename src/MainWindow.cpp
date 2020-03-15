@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 
 //Qt includes
-#include <QMessageBox>
+#include <QtWidgets/QMessageBox>
 
 //Project includes
 #include "Debug.h"

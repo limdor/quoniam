@@ -2,7 +2,7 @@
 #include "CurvatureEntropy.h"
 
 //Qt includes
-#include <QSet>
+#include <QtCore/QSet>
 
 //Dependency includes
 #include "glm/exponential.hpp"

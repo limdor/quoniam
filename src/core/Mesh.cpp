@@ -1,4 +1,3 @@
-//Definition include
 #include "Mesh.h"
 
 Mesh::Mesh(Geometry * pGeometry, Material * pMaterial):
