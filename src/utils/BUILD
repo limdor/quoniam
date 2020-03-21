@@ -11,11 +11,16 @@ cc_library(
         "Tools.h",
     ],
     includes = ["."],
+    linkopts = [
+        "-DEFAULTLIB:glu32.lib",
+        "-DEFAULTLIB:opengl32.lib",
+    ],
     visibility = ["//visibility:public"],
     deps = [
         "//dependencies/glew",
         "//dependencies/glm",
         "@qt//:qt_core",
         "@qt//:qt_widgets",
+        "@qt//:qt_gui",
     ],
 )
