@@ -17,6 +17,8 @@
 #include "SerializedSceneGeometry.h"
 #include "SphereOfViewpoints.h"
 
+#include <memory>
+
 /// Static class to create an InformationChannelHistogram
 class SceneInformationBuilder
 {
