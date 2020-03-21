@@ -47,3 +47,11 @@ TEST_CASE("GetOrderedIndexesByDimension", "Tools")
     REQUIRE(result_z == expected_indexes_z);
     REQUIRE(input == expected_sorted_z);
 }
+
+TEST_CASE("ScaleValues", "Tools")
+{
+    const QVector<float> input{1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+    const QVector<float> result = Tools::ScaleValues(input, 0.0f, 2.0f);
+    const QVector<float> expected{0.0f, 0.5f, 1.0f, 1.5f, 2.0f};
+    REQUIRE(result == expected);
+}
