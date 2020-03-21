@@ -1,9 +1,6 @@
 //Definition include
 #include "Tools.h"
 
-//System includes
-#include <math.h>
-
 //Qt includes
 #include <QtCore/QDir>
 #include <QtCore/QPair>
@@ -117,8 +114,8 @@ QVector< float > Tools::ScaleValues(const QVector< float >& pValues, float pLowe
     int size = pValues.size();
     if(pPercentOfClipping == 0.0f)
     {
-        min = FLT_MAX;
-        max = -FLT_MAX;
+        min = std::numeric_limits<int>::max();
+        max = -std::numeric_limits<int>::max();
         for( int i = 0; i < size; i++ )
         {
             if(pValues.at(i) > max)
