@@ -11,6 +11,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setAttribute(Qt::AA_UseDesktopOpenGL);
 
     MainWindow* window = MainWindow::GetInstance();
 
