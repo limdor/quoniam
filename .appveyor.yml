@@ -8,6 +8,9 @@ init:
   - call %VCVARSALLPATH% %VCVARSALL%
   - set PATH=C:\Qt\%QT_VERSION%\bin;C:\Qt\Tools\QtCreator\bin;%PATH%;
 
+install:
+  - choco install bazel
+
 build_script:
   - qmake Quoniam.pro
   - jom
