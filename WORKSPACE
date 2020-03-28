@@ -9,5 +9,5 @@ git_repository(
 new_local_repository(
     name = "qt",
     build_file = "@bazel_rules_qt//:qt.BUILD",
-    path = "C:\\Qt\\5.9.9\\msvc2015_64\\",
+    path = "C:\\Qt\\5.9.9\\msvc2017_64\\",
 )
