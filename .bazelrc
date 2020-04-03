@@ -1,1 +1,1 @@
-build --verbose_failures --record_rule_instantiation_callstack
+build --verbose_failures --record_rule_instantiation_callstack --all_incompatible_changes --incompatible_disallow_struct_provider_syntax=false

@@ -1,4 +1,16 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@bazel_rules_qt//:qt.bzl", "qt_cc_library")
+
+qt_cc_library(
+    name = "gl_canvas",
+    srcs = ["GLCanvas.cpp"],
+    hdrs = ["GLCanvas.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":core",
+        "@qt//:qt_widgets",
+    ],
+)
 
 cc_library(
     name = "core",
@@ -7,7 +19,6 @@ cc_library(
         "BoundingSphere.cpp",
         "Camera.cpp",
         "CameraController.cpp",
-        "GLCanvas.cpp",
         "GLSLProgram.cpp",
         "GLSLShader.cpp",
         "GPUGeometry.cpp",
@@ -31,7 +42,6 @@ cc_library(
         "BoundingSphere.h",
         "Camera.h",
         "CameraController.h",
-        "GLCanvas.h",
         "GLSLProgram.h",
         "GLSLShader.h",
         "GPUGeometry.h",
@@ -51,12 +61,14 @@ cc_library(
         "Texture.h",
         "TrackballCamera.h",
     ],
+    includes = ["."],
+    visibility = ["//visibility:public"],
     deps = [
-        "//src/utils",
         "//dependencies/assimp",
         "//dependencies/glew",
         "//dependencies/glm",
         "//dependencies/miniball",
+        "//src/utils",
         "@qt//:qt_core",
         "@qt//:qt_widgets",
     ],
