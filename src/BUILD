@@ -1,5 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@bazel_rules_qt//:qt.bzl", "qt_cc_library", "qt_ui_library")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 qt_ui_library(
     name = "dutagaci_view_ui",
@@ -89,6 +90,15 @@ cc_binary(
         ":quoniam_lib",
         "//src/core:gl_canvas",
     ],
+)
+
+pkg_tar(
+    name = "quoniam-pkg",
+    srcs = [":quoniam"],
+    extension = "tar.gz",
+    mode = "0755",
+    strip_prefix = "/src",
+    deps = ["//shaders:shaders-pkg"],
 )
 
 cc_library(
