@@ -94,6 +94,7 @@ cc_binary(
 
 pkg_tar(
     name = "quoniam-pkg",
+    include_runfiles = True,
     srcs = [":quoniam"],
     extension = "tar.gz",
     mode = "0755",
