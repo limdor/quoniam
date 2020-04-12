@@ -58,28 +58,28 @@ private:
     void FastDraw(unsigned int pSize) const;
 
     /// Id of the vertex array object
-    unsigned int mVaoId;
+    unsigned int mVaoId{0};
     /// Id of the vertex buffer object that stores the position of the vertices
-    unsigned int mVerticesId = 0;
+    unsigned int mVerticesId{0};
     /// Stride of the vertices
-    unsigned int mVerticesStride = 0;
+    unsigned int mVerticesStride{0};
     /// Id of the vertex buffer object that stores the color of the vertices
-    unsigned int mColorsId = 0;
+    unsigned int mColorsId{0};
     /// Stride of the colors
-    unsigned int mColorsStride = 0;
+    unsigned int mColorsStride{0};
     /// Id of the vertex buffer object that stores the normal of the vertices
-    unsigned int mNormalsId = 0;
+    unsigned int mNormalsId{0};
     /// Id of the vertex buffer object that stores the tangent of the vertices
-    unsigned int mTangentsId = 0;
+    unsigned int mTangentsId{0};
     /// Id of the vertex buffer object that stores the bitangent of the vertices
-    unsigned int mBitangentsId = 0;
+    unsigned int mBitangentsId{0};
     /// Id of the vertex buffer object that stores the texture coordinates of the vertices
-    unsigned int mTextCoordsId = 0;
+    unsigned int mTextCoordsId{0};
     /// Id of the buffer that stores the information of connectivities between vertices
-    unsigned int mIndexsId = 0;
+    unsigned int mIndexsId{0};
     /// Number of elements of the mesh
-    size_t mIndexsSize = 0;
+    size_t mIndexsSize{0};
     /// Topology of the mesh
-    GeometryTopology mMeshTopology = GeometryTopology::Triangles;
+    GeometryTopology mMeshTopology{GeometryTopology::Triangles};
 };
 #endif
