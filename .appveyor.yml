@@ -29,3 +29,7 @@ after_build:
 
 artifacts:
   - path: quoniam-$(ARTIFACT_NAME).zip
+    name: pro build
+
+  - path: .\bazel-bin\src\quoniam-pkg.tar.gz
+    name: bazel build
