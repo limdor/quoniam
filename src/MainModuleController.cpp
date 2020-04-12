@@ -43,7 +43,6 @@
 #include "SilhouetteCurvatureExtrema.h"
 #include "SilhouetteEntropy.h"
 #include "SilhouetteLength.h"
-#include "TrackballCamera.h"
 #include "Tools.h"
 #include "Unstability.h"
 #include "ViewpointEntropy.h"
@@ -290,60 +289,26 @@ void MainModuleController::keyPressEvent(QKeyEvent *pEvent)
 
 void MainModuleController::mouseMoveEvent(QMouseEvent *pEvent)
 {
-    Camera* camera = mOpenGLCanvas->GetCamera();
-    Scene* scene = mOpenGLCanvas->GetScene();
-    if( camera != nullptr && scene != nullptr )
+    const glm::vec2 startPoint{mLastMousePosition.x(), mLastMousePosition.y()};
+    const glm::vec2 endPoint{pEvent->pos().x(), pEvent->pos().y()};
+    if( pEvent->buttons() & Qt::RightButton )
     {
-        if( pEvent->buttons() & Qt::RightButton )
-        {
-            Camera* newCamera = camera->Clone();
-
-            int glWidth = mOpenGLCanvas->width();
-            int glHeight = mOpenGLCanvas->height();
-            glm::vec3 prevCamPosition = camera->GetPosition();
-            glm::vec3 prevCamUpVector = glm::normalize( camera->GetUp() );
-            glm::vec3 prevCamFrontVector = glm::normalize( camera->GetLookAt() - prevCamPosition );
-
-            glm::vec2 initVector(mLastMousePosition.x()-glWidth/2, mLastMousePosition.y()-glHeight/2);
-            glm::vec2 finalVector(pEvent->pos().x()-glWidth/2, pEvent->pos().y()-glHeight/2);
-            newCamera->SetUp( glm::rotate(prevCamUpVector, glm::atan(initVector.y, initVector.x) - glm::atan(finalVector.y, finalVector.x), prevCamFrontVector ) );
-            mOpenGLCanvas->SetCamera(newCamera);
-
-            delete newCamera;
-        }
-
-        if( pEvent->buttons() & Qt::LeftButton )
-        {
-            const BoundingSphere* boundingSphere = scene->GetBoundingSphere();
-            TrackballCamera trackball(mOpenGLCanvas, camera);
-            trackball.SetCenter(boundingSphere->GetCenter());
-            trackball.MoveCamera(mLastMousePosition, pEvent->pos());
-            mOpenGLCanvas->updateGL();
-        }
-
-        mLastMousePosition = pEvent->pos();
+        mOpenGLCanvas->PanActiveCamera(startPoint, endPoint);
     }
+    if( pEvent->buttons() & Qt::LeftButton )
+    {
+        mOpenGLCanvas->RotateActiveCamera(startPoint, endPoint);
+    }
+    mLastMousePosition = pEvent->pos();
 }
 
 void MainModuleController::wheelEvent(QWheelEvent *pEvent)
 {
-    Camera* camera = mOpenGLCanvas->GetCamera();
-    Scene* scene = mOpenGLCanvas->GetScene();
-    if( camera != nullptr && scene != nullptr && mOpenGLCanvas->hasFocus() )
+    if(  mOpenGLCanvas->hasFocus() )
     {
-        const BoundingSphere* boundingSphere = scene->GetBoundingSphere();
-        glm::vec3 prevCamPosition = camera->GetPosition();
-        glm::vec3 prevCamFrontVector = glm::normalize( camera->GetLookAt() - prevCamPosition );
-
         int numDegrees = pEvent->delta() / 8;
         float deltaFactor = (numDegrees / 360.0f) * 2.0f;
-        float farPlane = camera->GetFarPlane();
-        farPlane -= boundingSphere->GetRadius() * deltaFactor;
-
-        glm::vec3 position = prevCamPosition + prevCamFrontVector * boundingSphere->GetRadius() * deltaFactor;
-        camera->SetFarPlane( farPlane );
-        camera->SetPosition( position );
-        mOpenGLCanvas->updateGL();
+        mOpenGLCanvas->MoveActiveCamera(deltaFactor);
     }
 }
 
@@ -515,7 +480,7 @@ void MainModuleController::SetViewpoint(int pViewpoint)
 {
     mCurrentViewpoint = pViewpoint;
     Camera* currentCamera = mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint);
-    mOpenGLCanvas->SetCamera( currentCamera );
+    mOpenGLCanvas->SetCamera( std::unique_ptr<Camera>{currentCamera->Clone()} );
 
     //ShowViewpointInformation(pViewpoint);
     mOpenGLCanvas->updateGL();
@@ -851,16 +816,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
 
         on_measureInViewpointSphereList_currentIndexChanged( measureIndex );
 
-        Camera* camera = mOpenGLCanvas->GetCamera();
-        const BoundingSphere* boundingSphere = mOpenGLCanvas->GetScene()->GetBoundingSphere();
-        glm::vec3 prevCamPosition = camera->GetPosition();
-        glm::vec3 prevCamFrontVector = glm::normalize( camera->GetLookAt() - prevCamPosition );
-
-        glm::vec3 newCamPosition = prevCamPosition - prevCamFrontVector * boundingSphere->GetRadius() * 3.0f * 2.0f;
-        camera->SetPosition( newCamPosition );
-        mOpenGLCanvas->updateGL();
-
-
+        mOpenGLCanvas->ResetActiveCamera();
         if(measure->IsMaximumBest())
         {
             mOpenGLCanvas->SaveScreenshot( QString("%1_Worst_%2_Sphere.png").arg(sceneName).arg(measureName) );
@@ -869,9 +825,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
         {
             mOpenGLCanvas->SaveScreenshot( QString("%1_Best_%2_Sphere.png").arg(sceneName).arg(measureName) );
         }
-
-        camera->SetPosition( prevCamPosition );
-        mOpenGLCanvas->updateGL();
+        mOpenGLCanvas->ResetActiveCamera();
 
         mUi->alphaSpinBox->setValue( 0.01f );
 
@@ -890,14 +844,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
 
         on_measureInViewpointSphereList_currentIndexChanged( measureIndex );
 
-        camera = mOpenGLCanvas->GetCamera();
-        prevCamPosition = camera->GetPosition();
-        prevCamFrontVector = glm::normalize( camera->GetLookAt() - prevCamPosition );
-
-        newCamPosition = prevCamPosition - prevCamFrontVector * boundingSphere->GetRadius() * 3.0f * 2.0f;
-        camera->SetPosition( newCamPosition );
-        mOpenGLCanvas->updateGL();
-
+        mOpenGLCanvas->ResetActiveCamera();
         if(measure->IsMaximumBest())
         {
             mOpenGLCanvas->SaveScreenshot( QString("%1_Best_%2_Sphere.png").arg(sceneName).arg(measureName) );
@@ -906,9 +853,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
         {
             mOpenGLCanvas->SaveScreenshot( QString("%1_Worst_%2_Sphere.png").arg(sceneName).arg(measureName) );
         }
-
-        camera->SetPosition( prevCamPosition );
-        mOpenGLCanvas->updateGL();
+        mOpenGLCanvas->ResetActiveCamera();
 
         mUi->alphaSpinBox->setValue( 0.01f );
     }

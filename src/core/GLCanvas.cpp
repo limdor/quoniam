@@ -4,11 +4,13 @@
 #include "GPUGeometry.h"
 #include "OrthographicCamera.h"
 #include "Tools.h"
+#include "TrackballCamera.h"
 
 #include "glm/mat4x4.hpp"
 #include "glm/vec2.hpp"
 #include "glm/geometric.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 
 GLCanvas::GLCanvas(QWidget *pParent): QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
 {
@@ -23,7 +25,6 @@ GLCanvas::~GLCanvas()
 
     delete mMeshFullScreenQuad;
     delete mGPUScene;
-    delete mFreeCamera;
 }
 
 void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
@@ -34,10 +35,9 @@ void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
     mGPUScene = new GPUScene(pScene);
     mPerVertexColorMeshes.clear();
 
-    delete mFreeCamera;
     if(pCamera != nullptr)
     {
-        mFreeCamera = pCamera->Clone();
+        mFreeCamera = std::unique_ptr<Camera>{pCamera->Clone()};
     }
     else
     {
@@ -49,7 +49,7 @@ void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
         glm::vec3 front = center - position;
         glm::vec3 right = glm::cross( front, up );
         up = glm::cross( right, front );
-        mFreeCamera = new PerspectiveCamera(0.05f * radius, radius * 50.0f, center, up, position, 60.0f, mWinWidth/static_cast<float>(mWinHeight));
+        mFreeCamera = std::make_unique<PerspectiveCamera>(0.05f * radius, radius * 50.0f, center, up, position, 60.0f, mWinWidth/static_cast<float>(mWinHeight));
     }
 
     RecomputeViewport();
@@ -79,21 +79,73 @@ QString GLCanvas::SaveScreenshot( const QString &pFileName )
     return (completePath + pFileName);
 }
 
-void GLCanvas::SetCamera(const Camera* pCamera)
+void GLCanvas::PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint)
 {
-    makeCurrent();
     if( mFreeCamera != nullptr )
     {
-        delete mFreeCamera;
+        const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
+        const glm::vec3 prevCamUpVector = glm::normalize( mFreeCamera->GetUp() );
+        const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
+
+        const int glHalfWidth = width() / 2;
+        const int glHalfHeight = height() / 2;
+        glm::vec2 initVector(pStartPoint.x-glHalfWidth, pStartPoint.y-glHalfHeight);
+        glm::vec2 finalVector(pEndPoint.x-glHalfWidth, pEndPoint.y-glHalfHeight);
+
+        std::unique_ptr<Camera> newCamera{mFreeCamera->Clone()};
+        newCamera->SetUp( glm::rotate(prevCamUpVector, glm::atan(initVector.y, initVector.x) - glm::atan(finalVector.y, finalVector.x), prevCamFrontVector ) );
+        SetCamera(std::move(newCamera));
     }
-    mFreeCamera = pCamera->Clone();
-    RecomputeViewport();
-    updateGL();
 }
 
-Camera* GLCanvas::GetCamera()
+void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint)
 {
-    return mFreeCamera;
+    if ( mFreeCamera != nullptr && mScene != nullptr )
+    {
+        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        TrackballCamera::MoveCamera(pStartPoint, pEndPoint, *mFreeCamera, boundingSphere->GetCenter());
+        updateGL();
+    }
+}
+
+void GLCanvas::MoveActiveCamera(float pDeltaFactor)
+{
+    if( mFreeCamera != nullptr && mScene != nullptr )
+    {
+        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
+        const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
+
+        float farPlane = mFreeCamera->GetFarPlane();
+        farPlane -= boundingSphere->GetRadius() * pDeltaFactor;
+
+        const glm::vec3 position = prevCamPosition + prevCamFrontVector * boundingSphere->GetRadius() * pDeltaFactor;
+        mFreeCamera->SetFarPlane( farPlane );
+        mFreeCamera->SetPosition( position );
+        updateGL();
+    }
+}
+
+void GLCanvas::ResetActiveCamera()
+{
+    if( mFreeCamera != nullptr && mScene != nullptr )
+    {
+        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
+        const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
+
+        const glm::vec3 newCamPosition = prevCamPosition - prevCamFrontVector * boundingSphere->GetRadius() * 3.0f * 2.0f;
+        mFreeCamera->SetPosition( newCamPosition );
+        updateGL();
+    }
+}
+
+void GLCanvas::SetCamera(std::unique_ptr<Camera> pCamera)
+{
+    makeCurrent();
+    mFreeCamera = std::move(pCamera);
+    RecomputeViewport();
+    updateGL();
 }
 
 Scene* GLCanvas::GetScene()

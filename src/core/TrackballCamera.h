@@ -6,21 +6,12 @@
 #ifndef TRACKBALL_CAMERA_H
 #define TRACKBALL_CAMERA_H
 
-#include "CameraController.h"
+#include "Camera.h"
 
-#include "glm/vec3.hpp"
-
-class TrackballCamera : public CameraController
+class TrackballCamera
 {
 public:
-    TrackballCamera(GLCanvas* pGLCanvas, Camera* pCamera);
-    void SetCenter(const glm::vec3& pCenter);
-    void SetRadius(float pRadius);
-    QPoint MoveCamera(QPoint pMouseInitialPosition, QPoint pMouseFinalPosition);
-
-private:
-    float mRadius;
-    glm::vec3 mCenter;
+    static void MoveCamera(const glm::vec2& pMouseInitialPosition, const glm::vec2& pMouseFinalPosition, Camera& pCamera, const glm::vec3& pCenter);
 };
 
 #endif
