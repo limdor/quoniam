@@ -45,10 +45,13 @@ public:
     /// Save a screenshot of the renderer
     QString SaveScreenshot( const QString &pFileName );
 
+    void PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint);
+    void RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint);
+    void MoveActiveCamera(float pDeltaFactor);
+    void ResetActiveCamera();
+
     /// Set the camera used to render
-    void SetCamera(const Camera* pCamera);
-    /// Get the camera used to render
-    Camera *GetCamera();
+    void SetCamera(std::unique_ptr<Camera> pCamera);
     /// Get the scene rendered
     Scene* GetScene();
 
@@ -104,7 +107,7 @@ private:
     float mAmbientLightIntensity = 1.0f;
 
     /// Camera used for the rendering
-    Camera* mFreeCamera = nullptr;
+    std::unique_ptr<Camera> mFreeCamera{nullptr};
 
     /// Scene
     Scene* mScene = nullptr;

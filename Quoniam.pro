@@ -52,7 +52,6 @@ SOURCES +=\
     src/core/AxisAlignedBoundingBox.cpp \
     src/core/BoundingSphere.cpp \
     src/core/Camera.cpp \
-    src/core/CameraController.cpp \
     src/core/Geometry.cpp \
     src/core/Gizmo.cpp \
     src/core/GLCanvas.cpp \
@@ -111,7 +110,6 @@ HEADERS  += \
     src/core/AxisAlignedBoundingBox.h \
     src/core/BoundingSphere.h \
     src/core/Camera.h \
-    src/core/CameraController.h \
     src/core/Geometry.h \
     src/core/Gizmo.h \
     src/core/GLCanvas.h \
