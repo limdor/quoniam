@@ -29,7 +29,7 @@ public:
     /// Constructor
     SpherePointCloud();
     /// Copy constructor
-    SpherePointCloud( const SpherePointCloud& pSpherePointCloud );
+    SpherePointCloud( const SpherePointCloud& pSpherePointCloud ) = delete;
     /// Destructor
     ~SpherePointCloud();
 

@@ -34,23 +34,6 @@ SpherePointCloud::SpherePointCloud():
     mMesh = new Geometry("Sphere point cloud", Geometry::Points);
 }
 
-SpherePointCloud::SpherePointCloud( const SpherePointCloud& pSpherePointCloud )
-{
-    if(pSpherePointCloud.mMesh != nullptr)
-    {
-        mMesh = new Geometry(*pSpherePointCloud.mMesh);
-    }
-    else
-    {
-        mMesh = nullptr;
-    }
-    mNumberOfPoints = pSpherePointCloud.mNumberOfPoints;
-    mFaces = pSpherePointCloud.mFaces;
-    mVertices = pSpherePointCloud.mVertices;
-    mNormals = pSpherePointCloud.mNormals;
-    mNeighbours = pSpherePointCloud.mNeighbours;
-}
-
 SpherePointCloud::~SpherePointCloud()
 {
     delete mMesh;
