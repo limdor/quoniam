@@ -8,7 +8,7 @@
 
 #include "glm/exponential.hpp"
 
-Geometry::Geometry(const QString &pName, Topology pT):
+Geometry::Geometry(const QString &pName, GeometryTopology pT):
     mTopology(pT), mBoundingBox(nullptr), mBoundingSphere(nullptr), mGPUGeometry(nullptr), mName(pName), mNeedGPUGeometryUpdate(false)
 {
 
@@ -190,7 +190,7 @@ void Geometry::SetName(const QString &pName)
     mName = pName;
 }
 
-void Geometry::SetTopology( Topology pTopology )
+void Geometry::SetTopology( GeometryTopology pTopology )
 {
     mTopology = pTopology;
     mNeedGPUGeometryUpdate = true;
@@ -301,23 +301,23 @@ size_t Geometry::GetNumIndices() const
 
 size_t Geometry::GetNumFaces() const
 {
-    if( mTopology == Triangles )
+    if( mTopology == GeometryTopology::Triangles )
     {
         return mIndexData.size() / 3;
     }
-    else if( mTopology == Lines )
+    else if( mTopology == GeometryTopology::Lines )
     {
         return mIndexData.size() / 2;
     }
-    else if( mTopology == Points )
+    else if( mTopology == GeometryTopology::Points )
     {
         return mIndexData.size();
     }
-    else if( mTopology == Line_Strip )
+    else if( mTopology == GeometryTopology::Line_Strip )
     {
         return mIndexData.size() - 1;
     }
-    else if( mTopology == Line_Loop )
+    else if( mTopology == GeometryTopology::Line_Loop )
     {
         return mIndexData.size();
     }
@@ -333,7 +333,7 @@ size_t Geometry::GetNumVertices() const
     return mVertexData.size() / mVertexStride;
 }
 
-Geometry::Topology Geometry::GetTopology() const
+GeometryTopology Geometry::GetTopology() const
 {
     return mTopology;
 }

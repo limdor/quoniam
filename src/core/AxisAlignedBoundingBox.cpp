@@ -94,7 +94,7 @@ AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pA
 void AxisAlignedBoundingBox::CreateMesh()
 {
     /// Creation of the mesh
-    mGizmo = new Geometry("AxisAlignedBoundingBox", Geometry::Lines);
+    mGizmo = new Geometry("AxisAlignedBoundingBox", GeometryTopology::Lines);
 
     /// Set the positions
     mPositionOfVertices.resize(8);

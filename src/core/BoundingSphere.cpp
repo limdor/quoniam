@@ -95,7 +95,7 @@ void BoundingSphere::CreateMesh()
     int sphereResolution = 50;
 
     /// Creation of the mesh
-    mGizmo = new Geometry("BoundingSphere", Geometry::Lines);
+    mGizmo = new Geometry("BoundingSphere", GeometryTopology::Lines);
 
     /// Set the positions
     mPositionOfVertices.resize(sphereResolution*3);

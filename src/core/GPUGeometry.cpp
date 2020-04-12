@@ -88,7 +88,7 @@ void GPUGeometry::SetTextCoordsData(const std::vector<float>& pTextCoords)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void GPUGeometry::SetIndexsData(const std::vector<unsigned int>& pIndexs, Geometry::Topology pTopology)
+void GPUGeometry::SetIndexsData(const std::vector<unsigned int>& pIndexs, GeometryTopology pTopology)
 {
     if(mIndexsId == 0)
     {

@@ -65,7 +65,7 @@ OrthographicCamera* OrthographicCamera::Clone() const
 void OrthographicCamera::CreateMesh()
 {
     /// Creation of the mesh
-    mGizmo = new Geometry("OrthographicCamera", Geometry::Lines);
+    mGizmo = new Geometry("OrthographicCamera", GeometryTopology::Lines);
 
     /// Set the positions
     mPositionOfVertices.resize(8);

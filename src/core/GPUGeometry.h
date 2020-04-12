@@ -9,7 +9,9 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-#include "Geometry.h"
+#include "GeometryTopology.h"
+
+#include <vector>
 
 /// Class to wrap a Mesh that is stored into the GPU
 class GPUGeometry
@@ -40,7 +42,7 @@ public:
     /// Set the texture coordinates of the mesh
     void SetTextCoordsData(const std::vector<float> &pTextCoords);
     /// Set the information of connectivities between vertices of the mesh
-    void SetIndexsData(const std::vector<unsigned int> &pIndexs, Geometry::Topology pTopology);
+    void SetIndexsData(const std::vector<unsigned int> &pIndexs, GeometryTopology pTopology);
 
     /// Draw the mesh
     void Draw() const;
@@ -78,6 +80,6 @@ private:
     /// Number of elements of the mesh
     size_t mIndexsSize = 0;
     /// Topology of the mesh
-    Geometry::Topology mMeshTopology = Geometry::Triangles;
+    GeometryTopology mMeshTopology = GeometryTopology::Triangles;
 };
 #endif

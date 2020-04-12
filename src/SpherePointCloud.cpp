@@ -31,7 +31,7 @@ glm::vec3 SpherePointCloud::Up(const glm::vec3 &pViewpoint)
 SpherePointCloud::SpherePointCloud():
     mNumberOfPoints(0)
 {
-    mMesh = new Geometry("Sphere point cloud", Geometry::Points);
+    mMesh = new Geometry("Sphere point cloud", GeometryTopology::Points);
 }
 
 SpherePointCloud::~SpherePointCloud()
@@ -540,7 +540,7 @@ void SpherePointCloud::SetMeshInformation()
     if(mFaces.size() > 0)
     {
         mMesh->SetIndexsData(mFaces.size(), mFaces.data());
-        mMesh->SetTopology(Geometry::Triangles);
+        mMesh->SetTopology(GeometryTopology::Triangles);
     }
     mMesh->ComputeBoundingVolumes();
 }

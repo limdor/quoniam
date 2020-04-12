@@ -238,7 +238,7 @@ void GLCanvas::ApplyMaterials(bool pApplyMaterials)
 void GLCanvas::initializeGL()
 {
     //Initialize quad where the scene is painted
-    mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
+    mMeshFullScreenQuad = new Geometry("FullScreenQuad", GeometryTopology::Triangles);
     glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
                              glm::vec2(1.0f, 0.0f),
                              glm::vec2(1.0f, 1.0f),

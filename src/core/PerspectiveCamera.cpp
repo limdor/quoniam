@@ -47,7 +47,7 @@ PerspectiveCamera* PerspectiveCamera::Clone() const
 void PerspectiveCamera::CreateMesh()
 {
     /// Creation of the mesh
-    mGizmo = new Geometry("PerspectiveCamera", Geometry::Lines);
+    mGizmo = new Geometry("PerspectiveCamera", GeometryTopology::Lines);
 
     /// Set the positions
     mPositionOfVertices.resize(5);

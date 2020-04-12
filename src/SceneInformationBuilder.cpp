@@ -150,7 +150,7 @@ void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints*
     mDepthImages.resize(numberOfViewpoints);
     mVisibleVertexs.resize(numberOfViewpoints);
     GPUScene* gpuScene = new GPUScene(pScene);
-    Geometry* verticesScene = new Geometry("Vertices", Geometry::Points);
+    Geometry* verticesScene = new Geometry("Vertices", GeometryTopology::Points);
     QVector<glm::vec3> vertices = mSerializedScene->GetVertices();
     int numberOfVertices = vertices.size();
     QVector<unsigned int> indexs(numberOfVertices);

@@ -11,6 +11,7 @@
 
 #include "AxisAlignedBoundingBox.h"
 #include "BoundingSphere.h"
+#include "GeometryTopology.h"
 
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
@@ -26,17 +27,8 @@ class GPUGeometry;
 class Geometry
 {
 public:
-    /// Enumeration to define the topology of the geometry
-    enum Topology
-    {
-        Points = GL_POINTS,
-        Lines = GL_LINES,
-        Line_Strip = GL_LINE_STRIP,
-        Line_Loop = GL_LINE_LOOP,
-        Triangles = GL_TRIANGLES
-    };
     /// Constructor
-    Geometry(const QString &pName, Topology pT);
+    Geometry(const QString &pName, GeometryTopology pT);
     /// Copy constructor (vertex neighbours have to be set again)
     Geometry(const Geometry& pGeometry);
     /// Destructor
@@ -73,7 +65,7 @@ public:
     /// Set the name of the geometry
     void SetName(const QString &pName);
     /// Set the topology
-    void SetTopology( Topology pTopology );
+    void SetTopology( GeometryTopology pTopology );
 
     /// Compute the bounding volumes
     void ComputeBoundingVolumes();
@@ -95,7 +87,7 @@ public:
     /// Get the number of vertices
     size_t GetNumVertices() const;
     /// Get the topology
-    Topology GetTopology() const;
+    GeometryTopology GetTopology() const;
 
     /// Get the GPUGeometry creating it if it's necessary
     const GPUGeometry* GetGPUGeometry();
@@ -124,7 +116,7 @@ private:
     /// Name of the geometry
     QString mName;
     /// Topology of the geometry
-    Topology mTopology;
+    GeometryTopology mTopology;
 
     /// Axis-aligned bounding box
     AxisAlignedBoundingBox* mBoundingBox;
