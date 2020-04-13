@@ -39,9 +39,9 @@ void BoundingSphere::SetRadius(float pValue)
     UpdatePositions();
 }
 
-BoundingSphere* BoundingSphere::Merge(const BoundingSphere *pBS0, const BoundingSphere *pBS1)
+std::shared_ptr<BoundingSphere> BoundingSphere::Merge(std::shared_ptr<BoundingSphere const> pBS0, std::shared_ptr<BoundingSphere const> pBS1)
 {
-    BoundingSphere* result = new BoundingSphere();
+    auto result = std::make_shared<BoundingSphere>();
 
     if( pBS0 != nullptr && pBS1 != nullptr )
     {

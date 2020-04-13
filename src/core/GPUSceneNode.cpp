@@ -1,6 +1,6 @@
 #include "GPUSceneNode.h"
 
-GPUSceneNode::GPUSceneNode(const GPUGeometry *pGeometry, Material* pMaterial):
+GPUSceneNode::GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, Material* pMaterial):
     mGeometry(pGeometry), mMaterial(pMaterial), mModelMatrix(), mPolygonalOffset(0)
 {
 
@@ -26,7 +26,7 @@ glm::mat4 GPUSceneNode::GetModelMatrix() const
     return mModelMatrix;
 }
 
-const GPUGeometry* GPUSceneNode::GetGeometry()
+std::shared_ptr<GPUGeometry const> GPUSceneNode::GetGeometry()
 {
     return mGeometry;
 }

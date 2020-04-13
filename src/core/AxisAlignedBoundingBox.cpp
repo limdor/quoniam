@@ -35,11 +35,11 @@ glm::vec3 AxisAlignedBoundingBox::GetMax() const
     return mMax;
 }
 
-AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pAABB0, AxisAlignedBoundingBox* pAABB1)
+std::shared_ptr<AxisAlignedBoundingBox> AxisAlignedBoundingBox::Merge(std::shared_ptr<AxisAlignedBoundingBox const> pAABB0, std::shared_ptr<AxisAlignedBoundingBox const> pAABB1)
 {
     glm::vec3 newMin, newMax;
 
-    AxisAlignedBoundingBox* result = new AxisAlignedBoundingBox();
+    auto result = std::make_shared<AxisAlignedBoundingBox>();
 
     if( pAABB0 != nullptr && pAABB1 != nullptr )
     {

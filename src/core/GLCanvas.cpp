@@ -102,7 +102,7 @@ void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2&
 {
     if ( mFreeCamera != nullptr && mScene != nullptr )
     {
-        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        auto boundingSphere = mScene->GetBoundingSphere();
         TrackballCamera::MoveCamera(pStartPoint, pEndPoint, *mFreeCamera, boundingSphere->GetCenter());
         updateGL();
     }
@@ -112,7 +112,7 @@ void GLCanvas::MoveActiveCamera(float pDeltaFactor)
 {
     if( mFreeCamera != nullptr && mScene != nullptr )
     {
-        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        auto boundingSphere = mScene->GetBoundingSphere();
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
 
@@ -130,7 +130,7 @@ void GLCanvas::ResetActiveCamera()
 {
     if( mFreeCamera != nullptr && mScene != nullptr )
     {
-        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        auto boundingSphere = mScene->GetBoundingSphere();
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
 

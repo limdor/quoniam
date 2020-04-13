@@ -40,7 +40,7 @@ public:
     /// Get the number of polygons in the node
     int GetNumberOfPolygons() const;
     /// Get the bounding sphere of the node
-    const BoundingSphere* GetBoundingSphere() const;
+    std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
 
     /// Add a mesh into the node
     void AddMesh(Mesh* pMesh);
@@ -87,7 +87,7 @@ private:
     /// Number of polygons
     size_t mNumberOfPolygons;
     /// Bounding sphere
-    BoundingSphere* mBoundingSphere;
+    std::shared_ptr<BoundingSphere> mBoundingSphere;
 
     /// Parent node
     SceneNode* mParent;

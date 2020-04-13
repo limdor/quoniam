@@ -10,6 +10,8 @@
 
 #include "glm/vec3.hpp"
 
+#include <memory>
+
 /// BoundingVolume class with methods to use an axis-aligned bounding box
 class AxisAlignedBoundingBox : public Gizmo
 {
@@ -30,7 +32,7 @@ public:
     glm::vec3 GetMax() const;
 
     /// Create the minimum axis-aligned bounding box that includes pAABB0 and pAABB1
-    static AxisAlignedBoundingBox* Merge(AxisAlignedBoundingBox* pAABB0, AxisAlignedBoundingBox* pAABB1);
+    static std::shared_ptr<AxisAlignedBoundingBox> Merge(std::shared_ptr<AxisAlignedBoundingBox const> pAABB0, std::shared_ptr<AxisAlignedBoundingBox const> pAABB1);
 
 protected:
     /// Minimum of every axis

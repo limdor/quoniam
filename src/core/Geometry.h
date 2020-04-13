@@ -19,6 +19,7 @@
 
 #include <QtCore/QString>
 
+#include <memory>
 #include <vector>
 
 class GPUGeometry;
@@ -31,7 +32,6 @@ public:
     Geometry(const QString &pName, GeometryTopology pT);
     /// Copy constructor (vertex neighbours have to be set again)
     Geometry(const Geometry& pGeometry);
-    /// Destructor
     ~Geometry();
 
     /// Set the vertices of the geometry
@@ -72,10 +72,8 @@ public:
     /// Show information of the geometry like faces, vertices and diameter of the bounding sphere
     void ShowInformation() const;
 
-    /// Get the bounding box
-    AxisAlignedBoundingBox* GetBoundingBox() const;
-    /// Get the bounding sphere
-    const BoundingSphere *GetBoundingSphere() const;
+    std::shared_ptr<AxisAlignedBoundingBox> GetBoundingBox() const;
+    std::shared_ptr<BoundingSphere> GetBoundingSphere() const;
 
     /// Draw the geometry
     void Draw();
@@ -90,7 +88,7 @@ public:
     GeometryTopology GetTopology() const;
 
     /// Get the GPUGeometry creating it if it's necessary
-    const GPUGeometry* GetGPUGeometry();
+    std::shared_ptr<GPUGeometry const> GetGPUGeometry();
 
 private:
     /// Data of the positions of the vertices
@@ -119,11 +117,11 @@ private:
     GeometryTopology mTopology;
 
     /// Axis-aligned bounding box
-    AxisAlignedBoundingBox* mBoundingBox;
+    std::shared_ptr<AxisAlignedBoundingBox> mBoundingBox;
     /// Bounding sphere
-    BoundingSphere* mBoundingSphere;
+    std::shared_ptr<BoundingSphere> mBoundingSphere;
     /// GPU version of the geometry
-    GPUGeometry* mGPUGeometry;
+    std::shared_ptr<GPUGeometry> mGPUGeometry;
     /// Boolean to know if the GPUGeometry needs to be updated
     bool mNeedGPUGeometryUpdate;
 };

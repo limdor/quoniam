@@ -1,5 +1,7 @@
 #include "Geometry.h"
 
+#include "AxisAlignedBoundingBox.h"
+#include "BoundingSphere.h"
 #include "Debug.h"
 #include "GPUGeometry.h"
 #include "Scene.h"
@@ -20,31 +22,17 @@ Geometry::Geometry(const Geometry& pGeometry):
     mTangentData(pGeometry.mTangentData), mBitangentData(pGeometry.mBitangentData), mIndexData(pGeometry.mIndexData),
     mName(pGeometry.mName), mTopology(pGeometry.mTopology), mNeedGPUGeometryUpdate(true)
 {
+    mBoundingBox = nullptr;
+    mBoundingSphere = nullptr;
     if(pGeometry.mBoundingBox != nullptr)
     {
-        mBoundingBox = new AxisAlignedBoundingBox(*pGeometry.mBoundingBox);
+        mBoundingBox = std::make_shared<AxisAlignedBoundingBox>(*pGeometry.mBoundingBox);
     }
-    else
-    {
-        mBoundingBox = nullptr;
-    }
-
     if(pGeometry.mBoundingSphere != nullptr)
     {
-        mBoundingSphere = new BoundingSphere(*pGeometry.mBoundingSphere);
-    }
-    else
-    {
-        mBoundingSphere = nullptr;
+        mBoundingSphere = std::make_shared<BoundingSphere>(*pGeometry.mBoundingSphere);
     }
     mGPUGeometry = nullptr;
-}
-
-Geometry::~Geometry()
-{
-    delete mBoundingBox;
-    delete mBoundingSphere;
-    delete mGPUGeometry;
 }
 
 void Geometry::SetVerticesData(unsigned int pSize, const glm::vec4 *pData)
@@ -60,6 +48,8 @@ void Geometry::SetVerticesData(unsigned int pSize, const glm::vec4 *pData)
     mVertexStride = 4;
     mNeedGPUGeometryUpdate = true;
 }
+
+Geometry::~Geometry() = default;
 
 void Geometry::SetVerticesData(unsigned int pSize, const glm::vec3 *pData)
 {
@@ -248,11 +238,11 @@ void Geometry::ComputeBoundingVolumes()
     mb.build();
     if(mBoundingBox == nullptr)
     {
-        mBoundingBox = new AxisAlignedBoundingBox();
+        mBoundingBox = std::make_shared<AxisAlignedBoundingBox>();
     }
     if(mBoundingSphere == nullptr)
     {
-        mBoundingSphere = new BoundingSphere();
+        mBoundingSphere = std::make_shared<BoundingSphere>();
     }
     mBoundingBox->SetMax(max);
     mBoundingBox->SetMin(min);
@@ -279,12 +269,12 @@ void Geometry::ShowInformation() const
     Debug::Log(QString("   Diameter: %1").arg(mBoundingSphere->GetRadius()*2));
 }
 
-AxisAlignedBoundingBox * Geometry::GetBoundingBox() const
+std::shared_ptr<AxisAlignedBoundingBox> Geometry::GetBoundingBox() const
 {
     return mBoundingBox;
 }
 
-const BoundingSphere * Geometry::GetBoundingSphere() const
+std::shared_ptr<BoundingSphere> Geometry::GetBoundingSphere() const
 {
     return mBoundingSphere;
 }
@@ -338,13 +328,12 @@ GeometryTopology Geometry::GetTopology() const
     return mTopology;
 }
 
-const GPUGeometry *Geometry::GetGPUGeometry()
+std::shared_ptr<GPUGeometry const> Geometry::GetGPUGeometry()
 {
     if(mGPUGeometry == nullptr || mNeedGPUGeometryUpdate)
     {
-        delete mGPUGeometry;
         CHECK_GL_ERROR();
-        mGPUGeometry = new GPUGeometry();
+        mGPUGeometry = std::make_shared<GPUGeometry>();
         mGPUGeometry->SetVerticesData( mVertexData, mVertexStride );
         if(mNormalData.size() > 0)
             mGPUGeometry->SetNormalsData(mNormalData);
