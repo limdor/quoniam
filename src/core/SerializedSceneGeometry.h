@@ -15,7 +15,7 @@ class SerializedSceneGeometry
 {
 public:
     /// Constructor
-    explicit SerializedSceneGeometry(const Scene *pScene);
+    explicit SerializedSceneGeometry(std::shared_ptr<Scene const> pScene);
     /// Destructor
     ~SerializedSceneGeometry();
 

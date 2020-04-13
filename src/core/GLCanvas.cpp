@@ -22,17 +22,13 @@ GLCanvas::~GLCanvas()
     DeleteDualPeelingRenderTargets();
 
     glDeleteQueries(1, &mQueryId);
-
-    delete mMeshFullScreenQuad;
-    delete mGPUScene;
 }
 
-void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
+void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera)
 {
     makeCurrent();
     mScene = pScene;
-    delete mGPUScene;
-    mGPUScene = new GPUScene(pScene);
+    mGPUScene = std::make_unique<GPUScene>(pScene);
     mPerVertexColorMeshes.clear();
 
     if(pCamera != nullptr)
@@ -148,7 +144,7 @@ void GLCanvas::SetCamera(std::unique_ptr<Camera> pCamera)
     updateGL();
 }
 
-Scene* GLCanvas::GetScene()
+std::shared_ptr<Scene> GLCanvas::GetScene()
 {
     return mScene;
 }
@@ -238,7 +234,7 @@ void GLCanvas::ApplyMaterials(bool pApplyMaterials)
 void GLCanvas::initializeGL()
 {
     //Initialize quad where the scene is painted
-    mMeshFullScreenQuad = new Geometry("FullScreenQuad", GeometryTopology::Triangles);
+    mMeshFullScreenQuad = std::make_unique<Geometry>("FullScreenQuad", GeometryTopology::Triangles);
     glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
                              glm::vec2(1.0f, 0.0f),
                              glm::vec2(1.0f, 1.0f),

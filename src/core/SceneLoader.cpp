@@ -11,9 +11,9 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/matrix.hpp"
 
-Scene * SceneLoader::LoadScene(const QString &pPath)
+std::shared_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
 {
-    Scene* sceneLoaded;
+    std::shared_ptr<Scene> sceneLoaded;
 
     Assimp::Importer importer;
     importer.SetPropertyInteger(AI_CONFIG_PP_SBP_REMOVE,
@@ -47,12 +47,12 @@ Scene * SceneLoader::LoadScene(const QString &pPath)
         QVector<Mesh*> meshes = LoadMeshes(scene, materials, geometries);
 
         SceneNode* rootNode = LoadSceneNode( meshes, scene->mRootNode );
-        sceneLoaded = new Scene( fileInfo.baseName(), rootNode, materials, geometries, meshes );
+        sceneLoaded = std::make_shared<Scene>( fileInfo.baseName(), rootNode, materials, geometries, meshes );
     }
     else
     {
         Debug::Error(QString("Impossible to load with AssimpLoader: %1").arg(importer.GetErrorString()));
-        sceneLoaded = new Scene("Default", new SceneNode("Default"), QVector<Material*>(), QVector<Geometry*>(), QVector<Mesh*>());
+        sceneLoaded = std::make_shared<Scene>("Default", new SceneNode("Default"), QVector<Material*>(), QVector<Geometry*>(), QVector<Mesh*>());
     }
     return sceneLoaded;
 }

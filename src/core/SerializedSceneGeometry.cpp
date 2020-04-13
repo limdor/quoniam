@@ -13,7 +13,7 @@
 
 #include "Miniball.h"
 
-SerializedSceneGeometry::SerializedSceneGeometry(const Scene *pScene):
+SerializedSceneGeometry::SerializedSceneGeometry(std::shared_ptr<Scene const> pScene):
     mNumberOfVertexs(0), mNumberOfFaces(0)
 {
     mVertexs.resize(pScene->GetNumberOfVertices());

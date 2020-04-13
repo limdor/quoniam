@@ -17,12 +17,14 @@
 #include "assimp/material.h"
 #include "assimp/scene.h"
 
+#include <memory>
+
 /// Class to load scenes from files
 class SceneLoader
 {
 public:
     /// Create a scene from the given file
-    static Scene * LoadScene(const QString &pPath);
+    static std::shared_ptr<Scene> LoadScene(const QString &pPath);
 
 private:
     /// Create an SceneNode given an Assimp node

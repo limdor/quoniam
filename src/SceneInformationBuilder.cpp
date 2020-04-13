@@ -41,7 +41,7 @@ SceneInformationBuilder::~SceneInformationBuilder()
     delete mProjectedAreasMatrix;
 }
 
-void SceneInformationBuilder::CreateHistogram(Scene* pScene, SphereOfViewpoints* pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)
+void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)
 {
     int numberOfViewpoints = pSphereOfViewpoints->GetNumberOfViewpoints();
 

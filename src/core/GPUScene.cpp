@@ -2,7 +2,7 @@
 
 #include "glm/mat4x4.hpp"
 
-GPUScene::GPUScene(const Scene *pScene)
+GPUScene::GPUScene(std::shared_ptr<Scene const> pScene)
 {
     int polygonalOffset = 0;
     mSceneNodes = CreateGPUSceneNodes(pScene->GetRootNode(), polygonalOffset);
