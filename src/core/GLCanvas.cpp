@@ -287,19 +287,12 @@ void GLCanvas::paintGL()
 {
     if(mScene != nullptr)
     {
-        const float MAX_DEPTH = 1.0f;
-
-        glm::mat4 projectionMatrix = mFreeCamera->GetProjectionMatrix();
-        glm::mat4 viewMatrix = mFreeCamera->GetViewMatrix();
-        glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
-
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
 
         // ---------------------------------------------------------------------
         // 1. Initialize Min-Max Depth Buffer
         // ---------------------------------------------------------------------
-
         glBindFramebuffer(GL_FRAMEBUFFER, mDualPeelingSingleFboId);
 
         // Render targets 1 and 2 store the front and back colors
@@ -311,15 +304,19 @@ void GLCanvas::paintGL()
 
         // Render target 0 stores (-minDepth, maxDepth, alphaMultiplier)
         glDrawBuffer(mDrawBuffers[0]);
+        const float MAX_DEPTH = 1.0f;
         glClearColor(-MAX_DEPTH, -MAX_DEPTH, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendEquation(GL_MAX);
 
+        const glm::mat4 projectionMatrix = mFreeCamera->GetProjectionMatrix();
+        const glm::mat4 viewMatrix = mFreeCamera->GetViewMatrix();
+        const glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
         mShaderDualInit->UseProgram();
         for(int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++)
         {
             GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
-            glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
+            const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderDualInit->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
             //if( mWireframe )
             //    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -330,13 +327,13 @@ void GLCanvas::paintGL()
  //           if(mDrawBoundingSphere)
  //               mScene->GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
         }
-        for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
+        for(auto perVertexColorMesh : mPerVertexColorMeshes)
         {
             if( mDrawViewpointSphereInWireframe )
             {
                 glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
             }
-            mPerVertexColorMeshes.at(i)->Draw();
+            perVertexColorMesh->Draw();
             glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
         }
         glUseProgram(0);
@@ -390,7 +387,7 @@ void GLCanvas::paintGL()
             {
                 GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
                 Material* currentMaterial = sceneNode->GetMaterial();
-                glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
+                const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
                 mShaderDualPeel->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
                 if(mApplyMaterials && currentMaterial != nullptr)
                 {
@@ -426,13 +423,13 @@ void GLCanvas::paintGL()
             mShaderDualPeelPerVertexColor->BindTexture(GL_TEXTURE_RECTANGLE, "FrontBlenderTex", mDualFrontBlenderTexId[prevId], 2);
             mShaderDualPeelPerVertexColor->SetUniform("modelViewProjection", viewProjectionMatrix);
             DrawGeometryBoundingVolumes();
-            for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
+            for(auto perVertexColorMesh : mPerVertexColorMeshes)
             {
                 if( mDrawViewpointSphereInWireframe )
                 {
                     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
                 }
-                mPerVertexColorMeshes.at(i)->Draw();
+                perVertexColorMesh->Draw();
                 glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
             }
             glUseProgram(0);

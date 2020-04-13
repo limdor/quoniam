@@ -18,11 +18,11 @@
 #include "Scene.h"
 
 #include <QtOpenGL/QGLWidget>
-#include <QtCore/QVector>
 
 #include "glm/vec3.hpp"
 
 #include <memory>
+#include <vector>
 
 /// Class to do the OpenGL render
 class GLCanvas : public QGLWidget
@@ -114,7 +114,7 @@ private:
     /// Scene that will be used for the rendering
     std::unique_ptr<GPUScene> mGPUScene = nullptr;
     /// Meshes that will be rendered by per vertex color
-    QVector<Geometry*> mPerVertexColorMeshes;
+    std::vector<Geometry*> mPerVertexColorMeshes;
 
     /// Shader used to initialize the min-max depth buffer for the dual depth peeling
     std::unique_ptr<GLSLProgram> mShaderDualInit = nullptr;
