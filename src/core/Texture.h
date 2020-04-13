@@ -11,12 +11,14 @@
 
 #include <QtGui/QImage>
 
+#include <memory>
+
 /// Class to wrap an OpenGL texture
 class Texture
 {
 public:
     /// Constructor
-    Texture(QImage* pTexture, bool pRectangle = false);
+    Texture(std::unique_ptr<QImage> pTexture, bool pRectangle = false);
     /// Destructor
     ~Texture();
     /// Get the texture id in the GPU
@@ -24,7 +26,7 @@ public:
 
 private:
     /// Image of the texture
-    QImage* mTexture;
+    std::unique_ptr<QImage> mTexture;
     /// Id of the texture in the GPU
     GLuint mGLId;
 };

@@ -401,7 +401,7 @@ void GLCanvas::paintGL()
                     bool hasTexture = currentMaterial->HasKdTexture();
                     if( hasTexture )
                     {
-                        Texture* kdTexture = currentMaterial->GetKdTexture();
+                        auto kdTexture = currentMaterial->GetKdTexture();
                         mShaderDualPeel->BindTexture(GL_TEXTURE_2D, "diffuseTexture", kdTexture->GetGLId(), 0);
                     }
                     mShaderDualPeel->SetUniform("applyDiffuseTexture", hasTexture);

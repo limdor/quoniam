@@ -13,6 +13,8 @@
 
 #include "glm/vec3.hpp"
 
+#include <memory>
+
 /// Class to wrap the material of a mesh
 class Material
 {
@@ -20,15 +22,13 @@ public:
     /// Constructor
     /// \param pName Name of the material
     explicit Material(const QString &pName);
-    /// Destructor
-    ~Material();
 
     /// Get the ambient color
     glm::vec3 GetKa() const;
     /// Set the ambient color
     void SetKa(const glm::vec3 &pKa);
     /// Get the ambient texture
-    Texture *GetKaTexture() const;
+    std::shared_ptr<Texture> GetKaTexture() const;
     /// Set the ambient texture
     void SetKaTexture(QImage* pKaTexture);
     /// Return if the material has an ambient texture
@@ -39,7 +39,7 @@ public:
     /// Set the diffuse color
     void SetKd(const glm::vec3 &pKd);
     /// Get the diffuse texture
-    Texture* GetKdTexture() const;
+    std::shared_ptr<Texture> GetKdTexture() const;
     /// Set the diffuse texture
     void SetKdTexture(QImage* pKdTexture);
     /// Return if the material has a diffuse texture
@@ -50,7 +50,7 @@ public:
     /// Set the specular color
     void SetKs(const glm::vec3 &pKs);
     /// Get the specular texture
-    Texture* GetKsTexture() const;
+    std::shared_ptr<Texture> GetKsTexture() const;
     /// Set the specular texture
     void SetKsTexture(QImage* pKsTexture);
     /// Return if the material has a specular texture
@@ -66,15 +66,15 @@ private:
     /// Ambient color
     glm::vec3 mKa;
     /// Ambient texture
-    Texture* mKaTexture;
+    std::shared_ptr<Texture> mKaTexture;
     /// Diffuse color
     glm::vec3 mKd;
     /// Diffuse texture
-    Texture* mKdTexture;
+    std::shared_ptr<Texture> mKdTexture;
     /// Specular color
     glm::vec3 mKs;
     /// Specular texture
-    Texture* mKsTexture;
+    std::shared_ptr<Texture> mKsTexture;
     /// Specular exponent
     float mShininess;
 };
