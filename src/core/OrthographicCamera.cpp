@@ -65,7 +65,7 @@ OrthographicCamera* OrthographicCamera::Clone() const
 void OrthographicCamera::CreateMesh()
 {
     /// Creation of the mesh
-    mGizmo = new Geometry("OrthographicCamera", Geometry::Lines);
+    mGizmo = Geometry{"OrthographicCamera", GeometryTopology::Lines};
 
     /// Set the positions
     mPositionOfVertices.resize(8);
@@ -75,7 +75,7 @@ void OrthographicCamera::CreateMesh()
     QVector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
     colors[4] = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
     colors[5] = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-    mGizmo->SetColorData(colors.size(), colors.data());
+    mGizmo.SetColorData(colors.size(), colors.data());
 
     /// Set the indexs
     QVector<unsigned int> indexs(24);
@@ -91,7 +91,7 @@ void OrthographicCamera::CreateMesh()
     indexs[18] = 1; indexs[19] = 5;
     indexs[20] = 2; indexs[21] = 6;
     indexs[22] = 3; indexs[23] = 7;
-    mGizmo->SetIndexsData(indexs.size(), indexs.data());
+    mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 
 void OrthographicCamera::UpdatePositions()
@@ -109,5 +109,5 @@ void OrthographicCamera::UpdatePositions()
     mPositionOfVertices[6] = glm::vec4(mPosition - upVector * mBottom - leftVector * mRight + frontVector, 1.0f);
     mPositionOfVertices[7] = glm::vec4(mPosition - upVector * mBottom + leftVector * mLeft + frontVector, 1.0f);
 
-    mGizmo->SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
+    mGizmo.SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
 }

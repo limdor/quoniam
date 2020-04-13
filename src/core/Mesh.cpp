@@ -6,32 +6,6 @@ Mesh::Mesh(Geometry * pGeometry, Material * pMaterial):
 
 }
 
-Mesh::Mesh(const Mesh &pMesh):
-    mName(pMesh.mName), mVisible(pMesh.mVisible)
-{
-    if(pMesh.mMaterial != nullptr)
-    {
-        mMaterial = new Material(*pMesh.mMaterial);
-    }
-    else
-    {
-        mMaterial = nullptr;
-    }
-    if(pMesh.mGeometry != nullptr)
-    {
-        mGeometry = new Geometry(*pMesh.mGeometry);
-    }
-    else
-    {
-        mGeometry = nullptr;
-    }
-}
-
-Mesh::~Mesh()
-{
-
-}
-
 void Mesh::SetName(const QString &pName)
 {
     mName = pName;

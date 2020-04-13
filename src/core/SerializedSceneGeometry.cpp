@@ -230,7 +230,7 @@ void SerializedSceneGeometry::SerializeSceneNodes(const SceneNode *pSceneNode)
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
     {
         Geometry* geom = pSceneNode->GetMesh(i)->GetGeometry();
-        if(geom->GetTopology() == Geometry::Triangles)
+        if(geom->GetTopology() == GeometryTopology::Triangles)
         {
             int facesOffset = mNumberOfVertexs;
             const std::vector<float>& vertices = geom->GetVerticesData();

@@ -191,7 +191,7 @@ Geometry* SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
 {
     unsigned int numberOfVertices = pAiMesh->mNumVertices;
 
-    Geometry * geometry = new Geometry(QString(pAiMesh->mName.data), Geometry::Triangles);
+    Geometry * geometry = new Geometry(QString(pAiMesh->mName.data), GeometryTopology::Triangles);
 
     if( pAiMesh->mPrimitiveTypes == aiPrimitiveType_TRIANGLE )
     {

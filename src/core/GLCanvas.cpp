@@ -102,7 +102,7 @@ void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2&
 {
     if ( mFreeCamera != nullptr && mScene != nullptr )
     {
-        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        auto boundingSphere = mScene->GetBoundingSphere();
         TrackballCamera::MoveCamera(pStartPoint, pEndPoint, *mFreeCamera, boundingSphere->GetCenter());
         updateGL();
     }
@@ -112,7 +112,7 @@ void GLCanvas::MoveActiveCamera(float pDeltaFactor)
 {
     if( mFreeCamera != nullptr && mScene != nullptr )
     {
-        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        auto boundingSphere = mScene->GetBoundingSphere();
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
 
@@ -130,7 +130,7 @@ void GLCanvas::ResetActiveCamera()
 {
     if( mFreeCamera != nullptr && mScene != nullptr )
     {
-        const BoundingSphere* boundingSphere = mScene->GetBoundingSphere();
+        auto boundingSphere = mScene->GetBoundingSphere();
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamFrontVector = glm::normalize( mFreeCamera->GetLookAt() - prevCamPosition );
 
@@ -238,7 +238,7 @@ void GLCanvas::ApplyMaterials(bool pApplyMaterials)
 void GLCanvas::initializeGL()
 {
     //Initialize quad where the scene is painted
-    mMeshFullScreenQuad = new Geometry("FullScreenQuad", Geometry::Triangles);
+    mMeshFullScreenQuad = new Geometry("FullScreenQuad", GeometryTopology::Triangles);
     glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
                              glm::vec2(1.0f, 0.0f),
                              glm::vec2(1.0f, 1.0f),
@@ -401,7 +401,7 @@ void GLCanvas::paintGL()
                     bool hasTexture = currentMaterial->HasKdTexture();
                     if( hasTexture )
                     {
-                        Texture* kdTexture = currentMaterial->GetKdTexture();
+                        auto kdTexture = currentMaterial->GetKdTexture();
                         mShaderDualPeel->BindTexture(GL_TEXTURE_2D, "diffuseTexture", kdTexture->GetGLId(), 0);
                     }
                     mShaderDualPeel->SetUniform("applyDiffuseTexture", hasTexture);

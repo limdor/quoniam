@@ -35,11 +35,11 @@ glm::vec3 AxisAlignedBoundingBox::GetMax() const
     return mMax;
 }
 
-AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pAABB0, AxisAlignedBoundingBox* pAABB1)
+std::shared_ptr<AxisAlignedBoundingBox> AxisAlignedBoundingBox::Merge(std::shared_ptr<AxisAlignedBoundingBox const> pAABB0, std::shared_ptr<AxisAlignedBoundingBox const> pAABB1)
 {
     glm::vec3 newMin, newMax;
 
-    AxisAlignedBoundingBox* result = new AxisAlignedBoundingBox();
+    auto result = std::make_shared<AxisAlignedBoundingBox>();
 
     if( pAABB0 != nullptr && pAABB1 != nullptr )
     {
@@ -94,7 +94,7 @@ AxisAlignedBoundingBox* AxisAlignedBoundingBox::Merge(AxisAlignedBoundingBox* pA
 void AxisAlignedBoundingBox::CreateMesh()
 {
     /// Creation of the mesh
-    mGizmo = new Geometry("AxisAlignedBoundingBox", Geometry::Lines);
+    mGizmo = Geometry{"AxisAlignedBoundingBox", GeometryTopology::Lines};
 
     /// Set the positions
     mPositionOfVertices.resize(8);
@@ -102,7 +102,7 @@ void AxisAlignedBoundingBox::CreateMesh()
 
     /// Set the colors
     QVector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
-    mGizmo->SetColorData(colors.size(), colors.data());
+    mGizmo.SetColorData(colors.size(), colors.data());
 
     /// Set the indexs
     QVector<unsigned int> indexs(24);
@@ -118,7 +118,7 @@ void AxisAlignedBoundingBox::CreateMesh()
     indexs[18] = 3; indexs[19] = 7;
     indexs[20] = 5; indexs[21] = 7;
     indexs[22] = 6; indexs[23] = 7;
-    mGizmo->SetIndexsData(indexs.size(), indexs.data());
+    mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 
 void AxisAlignedBoundingBox::UpdatePositions()
@@ -132,5 +132,5 @@ void AxisAlignedBoundingBox::UpdatePositions()
     mPositionOfVertices[6] = glm::vec4(mMax.x, mMax.y, mMin.z, 1.0f);
     mPositionOfVertices[7] = glm::vec4(mMax.x, mMax.y, mMax.z, 1.0f);
 
-    mGizmo->SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
+    mGizmo.SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
 }

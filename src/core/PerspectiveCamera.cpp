@@ -47,7 +47,7 @@ PerspectiveCamera* PerspectiveCamera::Clone() const
 void PerspectiveCamera::CreateMesh()
 {
     /// Creation of the mesh
-    mGizmo = new Geometry("PerspectiveCamera", Geometry::Lines);
+    mGizmo = Geometry{"PerspectiveCamera", GeometryTopology::Lines};
 
     /// Set the positions
     mPositionOfVertices.resize(5);
@@ -57,7 +57,7 @@ void PerspectiveCamera::CreateMesh()
     QVector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
     colors[0] = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
     colors[1] = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-    mGizmo->SetColorData(colors.size(), colors.data());
+    mGizmo.SetColorData(colors.size(), colors.data());
 
     /// Set the indexs
     QVector<unsigned int> indexs(16);
@@ -69,7 +69,7 @@ void PerspectiveCamera::CreateMesh()
     indexs[10] = 1; indexs[11] = 4;
     indexs[12] = 2; indexs[13] = 4;
     indexs[14] = 3; indexs[15] = 4;
-    mGizmo->SetIndexsData(indexs.size(), indexs.data());
+    mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 
 void PerspectiveCamera::UpdatePositions()
@@ -85,5 +85,5 @@ void PerspectiveCamera::UpdatePositions()
     mPositionOfVertices[3] = glm::vec4(mPosition + frontVector - upVector + leftVector * mAspectRatio, 1.0f);
     mPositionOfVertices[4] = glm::vec4(mPosition, 1.0f);
 
-    mGizmo->SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
+    mGizmo.SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
 }

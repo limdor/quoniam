@@ -111,6 +111,7 @@ HEADERS  += \
     src/core/BoundingSphere.h \
     src/core/Camera.h \
     src/core/Geometry.h \
+    src/core/GeometryTopology.h \
     src/core/Gizmo.h \
     src/core/GLCanvas.h \
     src/core/GLSLProgram.h \

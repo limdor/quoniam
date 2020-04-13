@@ -18,9 +18,9 @@ public:
     /// Constructor
     Mesh(Geometry * pGeometry, Material * pMaterial);
     /// Copy constructor
-    Mesh(const Mesh& pMesh);
+    Mesh(const Mesh& pMesh) = delete;
     /// Destructor
-    ~Mesh();
+    ~Mesh() = default;
 
     /// Set the name of the mesh
     void SetName(const QString &pName);

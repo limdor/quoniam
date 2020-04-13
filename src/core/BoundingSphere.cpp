@@ -39,9 +39,9 @@ void BoundingSphere::SetRadius(float pValue)
     UpdatePositions();
 }
 
-BoundingSphere* BoundingSphere::Merge(const BoundingSphere *pBS0, const BoundingSphere *pBS1)
+std::shared_ptr<BoundingSphere> BoundingSphere::Merge(std::shared_ptr<BoundingSphere const> pBS0, std::shared_ptr<BoundingSphere const> pBS1)
 {
-    BoundingSphere* result = new BoundingSphere();
+    auto result = std::make_shared<BoundingSphere>();
 
     if( pBS0 != nullptr && pBS1 != nullptr )
     {
@@ -95,7 +95,7 @@ void BoundingSphere::CreateMesh()
     int sphereResolution = 50;
 
     /// Creation of the mesh
-    mGizmo = new Geometry("BoundingSphere", Geometry::Lines);
+    mGizmo = Geometry{"BoundingSphere", GeometryTopology::Lines};
 
     /// Set the positions
     mPositionOfVertices.resize(sphereResolution*3);
@@ -103,7 +103,7 @@ void BoundingSphere::CreateMesh()
 
     /// Set the colors
     QVector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
-    mGizmo->SetColorData(colors.size(), colors.data());
+    mGizmo.SetColorData(colors.size(), colors.data());
 
     /// Set the indexs
     QVector<unsigned int> indexs(sphereResolution*6);
@@ -118,7 +118,7 @@ void BoundingSphere::CreateMesh()
         indexs[(sphereResolution + offset)*2 - 1] = offset;
         offset += sphereResolution;
     }
-    mGizmo->SetIndexsData(indexs.size(), indexs.data());
+    mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 
 void BoundingSphere::UpdatePositions()
@@ -146,5 +146,5 @@ void BoundingSphere::UpdatePositions()
         index++;
     }
 
-    mGizmo->SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
+    mGizmo.SetVerticesData(mPositionOfVertices.size(), mPositionOfVertices.data());
 }

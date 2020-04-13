@@ -10,6 +10,8 @@
 
 #include "glm/vec3.hpp"
 
+#include <memory>
+
 /// BoundingVolume class with methods to use a bounding sphere
 class BoundingSphere : public Gizmo
 {
@@ -30,7 +32,7 @@ public:
     void SetRadius(float pValue);
 
     /// Create the minimum bounding sphere that includes pBS0 and pBS1
-    static BoundingSphere* Merge(const BoundingSphere* pBS0, const BoundingSphere* pBS1);
+    static std::shared_ptr<BoundingSphere> Merge(std::shared_ptr<BoundingSphere const> pBS0, std::shared_ptr<BoundingSphere const> pBS1);
 
 protected:
     /// Center

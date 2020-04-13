@@ -69,7 +69,7 @@ public:
     inline const_iterator cend() const{return const_iterator{nullptr};}
     QString GetName() const;
     const SceneNode* GetRootNode() const;
-    const BoundingSphere* GetBoundingSphere() const;
+    std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
     int GetNumberOfPolygons() const;
     int GetNumberOfVertices() const;
     void ShowInformation() const;

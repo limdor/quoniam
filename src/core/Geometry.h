@@ -9,8 +9,7 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-#include "AxisAlignedBoundingBox.h"
-#include "BoundingSphere.h"
+#include "GeometryTopology.h"
 
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
@@ -18,28 +17,25 @@
 
 #include <QtCore/QString>
 
+#include <memory>
 #include <vector>
 
+class AxisAlignedBoundingBox;
+class BoundingSphere;
 class GPUGeometry;
 
 /// Class to wrap the geometry of a 3d mesh that is not stored into the GPU until the GetGPUGeometry method is called.
 class Geometry
 {
 public:
-    /// Enumeration to define the topology of the geometry
-    enum Topology
-    {
-        Points = GL_POINTS,
-        Lines = GL_LINES,
-        Line_Strip = GL_LINE_STRIP,
-        Line_Loop = GL_LINE_LOOP,
-        Triangles = GL_TRIANGLES
-    };
     /// Constructor
-    Geometry(const QString &pName, Topology pT);
+    Geometry(const QString &pName, GeometryTopology pT);
+    Geometry() = default;
     /// Copy constructor (vertex neighbours have to be set again)
     Geometry(const Geometry& pGeometry);
-    /// Destructor
+    Geometry& operator=(const Geometry& pGeometry) = delete;
+    Geometry(Geometry&& pGeometry) = delete;
+    Geometry& operator=(Geometry&& pGeometry);
     ~Geometry();
 
     /// Set the vertices of the geometry
@@ -73,17 +69,15 @@ public:
     /// Set the name of the geometry
     void SetName(const QString &pName);
     /// Set the topology
-    void SetTopology( Topology pTopology );
+    void SetTopology( GeometryTopology pTopology );
 
     /// Compute the bounding volumes
     void ComputeBoundingVolumes();
     /// Show information of the geometry like faces, vertices and diameter of the bounding sphere
     void ShowInformation() const;
 
-    /// Get the bounding box
-    AxisAlignedBoundingBox* GetBoundingBox() const;
-    /// Get the bounding sphere
-    const BoundingSphere *GetBoundingSphere() const;
+    std::shared_ptr<AxisAlignedBoundingBox> GetBoundingBox() const;
+    std::shared_ptr<BoundingSphere> GetBoundingSphere() const;
 
     /// Draw the geometry
     void Draw();
@@ -95,22 +89,22 @@ public:
     /// Get the number of vertices
     size_t GetNumVertices() const;
     /// Get the topology
-    Topology GetTopology() const;
+    GeometryTopology GetTopology() const;
 
     /// Get the GPUGeometry creating it if it's necessary
-    const GPUGeometry* GetGPUGeometry();
+    std::shared_ptr<GPUGeometry const> GetGPUGeometry();
 
 private:
     /// Data of the positions of the vertices
     std::vector<float> mVertexData;
     /// Stride of the vertices
-    unsigned int mVertexStride;
+    unsigned int mVertexStride{3};
     /// Data of the normals of the vertices
     std::vector<float> mNormalData;
     /// Data of the colors of the vertices
     std::vector<float> mColorData;
     /// Stride of the colors
-    unsigned int mColorStride;
+    unsigned int mColorStride{3};
     /// Data of the texture coordinates of the vertices
     std::vector<float> mTextCoordsData;
     /// Data of the tangents of the vertices
@@ -122,17 +116,17 @@ private:
     std::vector<unsigned int> mIndexData;
 
     /// Name of the geometry
-    QString mName;
+    QString mName{"Default"};
     /// Topology of the geometry
-    Topology mTopology;
+    GeometryTopology mTopology{GeometryTopology::Triangles};
 
     /// Axis-aligned bounding box
-    AxisAlignedBoundingBox* mBoundingBox;
+    std::shared_ptr<AxisAlignedBoundingBox> mBoundingBox;
     /// Bounding sphere
-    BoundingSphere* mBoundingSphere;
+    std::shared_ptr<BoundingSphere> mBoundingSphere;
     /// GPU version of the geometry
-    GPUGeometry* mGPUGeometry;
+    std::shared_ptr<GPUGeometry> mGPUGeometry;
     /// Boolean to know if the GPUGeometry needs to be updated
-    bool mNeedGPUGeometryUpdate;
+    bool mNeedGPUGeometryUpdate{true};
 };
 #endif

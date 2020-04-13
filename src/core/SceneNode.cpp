@@ -1,5 +1,6 @@
 #include "SceneNode.h"
 
+#include "BoundingSphere.h"
 #include "Debug.h"
 
 SceneNode::SceneNode(const QString &pName):
@@ -16,7 +17,6 @@ SceneNode::~SceneNode()
     {
         delete mChilds[i];
     }
-    delete mBoundingSphere;
 }
 
 QString SceneNode::GetName() const
@@ -50,7 +50,7 @@ int SceneNode::GetNumberOfPolygons() const
     return mNumberOfPolygons;
 }
 
-const BoundingSphere* SceneNode::GetBoundingSphere() const
+std::shared_ptr<BoundingSphere const> SceneNode::GetBoundingSphere() const
 {
     return mBoundingSphere;
 }
@@ -62,9 +62,7 @@ void SceneNode::AddMesh(Mesh* pMesh)
     Geometry* geometry = pMesh->GetGeometry();
     mNumberOfVertices += geometry->GetNumVertices();
     mNumberOfPolygons += geometry->GetNumFaces();
-    BoundingSphere* previousBoundingSphere = mBoundingSphere;
     mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, geometry->GetBoundingSphere());
-    delete previousBoundingSphere;
     if(mParent != nullptr)
     {
         mParent->UpdateGeometryInformation();
@@ -147,9 +145,7 @@ void SceneNode::UpdateGeometryInformation()
 {
     mNumberOfVertices = 0;
     mNumberOfPolygons = 0;
-    delete mBoundingSphere;
-    mBoundingSphere = nullptr;
-    BoundingSphere* childBoundingSphere = new BoundingSphere();
+    auto childBoundingSphere = std::make_shared<BoundingSphere>();
     for( int i = 0; i < mChilds.size(); i++ )
     {
         const SceneNode* child = mChilds.at(i);
@@ -163,12 +159,9 @@ void SceneNode::UpdateGeometryInformation()
             childBoundingSphere->SetCenter(glm::vec3(aux.x, aux.y, aux.z));
             childBoundingSphere->SetRadius(childTransform[0][0] * child->GetBoundingSphere()->GetRadius());
 
-            BoundingSphere* previousBoundingSphere = mBoundingSphere;
             mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, childBoundingSphere);
-            delete previousBoundingSphere;
         }
     }
-    delete childBoundingSphere;
     if(mParent != nullptr)
     {
         mParent->UpdateGeometryInformation();

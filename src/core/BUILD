@@ -46,6 +46,7 @@ cc_library(
         "GPUScene.h",
         "GPUSceneNode.h",
         "Geometry.h",
+        "GeometryTopology.h",
         "Gizmo.h",
         "LightSettings.h",
         "Material.h",

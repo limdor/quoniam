@@ -37,7 +37,7 @@ const SceneNode* Scene::GetRootNode() const
     return mRootNode;
 }
 
-const BoundingSphere* Scene::GetBoundingSphere() const
+std::shared_ptr<BoundingSphere const> Scene::GetBoundingSphere() const
 {
     return mRootNode->GetBoundingSphere();
 }
@@ -54,7 +54,7 @@ int Scene::GetNumberOfVertices() const
 
 void Scene::ShowInformation() const
 {
-    const BoundingSphere* boundingSphere = GetBoundingSphere();
+    auto boundingSphere = GetBoundingSphere();
     glm::vec3 sceneCenter = boundingSphere->GetCenter();
     Debug::Log( QString("Scene: %1").arg(mName) );
     Debug::Log( QString("  Number of vertices: %1").arg(GetNumberOfVertices()) );

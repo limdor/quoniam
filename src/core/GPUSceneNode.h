@@ -14,11 +14,13 @@
 
 #include "glm/mat4x4.hpp"
 
+#include <memory>
+
 class GPUSceneNode
 {
 public:
     /// Constructor
-    GPUSceneNode(const GPUGeometry* pGeometry, Material* pMaterial);
+    GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, Material* pMaterial);
     /// Destructor
     ~GPUSceneNode();
 
@@ -30,7 +32,7 @@ public:
     /// Get the model matrix
     glm::mat4 GetModelMatrix() const;
     /// Get the gpu geometry
-    const GPUGeometry* GetGeometry();
+    std::shared_ptr<GPUGeometry const> GetGeometry();
     /// Get the material
     Material* GetMaterial();
     /// Get the polygonal offset
@@ -40,7 +42,7 @@ private:
     /// Model matrix
     glm::mat4 mModelMatrix;
     /// Geometry in the gpu
-    const GPUGeometry* mGeometry;
+    std::shared_ptr<GPUGeometry const> mGeometry;
     /// Material
     Material* mMaterial;
     /// Polygonal offset in the scene
