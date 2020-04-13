@@ -75,7 +75,7 @@ protected:
     void keyPressEvent(QKeyEvent *pEvent);
 
 private:
-    void DrawGeometryBoundingVolumes();
+    void DrawGeometryBoundingVolumes(const glm::mat4& viewProjectionMatrix, bool init);
 
     void RecomputeViewport();
 
