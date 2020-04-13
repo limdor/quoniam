@@ -1,7 +1,6 @@
 #include "Geometry.h"
 
 #include "AxisAlignedBoundingBox.h"
-#include "BoundingSphere.h"
 #include "Debug.h"
 #include "GPUGeometry.h"
 #include "Scene.h"
@@ -11,7 +10,7 @@
 #include "glm/exponential.hpp"
 
 Geometry::Geometry(const QString &pName, GeometryTopology pT):
-    mTopology(pT), mBoundingBox(nullptr), mBoundingSphere(nullptr), mGPUGeometry(nullptr), mName(pName), mNeedGPUGeometryUpdate(false)
+    mTopology{pT}, mName{pName}
 {
 
 }
@@ -35,6 +34,37 @@ Geometry::Geometry(const Geometry& pGeometry):
     mGPUGeometry = nullptr;
 }
 
+Geometry& Geometry::operator=(Geometry&& pGeometry)
+{
+    mVertexData = std::move(pGeometry.mVertexData);
+    mVertexStride = pGeometry.mVertexStride;
+    mNormalData = std::move(pGeometry.mNormalData);
+    mColorData = std::move(pGeometry.mColorData);
+    mColorStride = pGeometry.mColorStride;
+    mTextCoordsData = std::move(pGeometry.mTextCoordsData);
+    mTangentData = std::move(pGeometry.mTangentData);
+    mBitangentData = std::move(pGeometry.mBitangentData);
+    mIndexData = std::move(pGeometry.mIndexData);
+    mName = pGeometry.mName;
+    mTopology = pGeometry.mTopology;
+    mNeedGPUGeometryUpdate = true;
+    mBoundingBox = nullptr;
+    mBoundingSphere = nullptr;
+    if(pGeometry.mBoundingBox != nullptr)
+    {
+        mBoundingBox = std::make_shared<AxisAlignedBoundingBox>(*pGeometry.mBoundingBox);
+    }
+    if(pGeometry.mBoundingSphere != nullptr)
+    {
+        mBoundingSphere = std::make_shared<BoundingSphere>(*pGeometry.mBoundingSphere);
+    }
+    mGPUGeometry = nullptr;
+
+    return *this;
+}
+
+Geometry::~Geometry() = default;
+
 void Geometry::SetVerticesData(unsigned int pSize, const glm::vec4 *pData)
 {
     mVertexData.resize(pSize*4);
@@ -48,8 +78,6 @@ void Geometry::SetVerticesData(unsigned int pSize, const glm::vec4 *pData)
     mVertexStride = 4;
     mNeedGPUGeometryUpdate = true;
 }
-
-Geometry::~Geometry() = default;
 
 void Geometry::SetVerticesData(unsigned int pSize, const glm::vec3 *pData)
 {

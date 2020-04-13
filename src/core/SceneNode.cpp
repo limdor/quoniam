@@ -1,5 +1,6 @@
 #include "SceneNode.h"
 
+#include "BoundingSphere.h"
 #include "Debug.h"
 
 SceneNode::SceneNode(const QString &pName):

@@ -9,8 +9,6 @@
 //GLEW has to be included before any OpenGL include
 #include "glew.h"
 
-#include "AxisAlignedBoundingBox.h"
-#include "BoundingSphere.h"
 #include "GeometryTopology.h"
 
 #include "glm/vec2.hpp"
@@ -22,6 +20,8 @@
 #include <memory>
 #include <vector>
 
+class AxisAlignedBoundingBox;
+class BoundingSphere;
 class GPUGeometry;
 
 /// Class to wrap the geometry of a 3d mesh that is not stored into the GPU until the GetGPUGeometry method is called.
@@ -30,8 +30,12 @@ class Geometry
 public:
     /// Constructor
     Geometry(const QString &pName, GeometryTopology pT);
+    Geometry() = default;
     /// Copy constructor (vertex neighbours have to be set again)
     Geometry(const Geometry& pGeometry);
+    Geometry& operator=(const Geometry& pGeometry) = delete;
+    Geometry(Geometry&& pGeometry) = delete;
+    Geometry& operator=(Geometry&& pGeometry);
     ~Geometry();
 
     /// Set the vertices of the geometry
@@ -94,13 +98,13 @@ private:
     /// Data of the positions of the vertices
     std::vector<float> mVertexData;
     /// Stride of the vertices
-    unsigned int mVertexStride;
+    unsigned int mVertexStride{3};
     /// Data of the normals of the vertices
     std::vector<float> mNormalData;
     /// Data of the colors of the vertices
     std::vector<float> mColorData;
     /// Stride of the colors
-    unsigned int mColorStride;
+    unsigned int mColorStride{3};
     /// Data of the texture coordinates of the vertices
     std::vector<float> mTextCoordsData;
     /// Data of the tangents of the vertices
@@ -112,9 +116,9 @@ private:
     std::vector<unsigned int> mIndexData;
 
     /// Name of the geometry
-    QString mName;
+    QString mName{"Default"};
     /// Topology of the geometry
-    GeometryTopology mTopology;
+    GeometryTopology mTopology{GeometryTopology::Triangles};
 
     /// Axis-aligned bounding box
     std::shared_ptr<AxisAlignedBoundingBox> mBoundingBox;
@@ -123,6 +127,6 @@ private:
     /// GPU version of the geometry
     std::shared_ptr<GPUGeometry> mGPUGeometry;
     /// Boolean to know if the GPUGeometry needs to be updated
-    bool mNeedGPUGeometryUpdate;
+    bool mNeedGPUGeometryUpdate{true};
 };
 #endif
