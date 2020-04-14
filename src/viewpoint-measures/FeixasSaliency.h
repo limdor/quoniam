@@ -9,6 +9,8 @@
 //Project includes
 #include "Measure.h"
 
+#include <memory>
+
 /// Class that implements the saliency of a viewpoint [Feixas et al. 2009]
 class FeixasSaliency : public Measure
 {
@@ -23,7 +25,7 @@ public:
 
 private:
     /// Return the dissimilarity between two polygons
-    float GetDissimilarity(const ProjectedAreasMatrix *pProjectedAreasMatrix, int pPolygonI, int pPolygonJ);
+    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ);
 };
 
 #endif

@@ -20,7 +20,7 @@ FeixasSaliency::~FeixasSaliency()
 
 void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     QVector< float > polygonalSaliency(numberOfPolygons, 0.0f);
@@ -89,7 +89,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
     mComputed = true;
 }
 
-float FeixasSaliency::GetDissimilarity(const ProjectedAreasMatrix *pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
+float FeixasSaliency::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
 {
     int numberOfViewpoints = pProjectedAreasMatrix->GetNumberOfViewpoints();
     unsigned int sum_a_z_i = pProjectedAreasMatrix->GetSumPerPolygon(pPolygonI);

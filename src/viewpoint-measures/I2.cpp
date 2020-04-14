@@ -24,7 +24,7 @@ void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     QVector< int > elementsOutOfDomain;
 
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 

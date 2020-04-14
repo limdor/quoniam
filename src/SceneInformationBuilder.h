@@ -23,15 +23,10 @@
 class SceneInformationBuilder
 {
 public:
-    /// Constructor
-    SceneInformationBuilder();
-    /// Destructor
-    ~SceneInformationBuilder();
-
     /// Create an InformationChannelHistogram given the Scene and the SphereOfViewpoints
     void CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals = false);
     /// Get the histogram
-    const ProjectedAreasMatrix* GetProjectedAreasMatrix() const;
+    std::shared_ptr<ProjectedAreasMatrix const> GetProjectedAreasMatrix() const;
     QVector< QVector< int > > GetViewpointNeighbours() const;
     QVector< QVector< int > > GetSerializedPolygonNeighbours() const;
     float GetSilhouetteLength(int pViewpoint) const;
@@ -52,9 +47,9 @@ protected:
     void RestoreOpenGLStats();
 
     QVector<QVector<int> > mViewpointNeighbours;
-    SerializedSceneGeometry* mSerializedScene;
+    std::unique_ptr<SerializedSceneGeometry> mSerializedScene{nullptr};
     /// Matrix with the projected areas of the polygons from every viewpoint
-    ProjectedAreasMatrix* mProjectedAreasMatrix;
+    std::shared_ptr<ProjectedAreasMatrix> mProjectedAreasMatrix{nullptr};
     /// List of lengths of the silhouettes of the models seen from every viewpoint
     QVector<float> mSilhouetteLengths;
     QVector< QVector<float> > mSilhouetteCurvature;
@@ -62,8 +57,8 @@ protected:
     QVector<float> mMaxDepths;
     QVector<cv::Mat> mDepthImages;
     QVector< QSet<int> > mVisibleVertexs;
-    int mWidthResolution;
-    float mAspectRatio;
+    int mWidthResolution{640};
+    float mAspectRatio{1.0f};
     /// Program used to paint a different color per face
     std::unique_ptr<GLSLProgram> mShaderColorPerFace = nullptr;
     /// Clear color that was present when the OpenGL stats have been saved
@@ -71,11 +66,11 @@ protected:
     /// Viewport that was present when the OpenGL stats have been saved
     GLint mPreviousViewport[4];
     /// Boolean to know if the depth test was activated when the OpenGL stats have been saved
-    bool mPreviousDepthTest;
+    bool mPreviousDepthTest{true};
     /// Boolean to know if the cull face was activated when the OpenGL stats have been saved
-    bool mPreviousCullFace;
+    bool mPreviousCullFace{true};
     /// Boolean to know if the blending was activated when the OpenGL stats have been saved
-    bool mPreviousBlend;
+    bool mPreviousBlend{false};
 };
 
 #endif

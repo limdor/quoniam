@@ -19,7 +19,7 @@ KullbackLeibler::~KullbackLeibler()
 
 void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     mValues.fill( 0.0f, numberOfViewpoints );
