@@ -55,11 +55,11 @@ std::shared_ptr<BoundingSphere const> SceneNode::GetBoundingSphere() const
     return mBoundingSphere;
 }
 
-void SceneNode::AddMesh(Mesh* pMesh)
+void SceneNode::AddMesh(std::shared_ptr<Mesh> pMesh)
 {
     mMeshes.push_back(pMesh);
 
-    Geometry* geometry = pMesh->GetGeometry();
+    auto geometry = pMesh->GetGeometry();
     mNumberOfVertices += geometry->GetNumVertices();
     mNumberOfPolygons += geometry->GetNumFaces();
     mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, geometry->GetBoundingSphere());
@@ -100,7 +100,7 @@ int SceneNode::GetNumMeshes() const
     return mMeshes.size();
 }
 
-const Mesh* SceneNode::GetMesh(int pPosition) const
+std::shared_ptr<Mesh const> SceneNode::GetMesh(int pPosition) const
 {
     return mMeshes.at(pPosition);
 }

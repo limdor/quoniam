@@ -33,7 +33,7 @@ QVector<GPUSceneNode*> GPUScene::CreateGPUSceneNodes(const SceneNode* pSceneNode
     glm::mat4 modelMatrix = pSceneNode->GetGlobalTransform();
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
     {
-        const Mesh* mesh = pSceneNode->GetMesh(i);
+        auto mesh = pSceneNode->GetMesh(i);
         GPUSceneNode* gpuSceneNode = new GPUSceneNode(mesh->GetGeometry()->GetGPUGeometry(), mesh->GetMaterial());
         gpuSceneNode->SetModelMatrix(modelMatrix);
         gpuSceneNode->SetPolygonalOffset(pPolygonalOffset);

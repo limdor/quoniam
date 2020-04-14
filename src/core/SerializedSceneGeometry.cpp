@@ -229,7 +229,7 @@ void SerializedSceneGeometry::SerializeSceneNodes(const SceneNode *pSceneNode)
     glm::mat4 modelMatrix = pSceneNode->GetGlobalTransform();
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
     {
-        Geometry* geom = pSceneNode->GetMesh(i)->GetGeometry();
+        auto geom = pSceneNode->GetMesh(i)->GetGeometry();
         if(geom->GetTopology() == GeometryTopology::Triangles)
         {
             int facesOffset = mNumberOfVertexs;

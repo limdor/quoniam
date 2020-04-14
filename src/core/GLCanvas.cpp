@@ -386,7 +386,7 @@ void GLCanvas::paintGL()
             for(int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++)
             {
                 GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
-                Material* currentMaterial = sceneNode->GetMaterial();
+                auto currentMaterial = sceneNode->GetMaterial();
                 const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
                 mShaderDualPeel->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
                 if(mApplyMaterials && currentMaterial != nullptr)

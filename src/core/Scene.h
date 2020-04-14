@@ -15,6 +15,7 @@
 #include <stack>
 #include <cassert>
 #include <iterator>
+#include <memory>
 
 class Scene
 {
@@ -61,7 +62,7 @@ public:
         reference operator*() const {return *mCurrentNode;}
     };
     /// Create an scene given the name and the root scene node
-    Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes );
+    Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries, const QVector<std::shared_ptr<Mesh>>& pMeshes );
     Scene(const Scene& pScene) = delete;
     ~Scene();
 
@@ -78,11 +79,11 @@ private:
     QString mName;
     SceneNode* mRootNode;
     /// List of materials used
-    QVector<Material*> mMaterials;
+    QVector<std::shared_ptr<Material>> mMaterials;
     /// List of geometries used
-    QVector<Geometry*> mGeometries;
+    QVector<std::shared_ptr<Geometry>> mGeometries;
     /// List of meshes used
-    QVector<Mesh*> mMeshes;
+    QVector<std::shared_ptr<Mesh>> mMeshes;
 };
 
 #endif

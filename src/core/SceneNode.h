@@ -15,6 +15,8 @@
 
 #include "glm/mat4x4.hpp"
 
+#include <memory>
+
 /// Class for a node of a scene
 class SceneNode
 {
@@ -43,7 +45,7 @@ public:
     std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
 
     /// Add a mesh into the node
-    void AddMesh(Mesh* pMesh);
+    void AddMesh(std::shared_ptr<Mesh> pMesh);
     /// Add a camera into the node
     void AddCamera(Camera* pCamera);
     /// Add a node child into the node
@@ -57,7 +59,7 @@ public:
     /// Obtain the number of meshes
     int GetNumMeshes() const;
     /// Obtain the mesh
-    const Mesh* GetMesh(int pPosition) const;
+    std::shared_ptr<Mesh const> GetMesh(int pPosition) const;
 
     /// Obtain the number of cameras
     int GetNumCameras() const;
@@ -92,7 +94,7 @@ private:
     /// Parent node
     SceneNode* mParent;
     /// Meshes of the node
-    QVector<Mesh*> mMeshes;
+    QVector<std::shared_ptr<Mesh>> mMeshes;
     /// Cameras of the node
     QVector<Camera*> mCameras;
     /// Childs of the node

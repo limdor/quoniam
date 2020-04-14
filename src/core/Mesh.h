@@ -11,12 +11,14 @@
 
 #include <QtCore/QString>
 
+#include <memory>
+
 /// Class to wrap a 3d mesh
 class Mesh
 {
 public:
     /// Constructor
-    Mesh(Geometry * pGeometry, Material * pMaterial);
+    Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMaterial);
     /// Copy constructor
     Mesh(const Mesh& pMesh) = delete;
     /// Destructor
@@ -26,12 +28,12 @@ public:
     void SetName(const QString &pName);
 
     /// Set the material that will be used for the renderer
-    void SetMaterial(Material* pMaterial);
+    void SetMaterial(std::shared_ptr<Material> pMaterial);
     /// Get the material used for the renderer
-    Material* GetMaterial() const;
+    std::shared_ptr<Material> GetMaterial() const;
 
     /// Get geometry
-    Geometry* GetGeometry() const;
+    std::shared_ptr<Geometry> GetGeometry() const;
 
     /// Have to be rendered?
     void SetVisible(bool pVisible);
@@ -44,9 +46,9 @@ private:
     QString mName;
 
     /// Geometry associated to the mesh
-    Geometry* mGeometry;
+    std::shared_ptr<Geometry> mGeometry;
     /// Material used to render the mesh
-    Material* mMaterial;
+    std::shared_ptr<Material> mMaterial;
     /// Have to be rendered?
     bool mVisible;
 };

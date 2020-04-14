@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-Mesh::Mesh(Geometry * pGeometry, Material * pMaterial):
+Mesh::Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMaterial):
     mGeometry(pGeometry), mMaterial(pMaterial), mVisible(true), mName("")
 {
 
@@ -11,17 +11,17 @@ void Mesh::SetName(const QString &pName)
     mName = pName;
 }
 
-void Mesh::SetMaterial(Material *pMaterial)
+void Mesh::SetMaterial(std::shared_ptr<Material> pMaterial)
 {
     mMaterial = pMaterial;
 }
 
-Material* Mesh::GetMaterial() const
+std::shared_ptr<Material> Mesh::GetMaterial() const
 {
     return mMaterial;
 }
 
-Geometry* Mesh::GetGeometry() const
+std::shared_ptr<Geometry> Mesh::GetGeometry() const
 {
     return mGeometry;
 }

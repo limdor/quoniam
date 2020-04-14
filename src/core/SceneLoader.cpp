@@ -11,9 +11,9 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/matrix.hpp"
 
-std::shared_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
+std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
 {
-    std::shared_ptr<Scene> sceneLoaded;
+    std::unique_ptr<Scene> sceneLoaded;
 
     Assimp::Importer importer;
     importer.SetPropertyInteger(AI_CONFIG_PP_SBP_REMOVE,
@@ -42,22 +42,22 @@ std::shared_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
     {
         const QFileInfo fileInfo(pPath);
 
-        QVector<Material*> materials = LoadMaterials(scene, fileInfo.absolutePath());
-        QVector<Geometry*> geometries = LoadGeometries(scene);
-        QVector<Mesh*> meshes = LoadMeshes(scene, materials, geometries);
+        const QVector<std::shared_ptr<Material>> materials = LoadMaterials(scene, fileInfo.absolutePath());
+        const QVector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
+        const QVector<std::shared_ptr<Mesh>> meshes = LoadMeshes(scene, materials, geometries);
 
         SceneNode* rootNode = LoadSceneNode( meshes, scene->mRootNode );
-        sceneLoaded = std::make_shared<Scene>( fileInfo.baseName(), rootNode, materials, geometries, meshes );
+        sceneLoaded = std::make_unique<Scene>( fileInfo.baseName(), rootNode, materials, geometries, meshes );
     }
     else
     {
         Debug::Error(QString("Impossible to load with AssimpLoader: %1").arg(importer.GetErrorString()));
-        sceneLoaded = std::make_shared<Scene>("Default", new SceneNode("Default"), QVector<Material*>(), QVector<Geometry*>(), QVector<Mesh*>());
+        sceneLoaded = std::make_unique<Scene>("Default", new SceneNode("Default"), QVector<std::shared_ptr<Material>>(), QVector<std::shared_ptr<Geometry>>(), QVector<std::shared_ptr<Mesh>>());
     }
     return sceneLoaded;
 }
 
-SceneNode* SceneLoader::LoadSceneNode(const QVector<Mesh*>& pSceneMeshes, const aiNode* pNode)
+SceneNode* SceneLoader::LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode)
 {
     // Store the node's name.
     SceneNode* nodeLoaded = new SceneNode( QString(pNode->mName.data) );
@@ -84,10 +84,10 @@ SceneNode* SceneLoader::LoadSceneNode(const QVector<Mesh*>& pSceneMeshes, const 
     return nodeLoaded;
 }
 
-QVector<Material*> SceneLoader::LoadMaterials(const aiScene* pAiScene, const QString& pScenePath)
+QVector<std::shared_ptr<Material>> SceneLoader::LoadMaterials(const aiScene* pAiScene, const QString& pScenePath)
 {
     int numberOfMaterials = (int)pAiScene->mNumMaterials;
-    QVector<Material*> materials(numberOfMaterials);
+    QVector<std::shared_ptr<Material>> materials(numberOfMaterials);
     for( int i = 0; i < numberOfMaterials; i++ )
     {
         materials[i] = LoadMaterial(pAiScene->mMaterials[i], pScenePath);
@@ -95,19 +95,19 @@ QVector<Material*> SceneLoader::LoadMaterials(const aiScene* pAiScene, const QSt
     return materials;
 }
 
-Material* SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString& pScenePath)
+std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString& pScenePath)
 {
-    Material* material;
+    std::unique_ptr<Material> material;
 
     ShowMaterialInformation(pAiMaterial);
     aiString name;
     if( AI_SUCCESS == pAiMaterial->Get(AI_MATKEY_NAME, name) )
     {
-        material = new Material( QString("%1").arg(name.data) );
+        material = std::make_unique<Material>( QString("%1").arg(name.data) );
     }
     else
     {
-        material = new Material( QString("No name") );
+        material = std::make_unique<Material>( QString("No name") );
     }
 
     aiColor3D color;
@@ -176,10 +176,10 @@ Material* SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString
     return material;
 }
 
-QVector<Geometry*> SceneLoader::LoadGeometries(const aiScene* pAiScene)
+QVector<std::shared_ptr<Geometry>> SceneLoader::LoadGeometries(const aiScene* pAiScene)
 {
     unsigned int numberOfGeometries = pAiScene->mNumMeshes;
-    QVector<Geometry*> geometries(numberOfGeometries);
+    QVector<std::shared_ptr<Geometry>> geometries(numberOfGeometries);
     for( int i = 0; i < numberOfGeometries; i++ )
     {
         geometries[i] = LoadGeometry(pAiScene->mMeshes[i]);
@@ -187,11 +187,11 @@ QVector<Geometry*> SceneLoader::LoadGeometries(const aiScene* pAiScene)
     return geometries;
 }
 
-Geometry* SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
+std::unique_ptr<Geometry> SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
 {
     unsigned int numberOfVertices = pAiMesh->mNumVertices;
 
-    Geometry * geometry = new Geometry(QString(pAiMesh->mName.data), GeometryTopology::Triangles);
+    auto geometry = std::make_unique<Geometry>(QString(pAiMesh->mName.data), GeometryTopology::Triangles);
 
     if( pAiMesh->mPrimitiveTypes == aiPrimitiveType_TRIANGLE )
     {
@@ -277,10 +277,10 @@ Geometry* SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
     return geometry;
 }
 
-QVector<Mesh*> SceneLoader::LoadMeshes(const aiScene* pAiScene, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries)
+QVector<std::shared_ptr<Mesh>> SceneLoader::LoadMeshes(const aiScene* pAiScene, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries)
 {
     int numberOfMeshes = (int)pAiScene->mNumMeshes;
-    QVector<Mesh*> meshes(numberOfMeshes);
+    QVector<std::shared_ptr<Mesh>> meshes(numberOfMeshes);
     for( int i = 0; i < numberOfMeshes; i++ )
     {
         meshes[i] = LoadMesh(pAiScene->mMeshes[i], i, pMaterials, pGeometries);
@@ -288,9 +288,9 @@ QVector<Mesh*> SceneLoader::LoadMeshes(const aiScene* pAiScene, const QVector<Ma
     return meshes;
 }
 
-Mesh* SceneLoader::LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries)
+std::unique_ptr<Mesh> SceneLoader::LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries)
 {
-    Mesh * mesh = new Mesh(pGeometries.at(pAiMeshIndex), pMaterials.at(pAiMesh->mMaterialIndex));
+    auto mesh = std::make_unique<Mesh>(pGeometries.at(pAiMeshIndex), pMaterials.at(pAiMesh->mMaterialIndex));
     mesh->SetName(QString(pAiMesh->mName.data));
 
     return mesh;
