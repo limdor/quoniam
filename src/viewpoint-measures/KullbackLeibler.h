@@ -8,7 +8,6 @@
 class KullbackLeibler : public Measure
 {
 public:
-    /// Constructor
     explicit KullbackLeibler(const QString &pName);
 
     /// Method that computes the measure

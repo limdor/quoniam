@@ -7,7 +7,6 @@
 class DepthBasedVisualStability : public Measure
 {
 public:
-    /// Constructor
     explicit DepthBasedVisualStability(const QString &pName);
 
     /// Method that computes the measure

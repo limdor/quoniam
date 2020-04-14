@@ -8,7 +8,6 @@
 class MaximumDepth : public Measure
 {
 public:
-    /// Constructor
     explicit MaximumDepth(const QString &pName);
 
     /// Method that computes the measure

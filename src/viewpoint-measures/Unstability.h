@@ -10,7 +10,6 @@
 class Unstability : public Measure
 {
 public:
-    /// Constructor
     explicit Unstability(const QString &pName);
 
     /// Method that computes the measure

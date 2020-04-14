@@ -12,13 +12,9 @@
 class GPUGeometry
 {
 public:
-    /// Constructor
     GPUGeometry() = default;
-    /// Destructor
     ~GPUGeometry();
-    /// Remove copy constructor
     GPUGeometry(GPUGeometry const&) = delete;
-    /// Allow move constructor
     GPUGeometry(GPUGeometry&&) = default;
 
     GPUGeometry& operator =(const GPUGeometry&) = delete;

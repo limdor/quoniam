@@ -8,7 +8,6 @@
 class ViewpointEntropy : public Measure
 {
 public:
-    /// Constructor
     explicit ViewpointEntropy(const QString &pName);
 
     /// Method that computes the measure

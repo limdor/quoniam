@@ -10,7 +10,6 @@
 class SerializedSceneGeometry
 {
 public:
-    /// Constructor
     explicit SerializedSceneGeometry(std::shared_ptr<Scene const> pScene);
 
     /// Show neighbours

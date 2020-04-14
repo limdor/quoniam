@@ -8,7 +8,6 @@
 class SilhouetteLength : public Measure
 {
 public:
-    /// Constructor
     explicit SilhouetteLength(const QString &pName);
 
     /// Method that computes the measure

@@ -11,7 +11,6 @@
 class BoundingSphere : public Gizmo
 {
 public:
-    /// Constructor
     BoundingSphere();
 
     /// Get the center

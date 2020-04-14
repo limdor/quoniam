@@ -8,7 +8,6 @@
 class DepthDistribution : public Measure
 {
 public:
-    /// Constructor
     explicit DepthDistribution(const QString &pName);
 
     /// Method that computes the measure

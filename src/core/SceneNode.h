@@ -15,10 +15,8 @@
 class SceneNode : public std::enable_shared_from_this<SceneNode>
 {
 public:
-    /// Constructor with the name of the node
     explicit SceneNode(const QString &pName);
     explicit SceneNode(const SceneNode& sceneNode) = delete;
-    /// Destructor
     ~SceneNode() = default;
 
     /// Get the name of the node

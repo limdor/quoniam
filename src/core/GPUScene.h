@@ -9,7 +9,6 @@
 class GPUScene
 {
 public:
-    /// Constructor
     explicit GPUScene(std::shared_ptr<Scene const> pScene);
 
     /// Get the number of scene nodes

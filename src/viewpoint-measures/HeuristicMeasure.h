@@ -8,7 +8,6 @@
 class HeuristicMeasure : public Measure
 {
 public:
-    /// Constructor
     explicit HeuristicMeasure(const QString &pName);
 
     /// Method that computes the measure

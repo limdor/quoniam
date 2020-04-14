@@ -12,9 +12,7 @@
 class Texture
 {
 public:
-    /// Constructor
     Texture(std::unique_ptr<QImage> pTexture, bool pRectangle = false);
-    /// Destructor
     ~Texture();
     /// Get the texture id in the GPU
     GLuint GetGLId() const;

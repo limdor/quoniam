@@ -8,7 +8,6 @@
 class VisibilityRatio : public Measure
 {
 public:
-    /// Constructor
     explicit VisibilityRatio(const QString &pName);
 
     /// Method that computes the measure

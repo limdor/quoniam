@@ -14,13 +14,9 @@
 class Camera : public Gizmo
 {
 public:
-    /// Constructor
     Camera(float pNearPlane, float pFarPlane, const glm::vec3 &pLookAt, const glm::vec3 &pUp, const glm::vec3 &pPosition, float pAspectRatio);
-    /// Copy constructor
     Camera(const Camera& pCamera) = default;
-    /// Move constructor
     Camera(Camera&& pCamera) = default;
-    /// Destructor
     virtual ~Camera() = default;
 
     /// Get the view matrix

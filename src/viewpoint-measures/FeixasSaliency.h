@@ -10,7 +10,6 @@
 class FeixasSaliency : public Measure
 {
 public:
-    /// Constructor
     explicit FeixasSaliency(const QString& pName);
 
     /// Method that computes the measure

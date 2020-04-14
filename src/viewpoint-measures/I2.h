@@ -8,7 +8,6 @@
 class I2 : public Measure
 {
 public:
-    /// Constructor
     explicit I2(const QString &pName);
 
     /// Method that computes the measure

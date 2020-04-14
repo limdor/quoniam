@@ -10,9 +10,7 @@
 class GLSLShader
 {
 public:
-    /// Constructor
     GLSLShader(const QString& pSourceFile, GLenum pType);
-    /// Destructor
     ~GLSLShader();
 
     /// Return if the shader has had errors during compilation

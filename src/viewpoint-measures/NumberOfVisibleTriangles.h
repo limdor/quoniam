@@ -8,7 +8,6 @@
 class NumberOfVisibleTriangles : public Measure
 {
 public:
-    /// Constructor
     explicit NumberOfVisibleTriangles(const QString &pName);
 
     /// Method that computes the measure

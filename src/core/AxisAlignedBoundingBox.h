@@ -11,7 +11,6 @@
 class AxisAlignedBoundingBox : public Gizmo
 {
 public:
-    /// Constructor
     AxisAlignedBoundingBox();
 
     /// Set minimum of every axis

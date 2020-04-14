@@ -8,7 +8,6 @@
 class SilhouetteEntropy : public Measure
 {
 public:
-    /// Constructor
     explicit SilhouetteEntropy(const QString &pName);
 
     /// Method that computes the measure

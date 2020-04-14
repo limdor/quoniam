@@ -8,7 +8,6 @@
 class VMI : public Measure
 {
 public:
-    /// Constructor
     explicit VMI(const QString &pName);
 
     /// Method that computes the measure

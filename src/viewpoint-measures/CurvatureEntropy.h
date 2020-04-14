@@ -8,7 +8,6 @@
 class CurvatureEntropy : public Measure
 {
 public:
-    /// Constructor
     explicit CurvatureEntropy(const QString &pName);
 
     /// Method that computes the measure

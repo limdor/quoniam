@@ -8,7 +8,6 @@
 class StoevStrasser : public Measure
 {
 public:
-    /// Constructor
     explicit StoevStrasser(const QString &pName);
 
     /// Method that computes the measure

@@ -10,7 +10,6 @@
 class SaliencyEVMI : public Measure
 {
 public:
-    /// Constructor
     explicit SaliencyEVMI(const QString &pName);
 
     /// Method that computes the measure

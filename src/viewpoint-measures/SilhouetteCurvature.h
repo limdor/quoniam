@@ -8,7 +8,6 @@
 class SilhouetteCurvature : public Measure
 {
 public:
-    /// Constructor
     explicit SilhouetteCurvature(const QString &pName);
 
     /// Method that computes the measure

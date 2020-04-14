@@ -12,11 +12,8 @@
 class Mesh
 {
 public:
-    /// Constructor
     Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMaterial);
-    /// Copy constructor
     Mesh(const Mesh& pMesh) = delete;
-    /// Destructor
     ~Mesh() = default;
 
     /// Set the name of the mesh

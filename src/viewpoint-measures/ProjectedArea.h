@@ -8,7 +8,6 @@
 class ProjectedArea : public Measure
 {
 public:
-    /// Constructor
     explicit ProjectedArea(const QString &pName);
 
     /// Method that computes the measure

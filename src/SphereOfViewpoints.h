@@ -11,7 +11,6 @@
 class SphereOfViewpoints : public SpherePointCloud
 {
 public:
-    /// Constructor
     SphereOfViewpoints(float pAngle, float pAspectRatio);
 
     /// Generates 4 viewpoints uniformly distributed
