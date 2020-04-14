@@ -1,9 +1,3 @@
-/// \file OrthographicCamera.h
-/// \class OrthographicCamera
-/// \author Xavier Bonaventura
-/// \author Nicolau Sunyer
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef ORTHOGRAPHIC_CAMERA_H
 #define ORTHOGRAPHIC_CAMERA_H
 

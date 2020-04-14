@@ -1,8 +1,3 @@
-/// \file NumberOfVisibleTriangles.h
-/// \class NumberOfVisibleTriangles
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef NUMBER_OF_VISIBLE_TRIANGLES_H
 #define NUMBER_OF_VISIBLE_TRIANGLES_H
 

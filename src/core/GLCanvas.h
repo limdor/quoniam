@@ -1,8 +1,3 @@
-/// \file GLCanvas.h
-/// \class GLCanvas
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef GL_CANVAS_H
 #define GL_CANVAS_H
 

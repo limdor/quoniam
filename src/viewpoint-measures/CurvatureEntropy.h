@@ -1,8 +1,3 @@
-/// \file CurvatureEntropy.h
-/// \class CurvatureEntropy
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef CURVATURE_ENTROPY_H
 #define CURVATURE_ENTROPY_H
 

@@ -1,8 +1,3 @@
-/// \file ProjectedArea.h
-/// \class ProjectedArea
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef PROJECTED_AREA_H
 #define PROJECTED_AREA_H
 

@@ -1,8 +1,3 @@
-/// \file BoundingSphere.h
-/// \class BoundingSphere
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef BOUNDING_SPHERE_H
 #define BOUNDING_SPHERE_H
 

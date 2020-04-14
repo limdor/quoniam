@@ -1,8 +1,3 @@
-/// \file FeixasSaliency.h
-/// \class FeixasSaliency
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef FEIXAS_SALIENCY_H
 #define FEIXAS_SALIENCY_H
 

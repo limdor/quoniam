@@ -1,10 +1,3 @@
-/// \file SpherePointCloud.h
-/// \class SpherePointCloud
-/// \author Francisco González
-/// \author Marc Ruiz
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SPHERE_POINT_CLOUD_H
 #define SPHERE_POINT_CLOUD_H
 

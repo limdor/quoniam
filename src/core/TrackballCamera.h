@@ -1,8 +1,3 @@
-/// \file TrackballCamera.h
-/// \class TrackballCamera
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef TRACKBALL_CAMERA_H
 #define TRACKBALL_CAMERA_H
 

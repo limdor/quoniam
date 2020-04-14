@@ -1,8 +1,3 @@
-/// \file Debug.h
-/// \class Debug
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef DEBUG_H
 #define DEBUG_H
 

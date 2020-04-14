@@ -1,8 +1,3 @@
-/// \file SphereOfViewpoints.h
-/// \class SphereOfViewpoints
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SPHERE_OF_VIEWPOINTS_H
 #define SPHERE_OF_VIEWPOINTS_H
 

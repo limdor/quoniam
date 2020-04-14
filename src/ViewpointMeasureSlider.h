@@ -1,8 +1,3 @@
-/// \file ViewpointMeasureSlider.h
-/// \class ViewpointMeasureSlider
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef VIEWPOINT_MEASURE_SLIDER_H
 #define VIEWPOINT_MEASURE_SLIDER_H
 

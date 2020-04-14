@@ -1,8 +1,3 @@
-/// \file Gizmo.h
-/// \class Gizmo
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef GIZMO_H
 #define GIZMO_H
 

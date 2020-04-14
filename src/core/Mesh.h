@@ -1,8 +1,3 @@
-/// \file Mesh.h
-/// \class Mesh
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef MESH_H
 #define MESH_H
 

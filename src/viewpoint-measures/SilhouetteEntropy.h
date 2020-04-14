@@ -1,8 +1,3 @@
-/// \file SilhouetteEntropy.h
-/// \class SilhouetteEntropy
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SILHOUETTE_ENTROPY_H
 #define SILHOUETTE_ENTROPY_H
 

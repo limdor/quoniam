@@ -1,8 +1,3 @@
-/// \file GLSLShader.h
-/// \class GLSLShader
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef _GLSL_SHADER_
 #define _GLSL_SHADER_
 

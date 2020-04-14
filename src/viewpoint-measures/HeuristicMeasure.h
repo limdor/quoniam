@@ -1,8 +1,3 @@
-/// \file HeuristicMeasure.h
-/// \class HeuristicMeasure
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef HEURISTIC_MEASURE_H
 #define HEURISTIC_MEASURE_H
 

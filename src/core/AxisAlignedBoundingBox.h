@@ -1,8 +1,3 @@
-/// \file AxisAlignedBoundingBox.h
-/// \class AxisAlignedBoundingBox
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef AXIS_ALIGNED_BOUNDING_BOX_H
 #define AXIS_ALIGNED_BOUNDING_BOX_H
 

@@ -1,8 +1,3 @@
-/// \file SceneLoader.h
-/// \class SceneLoader
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SCENE_LOADER_H
 #define SCENE_LOADER_H
 

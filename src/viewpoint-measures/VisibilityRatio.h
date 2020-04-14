@@ -1,8 +1,3 @@
-/// \file VisibilityRatio.h
-/// \class VisibilityRatio
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef VISIBILITY_RATIO_H
 #define VISIBILITY_RATIO_H
 

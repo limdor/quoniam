@@ -1,8 +1,3 @@
-/// \file SilhouetteLength.h
-/// \class SilhouetteLength
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SILHOUETTE_LENGTH_H
 #define SILHOUETTE_LENGTH_H
 

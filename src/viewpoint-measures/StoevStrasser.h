@@ -1,8 +1,3 @@
-/// \file StoevStrasser.h
-/// \class StoevStrasser
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef STOEV_STRASSER_H
 #define STOEV_STRASSER_H
 

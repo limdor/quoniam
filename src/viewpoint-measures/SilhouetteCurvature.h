@@ -1,8 +1,3 @@
-/// \file SilhouetteCurvature.h
-/// \class SilhouetteCurvature
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SILHOUETTE_CURVATURE_H
 #define SILHOUETTE_CURVATURE_H
 

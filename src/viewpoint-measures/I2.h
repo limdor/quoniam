@@ -1,8 +1,3 @@
-/// \file I2.h
-/// \class I2
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef I2_H
 #define I2_H
 

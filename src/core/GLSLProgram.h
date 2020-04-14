@@ -1,8 +1,3 @@
-/// \file GLSLProgram.h
-/// \class GLSLProgram
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef _GLSL_PROGRAM_
 #define _GLSL_PROGRAM_
 

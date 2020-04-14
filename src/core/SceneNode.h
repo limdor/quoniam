@@ -1,9 +1,3 @@
-/// \file SceneNode.h
-/// \class SceneNode
-/// \author Xavier Bonaventura
-/// \author Nicolau Sunyer
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SCENE_NODE_H
 #define SCENE_NODE_H
 

@@ -1,8 +1,3 @@
-/// \file Texture.h
-/// \class Texture
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef TEXTURE_H
 #define TEXTURE_H
 

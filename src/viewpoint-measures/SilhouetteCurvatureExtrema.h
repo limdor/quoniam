@@ -1,8 +1,3 @@
-/// \file SilhouetteCurvatureExtrema.h
-/// \class SilhouetteCurvatureExtrema
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SILHOUETTE_CURVATURE_EXTREMA_H
 #define SILHOUETTE_CURVATURE_EXTREMA_H
 
