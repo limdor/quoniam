@@ -23,10 +23,10 @@ public:
     ~PerspectiveCamera();
 
     /// Update the projection matrix
-    void UpdateProjection();
+    void UpdateProjection() override;
 
     /// Method to clone the camera
-    PerspectiveCamera* Clone() const;
+    std::unique_ptr<Camera> Clone() const override;
 
     /// Set the field of view angle
     void SetAngle(float pAngle);
@@ -38,10 +38,10 @@ protected:
     float mAngle;
 
     /// Create the mesh of the gizmo with the indexs, positions and colors
-    void CreateMesh();
+    void CreateMesh() override;
 
     /// Update the positions of the vertices of the mesh
-    void UpdatePositions();
+    void UpdatePositions() override;
 };
 
 #endif

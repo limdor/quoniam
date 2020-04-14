@@ -20,7 +20,7 @@ class GPUSceneNode
 {
 public:
     /// Constructor
-    GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, Material* pMaterial);
+    GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, std::shared_ptr<Material> pMaterial);
     /// Destructor
     ~GPUSceneNode();
 
@@ -34,7 +34,7 @@ public:
     /// Get the gpu geometry
     std::shared_ptr<GPUGeometry const> GetGeometry();
     /// Get the material
-    Material* GetMaterial();
+    std::shared_ptr<Material> GetMaterial();
     /// Get the polygonal offset
     int GetPolygonalOffset() const;
 
@@ -44,7 +44,7 @@ private:
     /// Geometry in the gpu
     std::shared_ptr<GPUGeometry const> mGeometry;
     /// Material
-    Material* mMaterial;
+    std::shared_ptr<Material> mMaterial;
     /// Polygonal offset in the scene
     int mPolygonalOffset;
 };

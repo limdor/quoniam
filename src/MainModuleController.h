@@ -72,8 +72,8 @@ private:
     Ui::MainModule* mUi;
 
     GLCanvas *mOpenGLCanvas;
-    Scene *mScene;
-    SphereOfViewpoints *mSphereOfViewpoints;
+    std::shared_ptr<Scene> mScene;
+    std::shared_ptr<SphereOfViewpoints> mSphereOfViewpoints;
     SceneInformationBuilder *mSceneInformationBuilder;
 
     bool mUpdateView;

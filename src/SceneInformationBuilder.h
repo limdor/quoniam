@@ -29,7 +29,7 @@ public:
     ~SceneInformationBuilder();
 
     /// Create an InformationChannelHistogram given the Scene and the SphereOfViewpoints
-    void CreateHistogram(Scene* pScene, SphereOfViewpoints* pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals = false);
+    void CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals = false);
     /// Get the histogram
     const ProjectedAreasMatrix* GetProjectedAreasMatrix() const;
     QVector< QVector< int > > GetViewpointNeighbours() const;

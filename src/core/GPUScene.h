@@ -13,7 +13,7 @@ class GPUScene
 {
 public:
     /// Constructor
-    explicit GPUScene(const Scene *pScene);
+    explicit GPUScene(std::shared_ptr<Scene const> pScene);
     /// Destructor
     ~GPUScene();
     /// Get the number of scene nodes
@@ -23,7 +23,7 @@ public:
 
 private:
     /// Create the gpu scene nodes given a scene node
-    QVector<GPUSceneNode*> CreateGPUSceneNodes(const SceneNode* pSceneNode, int &pPolygonalOffset);
+    QVector<GPUSceneNode*> CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset);
 
     /// List of gpu scene nodes
     QVector<GPUSceneNode*> mSceneNodes;

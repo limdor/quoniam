@@ -41,10 +41,10 @@ protected:
     float mRadius;
 
     /// Create the mesh of the gizmo with the indexs, positions and colors
-    void CreateMesh();
+    void CreateMesh() override;
 
     /// Update the positions of the vertices of the mesh
-    void UpdatePositions();
+    void UpdatePositions() override;
 };
 
 #endif

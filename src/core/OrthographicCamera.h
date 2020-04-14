@@ -23,10 +23,10 @@ public:
     ~OrthographicCamera();
 
     /// Update the projection matrix
-    void UpdateProjection();
+    void UpdateProjection() override;
 
     /// Method to clone the camera
-    OrthographicCamera* Clone() const;
+    std::unique_ptr<Camera> Clone() const override;
 
     /// Set the top value
     void SetTop(float pTop);
@@ -48,10 +48,10 @@ private:
     float mRight;
 
     /// Create the mesh of the gizmo with the indexs, positions and colors
-    void CreateMesh();
+    void CreateMesh() override;
 
     /// Update the positions of the vertices of the mesh
-    void UpdatePositions();
+    void UpdatePositions() override;
 };
 
 #endif

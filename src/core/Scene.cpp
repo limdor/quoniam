@@ -4,27 +4,10 @@
 
 #include "glm/vec3.hpp"
 
-Scene::Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<Material*>& pMaterials, const QVector<Geometry*>& pGeometries, const QVector<Mesh*>& pMeshes ):
-    mName(pName), mRootNode(pSceneRoot), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
+Scene::Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries, const QVector<std::shared_ptr<Mesh>>& pMeshes ):
+    mName(pName), mRootNode(std::move(pSceneRoot)), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
 {
 
-}
-
-Scene::~Scene()
-{
-    delete mRootNode;
-    for(int i = 0; i < mMeshes.size(); i++)
-    {
-        delete mMeshes.at(i);
-    }
-    for( int i = 0; i < mGeometries.size(); i++ )
-    {
-        delete mGeometries.at(i);
-    }
-    for( int i = 0; i < mMaterials.size(); i++ )
-    {
-        delete mMaterials.at(i);
-    }
 }
 
 QString Scene::GetName() const
@@ -32,7 +15,7 @@ QString Scene::GetName() const
     return mName;
 }
 
-const SceneNode* Scene::GetRootNode() const
+std::shared_ptr<SceneNode const> Scene::GetRootNode() const
 {
     return mRootNode;
 }

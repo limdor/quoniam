@@ -18,11 +18,11 @@
 #include "Scene.h"
 
 #include <QtOpenGL/QGLWidget>
-#include <QtCore/QVector>
 
 #include "glm/vec3.hpp"
 
 #include <memory>
+#include <vector>
 
 /// Class to do the OpenGL render
 class GLCanvas : public QGLWidget
@@ -36,7 +36,7 @@ public:
     ~GLCanvas();
 
     /// Load an scene
-    void LoadScene(Scene* pScene , const Camera* pCamera = nullptr);
+    void LoadScene(std::shared_ptr<Scene> pScene , const Camera* pCamera = nullptr);
     /// Initialize the list of meshes that will be render with the color per vertex with the parameter
     void SetPerVertexMesh(Geometry* pPerVertexMesh);
     /// Add a mesh that will be render with the color per vertex
@@ -53,7 +53,7 @@ public:
     /// Set the camera used to render
     void SetCamera(std::unique_ptr<Camera> pCamera);
     /// Get the scene rendered
-    Scene* GetScene();
+    std::shared_ptr<Scene> GetScene();
 
     void ConfigureFirstLight(const LightSettings& settings);
     const LightSettings& GetFirstLightConfiguration() const;
@@ -110,11 +110,11 @@ private:
     std::unique_ptr<Camera> mFreeCamera{nullptr};
 
     /// Scene
-    Scene* mScene = nullptr;
+    std::shared_ptr<Scene> mScene = nullptr;
     /// Scene that will be used for the rendering
-    GPUScene* mGPUScene = nullptr;
+    std::unique_ptr<GPUScene> mGPUScene = nullptr;
     /// Meshes that will be rendered by per vertex color
-    QVector<Geometry*> mPerVertexColorMeshes;
+    std::vector<Geometry*> mPerVertexColorMeshes;
 
     /// Shader used to initialize the min-max depth buffer for the dual depth peeling
     std::unique_ptr<GLSLProgram> mShaderDualInit = nullptr;
@@ -154,7 +154,7 @@ private:
     const glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);
 
     /// Full screen quad mesh used for the rendering
-    Geometry* mMeshFullScreenQuad;
+    std::unique_ptr<Geometry> mMeshFullScreenQuad;
 
     /// Width of the canvas
     int mWinWidth = 0;

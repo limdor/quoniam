@@ -22,22 +22,18 @@ GLCanvas::~GLCanvas()
     DeleteDualPeelingRenderTargets();
 
     glDeleteQueries(1, &mQueryId);
-
-    delete mMeshFullScreenQuad;
-    delete mGPUScene;
 }
 
-void GLCanvas::LoadScene(Scene* pScene, const Camera* pCamera)
+void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera)
 {
     makeCurrent();
     mScene = pScene;
-    delete mGPUScene;
-    mGPUScene = new GPUScene(pScene);
+    mGPUScene = std::make_unique<GPUScene>(pScene);
     mPerVertexColorMeshes.clear();
 
     if(pCamera != nullptr)
     {
-        mFreeCamera = std::unique_ptr<Camera>{pCamera->Clone()};
+        mFreeCamera = pCamera->Clone();
     }
     else
     {
@@ -92,7 +88,7 @@ void GLCanvas::PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pE
         glm::vec2 initVector(pStartPoint.x-glHalfWidth, pStartPoint.y-glHalfHeight);
         glm::vec2 finalVector(pEndPoint.x-glHalfWidth, pEndPoint.y-glHalfHeight);
 
-        std::unique_ptr<Camera> newCamera{mFreeCamera->Clone()};
+        auto newCamera = mFreeCamera->Clone();
         newCamera->SetUp( glm::rotate(prevCamUpVector, glm::atan(initVector.y, initVector.x) - glm::atan(finalVector.y, finalVector.x), prevCamFrontVector ) );
         SetCamera(std::move(newCamera));
     }
@@ -148,7 +144,7 @@ void GLCanvas::SetCamera(std::unique_ptr<Camera> pCamera)
     updateGL();
 }
 
-Scene* GLCanvas::GetScene()
+std::shared_ptr<Scene> GLCanvas::GetScene()
 {
     return mScene;
 }
@@ -238,7 +234,7 @@ void GLCanvas::ApplyMaterials(bool pApplyMaterials)
 void GLCanvas::initializeGL()
 {
     //Initialize quad where the scene is painted
-    mMeshFullScreenQuad = new Geometry("FullScreenQuad", GeometryTopology::Triangles);
+    mMeshFullScreenQuad = std::make_unique<Geometry>("FullScreenQuad", GeometryTopology::Triangles);
     glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f),
                              glm::vec2(1.0f, 0.0f),
                              glm::vec2(1.0f, 1.0f),
@@ -291,19 +287,12 @@ void GLCanvas::paintGL()
 {
     if(mScene != nullptr)
     {
-        const float MAX_DEPTH = 1.0f;
-
-        glm::mat4 projectionMatrix = mFreeCamera->GetProjectionMatrix();
-        glm::mat4 viewMatrix = mFreeCamera->GetViewMatrix();
-        glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
-
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
 
         // ---------------------------------------------------------------------
         // 1. Initialize Min-Max Depth Buffer
         // ---------------------------------------------------------------------
-
         glBindFramebuffer(GL_FRAMEBUFFER, mDualPeelingSingleFboId);
 
         // Render targets 1 and 2 store the front and back colors
@@ -315,15 +304,19 @@ void GLCanvas::paintGL()
 
         // Render target 0 stores (-minDepth, maxDepth, alphaMultiplier)
         glDrawBuffer(mDrawBuffers[0]);
+        const float MAX_DEPTH = 1.0f;
         glClearColor(-MAX_DEPTH, -MAX_DEPTH, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendEquation(GL_MAX);
 
+        const glm::mat4 projectionMatrix = mFreeCamera->GetProjectionMatrix();
+        const glm::mat4 viewMatrix = mFreeCamera->GetViewMatrix();
+        const glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
         mShaderDualInit->UseProgram();
         for(int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++)
         {
             GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
-            glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
+            const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderDualInit->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
             //if( mWireframe )
             //    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -334,13 +327,13 @@ void GLCanvas::paintGL()
  //           if(mDrawBoundingSphere)
  //               mScene->GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
         }
-        for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
+        for(auto perVertexColorMesh : mPerVertexColorMeshes)
         {
             if( mDrawViewpointSphereInWireframe )
             {
                 glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
             }
-            mPerVertexColorMeshes.at(i)->Draw();
+            perVertexColorMesh->Draw();
             glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
         }
         glUseProgram(0);
@@ -393,8 +386,8 @@ void GLCanvas::paintGL()
             for(int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++)
             {
                 GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
-                Material* currentMaterial = sceneNode->GetMaterial();
-                glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
+                auto currentMaterial = sceneNode->GetMaterial();
+                const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
                 mShaderDualPeel->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
                 if(mApplyMaterials && currentMaterial != nullptr)
                 {
@@ -430,13 +423,13 @@ void GLCanvas::paintGL()
             mShaderDualPeelPerVertexColor->BindTexture(GL_TEXTURE_RECTANGLE, "FrontBlenderTex", mDualFrontBlenderTexId[prevId], 2);
             mShaderDualPeelPerVertexColor->SetUniform("modelViewProjection", viewProjectionMatrix);
             DrawGeometryBoundingVolumes();
-            for(int i = 0; i < mPerVertexColorMeshes.size(); i++)
+            for(auto perVertexColorMesh : mPerVertexColorMeshes)
             {
                 if( mDrawViewpointSphereInWireframe )
                 {
                     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
                 }
-                mPerVertexColorMeshes.at(i)->Draw();
+                perVertexColorMesh->Draw();
                 glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
             }
             glUseProgram(0);

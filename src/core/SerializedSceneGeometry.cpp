@@ -13,7 +13,7 @@
 
 #include "Miniball.h"
 
-SerializedSceneGeometry::SerializedSceneGeometry(const Scene *pScene):
+SerializedSceneGeometry::SerializedSceneGeometry(std::shared_ptr<Scene const> pScene):
     mNumberOfVertexs(0), mNumberOfFaces(0)
 {
     mVertexs.resize(pScene->GetNumberOfVertices());
@@ -224,12 +224,12 @@ QVector< float > SerializedSceneGeometry::GetFacesAreas() const
     return mFaceAreas;
 }
 
-void SerializedSceneGeometry::SerializeSceneNodes(const SceneNode *pSceneNode)
+void SerializedSceneGeometry::SerializeSceneNodes(std::shared_ptr<SceneNode const> pSceneNode)
 {
     glm::mat4 modelMatrix = pSceneNode->GetGlobalTransform();
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
     {
-        Geometry* geom = pSceneNode->GetMesh(i)->GetGeometry();
+        auto geom = pSceneNode->GetMesh(i)->GetGeometry();
         if(geom->GetTopology() == GeometryTopology::Triangles)
         {
             int facesOffset = mNumberOfVertexs;

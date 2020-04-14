@@ -197,8 +197,6 @@ MainModuleController::~MainModuleController()
     delete mSceneInformationBuilder;
     delete mOpenGLCanvas;
     delete mUi;
-    delete mSphereOfViewpoints;
-    delete mScene;
 }
 
 void MainModuleController::CreateModuleMenus()
@@ -336,9 +334,7 @@ void MainModuleController::LoadScene(const QString &pFileName)
     mUi->applyMaterialsCheckBox->setChecked(true);
     mUi->rightTabWidget->show();
 
-    delete mSphereOfViewpoints;
     mSphereOfViewpoints = nullptr;
-    delete mScene;
     mScene = SceneLoader::LoadScene(pFileName);
     mScene->ShowInformation();
     mOpenGLCanvas->LoadScene(mScene);
@@ -408,8 +404,7 @@ void MainModuleController::LoadViewpointsFromSphere(float pRadius, float pAngle,
     float radius = mScene->GetBoundingSphere()->GetRadius();
     glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
 
-    delete mSphereOfViewpoints;
-    mSphereOfViewpoints = new SphereOfViewpoints(pAngle, pAspectRatio);
+    mSphereOfViewpoints = std::make_shared<SphereOfViewpoints>(pAngle, pAspectRatio);
     mSphereOfViewpoints->SetToQuasiUniform(pSubdivision);
     mSphereOfViewpoints->ApplyTransform(radius, radius * pRadius, center);
 
@@ -480,7 +475,7 @@ void MainModuleController::SetViewpoint(int pViewpoint)
 {
     mCurrentViewpoint = pViewpoint;
     Camera* currentCamera = mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint);
-    mOpenGLCanvas->SetCamera( std::unique_ptr<Camera>{currentCamera->Clone()} );
+    mOpenGLCanvas->SetCamera( currentCamera->Clone() );
 
     //ShowViewpointInformation(pViewpoint);
     mOpenGLCanvas->updateGL();

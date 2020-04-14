@@ -2,7 +2,7 @@
 
 #include "glm/mat4x4.hpp"
 
-GPUScene::GPUScene(const Scene *pScene)
+GPUScene::GPUScene(std::shared_ptr<Scene const> pScene)
 {
     int polygonalOffset = 0;
     mSceneNodes = CreateGPUSceneNodes(pScene->GetRootNode(), polygonalOffset);
@@ -26,14 +26,14 @@ GPUSceneNode* GPUScene::GetSceneNode(int pNode) const
     return mSceneNodes.at(pNode);
 }
 
-QVector<GPUSceneNode*> GPUScene::CreateGPUSceneNodes(const SceneNode* pSceneNode, int &pPolygonalOffset)
+QVector<GPUSceneNode*> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset)
 {
     QVector<GPUSceneNode*> sceneNodes;
 
     glm::mat4 modelMatrix = pSceneNode->GetGlobalTransform();
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
     {
-        const Mesh* mesh = pSceneNode->GetMesh(i);
+        auto mesh = pSceneNode->GetMesh(i);
         GPUSceneNode* gpuSceneNode = new GPUSceneNode(mesh->GetGeometry()->GetGPUGeometry(), mesh->GetMaterial());
         gpuSceneNode->SetModelMatrix(modelMatrix);
         gpuSceneNode->SetPolygonalOffset(pPolygonalOffset);
