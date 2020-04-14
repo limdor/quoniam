@@ -23,9 +23,9 @@ std::shared_ptr<Texture> Material::GetKaTexture() const
     return mKaTexture;
 }
 
-void Material::SetKaTexture(QImage* pKaTexture)
+void Material::SetKaTexture(const QImage& pKaTexture)
 {
-    mKaTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(*pKaTexture) ) );
+    mKaTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(pKaTexture) ) );
 }
 
 bool Material::HasKaTexture() const
@@ -48,9 +48,9 @@ std::shared_ptr<Texture> Material::GetKdTexture() const
     return mKdTexture;
 }
 
-void Material::SetKdTexture(QImage* pKdTexture)
+void Material::SetKdTexture(const QImage& pKdTexture)
 {
-    mKdTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(*pKdTexture) ) );
+    mKdTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(pKdTexture) ) );
 }
 
 bool Material::HasKdTexture() const
@@ -73,9 +73,9 @@ std::shared_ptr<Texture> Material::GetKsTexture() const
     return mKsTexture;
 }
 
-void Material::SetKsTexture(QImage* pKsTexture)
+void Material::SetKsTexture(const QImage& pKsTexture)
 {
-    mKsTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(*pKsTexture) ) );
+    mKsTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(pKsTexture) ) );
 }
 
 bool Material::HasKsTexture() const

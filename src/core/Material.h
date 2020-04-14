@@ -30,7 +30,7 @@ public:
     /// Get the ambient texture
     std::shared_ptr<Texture> GetKaTexture() const;
     /// Set the ambient texture
-    void SetKaTexture(QImage* pKaTexture);
+    void SetKaTexture(const QImage& pKaTexture);
     /// Return if the material has an ambient texture
     bool HasKaTexture() const;
 
@@ -41,7 +41,7 @@ public:
     /// Get the diffuse texture
     std::shared_ptr<Texture> GetKdTexture() const;
     /// Set the diffuse texture
-    void SetKdTexture(QImage* pKdTexture);
+    void SetKdTexture(const QImage& pKdTexture);
     /// Return if the material has a diffuse texture
     bool HasKdTexture() const;
 
@@ -52,7 +52,7 @@ public:
     /// Get the specular texture
     std::shared_ptr<Texture> GetKsTexture() const;
     /// Set the specular texture
-    void SetKsTexture(QImage* pKsTexture);
+    void SetKsTexture(const QImage& pKsTexture);
     /// Return if the material has a specular texture
     bool HasKsTexture() const;
     /// Get the specular exponent
