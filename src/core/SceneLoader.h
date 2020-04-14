@@ -30,7 +30,7 @@ private:
     /// Create an SceneNode given an Assimp node
     /// \param pNode Pointer to the Assimp node to be loaded
     /// \param pSceneMeshes List of the meshes used in the node
-    static SceneNode* LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode);
+    static std::shared_ptr<SceneNode> LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode);
 
     /// Load the materials in pScene
     static QVector<std::shared_ptr<Material>> LoadMaterials(const aiScene* pAiScene, const QString& pScenePath);

@@ -40,7 +40,7 @@ private:
     /// Compute the area of the faces
     void ComputeFaceAreas();
     /// Serialize the scene
-    void SerializeSceneNodes(const SceneNode* pSceneNode);
+    void SerializeSceneNodes(std::shared_ptr<SceneNode const> pSceneNode);
 
     /// List of vertices
     QVector<glm::vec3> mVertexs;

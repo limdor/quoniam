@@ -11,14 +11,6 @@ SceneNode::SceneNode(const QString &pName):
 
 }
 
-SceneNode::~SceneNode()
-{
-    for( int i = 0; i < mChilds.size(); i++ )
-    {
-        delete mChilds[i];
-    }
-}
-
 QString SceneNode::GetName() const
 {
     return mName;
@@ -74,20 +66,23 @@ void SceneNode::AddCamera(Camera* pCamera)
     mCameras.push_back(pCamera);
 }
 
-void SceneNode::AddChild(SceneNode* pChild)
+void SceneNode::AddChild(std::shared_ptr<SceneNode> pChild)
 {
-    mChilds.push_back(pChild);
-    pChild->SetParent(this);
+    if(pChild != nullptr)
+    {
+        mChilds.push_back(std::move(pChild));
+        mChilds.back()->SetParent(shared_from_this());
+    }
 }
 
-SceneNode* SceneNode::GetParent() const
+std::shared_ptr<SceneNode> SceneNode::GetParent() const
 {
     return mParent;
 }
 
-void SceneNode::SetParent(SceneNode *pParent)
+void SceneNode::SetParent(std::shared_ptr<SceneNode> pParent)
 {
-    mParent = pParent;
+    mParent = std::move(pParent);
     UpdateGlobalTransform();
     if(mParent != nullptr)
     {
@@ -120,7 +115,7 @@ int SceneNode::GetNumChilds() const
     return mChilds.size();
 }
 
-const SceneNode* SceneNode::GetChild(int pPosition) const
+std::shared_ptr<SceneNode const> SceneNode::GetChild(int pPosition) const
 {
     return mChilds.at(pPosition);
 }
@@ -148,7 +143,7 @@ void SceneNode::UpdateGeometryInformation()
     auto childBoundingSphere = std::make_shared<BoundingSphere>();
     for( int i = 0; i < mChilds.size(); i++ )
     {
-        const SceneNode* child = mChilds.at(i);
+        auto child = mChilds.at(i);
         if(child->GetNumMeshes() != 0)
         {
             mNumberOfVertices += child->GetNumberOfVertices();

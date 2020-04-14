@@ -224,7 +224,7 @@ QVector< float > SerializedSceneGeometry::GetFacesAreas() const
     return mFaceAreas;
 }
 
-void SerializedSceneGeometry::SerializeSceneNodes(const SceneNode *pSceneNode)
+void SerializedSceneGeometry::SerializeSceneNodes(std::shared_ptr<SceneNode const> pSceneNode)
 {
     glm::mat4 modelMatrix = pSceneNode->GetGlobalTransform();
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )

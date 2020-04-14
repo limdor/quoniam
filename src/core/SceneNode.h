@@ -18,14 +18,14 @@
 #include <memory>
 
 /// Class for a node of a scene
-class SceneNode
+class SceneNode : public std::enable_shared_from_this<SceneNode>
 {
 public:
     /// Constructor with the name of the node
     explicit SceneNode(const QString &pName);
     explicit SceneNode(const SceneNode& sceneNode) = delete;
     /// Destructor
-    ~SceneNode();
+    ~SceneNode() = default;
 
     /// Get the name of the node
     QString GetName() const;
@@ -49,12 +49,12 @@ public:
     /// Add a camera into the node
     void AddCamera(Camera* pCamera);
     /// Add a node child into the node
-    void AddChild(SceneNode* pChild);
+    void AddChild(std::shared_ptr<SceneNode> pChild);
 
     /// Get the parent
-    SceneNode* GetParent() const;
+    std::shared_ptr<SceneNode> GetParent() const;
     /// Set the parent
-    void SetParent(SceneNode* pParent);
+    void SetParent(std::shared_ptr<SceneNode> pParent);
 
     /// Obtain the number of meshes
     int GetNumMeshes() const;
@@ -69,7 +69,7 @@ public:
     /// Obtain the number of childs
     int GetNumChilds() const;
     /// Obtain the child
-    const SceneNode* GetChild(int pPosition) const;
+    std::shared_ptr<SceneNode const> GetChild(int pPosition) const;
 
 private:
     /// Update global transform
@@ -92,12 +92,12 @@ private:
     std::shared_ptr<BoundingSphere> mBoundingSphere;
 
     /// Parent node
-    SceneNode* mParent;
+    std::shared_ptr<SceneNode> mParent;
     /// Meshes of the node
     QVector<std::shared_ptr<Mesh>> mMeshes;
     /// Cameras of the node
     QVector<Camera*> mCameras;
     /// Childs of the node
-    QVector<SceneNode*> mChilds;
+    QVector<std::shared_ptr<SceneNode>> mChilds;
 };
 #endif

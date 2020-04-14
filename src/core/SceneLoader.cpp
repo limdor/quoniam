@@ -46,21 +46,21 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
         const QVector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
         const QVector<std::shared_ptr<Mesh>> meshes = LoadMeshes(scene, materials, geometries);
 
-        SceneNode* rootNode = LoadSceneNode( meshes, scene->mRootNode );
-        sceneLoaded = std::make_unique<Scene>( fileInfo.baseName(), rootNode, materials, geometries, meshes );
+        auto rootNode = LoadSceneNode( meshes, scene->mRootNode );
+        sceneLoaded = std::make_unique<Scene>( fileInfo.baseName(), std::move(rootNode), materials, geometries, meshes );
     }
     else
     {
         Debug::Error(QString("Impossible to load with AssimpLoader: %1").arg(importer.GetErrorString()));
-        sceneLoaded = std::make_unique<Scene>("Default", new SceneNode("Default"), QVector<std::shared_ptr<Material>>(), QVector<std::shared_ptr<Geometry>>(), QVector<std::shared_ptr<Mesh>>());
+        sceneLoaded = std::make_unique<Scene>("Default", std::make_unique<SceneNode>("Default"), QVector<std::shared_ptr<Material>>(), QVector<std::shared_ptr<Geometry>>(), QVector<std::shared_ptr<Mesh>>());
     }
     return sceneLoaded;
 }
 
-SceneNode* SceneLoader::LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode)
+std::shared_ptr<SceneNode> SceneLoader::LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode)
 {
     // Store the node's name.
-    SceneNode* nodeLoaded = new SceneNode( QString(pNode->mName.data) );
+    auto nodeLoaded = std::make_shared<SceneNode>( QString(pNode->mName.data) );
 
     // Load the transformation matrix.
     aiMatrix4x4 mat = pNode->mTransformation;

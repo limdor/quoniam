@@ -22,11 +22,11 @@ class Scene
 public:
     class const_iterator: std::iterator<std::forward_iterator_tag, const SceneNode>
     {
-        const SceneNode* mCurrentNode = nullptr;
+        std::shared_ptr<SceneNode const> mCurrentNode = nullptr;
         std::stack<int> mChildIndexFromParent;
 
     public:
-        const_iterator(const SceneNode* currentNode = nullptr):
+        const_iterator(std::shared_ptr<SceneNode const> currentNode = nullptr):
             mCurrentNode{currentNode}, mChildIndexFromParent{} {}
         const_iterator& operator++() {
             if(mCurrentNode) {
@@ -62,14 +62,14 @@ public:
         reference operator*() const {return *mCurrentNode;}
     };
     /// Create an scene given the name and the root scene node
-    Scene(const QString &pName, SceneNode *pSceneRoot, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries, const QVector<std::shared_ptr<Mesh>>& pMeshes );
+    Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries, const QVector<std::shared_ptr<Mesh>>& pMeshes );
     Scene(const Scene& pScene) = delete;
-    ~Scene();
+    ~Scene() = default;
 
     inline const_iterator cbegin() const{return const_iterator{mRootNode};}
     inline const_iterator cend() const{return const_iterator{nullptr};}
     QString GetName() const;
-    const SceneNode* GetRootNode() const;
+    std::shared_ptr<SceneNode const> GetRootNode() const;
     std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
     int GetNumberOfPolygons() const;
     int GetNumberOfVertices() const;
@@ -77,7 +77,7 @@ public:
 
 private:
     QString mName;
-    SceneNode* mRootNode;
+    std::shared_ptr<SceneNode> mRootNode;
     /// List of materials used
     QVector<std::shared_ptr<Material>> mMaterials;
     /// List of geometries used

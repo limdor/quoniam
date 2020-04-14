@@ -26,7 +26,7 @@ GPUSceneNode* GPUScene::GetSceneNode(int pNode) const
     return mSceneNodes.at(pNode);
 }
 
-QVector<GPUSceneNode*> GPUScene::CreateGPUSceneNodes(const SceneNode* pSceneNode, int &pPolygonalOffset)
+QVector<GPUSceneNode*> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset)
 {
     QVector<GPUSceneNode*> sceneNodes;
 
