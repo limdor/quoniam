@@ -178,7 +178,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         //We paint the scene using a different color per face
         for( int k = 0; k < gpuScene->GetNumberOfSceneNodes(); k++ )
         {
-            GPUSceneNode* sceneNode = gpuScene->GetSceneNode(k);
+            auto sceneNode = gpuScene->GetSceneNode(k);
             glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderColorPerFace->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
             mShaderColorPerFace->SetUniform("offset", sceneNode->GetPolygonalOffset());
