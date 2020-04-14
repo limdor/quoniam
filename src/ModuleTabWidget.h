@@ -1,8 +1,3 @@
-/// \file ModuleTabWidget.h
-/// \class ModuleTabWidget
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef MODULE_TAB_WIDGET_H
 #define MODULE_TAB_WIDGET_H
 

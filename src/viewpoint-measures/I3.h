@@ -1,8 +1,3 @@
-/// \file I3.h
-/// \class I3
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef I3_H
 #define I3_H
 

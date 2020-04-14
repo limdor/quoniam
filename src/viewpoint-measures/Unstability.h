@@ -1,8 +1,3 @@
-/// \file Unstability.h
-/// \class Unstability
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef UNSTABILITY_H
 #define UNSTABILITY_H
 

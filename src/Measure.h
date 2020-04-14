@@ -1,8 +1,3 @@
-/// \file Measure.h
-/// \class Measure
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef MEASURE_H
 #define MEASURE_H
 

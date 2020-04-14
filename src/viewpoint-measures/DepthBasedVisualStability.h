@@ -1,8 +1,3 @@
-/// \file DepthBasedVisualStability.h
-/// \class DepthBasedVisualStability
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef DEPTH_BASED_VISUAL_STABILITY_H
 #define DEPTH_BASED_VISUAL_STABILITY_H
 

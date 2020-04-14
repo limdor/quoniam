@@ -1,8 +1,3 @@
-/// \file GPUGeometry.h
-/// \class GPUGeometry
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef GPU_GEOMETRY_H
 #define GPU_GEOMETRY_H
 

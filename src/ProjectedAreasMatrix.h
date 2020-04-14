@@ -1,8 +1,3 @@
-/// \file ProjectedAreasMatrix.h
-/// \class ProjectedAreasMatrix
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef PROJECTED_AREAS_MATRIX_H
 #define PROJECTED_AREAS_MATRIX_H
 

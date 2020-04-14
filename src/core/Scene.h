@@ -1,9 +1,3 @@
-/// \file Scene.h
-/// \class Scene
-/// \author Xavier Bonaventura
-/// \author Nicolau Sunyer
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SCENE_H
 #define SCENE_H
 

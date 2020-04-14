@@ -1,8 +1,3 @@
-/// \file Material.h
-/// \class Material
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef MATERIAL_H
 #define MATERIAL_H
 

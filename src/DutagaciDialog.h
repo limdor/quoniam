@@ -1,8 +1,3 @@
-/// \file DutagaciDialog.h
-/// \class DutagaciDialog
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-///
 #ifndef DUTAGACI_DIALOG_H
 #define DUTAGACI_DIALOG_H
 

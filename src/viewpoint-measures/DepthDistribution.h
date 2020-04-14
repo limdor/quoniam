@@ -1,8 +1,3 @@
-/// \file DepthDistribution.h
-/// \class DepthDistribution
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef DEPTH_DISTRIBUTION_H
 #define DEPTH_DISTRIBUTION_H
 

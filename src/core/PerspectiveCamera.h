@@ -1,9 +1,3 @@
-/// \file PerspectiveCamera.h
-/// \class PerspectiveCamera
-/// \author Xavier Bonaventura
-/// \author Nicolau Sunyer
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef PERSPECTIVE_CAMERA_H
 #define PERSPECTIVE_CAMERA_H
 

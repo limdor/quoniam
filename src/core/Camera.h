@@ -1,9 +1,3 @@
-/// \file Camera.h
-/// \class Camera
-/// \author Xavier Bonaventura
-/// \author Nicolau Sunyer
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef CAMERA_H
 #define CAMERA_H
 

@@ -1,8 +1,3 @@
-/// \file GPUScene.h
-/// \class GPUScene
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef GPU_SCENE_H
 #define GPU_SCENE_H
 

@@ -1,8 +1,3 @@
-/// \file SceneInformationBuilder.h
-/// \class SceneInformationBuilder
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SCENE_INFORMATION_BUILDER_H
 #define SCENE_INFORMATION_BUILDER_H
 

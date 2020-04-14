@@ -1,8 +1,3 @@
-/// \file VMI.h
-/// \class VMI
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef VMI_H
 #define VMI_H
 

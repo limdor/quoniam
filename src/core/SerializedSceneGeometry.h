@@ -1,9 +1,3 @@
-/// \file SerializedSceneGeometry.h
-/// \class SerializedSceneGeometry
-/// \author Xavier Bonaventura
-/// \author Nicolau Sunyer
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SERIALIZED_SCENE_GEOMETRY_H
 #define SERIALIZED_SCENE_GEOMETRY_H
 

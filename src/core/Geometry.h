@@ -1,8 +1,3 @@
-/// \file Geometry.h
-/// \class Geometry
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 

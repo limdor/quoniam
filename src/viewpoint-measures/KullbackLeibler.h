@@ -1,8 +1,3 @@
-/// \file KullbackLeibler.h
-/// \class KullbackLeibler
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef KULLBACK_LEIBLER_H
 #define KULLBACK_LEIBLER_H
 

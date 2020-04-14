@@ -1,8 +1,3 @@
-/// \file SaliencyEVMI.h
-/// \class SaliencyEVMI
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef SALIENCY_EVMI_H
 #define SALIENCY_EVMI_H
 

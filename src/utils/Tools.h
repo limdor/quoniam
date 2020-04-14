@@ -1,8 +1,3 @@
-/// \file Tools.h
-/// \class Tools
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef TOOLS_H
 #define TOOLS_H
 

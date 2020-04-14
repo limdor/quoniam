@@ -1,8 +1,3 @@
-/// \file MaximumDepth.h
-/// \class MaximumDepth
-/// \author Xavier Bonaventura
-/// \author Copyright: (c) Universitat de Girona
-
 #ifndef MAXIMUM_DEPTH_H
 #define MAXIMUM_DEPTH_H
 
