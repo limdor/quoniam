@@ -42,10 +42,14 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
     {
         const QFileInfo fileInfo(pPath);
 
+        Debug::Log(QString("Load materials"));
         const QVector<std::shared_ptr<Material>> materials = LoadMaterials(scene, fileInfo.absolutePath());
+        Debug::Log(QString("Load geometries"));
         const QVector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
+        Debug::Log(QString("Load meshes"));
         const QVector<std::shared_ptr<Mesh>> meshes = LoadMeshes(scene, materials, geometries);
 
+        Debug::Log(QString("Load scene"));
         auto rootNode = LoadSceneNode( meshes, scene->mRootNode );
         sceneLoaded = std::make_unique<Scene>( fileInfo.baseName(), std::move(rootNode), materials, geometries, meshes );
     }
