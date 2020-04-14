@@ -73,7 +73,8 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
     Debug::Log( QString("SerializedSceneGeometry::ComputeNeighbourhood: Epsilon value: %1").arg(epsilon) );
 
     QVector< QPair< int, glm::vec3 > > points(mNumberOfFaces * 3);
-    //Es posen tots els punts de l'escena a una llista de punts ("points") amb informació de a quin mesh pertanyen, l'index del vèrtex en el mesh i la posició del vèrtex
+    // All vertices of the scene are added to a list of points with information about what mesh they belong,
+    // the vertex index inside the mesh and the vertex position
     for( int j = 0; j < mNumberOfFaces; j++ )
     {
         points[j*3 + 0] = QPair< int, glm::vec3 >(j*3 + 0, mVertexs.at(mFaces.at(j)[0]));
