@@ -29,18 +29,6 @@
 #include "GPUScene.h"
 #include "MainWindow.h"
 
-SceneInformationBuilder::SceneInformationBuilder():
-    mSerializedScene(nullptr), mProjectedAreasMatrix(nullptr), mWidthResolution(640), mAspectRatio(1.0f),
-    mPreviousDepthTest(true), mPreviousCullFace(true), mPreviousBlend(false)
-{
-}
-
-SceneInformationBuilder::~SceneInformationBuilder()
-{
-    delete mSerializedScene;
-    delete mProjectedAreasMatrix;
-}
-
 void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)
 {
     int numberOfViewpoints = pSphereOfViewpoints->GetNumberOfViewpoints();
@@ -136,13 +124,11 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
 
     glViewport( 0, 0, windowWidth, windowHeight );
 
-    delete mSerializedScene;
-    delete mProjectedAreasMatrix;
     mViewpointNeighbours = pSphereOfViewpoints->GetNeighbours();
-    mSerializedScene = new SerializedSceneGeometry(pScene);
+    mSerializedScene = std::make_unique<SerializedSceneGeometry>(pScene);
     int numberOfPolygons = pScene->GetNumberOfPolygons();
     QVector< unsigned int > facesAreas(numberOfPolygons);
-    mProjectedAreasMatrix = new ProjectedAreasMatrix(numberOfViewpoints, numberOfPolygons);
+    mProjectedAreasMatrix = std::make_shared<ProjectedAreasMatrix>(numberOfViewpoints, numberOfPolygons);
     mSilhouetteLengths.resize(numberOfViewpoints);
     mSilhouetteCurvature.resize(numberOfViewpoints);
     mNormalizedDepthHistograms.resize(numberOfViewpoints);
@@ -167,7 +153,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         progress.setValue(i);   
 
         //We compute the camera matrix
-        Camera* currentViewpoint = pSphereOfViewpoints->GetViewpoint(i);
+        auto currentViewpoint = pSphereOfViewpoints->GetViewpoint(i);
         glm::mat4 viewMatrix = currentViewpoint->GetViewMatrix();
         glm::mat4 projectionMatrix = currentViewpoint->GetProjectionMatrix();
         glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
@@ -178,7 +164,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         //We paint the scene using a different color per face
         for( int k = 0; k < gpuScene->GetNumberOfSceneNodes(); k++ )
         {
-            GPUSceneNode* sceneNode = gpuScene->GetSceneNode(k);
+            auto sceneNode = gpuScene->GetSceneNode(k);
             glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderColorPerFace->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
             mShaderColorPerFace->SetUniform("offset", sceneNode->GetPolygonalOffset());
@@ -312,7 +298,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     QApplication::restoreOverrideCursor();
 }
 
-const ProjectedAreasMatrix *SceneInformationBuilder::GetProjectedAreasMatrix() const
+std::shared_ptr<ProjectedAreasMatrix const> SceneInformationBuilder::GetProjectedAreasMatrix() const
 {
     return mProjectedAreasMatrix;
 }

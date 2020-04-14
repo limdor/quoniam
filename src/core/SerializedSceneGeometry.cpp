@@ -30,11 +30,6 @@ SerializedSceneGeometry::SerializedSceneGeometry(std::shared_ptr<Scene const> pS
     ComputeVertexCurvatures();
 }
 
-SerializedSceneGeometry::~SerializedSceneGeometry()
-{
-    delete mBoundingSphere;
-}
-
 void SerializedSceneGeometry::ComputeBoundingSphere()
 {
     Miniball<3> mb;
@@ -47,7 +42,7 @@ void SerializedSceneGeometry::ComputeBoundingSphere()
         mb.check_in(p);
     }
     mb.build();
-    mBoundingSphere = new BoundingSphere();
+    mBoundingSphere = std::make_unique<BoundingSphere>();
     glm::vec3 sphereCenter;
     sphereCenter.x = mb.center()[0];
     sphereCenter.y = mb.center()[1];

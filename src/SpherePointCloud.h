@@ -24,7 +24,7 @@ public:
     /// Copy constructor
     SpherePointCloud( const SpherePointCloud& pSpherePointCloud ) = delete;
     /// Destructor
-    ~SpherePointCloud();
+    virtual ~SpherePointCloud() = default;
 
     /// Generates 4 points uniformly distributed
     void SetToUniform4();
@@ -53,7 +53,7 @@ public:
     QVector<int> GetNeighbours(unsigned int pI) const;
 
     /// Return the 3D mesh
-    Geometry* GetMesh() const;
+    std::shared_ptr<Geometry> GetMesh() const;
 
 private:
     /// Compute the neighbours of the quasi uniform distribution
@@ -71,7 +71,7 @@ protected:
     /// Configure the mesh
     void SetMeshInformation();
     /// Mesh to paint the sphere point cloud
-    Geometry* mMesh;
+    std::shared_ptr<Geometry> mMesh;
     /// Number of points
     int mNumberOfPoints;
     /// Faces

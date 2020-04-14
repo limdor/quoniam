@@ -4,24 +4,25 @@
 #include "GPUSceneNode.h"
 #include "Scene.h"
 
+#include <memory>
+
 class GPUScene
 {
 public:
     /// Constructor
     explicit GPUScene(std::shared_ptr<Scene const> pScene);
-    /// Destructor
-    ~GPUScene();
+
     /// Get the number of scene nodes
     int GetNumberOfSceneNodes() const;
     /// Get the scene node
-    GPUSceneNode* GetSceneNode(int pNode) const;
+    std::shared_ptr<GPUSceneNode> GetSceneNode(int pNode) const;
 
 private:
     /// Create the gpu scene nodes given a scene node
-    QVector<GPUSceneNode*> CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset);
+    QVector<std::shared_ptr<GPUSceneNode>> CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset);
 
     /// List of gpu scene nodes
-    QVector<GPUSceneNode*> mSceneNodes;
+    QVector<std::shared_ptr<GPUSceneNode>> mSceneNodes;
 };
 
 #endif

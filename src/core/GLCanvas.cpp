@@ -52,13 +52,13 @@ void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera)
     updateGL();
 }
 
-void GLCanvas::SetPerVertexMesh(Geometry *pPerVertexMesh)
+void GLCanvas::SetPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh)
 {
     mPerVertexColorMeshes.clear();
     mPerVertexColorMeshes.push_back(pPerVertexMesh);
 }
 
-void GLCanvas::AddPerVertexMesh(Geometry* pPerVertexMesh)
+void GLCanvas::AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh)
 {
     mPerVertexColorMeshes.push_back(pPerVertexMesh);
 }
@@ -315,7 +315,7 @@ void GLCanvas::paintGL()
         mShaderDualInit->UseProgram();
         for(int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++)
         {
-            GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
+            auto sceneNode = mGPUScene->GetSceneNode(i);
             const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderDualInit->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
             //if( mWireframe )
@@ -385,7 +385,7 @@ void GLCanvas::paintGL()
             //Recorrem els meshos
             for(int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++)
             {
-                GPUSceneNode* sceneNode = mGPUScene->GetSceneNode(i);
+                auto sceneNode = mGPUScene->GetSceneNode(i);
                 auto currentMaterial = sceneNode->GetMaterial();
                 const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
                 mShaderDualPeel->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);

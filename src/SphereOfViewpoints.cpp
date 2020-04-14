@@ -10,14 +10,6 @@ SphereOfViewpoints::SphereOfViewpoints(float pAngle, float pAspectRatio):
     mMesh->SetName("Sphere of viewpoints");
 }
 
-SphereOfViewpoints::~SphereOfViewpoints()
-{
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
-        delete mCameras[i];
-    }
-}
-
 void SphereOfViewpoints::SetToUniform4()
 {
     SpherePointCloud::SetToUniform4();
@@ -54,7 +46,7 @@ void SphereOfViewpoints::SetToQuasiUniform(unsigned char pDepth)
     SetCameras();
 }
 
-Camera *SphereOfViewpoints::GetViewpoint(int pIndex) const
+std::shared_ptr<Camera> SphereOfViewpoints::GetViewpoint(int pIndex) const
 {
     return mCameras.at(pIndex);
 }
@@ -75,7 +67,7 @@ void SphereOfViewpoints::ApplyTransform(float pSceneRadius, float pSphereRadius,
     {
         glm::vec3 cameraPosition= mVertices.at(i) * pSphereRadius + pCenter;
         mVertices[i] = mVertices.at(i) * pSceneRadius * 2.0f + pCenter;
-        Camera* cam = mCameras.at(i);
+        auto cam = mCameras.at(i);
         cam->SetNearPlane(qMax(pSphereRadius - 2.0f * pSceneRadius, pSphereRadius / 1000.0f));
         cam->SetFarPlane(pSphereRadius * 2.0f);
         cam->SetLookAt(pCenter);
@@ -89,7 +81,7 @@ void SphereOfViewpoints::SetCameras()
     mCameras.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
-        mCameras[i] = new PerspectiveCamera( 0.05f, 2.0f, glm::vec3(0.0f), SpherePointCloud::Up(mVertices.at(i)), mVertices.at(i), mAngle, mAspectRatio );
+        mCameras[i] = std::make_shared<PerspectiveCamera>( 0.05f, 2.0f, glm::vec3(0.0f), SpherePointCloud::Up(mVertices.at(i)), mVertices.at(i), mAngle, mAspectRatio );
         mCameras[i]->mName = QString("%1").arg(i);
     }
 }

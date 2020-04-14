@@ -31,12 +31,7 @@ glm::vec3 SpherePointCloud::Up(const glm::vec3 &pViewpoint)
 SpherePointCloud::SpherePointCloud():
     mNumberOfPoints(0)
 {
-    mMesh = new Geometry("Sphere point cloud", GeometryTopology::Points);
-}
-
-SpherePointCloud::~SpherePointCloud()
-{
-    delete mMesh;
+    mMesh = std::make_shared<Geometry>("Sphere point cloud", GeometryTopology::Points);
 }
 
 void SpherePointCloud::SetToUniform4()
@@ -335,7 +330,7 @@ QVector<int> SpherePointCloud::GetNeighbours(unsigned int pI) const
     return mNeighbours.at(pI);
 }
 
-Geometry* SpherePointCloud::GetMesh() const
+std::shared_ptr<Geometry> SpherePointCloud::GetMesh() const
 {
     return mMesh;
 }

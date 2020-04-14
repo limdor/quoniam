@@ -21,7 +21,7 @@ void StoevStrasser::Compute(const SceneInformationBuilder *pSceneInformationBuil
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
     mValues.fill( 0.0f, numberOfViewpoints );
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     unsigned int sum_a_t = projectedAreasMatrix->GetTotalSum();
     for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {

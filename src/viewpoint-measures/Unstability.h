@@ -4,6 +4,8 @@
 //Project includes
 #include "Measure.h"
 
+#include <memory>
+
 /// Class that implements the unstability measure [Feixas et al. 2009]
 class Unstability : public Measure
 {
@@ -18,7 +20,7 @@ public:
 
 protected:
     /// Return the dissimilarity between two viewpoints
-    float GetDissimilarity(const ProjectedAreasMatrix *pProjectedAreasMatrix, int pViewpointI, int pViewpointJ);
+    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pViewpointI, int pViewpointJ);
 };
 
 #endif

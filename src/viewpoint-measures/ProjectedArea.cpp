@@ -16,7 +16,7 @@ ProjectedArea::~ProjectedArea()
 
 void ProjectedArea::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     mValues.fill( 0.0f, numberOfViewpoints );
     for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )

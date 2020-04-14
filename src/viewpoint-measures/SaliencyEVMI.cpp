@@ -20,7 +20,7 @@ SaliencyEVMI::~SaliencyEVMI()
 
 void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     QVector< float > polygonalSaliency(numberOfPolygons, 0.0f);
@@ -121,7 +121,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
     mComputed = true;
 }
 
-float SaliencyEVMI::GetDissimilarity(const ProjectedAreasMatrix *pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
+float SaliencyEVMI::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
 {
     int numberOfViewpoints = pProjectedAreasMatrix->GetNumberOfViewpoints();
     unsigned int sum_a_z_i = pProjectedAreasMatrix->GetSumPerPolygon(pPolygonI);

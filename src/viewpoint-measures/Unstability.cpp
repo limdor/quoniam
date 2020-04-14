@@ -20,7 +20,7 @@ Unstability::~Unstability()
 
 void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    const ProjectedAreasMatrix* projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
+    const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     mValues.fill( 0.0f, numberOfViewpoints );
     QVector< QVector< int > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
@@ -74,7 +74,7 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
     mComputed = true;
 }
 
-float Unstability::GetDissimilarity(const ProjectedAreasMatrix *pProjectedAreasMatrix, int pViewpointI, int pViewpointJ)
+float Unstability::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pViewpointI, int pViewpointJ)
 {
     int numberOfPolygons = pProjectedAreasMatrix->GetNumberOfPolygons();
     unsigned int a_t_i = pProjectedAreasMatrix->GetSumPerViewpoint(pViewpointI);

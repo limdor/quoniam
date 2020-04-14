@@ -4,6 +4,8 @@
 //Project includes
 #include "Measure.h"
 
+#include <memory>
+
 /// Class that implements the Saliency-based extended viewpoint mutual information [Feixas et al. 2009]
 class SaliencyEVMI : public Measure
 {
@@ -18,7 +20,7 @@ public:
 
 private:
     /// Return the dissimilarity between two polygons
-    float GetDissimilarity(const ProjectedAreasMatrix *pProjectedAreasMatrix, int pPolygonI, int pPolygonJ);
+    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ);
 };
 
 #endif

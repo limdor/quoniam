@@ -13,8 +13,6 @@ class SphereOfViewpoints : public SpherePointCloud
 public:
     /// Constructor
     SphereOfViewpoints(float pAngle, float pAspectRatio);
-    /// Destructor
-    ~SphereOfViewpoints();
 
     /// Generates 4 viewpoints uniformly distributed
     void SetToUniform4();
@@ -30,7 +28,7 @@ public:
     /// subdivision of faces, starting from an icosahedron
     void SetToQuasiUniform(unsigned char pDepth);
     /// Get the pIndex viewpoint
-    Camera* GetViewpoint(int pIndex) const;
+    std::shared_ptr<Camera> GetViewpoint(int pIndex) const;
     /// Return the numer of viewpoints over the sphere
     int GetNumberOfViewpoints() const;
     /// Return the aspect ratio of the viewpoints
@@ -46,7 +44,7 @@ protected:
     /// Aspect ratio
     float mAspectRatio;
     /// Array of viewpoints
-    QVector< Camera * > mCameras;
+    QVector<std::shared_ptr<Camera>> mCameras;
 };
 
 #endif

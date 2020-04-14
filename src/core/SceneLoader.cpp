@@ -145,8 +145,8 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
         QString finalTexturePath = pScenePath;
         finalTexturePath.append("/").append(actualTexturePath);
 
-        QImage* imageTexture = new QImage();
-        if( imageTexture->load(finalTexturePath) )
+        QImage imageTexture{};
+        if( imageTexture.load(finalTexturePath) )
         {
             material->SetKdTexture(imageTexture);
         }
@@ -175,7 +175,6 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
                 Debug::Log(QString("Supported images: %1").arg(output));
             }
         }
-        delete imageTexture;
     }
     return material;
 }
