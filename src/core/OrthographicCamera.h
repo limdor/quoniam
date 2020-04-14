@@ -26,7 +26,7 @@ public:
     void UpdateProjection() override;
 
     /// Method to clone the camera
-    OrthographicCamera* Clone() const override;
+    std::unique_ptr<Camera> Clone() const override;
 
     /// Set the top value
     void SetTop(float pTop);

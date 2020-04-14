@@ -14,6 +14,8 @@
 #include "glm/mat4x4.hpp"
 #include "glm/vec3.hpp"
 
+#include <memory>
+
 /// Abstract camera class with methods to configure a generic camera
 class Camera : public Gizmo
 {
@@ -64,7 +66,7 @@ public:
     virtual void UpdateProjection() = 0;
 
     /// Method to clone a camera
-    virtual Camera* Clone() const = 0;
+    virtual std::unique_ptr<Camera> Clone() const = 0;
 
     /// Name of the camera
     QString mName;

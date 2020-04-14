@@ -39,9 +39,9 @@ void PerspectiveCamera::UpdateProjection()
 	mUpdatedProjection = true;
 }
 
-PerspectiveCamera* PerspectiveCamera::Clone() const
+std::unique_ptr<Camera> PerspectiveCamera::Clone() const
 {
-    return new PerspectiveCamera(*this);
+    return std::make_unique<PerspectiveCamera>(*this);
 }
 
 void PerspectiveCamera::CreateMesh()

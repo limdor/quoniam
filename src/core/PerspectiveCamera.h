@@ -26,7 +26,7 @@ public:
     void UpdateProjection() override;
 
     /// Method to clone the camera
-    PerspectiveCamera* Clone() const override;
+    std::unique_ptr<Camera> Clone() const override;
 
     /// Set the field of view angle
     void SetAngle(float pAngle);

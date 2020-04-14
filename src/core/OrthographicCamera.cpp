@@ -57,9 +57,9 @@ void OrthographicCamera::UpdateProjection()
 	mUpdatedProjection = true;
 }
 
-OrthographicCamera* OrthographicCamera::Clone() const
+std::unique_ptr<Camera> OrthographicCamera::Clone() const
 {
-    return new OrthographicCamera(*this);
+    return std::make_unique<OrthographicCamera>(*this);
 }
 
 void OrthographicCamera::CreateMesh()

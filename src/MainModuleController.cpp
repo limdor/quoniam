@@ -475,7 +475,7 @@ void MainModuleController::SetViewpoint(int pViewpoint)
 {
     mCurrentViewpoint = pViewpoint;
     Camera* currentCamera = mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint);
-    mOpenGLCanvas->SetCamera( std::unique_ptr<Camera>{currentCamera->Clone()} );
+    mOpenGLCanvas->SetCamera( currentCamera->Clone() );
 
     //ShowViewpointInformation(pViewpoint);
     mOpenGLCanvas->updateGL();

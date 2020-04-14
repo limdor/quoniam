@@ -33,7 +33,7 @@ void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera)
 
     if(pCamera != nullptr)
     {
-        mFreeCamera = std::unique_ptr<Camera>{pCamera->Clone()};
+        mFreeCamera = pCamera->Clone();
     }
     else
     {
@@ -88,7 +88,7 @@ void GLCanvas::PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pE
         glm::vec2 initVector(pStartPoint.x-glHalfWidth, pStartPoint.y-glHalfHeight);
         glm::vec2 finalVector(pEndPoint.x-glHalfWidth, pEndPoint.y-glHalfHeight);
 
-        std::unique_ptr<Camera> newCamera{mFreeCamera->Clone()};
+        auto newCamera = mFreeCamera->Clone();
         newCamera->SetUp( glm::rotate(prevCamUpVector, glm::atan(initVector.y, initVector.x) - glm::atan(finalVector.y, finalVector.x), prevCamFrontVector ) );
         SetCamera(std::move(newCamera));
     }
