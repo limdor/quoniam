@@ -13,11 +13,6 @@ SaliencyEVMI::SaliencyEVMI(const QString& pName): Measure(pName, false)
 
 }
 
-SaliencyEVMI::~SaliencyEVMI()
-{
-
-}
-
 void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

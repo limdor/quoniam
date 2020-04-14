@@ -8,11 +8,6 @@ AxisAlignedBoundingBox::AxisAlignedBoundingBox(): Gizmo(),
     CreateMesh();
 }
 
-AxisAlignedBoundingBox::~AxisAlignedBoundingBox()
-{
-
-}
-
 void AxisAlignedBoundingBox::SetMin(const glm::vec3 &pValue)
 {
     mMin = pValue;

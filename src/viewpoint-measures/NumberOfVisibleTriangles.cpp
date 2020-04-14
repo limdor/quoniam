@@ -9,11 +9,6 @@ NumberOfVisibleTriangles::NumberOfVisibleTriangles(const QString& pName): Measur
 
 }
 
-NumberOfVisibleTriangles::~NumberOfVisibleTriangles()
-{
-
-}
-
 void NumberOfVisibleTriangles::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

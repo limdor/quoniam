@@ -8,10 +8,7 @@
 class MaximumDepth : public Measure
 {
 public:
-    /// Constructor
     explicit MaximumDepth(const QString &pName);
-    /// Destructor
-    ~MaximumDepth();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

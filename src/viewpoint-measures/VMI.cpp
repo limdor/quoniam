@@ -12,11 +12,6 @@ VMI::VMI(const QString &pName): Measure(pName, false)
 
 }
 
-VMI::~VMI()
-{
-
-}
-
 void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     QVector< int > elementsOutOfDomain;

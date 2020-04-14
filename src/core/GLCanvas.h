@@ -25,9 +25,7 @@ class GLCanvas : public QGLWidget
     Q_OBJECT
 
 public:
-    /// Constructor
     explicit GLCanvas(QWidget *pParent = nullptr);
-    /// Destructor
     ~GLCanvas();
 
     /// Load an scene

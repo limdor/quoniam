@@ -19,7 +19,6 @@ public:
     /// Retorna un vector cap amunt per al punt de vista passat.
     static glm::vec3 Up(const glm::vec3 &pViewpoint);
 
-    /// Constructor
     SpherePointCloud();
     /// Copy constructor
     SpherePointCloud( const SpherePointCloud& pSpherePointCloud ) = delete;

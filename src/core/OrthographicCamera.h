@@ -9,11 +9,8 @@
 class OrthographicCamera : public Camera
 {
 public:
-    /// Constructor
     OrthographicCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp, glm::vec3 pPosition, float pTop, float pBottom, float pLeft, float pRight);
-    /// Copy constructor
     OrthographicCamera(const OrthographicCamera& pOrthographicCamera);
-    /// Destructor
     ~OrthographicCamera();
 
     /// Update the projection matrix

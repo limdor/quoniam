@@ -9,12 +9,8 @@
 class PerspectiveCamera : public Camera
 {
 public:
-    /// Constructor
     PerspectiveCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp, glm::vec3 pPosition, float pAngle, float pAspectRatio);
-    /// Copy constructor
     PerspectiveCamera(const PerspectiveCamera& pPerspectiveCamera);
-    /// Destructor
-    ~PerspectiveCamera();
 
     /// Update the projection matrix
     void UpdateProjection() override;

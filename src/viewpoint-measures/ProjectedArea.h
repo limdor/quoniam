@@ -8,10 +8,7 @@
 class ProjectedArea : public Measure
 {
 public:
-    /// Constructor
     explicit ProjectedArea(const QString &pName);
-    /// Destructor
-    ~ProjectedArea();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

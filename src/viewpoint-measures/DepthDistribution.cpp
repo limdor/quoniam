@@ -12,11 +12,6 @@ DepthDistribution::DepthDistribution(const QString &pName): Measure(pName, true)
 
 }
 
-DepthDistribution::~DepthDistribution()
-{
-
-}
-
 void DepthDistribution::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

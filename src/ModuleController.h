@@ -10,7 +10,6 @@ class ModuleController : public QWidget
     Q_OBJECT
 public:
     explicit ModuleController(QWidget *pParent = 0);
-    ~ModuleController();
     
     QVector<QMenu*> GetModuleMenus() const;
     virtual void CreateModuleMenus();

@@ -7,10 +7,7 @@
 class DepthBasedVisualStability : public Measure
 {
 public:
-    /// Constructor
     explicit DepthBasedVisualStability(const QString &pName);
-    /// Destructor
-    ~DepthBasedVisualStability();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

@@ -17,11 +17,6 @@ DepthBasedVisualStability::DepthBasedVisualStability(const QString &pName): Meas
 
 }
 
-DepthBasedVisualStability::~DepthBasedVisualStability()
-{
-
-}
-
 void DepthBasedVisualStability::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const float threshold = 0.87f;

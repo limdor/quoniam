@@ -18,9 +18,7 @@
 class GLSLProgram
 {
 public:
-    /// Constructor
     explicit GLSLProgram(const QString& pName);
-    /// Destructor
     ~GLSLProgram();
 
     /// Get the name of the program

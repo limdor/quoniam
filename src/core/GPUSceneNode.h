@@ -14,10 +14,7 @@
 class GPUSceneNode
 {
 public:
-    /// Constructor
     GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, std::shared_ptr<Material> pMaterial);
-    /// Destructor
-    ~GPUSceneNode();
 
     /// Set the model matrix
     void SetModelMatrix(const glm::mat4 &pModelMatrix);

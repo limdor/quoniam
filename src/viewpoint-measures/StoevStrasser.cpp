@@ -12,11 +12,6 @@ StoevStrasser::StoevStrasser(const QString &pName): Measure(pName, true)
 
 }
 
-StoevStrasser::~StoevStrasser()
-{
-
-}
-
 void StoevStrasser::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

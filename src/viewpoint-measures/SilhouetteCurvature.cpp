@@ -12,11 +12,6 @@ SilhouetteCurvature::SilhouetteCurvature(const QString &pName): Measure(pName, t
 
 }
 
-SilhouetteCurvature::~SilhouetteCurvature()
-{
-
-}
-
 void SilhouetteCurvature::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

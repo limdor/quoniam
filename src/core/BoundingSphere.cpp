@@ -12,11 +12,6 @@ BoundingSphere::BoundingSphere(): Gizmo(),
     CreateMesh();
 }
 
-BoundingSphere::~BoundingSphere()
-{
-
-}
-
 glm::vec3 BoundingSphere::GetCenter() const
 {
     return mCenter;

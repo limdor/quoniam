@@ -14,8 +14,6 @@
 class Material
 {
 public:
-    /// Constructor
-    /// \param pName Name of the material
     explicit Material(const QString &pName);
 
     /// Get the ambient color

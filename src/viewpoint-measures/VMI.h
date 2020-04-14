@@ -8,10 +8,7 @@
 class VMI : public Measure
 {
 public:
-    /// Constructor
     explicit VMI(const QString &pName);
-    /// Destructor
-    ~VMI();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

@@ -12,11 +12,6 @@ ViewpointEntropy::ViewpointEntropy(const QString& pName): Measure(pName, true)
 
 }
 
-ViewpointEntropy::~ViewpointEntropy()
-{
-
-}
-
 void ViewpointEntropy::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

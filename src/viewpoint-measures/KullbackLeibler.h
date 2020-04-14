@@ -8,10 +8,7 @@
 class KullbackLeibler : public Measure
 {
 public:
-    /// Constructor
     explicit KullbackLeibler(const QString &pName);
-    /// Destructor
-    ~KullbackLeibler();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

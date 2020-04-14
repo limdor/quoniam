@@ -23,10 +23,8 @@ class GPUGeometry;
 class Geometry
 {
 public:
-    /// Constructor
     Geometry(const QString &pName, GeometryTopology pT);
     Geometry() = default;
-    /// Copy constructor (vertex neighbours have to be set again)
     Geometry(const Geometry& pGeometry);
     Geometry& operator=(const Geometry& pGeometry) = delete;
     Geometry(Geometry&& pGeometry) = delete;

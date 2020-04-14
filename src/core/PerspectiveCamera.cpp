@@ -17,10 +17,6 @@ PerspectiveCamera::PerspectiveCamera(const PerspectiveCamera& pPerspectiveCamera
     mAngle = pPerspectiveCamera.mAngle;
 }
 
-PerspectiveCamera::~PerspectiveCamera()
-{
-}
-
 void PerspectiveCamera::SetAngle(float pAngle)
 {
 	mAngle = pAngle;

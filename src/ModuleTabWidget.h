@@ -10,9 +10,7 @@ class ModuleTabWidget : public QTabWidget
 {
     Q_OBJECT
 public:
-    /// Constructor
     explicit ModuleTabWidget(QWidget *pParent = 0);
-    /// Destructor
     ~ModuleTabWidget();
 
     void LoadModule(QWidget *pModule, const QString &pCaption, const QString &pModuleIdentifier);

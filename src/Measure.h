@@ -11,9 +11,7 @@
 class Measure
 {
 public:
-    /// Constructor
     Measure(const QString& pName, bool pMaximumBest);
-    /// Destructor
     virtual ~Measure() = default;
 
     /// Get the name of the measure

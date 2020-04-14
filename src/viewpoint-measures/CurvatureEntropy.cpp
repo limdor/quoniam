@@ -16,11 +16,6 @@ CurvatureEntropy::CurvatureEntropy(const QString& pName): Measure(pName, true)
 
 }
 
-CurvatureEntropy::~CurvatureEntropy()
-{
-
-}
-
 void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const int histogramSize = 256;
