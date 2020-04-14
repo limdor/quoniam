@@ -11,13 +11,13 @@
 
 #include "glm/vec3.hpp"
 
+#include <memory>
+
 class SerializedSceneGeometry
 {
 public:
     /// Constructor
     explicit SerializedSceneGeometry(std::shared_ptr<Scene const> pScene);
-    /// Destructor
-    ~SerializedSceneGeometry();
 
     /// Show neighbours
     void ShowNeighbours() const;
@@ -59,6 +59,6 @@ private:
     /// List with the area of every face
     QVector< float > mFaceAreas;
     /// Bounding sphere of the scene
-    BoundingSphere* mBoundingSphere;
+    std::unique_ptr<BoundingSphere> mBoundingSphere;
 };
 #endif
