@@ -167,7 +167,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         progress.setValue(i);   
 
         //We compute the camera matrix
-        Camera* currentViewpoint = pSphereOfViewpoints->GetViewpoint(i);
+        auto currentViewpoint = pSphereOfViewpoints->GetViewpoint(i);
         glm::mat4 viewMatrix = currentViewpoint->GetViewMatrix();
         glm::mat4 projectionMatrix = currentViewpoint->GetProjectionMatrix();
         glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
