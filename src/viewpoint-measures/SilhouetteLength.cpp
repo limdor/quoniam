@@ -9,11 +9,6 @@ SilhouetteLength::SilhouetteLength(const QString &pName): Measure(pName, true)
 
 }
 
-SilhouetteLength::~SilhouetteLength()
-{
-
-}
-
 void SilhouetteLength::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

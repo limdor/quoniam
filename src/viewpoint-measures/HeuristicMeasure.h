@@ -10,8 +10,6 @@ class HeuristicMeasure : public Measure
 public:
     /// Constructor
     explicit HeuristicMeasure(const QString &pName);
-    /// Destructor
-    ~HeuristicMeasure();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

@@ -9,11 +9,6 @@ ProjectedArea::ProjectedArea(const QString &pName): Measure(pName, true)
 
 }
 
-ProjectedArea::~ProjectedArea()
-{
-
-}
-
 void ProjectedArea::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

@@ -9,11 +9,6 @@ HeuristicMeasure::HeuristicMeasure(const QString& pName): Measure(pName, true)
 
 }
 
-HeuristicMeasure::~HeuristicMeasure()
-{
-
-}
-
 void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

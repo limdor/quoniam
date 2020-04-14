@@ -13,11 +13,6 @@ FeixasSaliency::FeixasSaliency(const QString &pName): Measure(pName, true)
 
 }
 
-FeixasSaliency::~FeixasSaliency()
-{
-
-}
-
 void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

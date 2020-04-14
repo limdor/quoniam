@@ -12,8 +12,6 @@ class FeixasSaliency : public Measure
 public:
     /// Constructor
     explicit FeixasSaliency(const QString& pName);
-    /// Destructor
-    ~FeixasSaliency();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

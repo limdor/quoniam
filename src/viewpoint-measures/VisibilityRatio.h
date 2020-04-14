@@ -10,8 +10,6 @@ class VisibilityRatio : public Measure
 public:
     /// Constructor
     explicit VisibilityRatio(const QString &pName);
-    /// Destructor
-    ~VisibilityRatio();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

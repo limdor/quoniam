@@ -12,8 +12,6 @@ class SaliencyEVMI : public Measure
 public:
     /// Constructor
     explicit SaliencyEVMI(const QString &pName);
-    /// Destructor
-    ~SaliencyEVMI();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

@@ -10,8 +10,6 @@ class I3 : public Measure
 public:
     /// Constructor
     explicit I3(const QString &pName);
-    /// Destructor
-    ~I3();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

@@ -9,11 +9,6 @@ MaximumDepth::MaximumDepth(const QString &pName): Measure(pName, true)
 
 }
 
-MaximumDepth::~MaximumDepth()
-{
-
-}
-
 void MaximumDepth::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

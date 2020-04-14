@@ -10,8 +10,6 @@ class I2 : public Measure
 public:
     /// Constructor
     explicit I2(const QString &pName);
-    /// Destructor
-    ~I2();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

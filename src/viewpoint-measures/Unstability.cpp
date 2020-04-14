@@ -13,11 +13,6 @@ Unstability::Unstability(const QString &pName): Measure(pName, false)
 
 }
 
-Unstability::~Unstability()
-{
-
-}
-
 void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

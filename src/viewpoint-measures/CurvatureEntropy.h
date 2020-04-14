@@ -10,8 +10,6 @@ class CurvatureEntropy : public Measure
 public:
     /// Constructor
     explicit CurvatureEntropy(const QString &pName);
-    /// Destructor
-    ~CurvatureEntropy();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

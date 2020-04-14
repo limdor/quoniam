@@ -10,8 +10,6 @@ class DepthDistribution : public Measure
 public:
     /// Constructor
     explicit DepthDistribution(const QString &pName);
-    /// Destructor
-    ~DepthDistribution();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

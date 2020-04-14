@@ -9,11 +9,6 @@ VisibilityRatio::VisibilityRatio(const QString& pName): Measure(pName, true)
 
 }
 
-VisibilityRatio::~VisibilityRatio()
-{
-
-}
-
 void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();

@@ -13,11 +13,6 @@ SilhouetteCurvatureExtrema::SilhouetteCurvatureExtrema(const QString &pName): Me
 
 }
 
-SilhouetteCurvatureExtrema::~SilhouetteCurvatureExtrema()
-{
-
-}
-
 void SilhouetteCurvatureExtrema::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

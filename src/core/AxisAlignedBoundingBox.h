@@ -13,8 +13,6 @@ class AxisAlignedBoundingBox : public Gizmo
 public:
     /// Constructor
     AxisAlignedBoundingBox();
-    /// Destructor
-    ~AxisAlignedBoundingBox();
 
     /// Set minimum of every axis
     void SetMin(const glm::vec3 &pValue);

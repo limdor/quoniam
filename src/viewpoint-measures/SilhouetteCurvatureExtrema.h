@@ -10,8 +10,6 @@ class SilhouetteCurvatureExtrema : public Measure
 public:
     /// Constructor
     explicit SilhouetteCurvatureExtrema(const QString &pName);
-    /// Destructor
-    ~SilhouetteCurvatureExtrema();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

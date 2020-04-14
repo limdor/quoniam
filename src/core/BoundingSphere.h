@@ -13,8 +13,6 @@ class BoundingSphere : public Gizmo
 public:
     /// Constructor
     BoundingSphere();
-    /// Destructor
-    ~BoundingSphere();
 
     /// Get the center
     glm::vec3 GetCenter() const;

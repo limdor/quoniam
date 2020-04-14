@@ -6,11 +6,6 @@ GPUSceneNode::GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, std::sh
 
 }
 
-GPUSceneNode::~GPUSceneNode()
-{
-
-}
-
 void GPUSceneNode::SetModelMatrix(const glm::mat4 &pModelMatrix)
 {
     mModelMatrix = pModelMatrix;

@@ -12,11 +12,6 @@ SilhouetteEntropy::SilhouetteEntropy(const QString &pName): Measure(pName, true)
 
 }
 
-SilhouetteEntropy::~SilhouetteEntropy()
-{
-
-}
-
 void SilhouetteEntropy::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();

@@ -10,8 +10,6 @@ class NumberOfVisibleTriangles : public Measure
 public:
     /// Constructor
     explicit NumberOfVisibleTriangles(const QString &pName);
-    /// Destructor
-    ~NumberOfVisibleTriangles();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

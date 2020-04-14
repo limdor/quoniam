@@ -10,8 +10,6 @@ class StoevStrasser : public Measure
 public:
     /// Constructor
     explicit StoevStrasser(const QString &pName);
-    /// Destructor
-    ~StoevStrasser();
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

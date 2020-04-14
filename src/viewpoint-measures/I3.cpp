@@ -15,11 +15,6 @@ I3::I3(const QString &pName): Measure(pName, true)
 
 }
 
-I3::~I3()
-{
-
-}
-
 void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     QVector< int > elementsOutOfDomain;

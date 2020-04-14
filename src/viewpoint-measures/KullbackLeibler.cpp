@@ -12,11 +12,6 @@ KullbackLeibler::KullbackLeibler(const QString& pName): Measure(pName, false)
 
 }
 
-KullbackLeibler::~KullbackLeibler()
-{
-
-}
-
 void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
