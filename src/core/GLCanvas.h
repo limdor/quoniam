@@ -38,9 +38,9 @@ public:
     /// Load an scene
     void LoadScene(std::shared_ptr<Scene> pScene , const Camera* pCamera = nullptr);
     /// Initialize the list of meshes that will be render with the color per vertex with the parameter
-    void SetPerVertexMesh(Geometry* pPerVertexMesh);
+    void SetPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh);
     /// Add a mesh that will be render with the color per vertex
-    void AddPerVertexMesh(Geometry* pPerVertexMesh);
+    void AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh);
 
     /// Save a screenshot of the renderer
     QString SaveScreenshot( const QString &pFileName );
@@ -114,7 +114,7 @@ private:
     /// Scene that will be used for the rendering
     std::unique_ptr<GPUScene> mGPUScene = nullptr;
     /// Meshes that will be rendered by per vertex color
-    std::vector<Geometry*> mPerVertexColorMeshes;
+    std::vector<std::shared_ptr<Geometry>> mPerVertexColorMeshes;
 
     /// Shader used to initialize the min-max depth buffer for the dual depth peeling
     std::unique_ptr<GLSLProgram> mShaderDualInit = nullptr;
