@@ -118,9 +118,12 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     unsigned int totalNumberOfPixels = ((unsigned int)windowWidth * (unsigned int)windowHeight);
 
     //Storage for the pixels on every draw
-    float* valuePerFaceImage = new float [totalNumberOfPixels];
-    GLubyte* depthImage = new GLubyte [totalNumberOfPixels];
-    unsigned char* projectionMask = new unsigned char[totalNumberOfPixels];
+    std::vector<float> valuePerFaceImage;
+    valuePerFaceImage.reserve(totalNumberOfPixels);
+    std::vector<GLubyte> depthImage;
+    depthImage.reserve(totalNumberOfPixels);
+    std::vector<unsigned char> projectionMask;
+    projectionMask.reserve(totalNumberOfPixels);
 
     glViewport( 0, 0, windowWidth, windowHeight );
 
@@ -173,7 +176,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         glFlush();
 
         //We get the rendered image
-        glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage);
+        glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage.data());
         CHECK_GL_ERROR();
 
         //We compute the projected area of every face and we compute a mask to know what is model and what is background
@@ -196,14 +199,14 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         mProjectedAreasMatrix->SetValues(i, facesAreas);
 
         //We convert the mask to OpenCV format
-        cv::Mat image(windowHeight, windowWidth, CV_8UC1, projectionMask);
+        cv::Mat image(windowHeight, windowWidth, CV_8UC1, projectionMask.data());
         cv::flip(image, image, 0);
 
         //We obtain the depth image
         glBindTexture( GL_TEXTURE_2D, depthRenderTexture);
-        glGetTexImage(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, depthImage);
+        glGetTexImage(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, depthImage.data());
         CHECK_GL_ERROR();
-        cv::Mat imageDepth(windowHeight, windowWidth, CV_8UC1, depthImage);
+        cv::Mat imageDepth(windowHeight, windowWidth, CV_8UC1, depthImage.data());
         cv::flip(imageDepth, imageDepth, 0);
 
         mDepthImages[i] = imageDepth.clone();
@@ -261,7 +264,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         mShaderColorPerFace->SetUniform("modelViewProjection", viewProjectionMatrix);
         mShaderColorPerFace->SetUniform("offset", 0);
         verticesScene->Draw();
-        glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage);
+        glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage.data());
         CHECK_GL_ERROR();
         QSet<int> visibleVertexs;
         for(unsigned int j = 0; j < totalNumberOfPixels; j++ )
@@ -278,9 +281,6 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     }
     delete verticesScene;
     delete gpuScene;
-    delete[] projectionMask;
-    delete[] depthImage;
-    delete[] valuePerFaceImage;
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     //Delete framebuffer and the two render buffers
