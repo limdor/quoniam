@@ -13,6 +13,8 @@
 //Project includes
 #include "Debug.h"
 
+#include <algorithm>
+
 bool pairCompareX(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
 {
     return (pI.second.x < pJ.second.x);
@@ -114,36 +116,36 @@ QVector<float> Tools::ScaleValues(const QVector<float> &pValues, float pLowerBou
     int size = pValues.size();
     if (pPercentOfClipping == 0.0f)
     {
-        min = std::numeric_limits<int>::max();
-        max = -std::numeric_limits<int>::max();
-        for (int i = 0; i < size; i++)
-        {
-            if (pValues.at(i) > max)
-            {
-                max = pValues.at(i);
-            }
-            if (pValues.at(i) < min)
-            {
-                min = pValues.at(i);
-            }
-        }
+        const auto minmax = std::minmax_element(pValues.cbegin(), pValues.cend());
+        min = *minmax.first;
+        max = *minmax.second;
     }
     else
     {
-        QVector<float> orderedValues;
-
-        int offset = glm::round(size * (pPercentOfClipping / 200.0f));
-        orderedValues = pValues;
+        const int offset = glm::round(size * (pPercentOfClipping / 200.0f));
+        QVector<float> orderedValues = pValues;
         qSort(orderedValues);
         min = orderedValues.at(offset);
         max = orderedValues.at(size - 1 - offset);
     }
-    float scale = (pUpperBound - pLowerBound) / (max - min);
-    QVector<float> results(size);
-    for (int i = 0; i < size; i++)
+    const bool all_values_equal = max == min;
+    const float scale = (pUpperBound - pLowerBound) / (max - min);
+    QVector<float> results{pValues};
+    if (all_values_equal)
     {
-        results[i] = (glm::clamp(pValues.at(i), min, max) - min) * scale + pLowerBound;
+        auto scale_function = [=](float &value) {
+            value = glm::clamp(value, pLowerBound, pUpperBound);
+        };
+        std::for_each(results.begin(), results.end(), scale_function);
     }
+    else
+    {
+        auto scale_function = [=](float &value) {
+            value = (glm::clamp(value, min, max) - min) * scale + pLowerBound;
+        };
+        std::for_each(results.begin(), results.end(), scale_function);
+    }
+
     return results;
 }
 
