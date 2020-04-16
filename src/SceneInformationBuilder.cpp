@@ -138,8 +138,8 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     mMaxDepths.resize(numberOfViewpoints);
     mDepthImages.resize(numberOfViewpoints);
     mVisibleVertexs.resize(numberOfViewpoints);
-    GPUScene* gpuScene = new GPUScene(pScene);
-    Geometry* verticesScene = new Geometry("Vertices", GeometryTopology::Points);
+    GPUScene gpuScene{pScene};
+    Geometry verticesScene{"Vertices", GeometryTopology::Points};
     QVector<glm::vec3> vertices = mSerializedScene->GetVertices();
     int numberOfVertices = vertices.size();
     QVector<unsigned int> indexs(numberOfVertices);
@@ -147,8 +147,8 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     {
         indexs[j] = j;
     }
-    verticesScene->SetVerticesData(numberOfVertices, vertices.data());
-    verticesScene->SetIndexsData(numberOfVertices, indexs.data());
+    verticesScene.SetVerticesData(numberOfVertices, vertices.data());
+    verticesScene.SetIndexsData(numberOfVertices, indexs.data());
     //We iterate over all the viewpoint of the sphere
     for( int i = 0; i < numberOfViewpoints; i++ )
     {
@@ -165,9 +165,9 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
         //We paint the scene using a different color per face
-        for( int k = 0; k < gpuScene->GetNumberOfSceneNodes(); k++ )
+        for( int k = 0; k < gpuScene.GetNumberOfSceneNodes(); k++ )
         {
-            auto sceneNode = gpuScene->GetSceneNode(k);
+            auto sceneNode = gpuScene.GetSceneNode(k);
             glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderColorPerFace->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
             mShaderColorPerFace->SetUniform("offset", sceneNode->GetPolygonalOffset());
@@ -263,7 +263,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         glClear( GL_COLOR_BUFFER_BIT );
         mShaderColorPerFace->SetUniform("modelViewProjection", viewProjectionMatrix);
         mShaderColorPerFace->SetUniform("offset", 0);
-        verticesScene->Draw();
+        verticesScene.Draw();
         glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage.data());
         CHECK_GL_ERROR();
         QSet<int> visibleVertexs;
@@ -279,8 +279,6 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         }
         mVisibleVertexs[i] = visibleVertexs;
     }
-    delete verticesScene;
-    delete gpuScene;
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     //Delete framebuffer and the two render buffers

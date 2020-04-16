@@ -1,5 +1,6 @@
 #include "GLCanvas.h"
 
+#include "AxisAlignedBoundingBox.h"
 #include "Debug.h"
 #include "GPUGeometry.h"
 #include "OrthographicCamera.h"
@@ -321,13 +322,10 @@ void GLCanvas::paintGL()
             //if( mWireframe )
             //    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
             sceneNode->GetGeometry()->Draw();
-            glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
- //           if(mDrawBoundingBox)
- //               mScene->GetMesh(i)->GetGeometry()->GetBoundingBox()->Draw();
- //           if(mDrawBoundingSphere)
- //               mScene->GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
-        for(auto perVertexColorMesh : mPerVertexColorMeshes)
+        DrawGeometryBoundingVolumes(viewProjectionMatrix, true);
+        for (auto perVertexColorMesh : mPerVertexColorMeshes)
         {
             if( mDrawViewpointSphereInWireframe )
             {
@@ -422,8 +420,8 @@ void GLCanvas::paintGL()
             mShaderDualPeelPerVertexColor->BindTexture(GL_TEXTURE_RECTANGLE, "DepthBlenderTex", mDualDepthTexId[prevId], 1);
             mShaderDualPeelPerVertexColor->BindTexture(GL_TEXTURE_RECTANGLE, "FrontBlenderTex", mDualFrontBlenderTexId[prevId], 2);
             mShaderDualPeelPerVertexColor->SetUniform("modelViewProjection", viewProjectionMatrix);
-            DrawGeometryBoundingVolumes();
-            for(auto perVertexColorMesh : mPerVertexColorMeshes)
+            DrawGeometryBoundingVolumes(viewProjectionMatrix, false);
+            for (auto perVertexColorMesh : mPerVertexColorMeshes)
             {
                 if( mDrawViewpointSphereInWireframe )
                 {
@@ -613,16 +611,35 @@ void GLCanvas::keyPressEvent(QKeyEvent *pEvent)
     }
 }
 
-void GLCanvas::DrawGeometryBoundingVolumes()
+void GLCanvas::DrawGeometryBoundingVolumes(const glm::mat4 &viewProjectionMatrix, bool init)
 {
-//    for(int i = 0; i < mScene->GetNumberOfMeshes(); i++)
-//    {
-//        if(mDrawBoundingBox)
-//            mScene->GetMesh(i)->GetGeometry()->GetBoundingBox()->Draw();
-//        if(mDrawBoundingSphere)
-//            mScene->GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
-//    }
-//    CHECK_GL_ERROR();
+    if (mDrawBoundingBox || mDrawBoundingSphere)
+    {
+        for (auto it = mScene->cbegin(); it != mScene->cend(); ++it)
+        {
+            const auto &sceneNode = (*it);
+            glm::mat4 modelMatrix = sceneNode.GetGlobalTransform();
+            for (int i = 0; i < sceneNode.GetNumMeshes(); ++i)
+            {
+                if (init)
+                {
+                    mShaderDualInit->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
+                }
+                else
+                {
+                    mShaderDualPeelPerVertexColor->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
+                }
+                if (mDrawBoundingBox)
+                {
+                    sceneNode.GetMesh(i)->GetGeometry()->GetBoundingBox()->Draw();
+                }
+                if (mDrawBoundingSphere)
+                {
+                    sceneNode.GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
+                }
+            }
+        }
+    }
 }
 
 void GLCanvas::RecomputeViewport()
