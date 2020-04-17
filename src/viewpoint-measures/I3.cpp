@@ -81,6 +81,6 @@ void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         mValues[elementsOutOfDomain.at(currentElement)] = minValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

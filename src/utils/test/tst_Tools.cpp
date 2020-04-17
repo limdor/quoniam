@@ -63,7 +63,7 @@ TEST_CASE("GetOrderedIndexesByDimension", "Tools")
     REQUIRE(input == expected_sorted_z);
 }
 
-TEST_CASE("GetOrderedIndexes", "Tools")
+TEST_CASE("GetOrderedIndexes<float>", "Tools")
 {
     const std::vector<float> input{2.0f, 4.0f, 1.0f, 3.0f};
 
@@ -72,11 +72,11 @@ TEST_CASE("GetOrderedIndexes", "Tools")
     REQUIRE(result == expected);
 }
 
-TEST_CASE("GetPositions", "Tools")
+TEST_CASE("GetOrderedIndexes<int>", "Tools")
 {
     const std::vector<int> input{2, 4, 1, 3};
 
-    const std::vector<int> result = Tools::GetPositions(input);
+    const std::vector<int> result = Tools::GetOrderedIndexes(input);
     const std::vector<int> expected{2, 0, 3, 1};
     REQUIRE(result == expected);
 }

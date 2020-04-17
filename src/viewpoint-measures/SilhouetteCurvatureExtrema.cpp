@@ -30,6 +30,6 @@ void SilhouetteCurvatureExtrema::Compute(const SceneInformationBuilder *pSceneIn
         mValues[currentViewpoint] /= silhouetteSize;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

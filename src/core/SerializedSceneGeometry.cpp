@@ -87,11 +87,11 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
 
     //S'ordenen els punts per la coordenada X, la coordenada Y i la coordenada Z
     std::vector< int > pointsX = Tools::GetOrderedIndexesByDimension(pointsOrderedByX, 0);
-    pointsX = Tools::GetPositions(pointsX);
+    pointsX = Tools::GetOrderedIndexes(pointsX);
     std::vector< int > pointsY = Tools::GetOrderedIndexesByDimension(pointsOrderedByY, 1);
-    pointsY = Tools::GetPositions(pointsY);
+    pointsY = Tools::GetOrderedIndexes(pointsY);
     std::vector< int > pointsZ = Tools::GetOrderedIndexesByDimension(pointsOrderedByZ, 2);
-    pointsZ = Tools::GetPositions(pointsZ);
+    pointsZ = Tools::GetOrderedIndexes(pointsZ);
 
     int verticesWithoutNeighbours = 0;
 

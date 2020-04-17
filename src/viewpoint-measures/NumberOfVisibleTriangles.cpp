@@ -30,6 +30,6 @@ void NumberOfVisibleTriangles::Compute(const SceneInformationBuilder *pSceneInfo
         mValues[currentViewpoint] = polygonsSeen;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

@@ -81,7 +81,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
         }
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }
 

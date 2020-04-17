@@ -27,6 +27,6 @@ void DepthDistribution::Compute(const SceneInformationBuilder *pSceneInformation
         mValues[currentViewpoint] = 1.0f - mValues.at(currentViewpoint);
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

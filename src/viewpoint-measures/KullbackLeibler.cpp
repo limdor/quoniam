@@ -39,6 +39,6 @@ void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBu
         }
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

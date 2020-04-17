@@ -51,6 +51,6 @@ void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationB
         mValues[currentViewpoint] = -mValues.at(currentViewpoint);
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

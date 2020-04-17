@@ -59,6 +59,6 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         mValues[elementsOutOfDomain.at(currentElement)] = maxValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

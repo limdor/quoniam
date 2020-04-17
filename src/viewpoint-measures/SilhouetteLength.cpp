@@ -19,6 +19,6 @@ void SilhouetteLength::Compute(const SceneInformationBuilder *pSceneInformationB
         mValues[currentViewpoint] = pSceneInformationBuilder->GetSilhouetteLength(currentViewpoint);
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

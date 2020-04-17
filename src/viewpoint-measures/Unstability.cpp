@@ -66,7 +66,7 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
         mValues[viewpointsOutOfDomain.at(currentViewpoint)] = minValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }
 

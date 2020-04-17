@@ -19,6 +19,6 @@ void MaximumDepth::Compute(const SceneInformationBuilder *pSceneInformationBuild
         mValues[currentViewpoint] = pSceneInformationBuilder->GetMaximumDepth(currentViewpoint);
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

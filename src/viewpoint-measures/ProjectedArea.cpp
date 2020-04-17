@@ -21,6 +21,6 @@ void ProjectedArea::Compute(const SceneInformationBuilder *pSceneInformationBuil
         mValues[currentViewpoint] = a_t;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

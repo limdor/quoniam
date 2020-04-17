@@ -13,41 +13,48 @@
 
 #include <algorithm>
 
-bool pairCompareX(std::pair<int, glm::vec3> pI, std::pair<int, glm::vec3> pJ)
+template<typename T>
+bool pairCompareX(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
 {
     return (pI.second.x < pJ.second.x);
 }
 
-bool pairCompareY(std::pair<int, glm::vec3> pI, std::pair<int, glm::vec3> pJ)
+template<typename T>
+bool pairCompareY(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
 {
     return (pI.second.y < pJ.second.y);
 }
 
-bool pairCompareZ(std::pair<int, glm::vec3> pI, std::pair<int, glm::vec3> pJ)
+template<typename T>
+bool pairCompareZ(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
 {
     return (pI.second.z < pJ.second.z);
 }
 
-std::vector<int> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<int, glm::vec3>> &pValues, int pDimension)
+template<typename T>
+std::vector<T> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<T, glm::vec3>> &pValues, int pDimension)
 {
     switch (pDimension)
     {
     case 0:
-        std::sort(pValues.begin(), pValues.end(), pairCompareX);
+        std::sort(pValues.begin(), pValues.end(), pairCompareX<T>);
         break;
     case 1:
-        std::sort(pValues.begin(), pValues.end(), pairCompareY);
+        std::sort(pValues.begin(), pValues.end(), pairCompareY<T>);
         break;
     case 2:
-        std::sort(pValues.begin(), pValues.end(), pairCompareZ);
+        std::sort(pValues.begin(), pValues.end(), pairCompareZ<T>);
         break;
     }
 
-    std::vector<int> result;
-    std::transform(pValues.cbegin(), pValues.cend(), std::back_inserter(result), [](std::pair<int, glm::vec3> pair) -> int { return pair.first; });
+    std::vector<T> result;
+    std::transform(pValues.cbegin(), pValues.cend(), std::back_inserter(result), [](std::pair<T, glm::vec3> pair) -> T { return pair.first; });
 
     return result;
 }
+
+template std::vector<int> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<int, glm::vec3>> &pValues, int pDimension);
+template std::vector<size_t> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<size_t, glm::vec3>> &pValues, int pDimension);
 
 template <class T>
 bool pairCompare(std::pair<int, T> i, std::pair<int, T> j)
@@ -55,17 +62,18 @@ bool pairCompare(std::pair<int, T> i, std::pair<int, T> j)
     return (i.second < j.second);
 }
 
-std::vector<int> Tools::GetOrderedIndexes(const std::vector<float> &pValues)
+template <typename T>
+std::vector<int> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
 {
     int size = pValues.size();
 
-    std::vector<std::pair<int, float>> toSort(size);
+    std::vector<std::pair<int, T>> toSort(size);
     for (int i = 0; i < size; i++)
     {
-        toSort[i] = std::pair<int, float>(i, pValues.at(i));
+        toSort[i] = std::pair<int, T>(i, pValues.at(i));
     }
 
-    std::sort(toSort.begin(), toSort.end(), pairCompare<float>);
+    std::sort(toSort.begin(), toSort.end(), pairCompare<T>);
 
     std::vector<int> result(size);
     for (int i = 0; i < size; i++)
@@ -76,26 +84,9 @@ std::vector<int> Tools::GetOrderedIndexes(const std::vector<float> &pValues)
     return result;
 }
 
-std::vector<int> Tools::GetPositions(const std::vector<int> &pValues)
-{
-    int size = pValues.size();
-
-    std::vector<std::pair<int, int>> toSort(size);
-    for (int i = 0; i < size; i++)
-    {
-        toSort[i] = std::pair<int, int>(i, pValues.at(i));
-    }
-
-    std::sort(toSort.begin(), toSort.end(), pairCompare<int>);
-
-    std::vector<int> result(size);
-    for (int i = 0; i < size; i++)
-    {
-        result[i] = toSort.at(i).first;
-    }
-
-    return result;
-}
+template std::vector<int> Tools::GetOrderedIndexes(const std::vector<int> &pValues);
+template std::vector<int> Tools::GetOrderedIndexes(const std::vector<float> &pValues);
+template std::vector<int> Tools::GetOrderedIndexes(const std::vector<size_t> &pValues);
 
 std::vector<glm::vec4> Tools::ConvertFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
@@ -166,9 +157,10 @@ float Tools::Mean(const std::vector<float> &pValues, const std::vector<float> &p
     return value;
 }
 
-std::vector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension)
+template <typename T>
+std::vector<T> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<T, glm::vec3>> &pVector, float pEpsilon, int pDimension)
 {
-    std::vector<int> result;
+    std::vector<T> result;
 
     bool nextUp = true;
     bool nextDown = true;
@@ -216,15 +208,20 @@ std::vector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const s
     return result;
 }
 
-std::vector<int> Tools::MergeNeighbours(const std::vector<int> &pVector1, const std::vector<int> &pVector2, const std::vector<int> &pVector3)
+template std::vector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension);
+template std::vector<size_t> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<size_t, glm::vec3>> &pVector, float pEpsilon, int pDimension);
+
+template <typename T>
+std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std::vector<T> &pVector2, const std::vector<T> &pVector3)
 {
-    int consecutiveElements, previousValue;
-    std::vector<int> result;
+    int consecutiveElements;
+    T previousValue;
+    std::vector<T> result;
 
     int sizeVector1 = pVector1.size();
     int sizeVector2 = pVector2.size();
     int sizeVector3 = pVector3.size();
-    std::vector<int> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
+    std::vector<T> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
     int offset = 0;
     for (int i = 0; i < sizeVector1; i++)
     {
@@ -242,7 +239,7 @@ std::vector<int> Tools::MergeNeighbours(const std::vector<int> &pVector1, const 
     }
     if (mixedVector.size() > 0)
     {
-        qSort(mixedVector.begin(), mixedVector.end());
+        std::sort(mixedVector.begin(), mixedVector.end());
         previousValue = mixedVector.at(0);
         consecutiveElements = 1;
     }
@@ -265,6 +262,9 @@ std::vector<int> Tools::MergeNeighbours(const std::vector<int> &pVector1, const 
     }
     return result;
 }
+
+template std::vector<int> Tools::MergeNeighbours(const std::vector<int> &pVector1, const std::vector<int> &pVector2, const std::vector<int> &pVector3);
+template std::vector<size_t> Tools::MergeNeighbours(const std::vector<size_t> &pVector1, const std::vector<size_t> &pVector2, const std::vector<size_t> &pVector3);
 
 std::vector<glm::vec4> Tools::ConvertNormalizedFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {

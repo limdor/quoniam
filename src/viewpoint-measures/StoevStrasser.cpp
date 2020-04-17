@@ -27,6 +27,6 @@ void StoevStrasser::Compute(const SceneInformationBuilder *pSceneInformationBuil
         mValues[currentViewpoint] = ( p_v + d_v + (1.0f - glm::abs(d_v - p_v)) ) / 3.0f;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

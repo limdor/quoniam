@@ -30,6 +30,6 @@ void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationB
         mValues[currentViewpoint] = ( differentZero / (float)numberOfPolygons ) + ( projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint) / ( pSceneInformationBuilder->GetWidthResolution() * ( pSceneInformationBuilder->GetWidthResolution() / pSceneInformationBuilder->GetAspectRatio() ) ) );
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

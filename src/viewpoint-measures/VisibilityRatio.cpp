@@ -38,6 +38,6 @@ void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBu
         mValues[currentViewpoint] = sumAreasSeen / sumAreaPolygons;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

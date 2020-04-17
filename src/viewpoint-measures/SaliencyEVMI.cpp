@@ -113,7 +113,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
         mValues[viewpointsOutOfDomain.at(currentViewpoint)] = maxValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }
 
