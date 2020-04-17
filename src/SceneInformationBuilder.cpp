@@ -306,7 +306,7 @@ QVector< QVector< int > > SceneInformationBuilder::GetViewpointNeighbours() cons
     return mViewpointNeighbours;
 }
 
-QVector< QVector< int > > SceneInformationBuilder::GetSerializedPolygonNeighbours() const
+QVector< QVector< size_t > > SceneInformationBuilder::GetSerializedPolygonNeighbours() const
 {
     return mSerializedScene->GetFacesNeighbours();
 }

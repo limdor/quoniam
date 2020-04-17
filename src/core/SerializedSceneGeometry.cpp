@@ -69,45 +69,45 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
     float epsilon = mBoundingSphere->GetRadius() / 1000000.0f;
     Debug::Log( QString("SerializedSceneGeometry::ComputeNeighbourhood: Epsilon value: %1").arg(epsilon) );
 
-    std::vector< std::pair< int, glm::vec3 > > points(mNumberOfFaces * 3);
+    std::vector< std::pair< size_t, glm::vec3 > > points(mNumberOfFaces * 3);
     // All vertices of the scene are added to a list of points with information about what mesh they belong,
     // the vertex index inside the mesh and the vertex position
-    for( int j = 0; j < mNumberOfFaces; j++ )
+    for( size_t j = 0; j < mNumberOfFaces; j++ )
     {
-        points[j*3 + 0] = std::pair< int, glm::vec3 >(j*3 + 0, mVertexs.at(mFaces.at(j)[0]));
-        points[j*3 + 1] = std::pair< int, glm::vec3 >(j*3 + 1, mVertexs.at(mFaces.at(j)[1]));
-        points[j*3 + 2] = std::pair< int, glm::vec3 >(j*3 + 2, mVertexs.at(mFaces.at(j)[2]));
+        points[j*3 + 0] = std::pair< size_t, glm::vec3 >(j*3 + 0, mVertexs.at(mFaces.at(j)[0]));
+        points[j*3 + 1] = std::pair< size_t, glm::vec3 >(j*3 + 1, mVertexs.at(mFaces.at(j)[1]));
+        points[j*3 + 2] = std::pair< size_t, glm::vec3 >(j*3 + 2, mVertexs.at(mFaces.at(j)[2]));
     }
 
-    std::vector< std::pair< int, glm::vec3 > > pointsOrderedByX = points;
-    std::vector< std::pair< int, glm::vec3 > > pointsOrderedByY = points;
-    std::vector< std::pair< int, glm::vec3 > > pointsOrderedByZ = points;
+    std::vector< std::pair< size_t, glm::vec3 > > pointsOrderedByX = points;
+    std::vector< std::pair< size_t, glm::vec3 > > pointsOrderedByY = points;
+    std::vector< std::pair< size_t, glm::vec3 > > pointsOrderedByZ = points;
 
     points.clear();
 
     //S'ordenen els punts per la coordenada X, la coordenada Y i la coordenada Z
-    std::vector< int > pointsX = Tools::GetOrderedIndexesByDimension(pointsOrderedByX, 0);
+    std::vector< size_t > pointsX = Tools::GetOrderedIndexesByDimension(pointsOrderedByX, 0);
     pointsX = Tools::GetOrderedIndexes(pointsX);
-    std::vector< int > pointsY = Tools::GetOrderedIndexesByDimension(pointsOrderedByY, 1);
+    std::vector< size_t > pointsY = Tools::GetOrderedIndexesByDimension(pointsOrderedByY, 1);
     pointsY = Tools::GetOrderedIndexes(pointsY);
-    std::vector< int > pointsZ = Tools::GetOrderedIndexesByDimension(pointsOrderedByZ, 2);
+    std::vector< size_t > pointsZ = Tools::GetOrderedIndexesByDimension(pointsOrderedByZ, 2);
     pointsZ = Tools::GetOrderedIndexes(pointsZ);
 
     int verticesWithoutNeighbours = 0;
 
-    for( int j = 0; j < mNumberOfFaces * 3; j++ )
+    for( size_t j = 0; j < mNumberOfFaces * 3; j++ )
     {
-        std::vector< int > neighboursX = Tools::FindNearestThanEpsilonByDimension( pointsX.at(j), pointsOrderedByX, epsilon, 0 );
-        std::vector< int > neighboursY = Tools::FindNearestThanEpsilonByDimension( pointsY.at(j), pointsOrderedByY, epsilon, 1 );
-        std::vector< int > neighboursZ = Tools::FindNearestThanEpsilonByDimension( pointsZ.at(j), pointsOrderedByZ, epsilon, 2 );
-        std::vector< int > neighbours = Tools::MergeNeighbours(neighboursX, neighboursY, neighboursZ);
+        std::vector< size_t > neighboursX = Tools::FindNearestThanEpsilonByDimension( pointsX.at(j), pointsOrderedByX, epsilon, 0 );
+        std::vector< size_t > neighboursY = Tools::FindNearestThanEpsilonByDimension( pointsY.at(j), pointsOrderedByY, epsilon, 1 );
+        std::vector< size_t > neighboursZ = Tools::FindNearestThanEpsilonByDimension( pointsZ.at(j), pointsOrderedByZ, epsilon, 2 );
+        std::vector< size_t > neighbours = Tools::MergeNeighbours(neighboursX, neighboursY, neighboursZ);
 
-        mVertexNeighbors[ mFaces.at(j / 3)[j % 3] ] += QVector<int>::fromStdVector(neighbours);
+        mVertexNeighbors[ mFaces.at(j / 3)[j % 3] ] += QVector<size_t>::fromStdVector(neighbours);
     }
     for( int j = 0; j < mVertexNeighbors.size(); j++ )
     {
         qSort(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
-        QVector< int >::iterator it = std::unique(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
+        QVector< size_t >::iterator it = std::unique(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
         mVertexNeighbors[j].resize( it - mVertexNeighbors[j].begin() );
         if( mVertexNeighbors.at(j).size() == 0 )
         {
@@ -125,16 +125,16 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
     }
 
     //Using the neighbourhood of the vertex we compute the neighbourhood of the polygons
-    for( int j = 0; j < mNumberOfFaces; j++ )
+    for( size_t j = 0; j < mNumberOfFaces; j++ )
     {
-        QVector< int > polygonNeighbours;
+        QVector< size_t > polygonNeighbours;
         for( int k = 0; k < 3; k++ )
         {
             polygonNeighbours += mVertexNeighbors.at( mFaces.at(j)[k] );
         }
 
         qSort(polygonNeighbours.begin(), polygonNeighbours.end());
-        QVector< int >::iterator it = std::unique(polygonNeighbours.begin(), polygonNeighbours.end());
+        QVector< size_t >::iterator it = std::unique(polygonNeighbours.begin(), polygonNeighbours.end());
         polygonNeighbours.resize( it - polygonNeighbours.begin() );
 
         mFaceNeighbors[j] = polygonNeighbours;
@@ -174,7 +174,7 @@ void SerializedSceneGeometry::ComputeVertexCurvatures()
 
 void SerializedSceneGeometry::ComputeFaceAreas()
 {
-    for( int i = 0; i < mNumberOfFaces; i++ )
+    for( size_t i = 0; i < mNumberOfFaces; i++ )
     {
         mFaceAreas[ i ] = 0.5f * glm::length( glm::cross( mVertexs.at( mFaces.at(i)[1] ) - mVertexs.at( mFaces.at(i)[0] ), mVertexs.at( mFaces.at(i)[2] ) - mVertexs.at( mFaces.at(i)[0] ) ) );
     }
@@ -212,7 +212,7 @@ QVector< float > SerializedSceneGeometry::GetVerticesCurvature() const
     return mVertexCurvatures;
 }
 
-QVector< QVector< int > > SerializedSceneGeometry::GetFacesNeighbours() const
+QVector< QVector< size_t > > SerializedSceneGeometry::GetFacesNeighbours() const
 {
     return mFaceNeighbors;
 }

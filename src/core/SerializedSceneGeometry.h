@@ -19,7 +19,7 @@ public:
     /// Get vertices curvature
     QVector< float > GetVerticesCurvature() const;
     /// Get face neighbours
-    QVector< QVector< int > > GetFacesNeighbours() const;
+    QVector< QVector< size_t > > GetFacesNeighbours() const;
     /// Get face areas
     QVector< float > GetFacesAreas() const;
 
@@ -40,15 +40,15 @@ private:
     /// Number of vertices
     int mNumberOfVertexs;
     /// For every vertex, the list of neighbourhood faces
-    QVector< QVector<int> > mVertexNeighbors;
+    QVector< QVector<size_t> > mVertexNeighbors;
     /// List with the curvature of every vertex
     QVector<float> mVertexCurvatures;
     /// List of faces: every face is compound by 3 indexs of the list of vertices
     QVector<glm::ivec3> mFaces;
     /// Number of faces
-    int mNumberOfFaces;
+    size_t mNumberOfFaces;
     /// For every face, the list of neighbourhood faces
-    QVector< QVector<int> > mFaceNeighbors;
+    QVector< QVector<size_t> > mFaceNeighbors;
     /// List with the area of every face
     QVector< float > mFaceAreas;
     /// Bounding sphere of the scene

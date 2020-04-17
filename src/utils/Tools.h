@@ -16,7 +16,7 @@ public:
     template<typename T>
     static std::vector< T > GetOrderedIndexesByDimension(std::vector<std::pair<T, glm::vec3> > &pValues, int pDimension);
     template<typename T>
-    static std::vector< int > GetOrderedIndexes(const std::vector< T >& pValues);
+    static std::vector< size_t > GetOrderedIndexes(const std::vector< T >& pValues);
     static std::vector< glm::vec4 > ConvertFloatsToColors(const std::vector< float >& pValues, bool pInverted);
     static std::vector< glm::vec4 > ConvertNormalizedFloatsToColors(const std::vector< float >& pValues, bool pInverted);
     static std::vector< float > ScaleValues(const std::vector< float >& pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping = 0.0f);

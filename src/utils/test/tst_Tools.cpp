@@ -67,8 +67,8 @@ TEST_CASE("GetOrderedIndexes<float>", "Tools")
 {
     const std::vector<float> input{2.0f, 4.0f, 1.0f, 3.0f};
 
-    const std::vector<int> result = Tools::GetOrderedIndexes(input);
-    const std::vector<int> expected{2, 0, 3, 1};
+    const std::vector<size_t> result = Tools::GetOrderedIndexes(input);
+    const std::vector<size_t> expected{2, 0, 3, 1};
     REQUIRE(result == expected);
 }
 
@@ -76,8 +76,8 @@ TEST_CASE("GetOrderedIndexes<int>", "Tools")
 {
     const std::vector<int> input{2, 4, 1, 3};
 
-    const std::vector<int> result = Tools::GetOrderedIndexes(input);
-    const std::vector<int> expected{2, 0, 3, 1};
+    const std::vector<size_t> result = Tools::GetOrderedIndexes(input);
+    const std::vector<size_t> expected{2, 0, 3, 1};
     REQUIRE(result == expected);
 }
 

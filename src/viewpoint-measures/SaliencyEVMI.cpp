@@ -19,7 +19,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     QVector< float > polygonalSaliency(numberOfPolygons, 0.0f);
-    QVector< QVector< int > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
+    QVector< QVector< size_t > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
     QVector< int > polygonsOutOfDomain;
     float maxValue = -FLT_MAX;
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
@@ -27,7 +27,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
 
-        QVector< int > neighbours = serializedPolygonNeighbours.at(currentPolygon);
+        QVector< size_t > neighbours = serializedPolygonNeighbours.at(currentPolygon);
         if(neighbours.size() == 0)
         {
             Debug::Log("SaliencyEVMI::No neighbours");

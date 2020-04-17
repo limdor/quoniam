@@ -57,26 +57,26 @@ template std::vector<int> Tools::GetOrderedIndexesByDimension(std::vector<std::p
 template std::vector<size_t> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<size_t, glm::vec3>> &pValues, int pDimension);
 
 template <class T>
-bool pairCompare(std::pair<int, T> i, std::pair<int, T> j)
+bool pairCompare(std::pair<size_t, T> i, std::pair<size_t, T> j)
 {
     return (i.second < j.second);
 }
 
 template <typename T>
-std::vector<int> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
+std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
 {
-    int size = pValues.size();
+    size_t size = pValues.size();
 
-    std::vector<std::pair<int, T>> toSort(size);
-    for (int i = 0; i < size; i++)
+    std::vector<std::pair<size_t, T>> toSort(size);
+    for (size_t i = 0; i < size; i++)
     {
-        toSort[i] = std::pair<int, T>(i, pValues.at(i));
+        toSort[i] = std::pair<size_t, T>(i, pValues.at(i));
     }
 
     std::sort(toSort.begin(), toSort.end(), pairCompare<T>);
 
-    std::vector<int> result(size);
-    for (int i = 0; i < size; i++)
+    std::vector<size_t> result(size);
+    for (size_t i = 0; i < size; i++)
     {
         result[i] = toSort.at(i).first;
     }
@@ -84,9 +84,9 @@ std::vector<int> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
     return result;
 }
 
-template std::vector<int> Tools::GetOrderedIndexes(const std::vector<int> &pValues);
-template std::vector<int> Tools::GetOrderedIndexes(const std::vector<float> &pValues);
-template std::vector<int> Tools::GetOrderedIndexes(const std::vector<size_t> &pValues);
+template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<int> &pValues);
+template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<float> &pValues);
+template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<size_t> &pValues);
 
 std::vector<glm::vec4> Tools::ConvertFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {

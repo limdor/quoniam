@@ -23,7 +23,7 @@ public:
     /// Get the histogram
     std::shared_ptr<ProjectedAreasMatrix const> GetProjectedAreasMatrix() const;
     QVector< QVector< int > > GetViewpointNeighbours() const;
-    QVector< QVector< int > > GetSerializedPolygonNeighbours() const;
+    QVector< QVector< size_t > > GetSerializedPolygonNeighbours() const;
     float GetSilhouetteLength(int pViewpoint) const;
     QVector< float > GetSilhouetteCurvature(int pViewpoint) const;
     QVector< float > GetNormalizedDepthHistogram(int pViewpoint) const;

@@ -42,8 +42,8 @@ protected:
     bool mComputed;
 
     std::vector<float> mValues;
-    std::vector<int> mSort;
-    std::vector<int> mPositions;
+    std::vector<size_t> mSort;
+    std::vector<size_t> mPositions;
 };
 
 #endif
