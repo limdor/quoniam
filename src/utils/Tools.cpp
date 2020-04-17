@@ -15,66 +15,61 @@
 
 #include <algorithm>
 
-bool pairCompareX(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
+bool pairCompareX(std::pair<int, glm::vec3> pI, std::pair<int, glm::vec3> pJ)
 {
     return (pI.second.x < pJ.second.x);
 }
 
-bool pairCompareY(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
+bool pairCompareY(std::pair<int, glm::vec3> pI, std::pair<int, glm::vec3> pJ)
 {
     return (pI.second.y < pJ.second.y);
 }
 
-bool pairCompareZ(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
+bool pairCompareZ(std::pair<int, glm::vec3> pI, std::pair<int, glm::vec3> pJ)
 {
     return (pI.second.z < pJ.second.z);
 }
 
-QVector<int> Tools::GetOrderedIndexesByDimension(QVector<QPair<int, glm::vec3>> &pValues, int pDimension)
+std::vector<int> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<int, glm::vec3>> &pValues, int pDimension)
 {
-    int size = pValues.size();
-
     switch (pDimension)
     {
     case 0:
-        qSort(pValues.begin(), pValues.end(), pairCompareX);
+        std::sort(pValues.begin(), pValues.end(), pairCompareX);
         break;
     case 1:
-        qSort(pValues.begin(), pValues.end(), pairCompareY);
+        std::sort(pValues.begin(), pValues.end(), pairCompareY);
         break;
     case 2:
-        qSort(pValues.begin(), pValues.end(), pairCompareZ);
+        std::sort(pValues.begin(), pValues.end(), pairCompareZ);
         break;
     }
 
-    QVector<int> result(size);
-    for (int i = 0; i < size; i++)
-    {
-        result[i] = pValues.at(i).first;
-    }
+    std::vector<int> result;
+    std::transform(pValues.cbegin(), pValues.cend(), std::back_inserter(result), [](std::pair<int, glm::vec3> pair) -> int { return pair.first; });
 
     return result;
 }
 
 template <class T>
-bool pairCompare(QPair<int, T> i, QPair<int, T> j)
+bool pairCompare(std::pair<int, T> i, std::pair<int, T> j)
 {
     return (i.second < j.second);
 }
 
-QVector<int> Tools::GetOrderedIndexes(const QVector<float> &pValues)
+std::vector<int> Tools::GetOrderedIndexes(const std::vector<float> &pValues)
 {
     int size = pValues.size();
 
-    QVector<QPair<int, float>> toSort(size);
+    std::vector<std::pair<int, float>> toSort(size);
     for (int i = 0; i < size; i++)
     {
-        toSort[i] = QPair<int, float>(i, pValues.at(i));
+        toSort[i] = std::pair<int, float>(i, pValues.at(i));
     }
 
-    qSort(toSort.begin(), toSort.end(), pairCompare<float>);
+    std::sort(toSort.begin(), toSort.end(), pairCompare<float>);
 
-    QVector<int> result(size);
+    std::vector<int> result(size);
     for (int i = 0; i < size; i++)
     {
         result[i] = toSort.at(i).first;
@@ -83,19 +78,19 @@ QVector<int> Tools::GetOrderedIndexes(const QVector<float> &pValues)
     return result;
 }
 
-QVector<int> Tools::GetPositions(const QVector<int> &pValues)
+std::vector<int> Tools::GetPositions(const std::vector<int> &pValues)
 {
     int size = pValues.size();
 
-    QVector<QPair<int, int>> toSort(size);
+    std::vector<std::pair<int, int>> toSort(size);
     for (int i = 0; i < size; i++)
     {
-        toSort[i] = QPair<int, int>(i, pValues.at(i));
+        toSort[i] = std::pair<int, int>(i, pValues.at(i));
     }
 
-    qSort(toSort.begin(), toSort.end(), pairCompare<int>);
+    std::sort(toSort.begin(), toSort.end(), pairCompare<int>);
 
-    QVector<int> result(size);
+    std::vector<int> result(size);
     for (int i = 0; i < size; i++)
     {
         result[i] = toSort.at(i).first;
@@ -173,7 +168,7 @@ float Tools::Mean(const QVector<float> &pValues, const QVector<float> &pWeights)
     return value;
 }
 
-QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, QVector<QPair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension)
+QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const QVector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension)
 {
     QVector<int> result;
 

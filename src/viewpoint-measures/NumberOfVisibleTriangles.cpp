@@ -14,7 +14,8 @@ void NumberOfVisibleTriangles::Compute(const SceneInformationBuilder *pSceneInfo
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         int polygonsSeen = 0;

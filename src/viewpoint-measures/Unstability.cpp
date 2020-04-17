@@ -17,7 +17,8 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     QVector< QVector< int > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
     QVector< int > viewpointsOutOfDomain;
     float minValue = FLT_MAX;

@@ -7,6 +7,8 @@
 //Project includes
 #include "SceneInformationBuilder.h"
 
+#include <vector>
+
 /// Parent class for all the measures
 class Measure
 {
@@ -17,7 +19,7 @@ public:
     /// Get the name of the measure
     const QString& GetName() const;
     /// Get a list of the values of the measures for every viewpoint
-    QVector<float> GetValues() const;
+    std::vector<float> GetValues() const;
     /// Get the value of the measure given a viewpoint
     float GetValue(int pViewpoint) const;
     int GetNth(int pNth) const;
@@ -39,9 +41,9 @@ protected:
     /// Boolean to know if the measure is computed
     bool mComputed;
 
-    QVector<float> mValues;
-    QVector<int> mSort;
-    QVector<int> mPositions;
+    std::vector<float> mValues;
+    std::vector<int> mSort;
+    std::vector<int> mPositions;
 };
 
 #endif

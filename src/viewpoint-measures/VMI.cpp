@@ -7,6 +7,8 @@
 //Project includes
 #include "Tools.h"
 
+#include <algorithm>
+
 VMI::VMI(const QString &pName): Measure(pName, false)
 {
 
@@ -20,7 +22,8 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     float maxValue = -FLT_MAX;
     for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )

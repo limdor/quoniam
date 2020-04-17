@@ -16,7 +16,8 @@ SilhouetteCurvatureExtrema::SilhouetteCurvatureExtrema(const QString &pName): Me
 void SilhouetteCurvatureExtrema::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         QVector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);

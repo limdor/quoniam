@@ -65,7 +65,8 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
     {
         polygonalSaliency[polygonsOutOfDomain.at(currentPolygon)] = minValue;
     }
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )

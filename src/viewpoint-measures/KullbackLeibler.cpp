@@ -17,7 +17,8 @@ void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBu
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     QVector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
     float sumAreaPolygons = 0.0f;
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )

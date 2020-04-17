@@ -11,7 +11,7 @@ const QString& Measure::GetName() const
     return mName;
 }
 
-QVector<float> Measure::GetValues() const
+std::vector<float> Measure::GetValues() const
 {
     return mValues;
 }

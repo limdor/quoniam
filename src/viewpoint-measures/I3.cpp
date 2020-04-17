@@ -23,7 +23,8 @@ void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     //The polygonal I2 is computed first
     QVector< float > polygonalI2(numberOfPolygons, 0.0f);
