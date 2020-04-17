@@ -88,15 +88,15 @@ SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
     const glm::vec3 BLUE{0.0f, 0.0f, 1.0f};
     GIVEN("A vector with three unsorted values")
     {
-        const QVector<float> input{1.0f, 0.0f, 2.0f};
+        const std::vector<float> input{1.0f, 0.0f, 2.0f};
 
         WHEN("converted without inversion")
         {
-            const QVector<glm::vec4> result = Tools::ConvertFloatsToColors(input, false);
+            const std::vector<glm::vec4> result = Tools::ConvertFloatsToColors(input, false);
 
             THEN("lower gets blue, middle gets green and higher gets red")
             {
-                const QVector<glm::vec4> expected{
+                const std::vector<glm::vec4> expected{
                     glm::vec4{GREEN, 0.5f},
                     glm::vec4{BLUE, 0.0f},
                     glm::vec4{RED, 1.0f}};
@@ -106,11 +106,11 @@ SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
 
         WHEN("converted with inversion")
         {
-            const QVector<glm::vec4> result = Tools::ConvertFloatsToColors(input, true);
+            const std::vector<glm::vec4> result = Tools::ConvertFloatsToColors(input, true);
 
             THEN("lower gets red, middle gets green and higher gets blue")
             {
-                const QVector<glm::vec4> expected{
+                const std::vector<glm::vec4> expected{
                     glm::vec4{GREEN, 0.5f},
                     glm::vec4{RED, 1.0f},
                     glm::vec4{BLUE, 0.0f}};
@@ -121,15 +121,15 @@ SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
 
     GIVEN("A vector with all values equal")
     {
-        const QVector<float> input{2.0f, 2.0f, 2.0f};
+        const std::vector<float> input{2.0f, 2.0f, 2.0f};
 
         WHEN("converted without inversion")
         {
-            const QVector<glm::vec4> result = Tools::ConvertFloatsToColors(input, false);
+            const std::vector<glm::vec4> result = Tools::ConvertFloatsToColors(input, false);
 
             THEN("all get green")
             {
-                const QVector<glm::vec4> expected{
+                const std::vector<glm::vec4> expected{
                     glm::vec4{RED, 1.0f},
                     glm::vec4{RED, 1.0f},
                     glm::vec4{RED, 1.0f}};
@@ -145,15 +145,15 @@ SCENARIO("values can be scaled within a range", "ScaleValues")
     const float UPPER_BOUND = 2.0f;
     GIVEN("A vector of different values")
     {
-        const QVector<float> input{1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+        const std::vector<float> input{1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
 
         WHEN("scaled between two different values")
         {
-            const QVector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
+            const std::vector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
 
             THEN("the lowest value gets the lower bound, the upper value the higher bound and the others the values in between")
             {
-                const QVector<float> expected{LOWER_BOUND, 0.5f, 1.0f, 1.5f, UPPER_BOUND};
+                const std::vector<float> expected{LOWER_BOUND, 0.5f, 1.0f, 1.5f, UPPER_BOUND};
                 REQUIRE(result == expected);
             }
         }
@@ -161,11 +161,11 @@ SCENARIO("values can be scaled within a range", "ScaleValues")
 
     GIVEN("A vector of same values inside [LOWER_BOUND, UPPER_BOUND]")
     {
-        const QVector<float> input{2.0f, 2.0f, 2.0f, 2.0f, 2.0f};
+        const std::vector<float> input{2.0f, 2.0f, 2.0f, 2.0f, 2.0f};
 
         WHEN("scaled between [LOWER_BOUND, UPPER_BOUND]")
         {
-            const QVector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
+            const std::vector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
 
             THEN("the output is the same like the input")
             {
@@ -176,15 +176,15 @@ SCENARIO("values can be scaled within a range", "ScaleValues")
 
     GIVEN("A vector of same values outside [LOWER_BOUND, UPPER_BOUND]")
     {
-        const QVector<float> input{4.0f, 4.0f, 4.0f, 4.0f, 4.0f};
+        const std::vector<float> input{4.0f, 4.0f, 4.0f, 4.0f, 4.0f};
 
         WHEN("scaled between [LOWER_BOUND, UPPER_BOUND]")
         {
-            const QVector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
+            const std::vector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
 
             THEN("the output is all values the same like the closer bound")
             {
-                const QVector<float> expected{UPPER_BOUND, UPPER_BOUND, UPPER_BOUND, UPPER_BOUND, UPPER_BOUND};
+                const std::vector<float> expected{UPPER_BOUND, UPPER_BOUND, UPPER_BOUND, UPPER_BOUND, UPPER_BOUND};
                 REQUIRE(result == expected);
             }
         }

@@ -2,7 +2,6 @@
 #define TOOLS_H
 
 //Qt includes
-#include <QtCore/QPair>
 #include <QtCore/QVector>
 
 //Dependency includes
@@ -17,9 +16,9 @@ public:
     static std::vector< int > GetOrderedIndexesByDimension(std::vector<std::pair<int, glm::vec3> > &pValues, int pDimension);
     static std::vector< int > GetOrderedIndexes(const std::vector< float >& pValues);
     static std::vector< int > GetPositions(const std::vector< int >& pValues);
-    static QVector< glm::vec4 > ConvertFloatsToColors(const QVector< float >& pValues, bool pInverted);
+    static std::vector< glm::vec4 > ConvertFloatsToColors(const std::vector< float >& pValues, bool pInverted);
     static QVector< glm::vec4 > ConvertNormalizedFloatsToColors(const QVector< float >& pValues, bool pInverted);
-    static QVector< float > ScaleValues(const QVector< float >& pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping = 0.0f);
+    static std::vector< float > ScaleValues(const std::vector< float >& pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping = 0.0f);
     static float Mean(const QVector< float >& pValues, const QVector<float>& pWeights = QVector<float>());
 
     static QVector<int> FindNearestThanEpsilonByDimension(int pPosition, const QVector<std::pair<int, glm::vec3> > &pVector, float pEpsilon, int pDimension);

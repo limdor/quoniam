@@ -99,12 +99,12 @@ std::vector<int> Tools::GetPositions(const std::vector<int> &pValues)
     return result;
 }
 
-QVector<glm::vec4> Tools::ConvertFloatsToColors(const QVector<float> &pValues, bool pInverted)
+std::vector<glm::vec4> Tools::ConvertFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
-    return ConvertNormalizedFloatsToColors(ScaleValues(pValues, 0.0f, 1.0f), pInverted);
+    return ConvertNormalizedFloatsToColors(QVector<float>::fromStdVector(ScaleValues(pValues, 0.0f, 1.0f)), pInverted).toStdVector();
 }
 
-QVector<float> Tools::ScaleValues(const QVector<float> &pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping)
+std::vector<float> Tools::ScaleValues(const std::vector<float> &pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping)
 {
     float min, max;
 
@@ -118,14 +118,14 @@ QVector<float> Tools::ScaleValues(const QVector<float> &pValues, float pLowerBou
     else
     {
         const int offset = glm::round(size * (pPercentOfClipping / 200.0f));
-        QVector<float> orderedValues = pValues;
-        qSort(orderedValues);
+        std::vector<float> orderedValues = pValues;
+        std::sort(orderedValues.begin(), orderedValues.end());
         min = orderedValues.at(offset);
         max = orderedValues.at(size - 1 - offset);
     }
     const bool all_values_equal = max == min;
     const float scale = (pUpperBound - pLowerBound) / (max - min);
-    QVector<float> results{pValues};
+    std::vector<float> results{pValues};
     if (all_values_equal)
     {
         auto scale_function = [=](float &value) {

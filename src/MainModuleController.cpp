@@ -659,11 +659,11 @@ void MainModuleController::on_measureInViewpointSphereList_currentIndexChanged(i
 {
     if( mSphereOfViewpoints != nullptr )
     {
-        QVector<glm::vec4> colors;
+        std::vector<glm::vec4> colors;
 
         if( pValue < mViewpointMeasures.size() )
         {
-            colors = Tools::ConvertFloatsToColors(QVector<float>::fromStdVector(mViewpointMeasures.at(pValue)->GetValues()), !mViewpointMeasures.at(pValue)->IsMaximumBest());
+            colors = Tools::ConvertFloatsToColors(mViewpointMeasures.at(pValue)->GetValues(), !mViewpointMeasures.at(pValue)->IsMaximumBest());
         }
         for( int i = 0; i < colors.size(); i++ )
         {
