@@ -19,7 +19,7 @@ public:
     /// Set the model matrix
     void SetModelMatrix(const glm::mat4 &pModelMatrix);
     /// Set the polygonal offset
-    void SetPolygonalOffset(int pPolygonalOffset);
+    void SetPolygonalOffset(size_t pPolygonalOffset);
 
     /// Get the model matrix
     glm::mat4 GetModelMatrix() const;
@@ -28,7 +28,7 @@ public:
     /// Get the material
     std::shared_ptr<Material> GetMaterial();
     /// Get the polygonal offset
-    int GetPolygonalOffset() const;
+    size_t GetPolygonalOffset() const;
 
 private:
     /// Model matrix
@@ -38,7 +38,7 @@ private:
     /// Material
     std::shared_ptr<Material> mMaterial;
     /// Polygonal offset in the scene
-    int mPolygonalOffset;
+    size_t mPolygonalOffset;
 };
 
 #endif

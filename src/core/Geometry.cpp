@@ -65,10 +65,10 @@ Geometry& Geometry::operator=(Geometry&& pGeometry)
 
 Geometry::~Geometry() = default;
 
-void Geometry::SetVerticesData(unsigned int pSize, const glm::vec4 *pData)
+void Geometry::SetVerticesData(size_t pSize, const glm::vec4 *pData)
 {
     mVertexData.resize(pSize*4);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mVertexData[i*4] = pData[i].x;
         mVertexData[i*4+1] = pData[i].y;
@@ -79,10 +79,10 @@ void Geometry::SetVerticesData(unsigned int pSize, const glm::vec4 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetVerticesData(unsigned int pSize, const glm::vec3 *pData)
+void Geometry::SetVerticesData(size_t pSize, const glm::vec3 *pData)
 {
     mVertexData.resize(pSize*3);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mVertexData[i*3] = pData[i].x;
         mVertexData[i*3+1] = pData[i].y;
@@ -92,10 +92,10 @@ void Geometry::SetVerticesData(unsigned int pSize, const glm::vec3 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetVerticesData(unsigned int pSize, const glm::vec2 *pData)
+void Geometry::SetVerticesData(size_t pSize, const glm::vec2 *pData)
 {
     mVertexData.resize(pSize*2);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mVertexData[i*2] = pData[i].x;
         mVertexData[i*2+1] = pData[i].y;
@@ -114,10 +114,10 @@ unsigned int Geometry::GetVertexStride() const
     return mVertexStride;
 }
 
-void Geometry::SetNormalsData(unsigned int pSize, const glm::vec3 *pData)
+void Geometry::SetNormalsData(size_t pSize, const glm::vec3 *pData)
 {
     mNormalData.resize(pSize*3);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mNormalData[i*3] = pData[i].x;
         mNormalData[i*3+1] = pData[i].y;
@@ -126,10 +126,10 @@ void Geometry::SetNormalsData(unsigned int pSize, const glm::vec3 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetColorData(unsigned int pSize, const glm::vec4 *pData)
+void Geometry::SetColorData(size_t pSize, const glm::vec4 *pData)
 {
     mColorData.resize(pSize*4);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mColorData[i*4] = pData[i].r;
         mColorData[i*4+1] = pData[i].g;
@@ -140,10 +140,10 @@ void Geometry::SetColorData(unsigned int pSize, const glm::vec4 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetColorData(unsigned int pSize, const glm::vec3 *pData)
+void Geometry::SetColorData(size_t pSize, const glm::vec3 *pData)
 {
     mColorData.resize(pSize*3);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mColorData[i*3] = pData[i].x;
         mColorData[i*3+1] = pData[i].y;
@@ -153,10 +153,10 @@ void Geometry::SetColorData(unsigned int pSize, const glm::vec3 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetTextCoordsData(unsigned int pSize, const glm::vec2 *pData)
+void Geometry::SetTextCoordsData(size_t pSize, const glm::vec2 *pData)
 {
     mTextCoordsData.resize(pSize*2);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mTextCoordsData[i*2] = pData[i].x;
         mTextCoordsData[i*2+1] = pData[i].y;
@@ -164,10 +164,10 @@ void Geometry::SetTextCoordsData(unsigned int pSize, const glm::vec2 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetTangentData(unsigned int pSize, const glm::vec3 *pData)
+void Geometry::SetTangentData(size_t pSize, const glm::vec3 *pData)
 {
     mTangentData.resize(pSize*3);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mTangentData[i*3] = pData[i].x;
         mTangentData[i*3+1] = pData[i].y;
@@ -176,10 +176,10 @@ void Geometry::SetTangentData(unsigned int pSize, const glm::vec3 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetBitangentData(unsigned int pSize, const glm::vec3 *pData)
+void Geometry::SetBitangentData(size_t pSize, const glm::vec3 *pData)
 {
     mBitangentData.resize(pSize*3);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mBitangentData[i*3] = pData[i].x;
         mBitangentData[i*3+1] = pData[i].y;
@@ -188,10 +188,10 @@ void Geometry::SetBitangentData(unsigned int pSize, const glm::vec3 *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetIndexsData(unsigned int pSize, const unsigned int *pData)
+void Geometry::SetIndexsData(size_t pSize, const unsigned int *pData)
 {
     mIndexData.resize(pSize);
-    for( unsigned int i = 0; i < pSize; i++ )
+    for( size_t i = 0; i < pSize; i++ )
     {
         mIndexData[i] = pData[i];
     }

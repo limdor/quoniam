@@ -25,12 +25,12 @@ std::shared_ptr<BoundingSphere const> Scene::GetBoundingSphere() const
     return mRootNode->GetBoundingSphere();
 }
 
-int Scene::GetNumberOfPolygons() const
+size_t Scene::GetNumberOfPolygons() const
 {
     return mRootNode->GetNumberOfPolygons();
 }
 
-int Scene::GetNumberOfVertices() const
+size_t Scene::GetNumberOfVertices() const
 {
     return mRootNode->GetNumberOfVertices();
 }

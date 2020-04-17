@@ -16,12 +16,14 @@
 SerializedSceneGeometry::SerializedSceneGeometry(std::shared_ptr<Scene const> pScene):
     mNumberOfVertexs(0), mNumberOfFaces(0)
 {
-    mVertexs.resize(pScene->GetNumberOfVertices());
-    mVertexNeighbors.resize(pScene->GetNumberOfVertices());
-    mVertexCurvatures.resize(pScene->GetNumberOfVertices());
-    mFaces.resize(pScene->GetNumberOfPolygons());
-    mFaceNeighbors.resize(pScene->GetNumberOfPolygons());
-    mFaceAreas.resize(pScene->GetNumberOfPolygons());
+    int numberOfVertices = static_cast<int>(pScene->GetNumberOfVertices());
+    mVertexs.resize(numberOfVertices);
+    mVertexNeighbors.resize(numberOfVertices);
+    mVertexCurvatures.resize(numberOfVertices);
+    int numberOfPolygons = static_cast<int>(pScene->GetNumberOfPolygons());
+    mFaces.resize(numberOfPolygons);
+    mFaceNeighbors.resize(numberOfPolygons);
+    mFaceAreas.resize(numberOfPolygons);
     SerializeSceneNodes(pScene->GetRootNode());
     Q_ASSERT(mVertexs.size() == mNumberOfVertexs && mFaces.size() == mNumberOfFaces);
     ComputeBoundingSphere();

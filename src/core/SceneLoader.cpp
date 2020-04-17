@@ -183,7 +183,7 @@ QVector<std::shared_ptr<Geometry>> SceneLoader::LoadGeometries(const aiScene* pA
 {
     unsigned int numberOfGeometries = pAiScene->mNumMeshes;
     QVector<std::shared_ptr<Geometry>> geometries(numberOfGeometries);
-    for( int i = 0; i < numberOfGeometries; i++ )
+    for( unsigned int i = 0; i < numberOfGeometries; i++ )
     {
         geometries[i] = LoadGeometry(pAiScene->mMeshes[i]);
     }

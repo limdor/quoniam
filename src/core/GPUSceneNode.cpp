@@ -11,7 +11,7 @@ void GPUSceneNode::SetModelMatrix(const glm::mat4 &pModelMatrix)
     mModelMatrix = pModelMatrix;
 }
 
-void GPUSceneNode::SetPolygonalOffset(int pPolygonalOffset)
+void GPUSceneNode::SetPolygonalOffset(size_t pPolygonalOffset)
 {
     mPolygonalOffset = pPolygonalOffset;
 }
@@ -31,7 +31,7 @@ std::shared_ptr<Material> GPUSceneNode::GetMaterial()
     return mMaterial;
 }
 
-int GPUSceneNode::GetPolygonalOffset() const
+size_t GPUSceneNode::GetPolygonalOffset() const
 {
     return mPolygonalOffset;
 }

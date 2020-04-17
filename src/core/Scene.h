@@ -65,8 +65,8 @@ public:
     QString GetName() const;
     std::shared_ptr<SceneNode const> GetRootNode() const;
     std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
-    int GetNumberOfPolygons() const;
-    int GetNumberOfVertices() const;
+    size_t GetNumberOfPolygons() const;
+    size_t GetNumberOfVertices() const;
     void ShowInformation() const;
 
 private:

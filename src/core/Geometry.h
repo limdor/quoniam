@@ -32,30 +32,30 @@ public:
     ~Geometry();
 
     /// Set the vertices of the geometry
-    void SetVerticesData(unsigned int pSize, const glm::vec4 *pData);
+    void SetVerticesData(size_t pSize, const glm::vec4 *pData);
     /// Set the vertices of the geometry
-    void SetVerticesData(unsigned int pSize, const glm::vec3 *pData);
+    void SetVerticesData(size_t pSize, const glm::vec3 *pData);
     /// Set the vertices of the geometry
-    void SetVerticesData(unsigned int pSize, const glm::vec2 *pData);
+    void SetVerticesData(size_t pSize, const glm::vec2 *pData);
     /// Get the vertices of the geometry
     const std::vector<float>& GetVerticesData() const;
     /// Get vertex stride
     unsigned int GetVertexStride() const;
     /// Set the normals of the geometry
-    void SetNormalsData(unsigned int pSize, const glm::vec3 *pData);
+    void SetNormalsData(size_t pSize, const glm::vec3 *pData);
     /// Set the colors of the geometry
-    void SetColorData(unsigned int pSize, const glm::vec4 *pData);
+    void SetColorData(size_t pSize, const glm::vec4 *pData);
     /// Set the colors of the geometry
-    void SetColorData(unsigned int pSize, const glm::vec3 *pData);
+    void SetColorData(size_t pSize, const glm::vec3 *pData);
     /// Set the texture coordinates of the geometry
-    void SetTextCoordsData(unsigned int pSize, const glm::vec2 *pData);
+    void SetTextCoordsData(size_t pSize, const glm::vec2 *pData);
     /// Set the tangents of the geometry
-    void SetTangentData(unsigned int pSize, const glm::vec3 *pData);
+    void SetTangentData(size_t pSize, const glm::vec3 *pData);
     /// Set the bitangents of the geometry
-    void SetBitangentData(unsigned int pSize, const glm::vec3 *pData);
+    void SetBitangentData(size_t pSize, const glm::vec3 *pData);
 
     /// Set the information of connectivities between vertices of the geometry
-    void SetIndexsData(unsigned int pSize, const unsigned int *pData);
+    void SetIndexsData(size_t pSize, const unsigned int *pData);
     /// Get the information of connectivities between vertices of the geometry
     const std::vector<unsigned int>& GetIndexsData() const;
 

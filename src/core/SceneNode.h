@@ -30,9 +30,9 @@ public:
     glm::mat4 GetGlobalTransform() const;
 
     /// Get the number of vertices in the node
-    int GetNumberOfVertices() const;
+    size_t GetNumberOfVertices() const;
     /// Get the number of polygons in the node
-    int GetNumberOfPolygons() const;
+    size_t GetNumberOfPolygons() const;
     /// Get the bounding sphere of the node
     std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
 
