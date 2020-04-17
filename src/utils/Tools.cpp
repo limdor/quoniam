@@ -3,8 +3,6 @@
 
 //Qt includes
 #include <QtCore/QDir>
-#include <QtCore/QPair>
-#include <QtCore/QtAlgorithms>
 
 //Dependency includes
 #include "glm/common.hpp"
@@ -101,7 +99,7 @@ std::vector<int> Tools::GetPositions(const std::vector<int> &pValues)
 
 std::vector<glm::vec4> Tools::ConvertFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
-    return ConvertNormalizedFloatsToColors(QVector<float>::fromStdVector(ScaleValues(pValues, 0.0f, 1.0f)), pInverted).toStdVector();
+    return ConvertNormalizedFloatsToColors(ScaleValues(pValues, 0.0f, 1.0f), pInverted);
 }
 
 std::vector<float> Tools::ScaleValues(const std::vector<float> &pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping)
@@ -144,7 +142,7 @@ std::vector<float> Tools::ScaleValues(const std::vector<float> &pValues, float p
     return results;
 }
 
-float Tools::Mean(const QVector<float> &pValues, const QVector<float> &pWeights)
+float Tools::Mean(const std::vector<float> &pValues, const std::vector<float> &pWeights)
 {
     float value = 0.0f;
     if (pValues.size() == pWeights.size())
@@ -168,9 +166,9 @@ float Tools::Mean(const QVector<float> &pValues, const QVector<float> &pWeights)
     return value;
 }
 
-QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const QVector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension)
+std::vector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension)
 {
-    QVector<int> result;
+    std::vector<int> result;
 
     bool nextUp = true;
     bool nextDown = true;
@@ -218,15 +216,15 @@ QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const QVect
     return result;
 }
 
-QVector<int> Tools::MergeNeighbours(const QVector<int> &pVector1, const QVector<int> &pVector2, const QVector<int> &pVector3)
+std::vector<int> Tools::MergeNeighbours(const std::vector<int> &pVector1, const std::vector<int> &pVector2, const std::vector<int> &pVector3)
 {
     int consecutiveElements, previousValue;
-    QVector<int> result;
+    std::vector<int> result;
 
     int sizeVector1 = pVector1.size();
     int sizeVector2 = pVector2.size();
     int sizeVector3 = pVector3.size();
-    QVector<int> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
+    std::vector<int> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
     int offset = 0;
     for (int i = 0; i < sizeVector1; i++)
     {
@@ -268,11 +266,11 @@ QVector<int> Tools::MergeNeighbours(const QVector<int> &pVector1, const QVector<
     return result;
 }
 
-QVector<glm::vec4> Tools::ConvertNormalizedFloatsToColors(const QVector<float> &pValues, bool pInverted)
+std::vector<glm::vec4> Tools::ConvertNormalizedFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
     int size = pValues.size();
 
-    QVector<glm::vec4> results(size);
+    std::vector<glm::vec4> results(size);
     for (int i = 0; i < size; i++)
     {
         results[i] = ConvertNormalizedFloatToColor(pValues.at(i), pInverted);

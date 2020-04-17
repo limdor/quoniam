@@ -97,12 +97,12 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
 
     for( int j = 0; j < mNumberOfFaces * 3; j++ )
     {
-        QVector< int > neighboursX = Tools::FindNearestThanEpsilonByDimension( pointsX.at(j), QVector<std::pair< int, glm::vec3 >>::fromStdVector(pointsOrderedByX), epsilon, 0 );
-        QVector< int > neighboursY = Tools::FindNearestThanEpsilonByDimension( pointsY.at(j), QVector<std::pair< int, glm::vec3 >>::fromStdVector(pointsOrderedByY), epsilon, 1 );
-        QVector< int > neighboursZ = Tools::FindNearestThanEpsilonByDimension( pointsZ.at(j), QVector<std::pair< int, glm::vec3 >>::fromStdVector(pointsOrderedByZ), epsilon, 2 );
-        QVector< int > neighbours = Tools::MergeNeighbours(neighboursX, neighboursY, neighboursZ);
+        std::vector< int > neighboursX = Tools::FindNearestThanEpsilonByDimension( pointsX.at(j), pointsOrderedByX, epsilon, 0 );
+        std::vector< int > neighboursY = Tools::FindNearestThanEpsilonByDimension( pointsY.at(j), pointsOrderedByY, epsilon, 1 );
+        std::vector< int > neighboursZ = Tools::FindNearestThanEpsilonByDimension( pointsZ.at(j), pointsOrderedByZ, epsilon, 2 );
+        std::vector< int > neighbours = Tools::MergeNeighbours(neighboursX, neighboursY, neighboursZ);
 
-        mVertexNeighbors[ mFaces.at(j / 3)[j % 3] ] += neighbours;
+        mVertexNeighbors[ mFaces.at(j / 3)[j % 3] ] += QVector<int>::fromStdVector(neighbours);
     }
     for( int j = 0; j < mVertexNeighbors.size(); j++ )
     {
