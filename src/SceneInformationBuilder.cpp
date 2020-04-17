@@ -129,7 +129,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
 
     mViewpointNeighbours = pSphereOfViewpoints->GetNeighbours();
     mSerializedScene = std::make_unique<SerializedSceneGeometry>(pScene);
-    int numberOfPolygons = pScene->GetNumberOfPolygons();
+    int numberOfPolygons = static_cast<int>(pScene->GetNumberOfPolygons());
     QVector< unsigned int > facesAreas(numberOfPolygons);
     mProjectedAreasMatrix = std::make_shared<ProjectedAreasMatrix>(numberOfViewpoints, numberOfPolygons);
     mSilhouetteLengths.resize(numberOfViewpoints);
@@ -170,7 +170,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
             auto sceneNode = gpuScene.GetSceneNode(k);
             glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderColorPerFace->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
-            mShaderColorPerFace->SetUniform("offset", sceneNode->GetPolygonalOffset());
+            mShaderColorPerFace->SetUniform("offset", static_cast<int>(sceneNode->GetPolygonalOffset()));
             sceneNode->GetGeometry()->Draw();
         }
         glFlush();

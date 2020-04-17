@@ -32,12 +32,12 @@ glm::mat4 SceneNode::GetGlobalTransform() const
     return mGlobalTransform;
 }
 
-int SceneNode::GetNumberOfVertices() const
+size_t SceneNode::GetNumberOfVertices() const
 {
     return mNumberOfVertices;
 }
 
-int SceneNode::GetNumberOfPolygons() const
+size_t SceneNode::GetNumberOfPolygons() const
 {
     return mNumberOfPolygons;
 }

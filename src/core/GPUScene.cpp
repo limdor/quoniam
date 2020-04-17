@@ -4,7 +4,7 @@
 
 GPUScene::GPUScene(std::shared_ptr<Scene const> pScene)
 {
-    int polygonalOffset = 0;
+    size_t polygonalOffset = 0;
     mSceneNodes = CreateGPUSceneNodes(pScene->GetRootNode(), polygonalOffset);
 }
 
@@ -18,7 +18,7 @@ std::shared_ptr<GPUSceneNode> GPUScene::GetSceneNode(int pNode) const
     return mSceneNodes.at(pNode);
 }
 
-QVector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset)
+QVector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, size_t &pPolygonalOffset)
 {
     QVector<std::shared_ptr<GPUSceneNode>> sceneNodes;
 

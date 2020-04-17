@@ -18,7 +18,7 @@ public:
 
 private:
     /// Create the gpu scene nodes given a scene node
-    QVector<std::shared_ptr<GPUSceneNode>> CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, int &pPolygonalOffset);
+    QVector<std::shared_ptr<GPUSceneNode>> CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, size_t &pPolygonalOffset);
 
     /// List of gpu scene nodes
     QVector<std::shared_ptr<GPUSceneNode>> mSceneNodes;
