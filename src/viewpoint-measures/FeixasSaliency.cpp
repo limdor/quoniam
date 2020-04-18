@@ -19,7 +19,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     QVector< float > polygonalSaliency(numberOfPolygons, 0.0f);
-    QVector< QVector< size_t > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
+    std::vector< std::vector< size_t > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
     QVector< int > polygonsOutOfDomain;
     float minValue = FLT_MAX;
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
@@ -27,7 +27,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
 
-        QVector< size_t > neighbours = serializedPolygonNeighbours.at(currentPolygon);
+        std::vector< size_t > neighbours = serializedPolygonNeighbours.at(currentPolygon);
         if(neighbours.size() == 0)
         {
             Debug::Log("FeixasSaliency::No neighbours");

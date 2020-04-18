@@ -18,7 +18,7 @@ void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBu
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    QVector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
+    std::vector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
     float sumAreaPolygons = 0.0f;
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {

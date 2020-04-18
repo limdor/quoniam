@@ -20,7 +20,7 @@ void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationB
 {
     const int histogramSize = 256;
     int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
-    QVector<float> vertexCurvatures = pSceneInformationBuilder->GetSerializedVertexCurvature();
+    std::vector<float> vertexCurvatures = pSceneInformationBuilder->GetSerializedVertexCurvature();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     float min = -2.0f * glm::pi<float>();

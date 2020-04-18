@@ -102,12 +102,13 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
         std::vector< size_t > neighboursZ = Tools::FindNearestThanEpsilonByDimension( pointsZ.at(j), pointsOrderedByZ, epsilon, 2 );
         std::vector< size_t > neighbours = Tools::MergeNeighbours(neighboursX, neighboursY, neighboursZ);
 
-        mVertexNeighbors[ mFaces.at(j / 3)[j % 3] ] += QVector<size_t>::fromStdVector(neighbours);
+        auto& vertexNeighbors = mVertexNeighbors[ mFaces.at(j / 3)[j % 3] ];
+        vertexNeighbors.insert(vertexNeighbors.end(), neighbours.cbegin(), neighbours.cend());
     }
     for( int j = 0; j < mVertexNeighbors.size(); j++ )
     {
-        qSort(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
-        QVector< size_t >::iterator it = std::unique(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
+        std::sort(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
+        std::vector< size_t >::iterator it = std::unique(mVertexNeighbors[j].begin(), mVertexNeighbors[j].end());
         mVertexNeighbors[j].resize( it - mVertexNeighbors[j].begin() );
         if( mVertexNeighbors.at(j).size() == 0 )
         {
@@ -127,14 +128,15 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
     //Using the neighbourhood of the vertex we compute the neighbourhood of the polygons
     for( size_t j = 0; j < mNumberOfFaces; j++ )
     {
-        QVector< size_t > polygonNeighbours;
+        std::vector< size_t > polygonNeighbours;
         for( int k = 0; k < 3; k++ )
         {
-            polygonNeighbours += mVertexNeighbors.at( mFaces.at(j)[k] );
+            const auto& vertexNeighbors = mVertexNeighbors.at( mFaces.at(j)[k] );
+            polygonNeighbours.insert(polygonNeighbours.end(), vertexNeighbors.cbegin(), vertexNeighbors.cend());
         }
 
-        qSort(polygonNeighbours.begin(), polygonNeighbours.end());
-        QVector< size_t >::iterator it = std::unique(polygonNeighbours.begin(), polygonNeighbours.end());
+        std::sort(polygonNeighbours.begin(), polygonNeighbours.end());
+        std::vector< size_t >::iterator it = std::unique(polygonNeighbours.begin(), polygonNeighbours.end());
         polygonNeighbours.resize( it - polygonNeighbours.begin() );
 
         mFaceNeighbors[j] = polygonNeighbours;
@@ -202,22 +204,22 @@ void SerializedSceneGeometry::ShowNeighbours() const
     }
 }
 
-QVector<glm::vec3> SerializedSceneGeometry::GetVertices() const
+std::vector<glm::vec3> SerializedSceneGeometry::GetVertices() const
 {
     return mVertexs;
 }
 
-QVector< float > SerializedSceneGeometry::GetVerticesCurvature() const
+std::vector< float > SerializedSceneGeometry::GetVerticesCurvature() const
 {
     return mVertexCurvatures;
 }
 
-QVector< QVector< size_t > > SerializedSceneGeometry::GetFacesNeighbours() const
+std::vector< std::vector< size_t > > SerializedSceneGeometry::GetFacesNeighbours() const
 {
     return mFaceNeighbors;
 }
 
-QVector< float > SerializedSceneGeometry::GetFacesAreas() const
+std::vector< float > SerializedSceneGeometry::GetFacesAreas() const
 {
     return mFaceAreas;
 }
