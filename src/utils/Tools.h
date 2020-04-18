@@ -22,7 +22,7 @@ public:
     static std::vector< float > ScaleValues(const std::vector< float >& pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping = 0.0f);
     static float Mean(const std::vector< float >& pValues, const std::vector<float>& pWeights = std::vector<float>());
     template<typename T>
-    static std::vector<T> FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<T, glm::vec3> > &pVector, float pEpsilon, int pDimension);
+    static std::vector<T> FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<T, glm::vec3> > &pVector, float pEpsilon, int pDimension);
     template<typename T>
     static std::vector<T> MergeNeighbours(const std::vector<T> &pVector1, const std::vector<T> &pVector2, const std::vector<T> &pVector3);
 

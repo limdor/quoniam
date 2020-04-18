@@ -158,13 +158,13 @@ float Tools::Mean(const std::vector<float> &pValues, const std::vector<float> &p
 }
 
 template <typename T>
-std::vector<T> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<T, glm::vec3>> &pVector, float pEpsilon, int pDimension)
+std::vector<T> Tools::FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<T, glm::vec3>> &pVector, float pEpsilon, int pDimension)
 {
     std::vector<T> result;
 
     bool nextUp = true;
     bool nextDown = true;
-    int i = 1;
+    size_t i = 1;
     while (nextUp || nextDown)
     {
         if (nextUp)
@@ -187,7 +187,7 @@ std::vector<T> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std
         }
         if (nextDown)
         {
-            if ((pPosition - i) >= 0)
+            if (pPosition >= i)
             {
                 if (glm::abs(pVector.at(pPosition - i).second[pDimension] - pVector.at(pPosition).second[pDimension]) < pEpsilon)
                 {
@@ -208,8 +208,8 @@ std::vector<T> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std
     return result;
 }
 
-template std::vector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension);
-template std::vector<size_t> Tools::FindNearestThanEpsilonByDimension(int pPosition, const std::vector<std::pair<size_t, glm::vec3>> &pVector, float pEpsilon, int pDimension);
+template std::vector<int> Tools::FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension);
+template std::vector<size_t> Tools::FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<size_t, glm::vec3>> &pVector, float pEpsilon, int pDimension);
 
 template <typename T>
 std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std::vector<T> &pVector2, const std::vector<T> &pVector3)

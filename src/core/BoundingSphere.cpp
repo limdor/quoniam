@@ -87,7 +87,7 @@ std::shared_ptr<BoundingSphere> BoundingSphere::Merge(std::shared_ptr<BoundingSp
 void BoundingSphere::CreateMesh()
 {
     /// Resolution used to render the bounding sphere
-    int sphereResolution = 50;
+    constexpr size_t sphereResolution = 50;
 
     /// Creation of the mesh
     mGizmo = Geometry{"BoundingSphere", GeometryTopology::Lines};
@@ -105,7 +105,7 @@ void BoundingSphere::CreateMesh()
     int offset = 0;
     for( int i = 0; i < 3; i++ )
     {
-        for( int j = 0; j < sphereResolution; j++ )
+        for( size_t j = 0; j < sphereResolution; j++ )
         {
             indexs[(j + offset)*2] = j + offset;
             indexs[(j + offset)*2 + 1] = j + offset + 1;
@@ -118,10 +118,10 @@ void BoundingSphere::CreateMesh()
 
 void BoundingSphere::UpdatePositions()
 {
-    int sphereResolution = mPositionOfVertices.size() / 3;
+    const size_t sphereResolution = mPositionOfVertices.size() / 3;
     int index = 0;
-    const float pi2 = 3.1415926535f * 2.0f;
-    float step = pi2 / (float)sphereResolution;
+    constexpr float pi2 = 3.1415926535f * 2.0f;
+    const float step = pi2 / (float)sphereResolution;
 
     for(float t = 0.0f; t <= pi2; t += step)
     {
