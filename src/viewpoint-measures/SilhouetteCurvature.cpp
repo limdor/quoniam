@@ -19,7 +19,7 @@ void SilhouetteCurvature::Compute(const SceneInformationBuilder *pSceneInformati
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
-        QVector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
+        std::vector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
         int silhouetteSize = silhouetteCurvature.size();
         for( int i = 0; i < silhouetteSize; i++ )
         {

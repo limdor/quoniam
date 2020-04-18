@@ -17,7 +17,7 @@ I2::I2(const QString &pName): Measure(pName, false)
 
 void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    QVector< int > elementsOutOfDomain;
+    std::vector< int > elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();

@@ -27,7 +27,7 @@ void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationB
     float range = 4.0f * glm::pi<float>();
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
-        QVector<unsigned int> curvatureHistogram(histogramSize, 0);
+        std::vector<unsigned int> curvatureHistogram(histogramSize, 0);
         QSet<int> visibleVertices = pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);
         foreach(int value, visibleVertices)
         {

@@ -287,7 +287,7 @@ void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
     // Create the initial vertices and faces from the sphere cloud
     CreateIcosahedron();
 
-    QVector< unsigned int > tempFaces = mFaces;
+    std::vector< unsigned int > tempFaces = mFaces;
 
     mFaces.clear();
 
@@ -305,12 +305,12 @@ void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
     SetMeshInformation();
 }
 
-QVector<unsigned int> SpherePointCloud::GetFaces() const
+std::vector<unsigned int> SpherePointCloud::GetFaces() const
 {
     return mFaces;
 }
 
-QVector<glm::vec3> SpherePointCloud::GetVertices() const
+std::vector<glm::vec3> SpherePointCloud::GetVertices() const
 {
     return mVertices;
 }
@@ -320,12 +320,12 @@ glm::vec3 SpherePointCloud::GetVertex(unsigned int pI) const
     return mVertices.at(pI);
 }
 
-QVector<QVector<int> > SpherePointCloud::GetNeighbours() const
+std::vector<std::vector<int> > SpherePointCloud::GetNeighbours() const
 {
     return mNeighbours;
 }
 
-QVector<int> SpherePointCloud::GetNeighbours(unsigned int pI) const
+std::vector<int> SpherePointCloud::GetNeighbours(unsigned int pI) const
 {
     return mNeighbours.at(pI);
 }
@@ -338,22 +338,22 @@ std::shared_ptr<Geometry> SpherePointCloud::GetMesh() const
 void SpherePointCloud::ComputeQuasiUniformNeighbours()
 {
     mNeighbours.clear();
-    int nFaces = mFaces.size() / 3;
+    const size_t nFaces = mFaces.size() / 3;
     Q_ASSERT( nFaces * 3 == mFaces.size() );
 
     for ( int i = 0; i < mNumberOfPoints; i++ )
     {
-        QVector<int> vertexNeighbours;
+        std::vector<int> vertexNeighbours;
 
         for ( int j = 0; j < nFaces; j++ )
         {
             if ( mFaces.at( 3 * j ) == i )
             {
-                if ( vertexNeighbours.indexOf( mFaces.at( 3 * j + 1 ) ) == -1 )
+                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 1 ) ) == vertexNeighbours.cend() )
                 {
                     vertexNeighbours.push_back(mFaces.at( 3 * j + 1 ));
                 }
-                if ( vertexNeighbours.indexOf( mFaces.at( 3 * j + 2 ) ) == -1 )
+                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 2 ) ) == vertexNeighbours.cend() )
                 {
                     vertexNeighbours.push_back(mFaces.at( 3 * j + 2 ));
                 }
@@ -361,11 +361,11 @@ void SpherePointCloud::ComputeQuasiUniformNeighbours()
 
             if ( mFaces.at( 3 * j + 1 ) == i )
             {
-                if ( vertexNeighbours.indexOf( mFaces.at( 3 * j ) ) == -1 )
+                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j ) ) == vertexNeighbours.cend() )
                 {
                     vertexNeighbours.push_back(mFaces.at( 3 * j ));
                 }
-                if ( vertexNeighbours.indexOf( mFaces.at( 3 * j + 2 ) ) == -1 )
+                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 2 ) ) == vertexNeighbours.cend() )
                 {
                     vertexNeighbours.push_back(mFaces.at( 3 * j + 2 ));
                 }
@@ -373,11 +373,11 @@ void SpherePointCloud::ComputeQuasiUniformNeighbours()
 
             if ( mFaces.at( 3 * j + 2 ) == i )
             {
-                if ( vertexNeighbours.indexOf( mFaces.at( 3 * j ) ) == -1 )
+                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j ) ) == vertexNeighbours.cend() )
                 {
                     vertexNeighbours.push_back(mFaces.at( 3 * j ));
                 }
-                if ( vertexNeighbours.indexOf( mFaces.at( 3 * j + 1 ) ) == -1 )
+                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 1 ) ) == vertexNeighbours.cend() )
                 {
                     vertexNeighbours.push_back(mFaces.at( 3 * j + 1 ));
                 }

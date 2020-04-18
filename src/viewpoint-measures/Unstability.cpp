@@ -19,15 +19,15 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    QVector< QVector< int > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
-    QVector< int > viewpointsOutOfDomain;
+    std::vector< std::vector< int > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
+    std::vector< int > viewpointsOutOfDomain;
     float minValue = FLT_MAX;
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
 
-        QVector< int > neighbours = viewpointNeighbours.at(currentViewpoint);
+        std::vector< int > neighbours = viewpointNeighbours.at(currentViewpoint);
         if(neighbours.size() == 0)
         {
             Debug::Log("Unstability::No neighbours");

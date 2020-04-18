@@ -21,7 +21,7 @@ public:
     ~DutagaciDialog();
 
     /// Return the list of files loaded in the dialog
-    QVector<QString> GetFilesToLoad() const;
+    std::vector<QString> GetFilesToLoad() const;
     /// Get the distance as times the radius of the scene
     float GetDistance() const;
     /// Get the field of view of the cameras
@@ -30,11 +30,11 @@ public:
 private:
     /// User interface
     Ui::DutagaciView* mUi;
-    QVector<QString> mFilesToLoad;
+    std::vector<QString> mFilesToLoad;
     float mDistance;
     int mAngle;
 
-    QVector<QString> GetFileListFromTXT(const QString &pFileName) const;
+    std::vector<QString> GetFileListFromTXT(const QString &pFileName) const;
 
 private slots:
     /// Compute camera distance button method

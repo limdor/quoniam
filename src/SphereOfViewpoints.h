@@ -43,7 +43,7 @@ protected:
     /// Aspect ratio
     float mAspectRatio;
     /// Array of viewpoints
-    QVector<std::shared_ptr<Camera>> mCameras;
+    std::vector<std::shared_ptr<Camera>> mCameras;
 };
 
 #endif

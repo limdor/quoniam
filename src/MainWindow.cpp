@@ -47,7 +47,7 @@ void MainWindow::ModuleChanged(int pIndex)
 
         currentModule->ActiveModule();
 
-        QVector<QMenu*> menus = currentModule->GetModuleMenus();
+        std::vector<QMenu*> menus = currentModule->GetModuleMenus();
         for( int i = 0; i < menus.size(); i++ )
         {
             menuBar()->addMenu(menus.at(i));

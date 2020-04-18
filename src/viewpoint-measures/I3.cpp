@@ -17,7 +17,7 @@ I3::I3(const QString &pName): Measure(pName, true)
 
 void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    QVector< int > elementsOutOfDomain;
+    std::vector< int > elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
@@ -27,7 +27,7 @@ void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
     std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     //The polygonal I2 is computed first
-    QVector< float > polygonalI2(numberOfPolygons, 0.0f);
+    std::vector< float > polygonalI2(numberOfPolygons, 0.0f);
     unsigned int sum_a_t = projectedAreasMatrix->GetTotalSum();
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {

@@ -26,7 +26,7 @@ DutagaciDialog::~DutagaciDialog()
     delete mUi;
 }
 
-QVector<QString> DutagaciDialog::GetFilesToLoad() const
+std::vector<QString> DutagaciDialog::GetFilesToLoad() const
 {
     return mFilesToLoad;
 }
@@ -41,9 +41,9 @@ int DutagaciDialog::GetAngle() const
     return mAngle;
 }
 
-QVector<QString> DutagaciDialog::GetFileListFromTXT(const QString& pFileName) const
+std::vector<QString> DutagaciDialog::GetFileListFromTXT(const QString& pFileName) const
 {
-    QVector<QString> objFiles;
+    std::vector<QString> objFiles;
     QFile file(pFileName);
     if( file.open(QIODevice::ReadOnly) )
     {
@@ -83,7 +83,7 @@ void DutagaciDialog::on_addButton_clicked()
         {
             if(fileName.right(3) == "txt")
             {
-                QVector<QString> objFiles = GetFileListFromTXT(fileName);
+                std::vector<QString> objFiles = GetFileListFromTXT(fileName);
                 for( int j = 0; j < objFiles.size(); j++ )
                 {
                     mUi->filesListWidget->addItem(objFiles.at(j));

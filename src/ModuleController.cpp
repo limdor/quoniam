@@ -5,7 +5,7 @@ ModuleController::ModuleController(QWidget *pParent): QWidget(pParent)
 
 }
 
-QVector<QMenu*> ModuleController::GetModuleMenus() const
+std::vector<QMenu*> ModuleController::GetModuleMenus() const
 {
     return mMenus;
 }

@@ -615,8 +615,8 @@ void MainModuleController::RunDutagaciBenchmark()
     int dialogReturn = mDutagaciDialog->exec();
     if(dialogReturn == QDialog::Accepted)
     {
-        QVector< QVector<glm::vec3> > bestViewpoints(mViewpointMeasures.size());
-        QVector<QString> filestoLoad = mDutagaciDialog->GetFilesToLoad();
+        std::vector< std::vector<glm::vec3> > bestViewpoints(mViewpointMeasures.size());
+        std::vector<QString> filestoLoad = mDutagaciDialog->GetFilesToLoad();
         float angle = mDutagaciDialog->GetAngle();
         float distance = mDutagaciDialog->GetDistance();
         int numberOfFiles = filestoLoad.size();

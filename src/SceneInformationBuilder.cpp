@@ -8,7 +8,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QProgressDialog>
 #include <QtCore/QTime>
-#include <QtCore/QVector>
 
 //Dependency includes
 #include "glm/mat4x4.hpp"
@@ -301,7 +300,7 @@ std::shared_ptr<ProjectedAreasMatrix const> SceneInformationBuilder::GetProjecte
     return mProjectedAreasMatrix;
 }
 
-QVector< QVector< int > > SceneInformationBuilder::GetViewpointNeighbours() const
+std::vector< std::vector< int > > SceneInformationBuilder::GetViewpointNeighbours() const
 {
     return mViewpointNeighbours;
 }
@@ -316,12 +315,12 @@ float SceneInformationBuilder::GetSilhouetteLength(int pViewpoint) const
     return mSilhouetteLengths.at(pViewpoint);
 }
 
-QVector< float > SceneInformationBuilder::GetSilhouetteCurvature(int pViewpoint) const
+std::vector< float > SceneInformationBuilder::GetSilhouetteCurvature(int pViewpoint) const
 {
     return mSilhouetteCurvature.at(pViewpoint);
 }
 
-QVector< float > SceneInformationBuilder::GetNormalizedDepthHistogram(int pViewpoint) const
+std::vector< float > SceneInformationBuilder::GetNormalizedDepthHistogram(int pViewpoint) const
 {
     return mNormalizedDepthHistograms.at(pViewpoint);
 }

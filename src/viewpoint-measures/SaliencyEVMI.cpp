@@ -65,7 +65,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
     {
         polygonalSaliency[polygonsOutOfDomain.at(currentPolygon)] = maxValue;
     }
-    QVector< int > viewpointsOutOfDomain;
+    std::vector< int > viewpointsOutOfDomain;
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     maxValue = -FLT_MAX;

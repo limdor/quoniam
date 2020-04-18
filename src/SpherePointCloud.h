@@ -1,14 +1,13 @@
 #ifndef SPHERE_POINT_CLOUD_H
 #define SPHERE_POINT_CLOUD_H
 
-//Qt includes
-#include <QtCore/QVector>
-
 //Dependency includes
 #include "glm/vec3.hpp"
 
 //Project includes
 #include "Geometry.h"
+
+#include <vector>
 
 ///
 /// Sphere of points uniformly or quasi-uniformly distributed
@@ -40,16 +39,16 @@ public:
     void SetToQuasiUniform(unsigned char pDepth);
 
     /// Return the faces of the triangles
-    QVector<unsigned int> GetFaces() const;
+    std::vector<unsigned int> GetFaces() const;
     /// Return the points in cartesian coordinates
-    QVector<glm::vec3> GetVertices() const;
+    std::vector<glm::vec3> GetVertices() const;
 
     /// Return the vertex \a pI
     glm::vec3 GetVertex(unsigned int pI) const;
     /// Return the neighbours of every point
-    QVector< QVector<int> > GetNeighbours() const;
+    std::vector< std::vector<int> > GetNeighbours() const;
     /// Return the neighbours of the point \a pI
-    QVector<int> GetNeighbours(unsigned int pI) const;
+    std::vector<int> GetNeighbours(unsigned int pI) const;
 
     /// Return the 3D mesh
     std::shared_ptr<Geometry> GetMesh() const;
@@ -72,15 +71,15 @@ protected:
     /// Mesh to paint the sphere point cloud
     std::shared_ptr<Geometry> mMesh;
     /// Number of points
-    int mNumberOfPoints;
+    size_t mNumberOfPoints;
     /// Faces
-    QVector< unsigned int > mFaces;
+    std::vector< unsigned int > mFaces;
     /// Vertexs in cartesian coordinates
-    QVector< glm::vec3 > mVertices;
+    std::vector< glm::vec3 > mVertices;
     /// Normals of the vertexs
-    QVector< glm::vec3 > mNormals;
+    std::vector< glm::vec3 > mNormals;
     /// Neighbours of the vertexs
-    QVector< QVector<int> > mNeighbours;
+    std::vector< std::vector<int> > mNeighbours;
 };
 
 #endif

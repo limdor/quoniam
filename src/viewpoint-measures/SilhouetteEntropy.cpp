@@ -19,8 +19,8 @@ void SilhouetteEntropy::Compute(const SceneInformationBuilder *pSceneInformation
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
-        QVector<unsigned int> curvatureHistogram(9, 0);
-        QVector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
+        std::vector<unsigned int> curvatureHistogram(9, 0);
+        std::vector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
         int silhouetteSize = silhouetteCurvature.size();
         for( int i = 0; i < silhouetteSize; i++ )
         {

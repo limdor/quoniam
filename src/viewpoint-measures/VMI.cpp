@@ -16,7 +16,7 @@ VMI::VMI(const QString &pName): Measure(pName, false)
 
 void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    QVector< int > elementsOutOfDomain;
+    std::vector< int > elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();

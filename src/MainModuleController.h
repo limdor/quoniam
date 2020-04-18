@@ -62,7 +62,7 @@ private:
     QAction* mActionViewpointsSphere;
 
     DutagaciDialog* mDutagaciDialog;
-    QVector<glm::vec3> mDutagaciViewpoints;
+    std::vector<glm::vec3> mDutagaciViewpoints;
 
     Ui::MainModule* mUi;
 
@@ -75,8 +75,8 @@ private:
 
     int mCurrentViewpoint;
 
-    QVector<Measure*> mViewpointMeasures;
-    QVector<QSlider*> mViewpointMeasuresSliders;
+    std::vector<Measure*> mViewpointMeasures;
+    std::vector<QSlider*> mViewpointMeasuresSliders;
 
     QPoint mLastMousePosition;
 
