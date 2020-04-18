@@ -130,7 +130,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     mViewpointNeighbours = pSphereOfViewpoints->GetNeighbours();
     mSerializedScene = std::make_unique<SerializedSceneGeometry>(pScene);
     int numberOfPolygons = static_cast<int>(pScene->GetNumberOfPolygons());
-    QVector< unsigned int > facesAreas(numberOfPolygons);
+    std::vector< unsigned int > facesAreas(numberOfPolygons);
     mProjectedAreasMatrix = std::make_shared<ProjectedAreasMatrix>(numberOfViewpoints, numberOfPolygons);
     mSilhouetteLengths.resize(numberOfViewpoints);
     mSilhouetteCurvature.resize(numberOfViewpoints);
@@ -145,7 +145,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     std::vector<unsigned int> indexs(numberOfVertices);
     for( size_t j = 0; j < numberOfVertices; j++ )
     {
-        indexs[j] = j;
+        indexs[j] = static_cast<unsigned int>(j);
     }
     verticesScene.SetVerticesData(numberOfVertices, vertices.data());
     verticesScene.SetIndexsData(numberOfVertices, indexs.data());
@@ -180,7 +180,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         CHECK_GL_ERROR();
 
         //We compute the projected area of every face and we compute a mask to know what is model and what is background
-        facesAreas.fill( 0 );
+        std::fill(facesAreas.begin(), facesAreas.end(), 0);
         for(unsigned int j = 0; j < totalNumberOfPixels; j++ )
         {
             int pixelActual = glm::round(valuePerFaceImage[j]);

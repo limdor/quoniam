@@ -12,10 +12,13 @@ ProjectedAreasMatrix::ProjectedAreasMatrix(int pNumberOfViewpoints, int pNumberO
     mValues.resize(pNumberOfViewpoints);
     for( int currentViewpoint = 0; currentViewpoint < pNumberOfViewpoints; currentViewpoint++ )
     {
-        mValues[currentViewpoint].fill(0, pNumberOfPolygons);
+        mValues[currentViewpoint].resize(pNumberOfPolygons);
+        std::fill(mValues[currentViewpoint].begin(), mValues[currentViewpoint].end(), 0);
     }
-    mSumPerPolygon.fill( 0, mNumberOfPolygons );
-    mSumPerViewpoint.fill( 0, mNumberOfViewpoints );
+    mSumPerPolygon.resize( mNumberOfPolygons );
+    std::fill(mSumPerPolygon.begin(), mSumPerPolygon.end(), 0);
+    mSumPerViewpoint.resize( mNumberOfViewpoints );
+    std::fill(mSumPerViewpoint.begin(), mSumPerViewpoint.end(), 0);
 }
 
 ProjectedAreasMatrix::ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjectedAreasMatrix):
@@ -37,12 +40,12 @@ int ProjectedAreasMatrix::GetNumberOfPolygons() const
     return mNumberOfPolygons;
 }
 
-unsigned int ProjectedAreasMatrix::GetSumPerViewpoint(int pViewpoint) const
+unsigned int ProjectedAreasMatrix::GetSumPerViewpoint(size_t pViewpoint) const
 {
     return mSumPerViewpoint.at(pViewpoint);
 }
 
-unsigned int ProjectedAreasMatrix::GetSumPerPolygon(int pPolygon) const
+unsigned int ProjectedAreasMatrix::GetSumPerPolygon(size_t pPolygon) const
 {
     return mSumPerPolygon.at(pPolygon);
 }
@@ -52,7 +55,7 @@ unsigned int ProjectedAreasMatrix::GetTotalSum() const
     return mTotalSum;
 }
 
-void ProjectedAreasMatrix::SetValues(int pViewpoint, const QVector< unsigned int > &pValues)
+void ProjectedAreasMatrix::SetValues(int pViewpoint, const std::vector< unsigned int > &pValues)
 {
     mValues[pViewpoint] = pValues;
 }
@@ -64,8 +67,10 @@ unsigned int ProjectedAreasMatrix::GetValue(int pViewpoint, int pPolygon) const
 
 void ProjectedAreasMatrix::Compute()
 {
-    mSumPerPolygon.fill( 0, mNumberOfPolygons );
-    mSumPerViewpoint.fill( 0, mNumberOfViewpoints );
+    mSumPerPolygon.resize( mNumberOfPolygons );
+    std::fill(mSumPerPolygon.begin(), mSumPerPolygon.end(), 0);
+    mSumPerViewpoint.resize( mNumberOfViewpoints );
+    std::fill(mSumPerViewpoint.begin(), mSumPerViewpoint.end(), 0);
     mTotalSum = 0;
     for( int currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
     {
