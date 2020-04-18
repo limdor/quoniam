@@ -17,14 +17,15 @@ void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBu
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.fill( 0.0f, numberOfViewpoints );
-    QVector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
+    std::vector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
     float sumAreaPolygons = 0.0f;
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {
         sumAreaPolygons += serializedPolygonAreas.at(currentPolygon);
     }
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
@@ -38,6 +39,6 @@ void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBu
         }
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

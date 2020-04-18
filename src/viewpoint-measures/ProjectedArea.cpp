@@ -13,13 +13,14 @@ void ProjectedArea::Compute(const SceneInformationBuilder *pSceneInformationBuil
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    mValues.fill( 0.0f, numberOfViewpoints );
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         mValues[currentViewpoint] = a_t;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

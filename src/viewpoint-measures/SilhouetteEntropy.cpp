@@ -14,9 +14,10 @@ SilhouetteEntropy::SilhouetteEntropy(const QString &pName): Measure(pName, true)
 
 void SilhouetteEntropy::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
-    mValues.fill( 0.0f, numberOfViewpoints );
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    const size_t numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         QVector<unsigned int> curvatureHistogram(9, 0);
         QVector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
@@ -40,6 +41,6 @@ void SilhouetteEntropy::Compute(const SceneInformationBuilder *pSceneInformation
         mValues[currentViewpoint] = -mValues.at(currentViewpoint);
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

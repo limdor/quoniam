@@ -6,6 +6,7 @@
 #include "glm/vec3.hpp"
 
 #include <memory>
+#include <vector>
 
 class SerializedSceneGeometry
 {
@@ -15,13 +16,13 @@ public:
     /// Show neighbours
     void ShowNeighbours() const;
     /// Get vertices
-    QVector<glm::vec3> GetVertices() const;
+    std::vector<glm::vec3> GetVertices() const;
     /// Get vertices curvature
-    QVector< float > GetVerticesCurvature() const;
+    std::vector< float > GetVerticesCurvature() const;
     /// Get face neighbours
-    QVector< QVector< int > > GetFacesNeighbours() const;
+    std::vector< std::vector< size_t > > GetFacesNeighbours() const;
     /// Get face areas
-    QVector< float > GetFacesAreas() const;
+    std::vector< float > GetFacesAreas() const;
 
 private:
     /// Compute the bounding sphere
@@ -36,21 +37,21 @@ private:
     void SerializeSceneNodes(std::shared_ptr<SceneNode const> pSceneNode);
 
     /// List of vertices
-    QVector<glm::vec3> mVertexs;
+    std::vector<glm::vec3> mVertexs;
     /// Number of vertices
     int mNumberOfVertexs;
     /// For every vertex, the list of neighbourhood faces
-    QVector< QVector<int> > mVertexNeighbors;
+    std::vector< std::vector<size_t> > mVertexNeighbors;
     /// List with the curvature of every vertex
-    QVector<float> mVertexCurvatures;
+    std::vector<float> mVertexCurvatures;
     /// List of faces: every face is compound by 3 indexs of the list of vertices
-    QVector<glm::ivec3> mFaces;
+    std::vector<glm::ivec3> mFaces;
     /// Number of faces
-    int mNumberOfFaces;
+    size_t mNumberOfFaces;
     /// For every face, the list of neighbourhood faces
-    QVector< QVector<int> > mFaceNeighbors;
+    std::vector< std::vector<size_t> > mFaceNeighbors;
     /// List with the area of every face
-    QVector< float > mFaceAreas;
+    std::vector< float > mFaceAreas;
     /// Bounding sphere of the scene
     std::unique_ptr<BoundingSphere> mBoundingSphere;
 };

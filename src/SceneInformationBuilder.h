@@ -13,6 +13,7 @@
 #include "SphereOfViewpoints.h"
 
 #include <memory>
+#include <vector>
 
 /// Static class to create an InformationChannelHistogram
 class SceneInformationBuilder
@@ -23,15 +24,15 @@ public:
     /// Get the histogram
     std::shared_ptr<ProjectedAreasMatrix const> GetProjectedAreasMatrix() const;
     QVector< QVector< int > > GetViewpointNeighbours() const;
-    QVector< QVector< int > > GetSerializedPolygonNeighbours() const;
+    std::vector< std::vector< size_t > > GetSerializedPolygonNeighbours() const;
     float GetSilhouetteLength(int pViewpoint) const;
     QVector< float > GetSilhouetteCurvature(int pViewpoint) const;
     QVector< float > GetNormalizedDepthHistogram(int pViewpoint) const;
     cv::Mat GetDepthImage(int pViewpoint) const;
     float GetMaximumDepth(int pViewpoint) const;
     QSet< int > GetVisibleVertices(int pViewpoint) const;
-    QVector< float > GetSerializedPolygonAreas() const;
-    QVector< float > GetSerializedVertexCurvature() const;
+    std::vector< float > GetSerializedPolygonAreas() const;
+    std::vector< float > GetSerializedVertexCurvature() const;
     int GetWidthResolution() const;
     float GetAspectRatio() const;
 

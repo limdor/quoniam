@@ -43,11 +43,11 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
         const QFileInfo fileInfo(pPath);
 
         Debug::Log(QString("Load materials"));
-        const QVector<std::shared_ptr<Material>> materials = LoadMaterials(scene, fileInfo.absolutePath());
+        const std::vector<std::shared_ptr<Material>> materials = LoadMaterials(scene, fileInfo.absolutePath());
         Debug::Log(QString("Load geometries"));
-        const QVector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
+        const std::vector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
         Debug::Log(QString("Load meshes"));
-        const QVector<std::shared_ptr<Mesh>> meshes = LoadMeshes(scene, materials, geometries);
+        const std::vector<std::shared_ptr<Mesh>> meshes = LoadMeshes(scene, materials, geometries);
 
         Debug::Log(QString("Load scene"));
         auto rootNode = LoadSceneNode( meshes, scene->mRootNode );
@@ -56,12 +56,12 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
     else
     {
         Debug::Error(QString("Impossible to load with AssimpLoader: %1").arg(importer.GetErrorString()));
-        sceneLoaded = std::make_unique<Scene>("Default", std::make_unique<SceneNode>("Default"), QVector<std::shared_ptr<Material>>(), QVector<std::shared_ptr<Geometry>>(), QVector<std::shared_ptr<Mesh>>());
+        sceneLoaded = std::make_unique<Scene>("Default", std::make_unique<SceneNode>("Default"), std::vector<std::shared_ptr<Material>>(), std::vector<std::shared_ptr<Geometry>>(), std::vector<std::shared_ptr<Mesh>>());
     }
     return sceneLoaded;
 }
 
-std::shared_ptr<SceneNode> SceneLoader::LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode)
+std::shared_ptr<SceneNode> SceneLoader::LoadSceneNode(const std::vector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode)
 {
     // Store the node's name.
     auto nodeLoaded = std::make_shared<SceneNode>( QString(pNode->mName.data) );
@@ -88,10 +88,10 @@ std::shared_ptr<SceneNode> SceneLoader::LoadSceneNode(const QVector<std::shared_
     return nodeLoaded;
 }
 
-QVector<std::shared_ptr<Material>> SceneLoader::LoadMaterials(const aiScene* pAiScene, const QString& pScenePath)
+std::vector<std::shared_ptr<Material>> SceneLoader::LoadMaterials(const aiScene* pAiScene, const QString& pScenePath)
 {
     int numberOfMaterials = (int)pAiScene->mNumMaterials;
-    QVector<std::shared_ptr<Material>> materials(numberOfMaterials);
+    std::vector<std::shared_ptr<Material>> materials(numberOfMaterials);
     for( int i = 0; i < numberOfMaterials; i++ )
     {
         materials[i] = LoadMaterial(pAiScene->mMaterials[i], pScenePath);
@@ -179,10 +179,10 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
     return material;
 }
 
-QVector<std::shared_ptr<Geometry>> SceneLoader::LoadGeometries(const aiScene* pAiScene)
+std::vector<std::shared_ptr<Geometry>> SceneLoader::LoadGeometries(const aiScene* pAiScene)
 {
     unsigned int numberOfGeometries = pAiScene->mNumMeshes;
-    QVector<std::shared_ptr<Geometry>> geometries(numberOfGeometries);
+    std::vector<std::shared_ptr<Geometry>> geometries(numberOfGeometries);
     for( unsigned int i = 0; i < numberOfGeometries; i++ )
     {
         geometries[i] = LoadGeometry(pAiScene->mMeshes[i]);
@@ -280,10 +280,10 @@ std::unique_ptr<Geometry> SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
     return geometry;
 }
 
-QVector<std::shared_ptr<Mesh>> SceneLoader::LoadMeshes(const aiScene* pAiScene, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries)
+std::vector<std::shared_ptr<Mesh>> SceneLoader::LoadMeshes(const aiScene* pAiScene, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries)
 {
     int numberOfMeshes = (int)pAiScene->mNumMeshes;
-    QVector<std::shared_ptr<Mesh>> meshes(numberOfMeshes);
+    std::vector<std::shared_ptr<Mesh>> meshes(numberOfMeshes);
     for( int i = 0; i < numberOfMeshes; i++ )
     {
         meshes[i] = LoadMesh(pAiScene->mMeshes[i], i, pMaterials, pGeometries);
@@ -291,7 +291,7 @@ QVector<std::shared_ptr<Mesh>> SceneLoader::LoadMeshes(const aiScene* pAiScene, 
     return meshes;
 }
 
-std::unique_ptr<Mesh> SceneLoader::LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries)
+std::unique_ptr<Mesh> SceneLoader::LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries)
 {
     auto mesh = std::make_unique<Mesh>(pGeometries.at(pAiMeshIndex), pMaterials.at(pAiMesh->mMaterialIndex));
     mesh->SetName(QString(pAiMesh->mName.data));

@@ -17,11 +17,12 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     QVector< QVector< int > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
     QVector< int > viewpointsOutOfDomain;
     float minValue = FLT_MAX;
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
@@ -60,12 +61,12 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
         }
     }
     //The minimum value is assigned to the viewpoints out of the domain (viewpoints that don't see anything)
-    for( int currentViewpoint = 0; currentViewpoint < viewpointsOutOfDomain.size(); currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < viewpointsOutOfDomain.size(); currentViewpoint++ )
     {
         mValues[viewpointsOutOfDomain.at(currentViewpoint)] = minValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }
 

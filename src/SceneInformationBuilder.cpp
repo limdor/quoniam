@@ -130,7 +130,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     mViewpointNeighbours = pSphereOfViewpoints->GetNeighbours();
     mSerializedScene = std::make_unique<SerializedSceneGeometry>(pScene);
     int numberOfPolygons = static_cast<int>(pScene->GetNumberOfPolygons());
-    QVector< unsigned int > facesAreas(numberOfPolygons);
+    std::vector< unsigned int > facesAreas(numberOfPolygons);
     mProjectedAreasMatrix = std::make_shared<ProjectedAreasMatrix>(numberOfViewpoints, numberOfPolygons);
     mSilhouetteLengths.resize(numberOfViewpoints);
     mSilhouetteCurvature.resize(numberOfViewpoints);
@@ -140,12 +140,12 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     mVisibleVertexs.resize(numberOfViewpoints);
     GPUScene gpuScene{pScene};
     Geometry verticesScene{"Vertices", GeometryTopology::Points};
-    QVector<glm::vec3> vertices = mSerializedScene->GetVertices();
-    int numberOfVertices = vertices.size();
-    QVector<unsigned int> indexs(numberOfVertices);
-    for( int j = 0; j < numberOfVertices; j++ )
+    std::vector<glm::vec3> vertices = mSerializedScene->GetVertices();
+    size_t numberOfVertices = vertices.size();
+    std::vector<unsigned int> indexs(numberOfVertices);
+    for( size_t j = 0; j < numberOfVertices; j++ )
     {
-        indexs[j] = j;
+        indexs[j] = static_cast<unsigned int>(j);
     }
     verticesScene.SetVerticesData(numberOfVertices, vertices.data());
     verticesScene.SetIndexsData(numberOfVertices, indexs.data());
@@ -180,7 +180,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         CHECK_GL_ERROR();
 
         //We compute the projected area of every face and we compute a mask to know what is model and what is background
-        facesAreas.fill( 0 );
+        std::fill(facesAreas.begin(), facesAreas.end(), 0);
         for(unsigned int j = 0; j < totalNumberOfPixels; j++ )
         {
             int pixelActual = glm::round(valuePerFaceImage[j]);
@@ -306,7 +306,7 @@ QVector< QVector< int > > SceneInformationBuilder::GetViewpointNeighbours() cons
     return mViewpointNeighbours;
 }
 
-QVector< QVector< int > > SceneInformationBuilder::GetSerializedPolygonNeighbours() const
+std::vector< std::vector< size_t > > SceneInformationBuilder::GetSerializedPolygonNeighbours() const
 {
     return mSerializedScene->GetFacesNeighbours();
 }
@@ -341,12 +341,12 @@ QSet< int > SceneInformationBuilder::GetVisibleVertices(int pViewpoint) const
     return mVisibleVertexs.at(pViewpoint);
 }
 
-QVector< float > SceneInformationBuilder::GetSerializedPolygonAreas() const
+std::vector< float > SceneInformationBuilder::GetSerializedPolygonAreas() const
 {
     return mSerializedScene->GetFacesAreas();
 }
 
-QVector< float > SceneInformationBuilder::GetSerializedVertexCurvature() const
+std::vector< float > SceneInformationBuilder::GetSerializedVertexCurvature() const
 {
     return mSerializedScene->GetVerticesCurvature();
 }

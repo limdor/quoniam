@@ -1,30 +1,29 @@
 #ifndef PROJECTED_AREAS_MATRIX_H
 #define PROJECTED_AREAS_MATRIX_H
 
-//Qt includes
-#include <QtCore/QVector>
+#include <vector>
 
 class ProjectedAreasMatrix
 {
 public:
-    ProjectedAreasMatrix(int pNumberOfViewpoints, int pNumberOfPolygons);
+    ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pNumberOfPolygons);
     explicit ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjectedAreasMatrix);
-    int GetNumberOfViewpoints() const;
-    int GetNumberOfPolygons() const;
-    unsigned int GetSumPerViewpoint(int pViewpoint) const;
-    unsigned int GetSumPerPolygon(int pPolygon) const;
+    size_t GetNumberOfViewpoints() const;
+    size_t GetNumberOfPolygons() const;
+    unsigned int GetSumPerViewpoint(size_t pViewpoint) const;
+    unsigned int GetSumPerPolygon(size_t pPolygon) const;
     unsigned int GetTotalSum() const;
-    void SetValues(int pViewpoint, const QVector< unsigned int > &pValues);
-    unsigned int GetValue(int pViewpoint, int pPolygon) const;
+    void SetValues(size_t pViewpoint, const std::vector< unsigned int > &pValues);
+    unsigned int GetValue(size_t pViewpoint, int pPolygon) const;
     void Compute();
     void SaveToFile() const;
 
 private:
-    QVector< QVector< unsigned int > > mValues;
-    int mNumberOfViewpoints;
-    int mNumberOfPolygons;
-    QVector< unsigned int > mSumPerViewpoint;
-    QVector< unsigned int > mSumPerPolygon;
+    std::vector< std::vector< unsigned int > > mValues;
+    size_t mNumberOfViewpoints;
+    size_t mNumberOfPolygons;
+    std::vector< unsigned int > mSumPerViewpoint;
+    std::vector< unsigned int > mSumPerPolygon;
     unsigned int mTotalSum;
 };
 

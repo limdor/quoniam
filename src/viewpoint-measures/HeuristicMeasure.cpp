@@ -14,8 +14,9 @@ void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationB
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.fill( 0.0f, numberOfViewpoints );
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int differentZero = 0;
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
@@ -29,6 +30,6 @@ void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationB
         mValues[currentViewpoint] = ( differentZero / (float)numberOfPolygons ) + ( projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint) / ( pSceneInformationBuilder->GetWidthResolution() * ( pSceneInformationBuilder->GetWidthResolution() / pSceneInformationBuilder->GetAspectRatio() ) ) );
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

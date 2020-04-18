@@ -3,8 +3,6 @@
 
 //Qt includes
 #include <QtCore/QDir>
-#include <QtCore/QPair>
-#include <QtCore/QtAlgorithms>
 
 //Dependency includes
 #include "glm/common.hpp"
@@ -15,67 +13,70 @@
 
 #include <algorithm>
 
-bool pairCompareX(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
+template<typename T>
+bool pairCompareX(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
 {
     return (pI.second.x < pJ.second.x);
 }
 
-bool pairCompareY(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
+template<typename T>
+bool pairCompareY(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
 {
     return (pI.second.y < pJ.second.y);
 }
 
-bool pairCompareZ(QPair<int, glm::vec3> pI, QPair<int, glm::vec3> pJ)
+template<typename T>
+bool pairCompareZ(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
 {
     return (pI.second.z < pJ.second.z);
 }
 
-QVector<int> Tools::GetOrderedIndexesByDimension(QVector<QPair<int, glm::vec3>> &pValues, int pDimension)
+template<typename T>
+std::vector<T> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<T, glm::vec3>> &pValues, int pDimension)
 {
-    int size = pValues.size();
-
     switch (pDimension)
     {
     case 0:
-        qSort(pValues.begin(), pValues.end(), pairCompareX);
+        std::sort(pValues.begin(), pValues.end(), pairCompareX<T>);
         break;
     case 1:
-        qSort(pValues.begin(), pValues.end(), pairCompareY);
+        std::sort(pValues.begin(), pValues.end(), pairCompareY<T>);
         break;
     case 2:
-        qSort(pValues.begin(), pValues.end(), pairCompareZ);
+        std::sort(pValues.begin(), pValues.end(), pairCompareZ<T>);
         break;
     }
 
-    QVector<int> result(size);
-    for (int i = 0; i < size; i++)
-    {
-        result[i] = pValues.at(i).first;
-    }
+    std::vector<T> result;
+    std::transform(pValues.cbegin(), pValues.cend(), std::back_inserter(result), [](std::pair<T, glm::vec3> pair) -> T { return pair.first; });
 
     return result;
 }
 
+template std::vector<int> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<int, glm::vec3>> &pValues, int pDimension);
+template std::vector<size_t> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<size_t, glm::vec3>> &pValues, int pDimension);
+
 template <class T>
-bool pairCompare(QPair<int, T> i, QPair<int, T> j)
+bool pairCompare(std::pair<size_t, T> i, std::pair<size_t, T> j)
 {
     return (i.second < j.second);
 }
 
-QVector<int> Tools::GetOrderedIndexes(const QVector<float> &pValues)
+template <typename T>
+std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
 {
-    int size = pValues.size();
+    size_t size = pValues.size();
 
-    QVector<QPair<int, float>> toSort(size);
-    for (int i = 0; i < size; i++)
+    std::vector<std::pair<size_t, T>> toSort(size);
+    for (size_t i = 0; i < size; i++)
     {
-        toSort[i] = QPair<int, float>(i, pValues.at(i));
+        toSort[i] = std::pair<size_t, T>(i, pValues.at(i));
     }
 
-    qSort(toSort.begin(), toSort.end(), pairCompare<float>);
+    std::sort(toSort.begin(), toSort.end(), pairCompare<T>);
 
-    QVector<int> result(size);
-    for (int i = 0; i < size; i++)
+    std::vector<size_t> result(size);
+    for (size_t i = 0; i < size; i++)
     {
         result[i] = toSort.at(i).first;
     }
@@ -83,37 +84,19 @@ QVector<int> Tools::GetOrderedIndexes(const QVector<float> &pValues)
     return result;
 }
 
-QVector<int> Tools::GetPositions(const QVector<int> &pValues)
-{
-    int size = pValues.size();
+template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<int> &pValues);
+template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<float> &pValues);
+template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<size_t> &pValues);
 
-    QVector<QPair<int, int>> toSort(size);
-    for (int i = 0; i < size; i++)
-    {
-        toSort[i] = QPair<int, int>(i, pValues.at(i));
-    }
-
-    qSort(toSort.begin(), toSort.end(), pairCompare<int>);
-
-    QVector<int> result(size);
-    for (int i = 0; i < size; i++)
-    {
-        result[i] = toSort.at(i).first;
-    }
-
-    return result;
-}
-
-QVector<glm::vec4> Tools::ConvertFloatsToColors(const QVector<float> &pValues, bool pInverted)
+std::vector<glm::vec4> Tools::ConvertFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
     return ConvertNormalizedFloatsToColors(ScaleValues(pValues, 0.0f, 1.0f), pInverted);
 }
 
-QVector<float> Tools::ScaleValues(const QVector<float> &pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping)
+std::vector<float> Tools::ScaleValues(const std::vector<float> &pValues, float pLowerBound, float pUpperBound, float pPercentOfClipping)
 {
     float min, max;
 
-    int size = pValues.size();
     if (pPercentOfClipping == 0.0f)
     {
         const auto minmax = std::minmax_element(pValues.cbegin(), pValues.cend());
@@ -122,15 +105,16 @@ QVector<float> Tools::ScaleValues(const QVector<float> &pValues, float pLowerBou
     }
     else
     {
+        const size_t size = pValues.size();
         const int offset = glm::round(size * (pPercentOfClipping / 200.0f));
-        QVector<float> orderedValues = pValues;
-        qSort(orderedValues);
+        std::vector<float> orderedValues = pValues;
+        std::sort(orderedValues.begin(), orderedValues.end());
         min = orderedValues.at(offset);
         max = orderedValues.at(size - 1 - offset);
     }
     const bool all_values_equal = max == min;
     const float scale = (pUpperBound - pLowerBound) / (max - min);
-    QVector<float> results{pValues};
+    std::vector<float> results{pValues};
     if (all_values_equal)
     {
         auto scale_function = [=](float &value) {
@@ -149,7 +133,7 @@ QVector<float> Tools::ScaleValues(const QVector<float> &pValues, float pLowerBou
     return results;
 }
 
-float Tools::Mean(const QVector<float> &pValues, const QVector<float> &pWeights)
+float Tools::Mean(const std::vector<float> &pValues, const std::vector<float> &pWeights)
 {
     float value = 0.0f;
     if (pValues.size() == pWeights.size())
@@ -173,13 +157,14 @@ float Tools::Mean(const QVector<float> &pValues, const QVector<float> &pWeights)
     return value;
 }
 
-QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, QVector<QPair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension)
+template <typename T>
+std::vector<T> Tools::FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<T, glm::vec3>> &pVector, float pEpsilon, int pDimension)
 {
-    QVector<int> result;
+    std::vector<T> result;
 
     bool nextUp = true;
     bool nextDown = true;
-    int i = 1;
+    size_t i = 1;
     while (nextUp || nextDown)
     {
         if (nextUp)
@@ -202,7 +187,7 @@ QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, QVector<QPa
         }
         if (nextDown)
         {
-            if ((pPosition - i) >= 0)
+            if (pPosition >= i)
             {
                 if (glm::abs(pVector.at(pPosition - i).second[pDimension] - pVector.at(pPosition).second[pDimension]) < pEpsilon)
                 {
@@ -223,39 +208,44 @@ QVector<int> Tools::FindNearestThanEpsilonByDimension(int pPosition, QVector<QPa
     return result;
 }
 
-QVector<int> Tools::MergeNeighbours(const QVector<int> &pVector1, const QVector<int> &pVector2, const QVector<int> &pVector3)
-{
-    int consecutiveElements, previousValue;
-    QVector<int> result;
+template std::vector<int> Tools::FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<int, glm::vec3>> &pVector, float pEpsilon, int pDimension);
+template std::vector<size_t> Tools::FindNearestThanEpsilonByDimension(size_t pPosition, const std::vector<std::pair<size_t, glm::vec3>> &pVector, float pEpsilon, int pDimension);
 
-    int sizeVector1 = pVector1.size();
-    int sizeVector2 = pVector2.size();
-    int sizeVector3 = pVector3.size();
-    QVector<int> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
-    int offset = 0;
-    for (int i = 0; i < sizeVector1; i++)
+template <typename T>
+std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std::vector<T> &pVector2, const std::vector<T> &pVector3)
+{
+    int consecutiveElements;
+    T previousValue;
+    std::vector<T> result;
+
+    const size_t sizeVector1 = pVector1.size();
+    const size_t sizeVector2 = pVector2.size();
+    const size_t sizeVector3 = pVector3.size();
+    std::vector<T> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
+    size_t offset = 0;
+    for (size_t i = 0; i < sizeVector1; i++)
     {
         mixedVector[offset + i] = pVector1.at(i);
     }
     offset += sizeVector1;
-    for (int i = 0; i < sizeVector2; i++)
+    for (size_t i = 0; i < sizeVector2; i++)
     {
         mixedVector[offset + i] = pVector2.at(i);
     }
     offset += sizeVector2;
-    for (int i = 0; i < sizeVector3; i++)
+    for (size_t i = 0; i < sizeVector3; i++)
     {
         mixedVector[offset + i] = pVector3.at(i);
     }
-    if (mixedVector.size() > 0)
+    if (!mixedVector.empty())
     {
-        qSort(mixedVector.begin(), mixedVector.end());
+        std::sort(mixedVector.begin(), mixedVector.end());
         previousValue = mixedVector.at(0);
         consecutiveElements = 1;
     }
-    for (int i = 1; i < mixedVector.size(); i++)
+    for (size_t i = 1; i < mixedVector.size(); i++)
     {
-        int currentValue = mixedVector.at(i);
+        T currentValue = mixedVector.at(i);
         if (currentValue == previousValue)
         {
             consecutiveElements++;
@@ -273,15 +263,14 @@ QVector<int> Tools::MergeNeighbours(const QVector<int> &pVector1, const QVector<
     return result;
 }
 
-QVector<glm::vec4> Tools::ConvertNormalizedFloatsToColors(const QVector<float> &pValues, bool pInverted)
-{
-    int size = pValues.size();
+template std::vector<int> Tools::MergeNeighbours(const std::vector<int> &pVector1, const std::vector<int> &pVector2, const std::vector<int> &pVector3);
+template std::vector<size_t> Tools::MergeNeighbours(const std::vector<size_t> &pVector1, const std::vector<size_t> &pVector2, const std::vector<size_t> &pVector3);
 
-    QVector<glm::vec4> results(size);
-    for (int i = 0; i < size; i++)
-    {
-        results[i] = ConvertNormalizedFloatToColor(pValues.at(i), pInverted);
-    }
+std::vector<glm::vec4> Tools::ConvertNormalizedFloatsToColors(const std::vector<float> &pValues, bool pInverted)
+{
+    std::vector<glm::vec4> results;
+    std::transform(pValues.cbegin(), pValues.cend(), std::back_inserter(results),
+     [pInverted](float value) -> glm::vec4 { return ConvertNormalizedFloatToColor(value, pInverted); });
 
     return results;
 }

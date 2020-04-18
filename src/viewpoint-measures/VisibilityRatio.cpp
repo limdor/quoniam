@@ -4,6 +4,8 @@
 //Project includes
 #include "Tools.h"
 
+#include <algorithm>
+
 VisibilityRatio::VisibilityRatio(const QString& pName): Measure(pName, true)
 {
 
@@ -14,14 +16,15 @@ void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBu
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.fill( 0.0f, numberOfViewpoints );
-    QVector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
+    std::vector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
     float sumAreaPolygons = 0.0f;
     for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {
         sumAreaPolygons += serializedPolygonAreas.at(currentPolygon);
     }
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         float sumAreasSeen = 0.0f;
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
@@ -35,6 +38,6 @@ void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBu
         mValues[currentViewpoint] = sumAreasSeen / sumAreaPolygons;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }

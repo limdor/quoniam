@@ -3,9 +3,9 @@
 
 #include "Geometry.h"
 
-#include <QtCore/QVector>
-
 #include "glm/vec4.hpp"
+
+#include <vector>
 
 /// A gizmo is a special element that can be rendered but without any kind of illumination.
 class Gizmo
@@ -19,7 +19,7 @@ protected:
     Geometry mGizmo;
 
     /// Position of the vertices of the gizmo
-    QVector<glm::vec4> mPositionOfVertices;
+    std::vector<glm::vec4> mPositionOfVertices;
 
     /// Create the mesh of the gizmo with the indexs, positions and colors
     virtual void CreateMesh() = 0;

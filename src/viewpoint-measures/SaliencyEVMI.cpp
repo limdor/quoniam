@@ -16,23 +16,23 @@ SaliencyEVMI::SaliencyEVMI(const QString& pName): Measure(pName, false)
 void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
-    int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    QVector< float > polygonalSaliency(numberOfPolygons, 0.0f);
-    QVector< QVector< int > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
-    QVector< int > polygonsOutOfDomain;
+    const size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
+    const size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
+    std::vector< float > polygonalSaliency(numberOfPolygons, 0.0f);
+    std::vector< std::vector< size_t > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
+    std::vector< int > polygonsOutOfDomain;
     float maxValue = -FLT_MAX;
-    for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
+    for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
 
-        QVector< int > neighbours = serializedPolygonNeighbours.at(currentPolygon);
+        std::vector< size_t > neighbours = serializedPolygonNeighbours.at(currentPolygon);
         if(neighbours.size() == 0)
         {
             Debug::Log("SaliencyEVMI::No neighbours");
         }
-        for( int currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
+        for( size_t currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
         {
             unsigned int sum_a_z_i = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
             unsigned int sum_a_z_j = projectedAreasMatrix->GetSumPerPolygon(neighbours.at(currentNeighbour));
@@ -66,15 +66,16 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
         polygonalSaliency[polygonsOutOfDomain.at(currentPolygon)] = maxValue;
     }
     QVector< int > viewpointsOutOfDomain;
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
     maxValue = -FLT_MAX;
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         if( a_t != 0 )
         {
             float auxDependency = 0.0f;
-            for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
+            for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
             {
                 unsigned int sumDependency = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
                 if(sumDependency != 0)
@@ -82,7 +83,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
                     auxDependency += sumDependency * polygonalSaliency.at(currentPolygon);
                 }
             }
-            for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
+            for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
             {
                 unsigned int a_z = projectedAreasMatrix->GetValue(currentViewpoint, currentPolygon);
                 unsigned int sum_a_z = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
@@ -107,25 +108,25 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
         }
     }
     //The maximum value is assigned to the viewpoints out of the domain (viewpoints that don't see anything)
-    for( int currentViewpoint = 0; currentViewpoint < viewpointsOutOfDomain.size(); currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < viewpointsOutOfDomain.size(); currentViewpoint++ )
     {
         mValues[viewpointsOutOfDomain.at(currentViewpoint)] = maxValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }
 
 float SaliencyEVMI::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
 {
-    int numberOfViewpoints = pProjectedAreasMatrix->GetNumberOfViewpoints();
+    const size_t numberOfViewpoints = pProjectedAreasMatrix->GetNumberOfViewpoints();
     unsigned int sum_a_z_i = pProjectedAreasMatrix->GetSumPerPolygon(pPolygonI);
     unsigned int sum_a_z_j = pProjectedAreasMatrix->GetSumPerPolygon(pPolygonJ);
     unsigned int sum_a_z_ij = sum_a_z_i + sum_a_z_j;
     float dissimilarity = 0.0f;
     if( sum_a_z_ij != 0 )
     {
-        for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+        for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
         {
             unsigned int a_z_i = pProjectedAreasMatrix->GetValue(currentViewpoint, pPolygonI);
             unsigned int a_z_j = pProjectedAreasMatrix->GetValue(currentViewpoint, pPolygonJ);

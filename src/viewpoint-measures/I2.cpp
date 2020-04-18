@@ -23,11 +23,12 @@ void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
-    mValues.fill( 0.0f, numberOfViewpoints );
+    mValues.resize( numberOfViewpoints );
+    std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     float maxValue = -FLT_MAX;
     unsigned int sum_a_t = projectedAreasMatrix->GetTotalSum();
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         if( a_t != 0 )
@@ -66,6 +67,6 @@ void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         mValues[elementsOutOfDomain.at(currentElement)] = maxValue;
     }
     mSort = Tools::GetOrderedIndexes(mValues);
-    mPositions = Tools::GetPositions(mSort);
+    mPositions = Tools::GetOrderedIndexes(mSort);
     mComputed = true;
 }
