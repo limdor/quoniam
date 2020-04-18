@@ -102,15 +102,15 @@ void BoundingSphere::CreateMesh()
 
     /// Set the indexs
     std::vector<unsigned int> indexs(sphereResolution*6);
-    int offset = 0;
+    size_t offset = 0;
     for( int i = 0; i < 3; i++ )
     {
         for( size_t j = 0; j < sphereResolution; j++ )
         {
-            indexs[(j + offset)*2] = j + offset;
-            indexs[(j + offset)*2 + 1] = j + offset + 1;
+            indexs[(j + offset)*2] = static_cast<unsigned int>(j + offset);
+            indexs[(j + offset)*2 + 1] = static_cast<unsigned int>(j + offset + 1);
         }
-        indexs[(sphereResolution + offset)*2 - 1] = offset;
+        indexs[(sphereResolution + offset)*2 - 1] = static_cast<unsigned int>(offset);
         offset += sphereResolution;
     }
     mGizmo.SetIndexsData(indexs.size(), indexs.data());

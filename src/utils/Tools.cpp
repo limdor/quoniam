@@ -97,7 +97,6 @@ std::vector<float> Tools::ScaleValues(const std::vector<float> &pValues, float p
 {
     float min, max;
 
-    int size = pValues.size();
     if (pPercentOfClipping == 0.0f)
     {
         const auto minmax = std::minmax_element(pValues.cbegin(), pValues.cend());
@@ -106,6 +105,7 @@ std::vector<float> Tools::ScaleValues(const std::vector<float> &pValues, float p
     }
     else
     {
+        const size_t size = pValues.size();
         const int offset = glm::round(size * (pPercentOfClipping / 200.0f));
         std::vector<float> orderedValues = pValues;
         std::sort(orderedValues.begin(), orderedValues.end());
@@ -218,32 +218,32 @@ std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std:
     T previousValue;
     std::vector<T> result;
 
-    int sizeVector1 = pVector1.size();
-    int sizeVector2 = pVector2.size();
-    int sizeVector3 = pVector3.size();
+    const size_t sizeVector1 = pVector1.size();
+    const size_t sizeVector2 = pVector2.size();
+    const size_t sizeVector3 = pVector3.size();
     std::vector<T> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
-    int offset = 0;
-    for (int i = 0; i < sizeVector1; i++)
+    size_t offset = 0;
+    for (size_t i = 0; i < sizeVector1; i++)
     {
         mixedVector[offset + i] = pVector1.at(i);
     }
     offset += sizeVector1;
-    for (int i = 0; i < sizeVector2; i++)
+    for (size_t i = 0; i < sizeVector2; i++)
     {
         mixedVector[offset + i] = pVector2.at(i);
     }
     offset += sizeVector2;
-    for (int i = 0; i < sizeVector3; i++)
+    for (size_t i = 0; i < sizeVector3; i++)
     {
         mixedVector[offset + i] = pVector3.at(i);
     }
-    if (mixedVector.size() > 0)
+    if (!mixedVector.empty())
     {
         std::sort(mixedVector.begin(), mixedVector.end());
         previousValue = mixedVector.at(0);
         consecutiveElements = 1;
     }
-    for (int i = 1; i < mixedVector.size(); i++)
+    for (size_t i = 1; i < mixedVector.size(); i++)
     {
         int currentValue = mixedVector.at(i);
         if (currentValue == previousValue)
