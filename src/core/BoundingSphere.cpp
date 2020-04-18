@@ -97,11 +97,11 @@ void BoundingSphere::CreateMesh()
     UpdatePositions();
 
     /// Set the colors
-    QVector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
+    std::vector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
     mGizmo.SetColorData(colors.size(), colors.data());
 
     /// Set the indexs
-    QVector<unsigned int> indexs(sphereResolution*6);
+    std::vector<unsigned int> indexs(sphereResolution*6);
     int offset = 0;
     for( int i = 0; i < 3; i++ )
     {

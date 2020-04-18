@@ -50,13 +50,13 @@ void PerspectiveCamera::CreateMesh()
     UpdatePositions();
 
     /// Set the colors
-    QVector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
+    std::vector<glm::vec4> colors(mPositionOfVertices.size(), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
     colors[0] = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
     colors[1] = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
     mGizmo.SetColorData(colors.size(), colors.data());
 
     /// Set the indexs
-    QVector<unsigned int> indexs(16);
+    std::vector<unsigned int> indexs(16);
     indexs[0] = 0; indexs[1] = 1;
     indexs[2] = 1; indexs[3] = 2;
     indexs[4] = 2; indexs[5] = 3;

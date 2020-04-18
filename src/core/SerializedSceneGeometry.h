@@ -44,7 +44,7 @@ private:
     /// List with the curvature of every vertex
     QVector<float> mVertexCurvatures;
     /// List of faces: every face is compound by 3 indexs of the list of vertices
-    QVector<glm::ivec3> mFaces;
+    std::vector<glm::ivec3> mFaces;
     /// Number of faces
     size_t mNumberOfFaces;
     /// For every face, the list of neighbourhood faces
