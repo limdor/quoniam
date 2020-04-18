@@ -15,7 +15,7 @@ void ProjectedArea::Compute(const SceneInformationBuilder *pSceneInformationBuil
     int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         mValues[currentViewpoint] = a_t;

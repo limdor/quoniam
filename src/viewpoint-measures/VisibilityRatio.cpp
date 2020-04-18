@@ -24,7 +24,7 @@ void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBu
     {
         sumAreaPolygons += serializedPolygonAreas.at(currentPolygon);
     }
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         float sumAreasSeen = 0.0f;
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )

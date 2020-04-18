@@ -26,7 +26,7 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
     std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     float maxValue = -FLT_MAX;
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         if( a_t != 0 )

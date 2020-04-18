@@ -16,17 +16,17 @@ std::vector<float> Measure::GetValues() const
     return mValues;
 }
 
-float Measure::GetValue(int pViewpoint) const
+float Measure::GetValue(size_t pViewpoint) const
 {
     return mValues.at(pViewpoint);
 }
 
-size_t Measure::GetNth(int pNth) const
+size_t Measure::GetNth(size_t pNth) const
 {
     return mSort.at(pNth);
 }
 
-size_t Measure::GetPosition(int pViewpoint) const
+size_t Measure::GetPosition(size_t pViewpoint) const
 {
     return mPositions.at(pViewpoint);
 }

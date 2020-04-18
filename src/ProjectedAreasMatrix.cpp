@@ -5,12 +5,12 @@
 
 #include "Debug.h"
 
-ProjectedAreasMatrix::ProjectedAreasMatrix(int pNumberOfViewpoints, int pNumberOfPolygons):
+ProjectedAreasMatrix::ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pNumberOfPolygons):
     mNumberOfViewpoints(pNumberOfViewpoints), mNumberOfPolygons(pNumberOfPolygons),
     mTotalSum(0)
 {
     mValues.resize(pNumberOfViewpoints);
-    for( int currentViewpoint = 0; currentViewpoint < pNumberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < pNumberOfViewpoints; currentViewpoint++ )
     {
         mValues[currentViewpoint].resize(pNumberOfPolygons);
         std::fill(mValues[currentViewpoint].begin(), mValues[currentViewpoint].end(), 0);
@@ -30,12 +30,12 @@ ProjectedAreasMatrix::ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjecte
 
 }
 
-int ProjectedAreasMatrix::GetNumberOfViewpoints() const
+size_t ProjectedAreasMatrix::GetNumberOfViewpoints() const
 {
     return mNumberOfViewpoints;
 }
 
-int ProjectedAreasMatrix::GetNumberOfPolygons() const
+size_t ProjectedAreasMatrix::GetNumberOfPolygons() const
 {
     return mNumberOfPolygons;
 }
@@ -55,12 +55,12 @@ unsigned int ProjectedAreasMatrix::GetTotalSum() const
     return mTotalSum;
 }
 
-void ProjectedAreasMatrix::SetValues(int pViewpoint, const std::vector< unsigned int > &pValues)
+void ProjectedAreasMatrix::SetValues(size_t pViewpoint, const std::vector< unsigned int > &pValues)
 {
     mValues[pViewpoint] = pValues;
 }
 
-unsigned int ProjectedAreasMatrix::GetValue(int pViewpoint, int pPolygon) const
+unsigned int ProjectedAreasMatrix::GetValue(size_t pViewpoint, int pPolygon) const
 {
     return mValues.at(pViewpoint).at(pPolygon);
 }
@@ -72,9 +72,9 @@ void ProjectedAreasMatrix::Compute()
     mSumPerViewpoint.resize( mNumberOfViewpoints );
     std::fill(mSumPerViewpoint.begin(), mSumPerViewpoint.end(), 0);
     mTotalSum = 0;
-    for( int currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
     {
-        for( int currentPolygon = 0; currentPolygon < mNumberOfPolygons; currentPolygon++ )
+        for( size_t currentPolygon = 0; currentPolygon < mNumberOfPolygons; currentPolygon++ )
         {
             unsigned int value = mValues.at(currentViewpoint).at(currentPolygon);
             mTotalSum += value;
@@ -90,9 +90,9 @@ void ProjectedAreasMatrix::SaveToFile() const
     if( file.open(QFile::WriteOnly) )
     {
         QTextStream out(&file);
-        for( int currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
+        for( size_t currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
         {
-            for( int currentPolygon = 0; currentPolygon < mNumberOfPolygons; currentPolygon++ )
+            for( size_t currentPolygon = 0; currentPolygon < mNumberOfPolygons; currentPolygon++ )
             {
                 out << mValues.at(currentViewpoint).at(currentPolygon) << " ";
             }

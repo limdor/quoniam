@@ -16,7 +16,7 @@ void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationB
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int differentZero = 0;
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )

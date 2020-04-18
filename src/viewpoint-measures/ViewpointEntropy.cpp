@@ -19,7 +19,7 @@ void ViewpointEntropy::Compute(const SceneInformationBuilder *pSceneInformationB
     int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )

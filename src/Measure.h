@@ -21,9 +21,9 @@ public:
     /// Get a list of the values of the measures for every viewpoint
     std::vector<float> GetValues() const;
     /// Get the value of the measure given a viewpoint
-    float GetValue(int pViewpoint) const;
-    size_t GetNth(int pNth) const;
-    size_t GetPosition(int pViewpoint) const;
+    float GetValue(size_t pViewpoint) const;
+    size_t GetNth(size_t pNth) const;
+    size_t GetPosition(size_t pViewpoint) const;
     bool IsMaximumBest() const;
     /// Get the best viewpoint
     size_t GetBestViewpoint() const;

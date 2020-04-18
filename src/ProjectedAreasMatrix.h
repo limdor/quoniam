@@ -6,22 +6,22 @@
 class ProjectedAreasMatrix
 {
 public:
-    ProjectedAreasMatrix(int pNumberOfViewpoints, int pNumberOfPolygons);
+    ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pNumberOfPolygons);
     explicit ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjectedAreasMatrix);
-    int GetNumberOfViewpoints() const;
-    int GetNumberOfPolygons() const;
+    size_t GetNumberOfViewpoints() const;
+    size_t GetNumberOfPolygons() const;
     unsigned int GetSumPerViewpoint(size_t pViewpoint) const;
     unsigned int GetSumPerPolygon(size_t pPolygon) const;
     unsigned int GetTotalSum() const;
-    void SetValues(int pViewpoint, const std::vector< unsigned int > &pValues);
-    unsigned int GetValue(int pViewpoint, int pPolygon) const;
+    void SetValues(size_t pViewpoint, const std::vector< unsigned int > &pValues);
+    unsigned int GetValue(size_t pViewpoint, int pPolygon) const;
     void Compute();
     void SaveToFile() const;
 
 private:
     std::vector< std::vector< unsigned int > > mValues;
-    int mNumberOfViewpoints;
-    int mNumberOfPolygons;
+    size_t mNumberOfViewpoints;
+    size_t mNumberOfPolygons;
     std::vector< unsigned int > mSumPerViewpoint;
     std::vector< unsigned int > mSumPerPolygon;
     unsigned int mTotalSum;

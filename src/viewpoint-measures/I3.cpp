@@ -34,7 +34,7 @@ void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         unsigned int sum_a_z = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
         float sumAux1 = 0.0f;
         float sumAux2 = 0.0f;
-        for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+        for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
         {
             unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
             unsigned int a_z = projectedAreasMatrix->GetValue(currentViewpoint, currentPolygon);
@@ -51,7 +51,7 @@ void I3::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 
     //Now I3 is computed using polygonal I2
     float minValue = FLT_MAX;
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         if( a_t != 0 )

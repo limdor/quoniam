@@ -25,7 +25,7 @@ void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBu
     {
         sumAreaPolygons += serializedPolygonAreas.at(currentPolygon);
     }
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
