@@ -125,7 +125,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     mViewpointMeasures.push_back( new StoevStrasser("Stoev and Strasser") );
     mViewpointMeasures.push_back( new DepthDistribution("Depth distribution") );
 
-    for( int i = 0; i < mViewpointMeasures.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
         mUi->measureInViewpointSphereList->addItem( mViewpointMeasures.at(i)->GetName() );
     }
@@ -146,7 +146,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     mViewpointMeasuresSliders.resize( mViewpointMeasures.size() );
     QVBoxLayout* verticalLayout = new QVBoxLayout();
     verticalLayout->addWidget(minMaxWidget);
-    for( int i = 0; i < mViewpointMeasures.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
         QString text = mViewpointMeasures.at(i)->GetName();
         if(mViewpointMeasures.at(i)->IsMaximumBest())
@@ -160,7 +160,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
         QLabel* textNameLabel = new QLabel(text);
         textNameLabel->setAlignment(Qt::AlignHCenter);
         verticalLayout->addWidget(textNameLabel);
-        ViewpointMeasureSlider* slider = new ViewpointMeasureSlider(i, Qt::Horizontal);
+        ViewpointMeasureSlider* slider = new ViewpointMeasureSlider(static_cast<int>(i), Qt::Horizontal);
         verticalLayout->addWidget(slider);
         mViewpointMeasuresSliders[i] = slider;
         connect(slider, SIGNAL(valueChanged(int,int)), this, SLOT(SliderChanged(int, int)));
@@ -189,7 +189,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
 
 MainModuleController::~MainModuleController()
 {
-    for( int i = 0; i < mViewpointMeasures.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
         delete mViewpointMeasures.at(i);
     }
@@ -261,13 +261,13 @@ void MainModuleController::keyPressEvent(QKeyEvent *pEvent)
 {
     if( pEvent->key() == Qt::Key_N && mSphereOfViewpoints != nullptr )
     {
-        int viewpoint = NextViewpoint();
+        size_t viewpoint = NextViewpoint();
         Debug::Log(QString("Viewpoint %1 selected").arg(mSphereOfViewpoints->GetViewpoint(viewpoint)->mName));
 
         mUpdateView = false;
-        for( int i = 0; i < mViewpointMeasuresSliders.size(); i++ )
+        for( size_t i = 0; i < mViewpointMeasuresSliders.size(); i++ )
         {
-            mViewpointMeasuresSliders.at(i)->setValue(mViewpointMeasures.at(i)->GetPosition(viewpoint));
+            mViewpointMeasuresSliders.at(i)->setValue(static_cast<int>(mViewpointMeasures.at(i)->GetPosition(viewpoint)));
         }
         mUpdateView = true;
 
@@ -360,12 +360,12 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     QProgressDialog progress(this);
     progress.setLabelText("Computing measures...");
     progress.setCancelButton(0);
-    progress.setRange(0, mViewpointMeasures.size());
+    progress.setRange(0, static_cast<int>(mViewpointMeasures.size()));
     progress.show();
     progress.setValue(0);
     qApp->processEvents();
     //Reinitialize the measures
-    for( int i = 0; i < mViewpointMeasures.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
         mViewpointMeasures.at(i)->SetComputed(false);
     }
@@ -411,12 +411,12 @@ void MainModuleController::LoadViewpointsFromSphere(float pRadius, float pAngle,
     LoadViewpoints(pWidthResolution, pFaceCulling);
 }
 
-void MainModuleController::ChangeNumberOfViewpoints(int pNumberOfViewpoints)
+void MainModuleController::ChangeNumberOfViewpoints(size_t pNumberOfViewpoints)
 {
     //Modify the range of the sliders depending of the amount of viewpoints
-    for( int i = 0; i < mViewpointMeasuresSliders.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasuresSliders.size(); i++ )
     {
-        mViewpointMeasuresSliders.at(i)->setRange(0, pNumberOfViewpoints - 1);
+        mViewpointMeasuresSliders.at(i)->setRange(0, static_cast<int>(pNumberOfViewpoints - 1));
     }
 }
 
@@ -462,7 +462,7 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
     QApplication::restoreOverrideCursor();
 }
 
-int MainModuleController::NextViewpoint()
+size_t MainModuleController::NextViewpoint()
 {
     mCurrentViewpoint++;
     if( mCurrentViewpoint >= mSphereOfViewpoints->GetNumberOfViewpoints() )
@@ -471,7 +471,7 @@ int MainModuleController::NextViewpoint()
     return mCurrentViewpoint;
 }
 
-void MainModuleController::SetViewpoint(int pViewpoint)
+void MainModuleController::SetViewpoint(size_t pViewpoint)
 {
     mCurrentViewpoint = pViewpoint;
     auto currentCamera = mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint);
@@ -481,14 +481,14 @@ void MainModuleController::SetViewpoint(int pViewpoint)
     mOpenGLCanvas->updateGL();
 
     mUpdateView = false;
-    for( int i = 0; i < mViewpointMeasuresSliders.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasuresSliders.size(); i++ )
     {
-        mViewpointMeasuresSliders.at(i)->setValue(mViewpointMeasures.at(i)->GetPosition(pViewpoint));
+        mViewpointMeasuresSliders.at(i)->setValue(static_cast<int>(mViewpointMeasures.at(i)->GetPosition(pViewpoint)));
     }
     mUpdateView = true;
 }
 
-void MainModuleController::ShowViewpointInformation(int pViewpoint)
+void MainModuleController::ShowViewpointInformation(size_t pViewpoint)
 {
     Debug::Log(QString("Selected viewpoint: %1").arg(pViewpoint));
     glm::vec3 position = mSphereOfViewpoints->GetViewpoint(pViewpoint)->GetPosition();
@@ -500,7 +500,7 @@ void MainModuleController::ShowViewpointInformation(int pViewpoint)
     //Debug::Log(QString("  Latitude: %1").arg(mGeographicViewpoints[pViewpoint].y));
     //Debug::Log(QString("  Longitude: %1").arg(mGeographicViewpoints[pViewpoint].z));
     Debug::Log(QString("Viewpoint quality measures:"));
-    for( int i = 0; i < mViewpointMeasures.size(); i++ )
+    for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
         Debug::Log( QString("  %1: %2").arg(mViewpointMeasures.at(i)->GetName()).arg(mViewpointMeasures.at(i)->GetValue(pViewpoint)) );
     }
@@ -560,7 +560,7 @@ void MainModuleController::UpdateRenderingGUI()
     }
 }
 
-QString MainModuleController::GetScreenshotName(int pViewpoint)
+QString MainModuleController::GetScreenshotName(size_t pViewpoint)
 {
     QString name = mScene->GetName();
     name += "_";
@@ -619,21 +619,21 @@ void MainModuleController::RunDutagaciBenchmark()
         std::vector<QString> filestoLoad = mDutagaciDialog->GetFilesToLoad();
         float angle = mDutagaciDialog->GetAngle();
         float distance = mDutagaciDialog->GetDistance();
-        int numberOfFiles = filestoLoad.size();
-        for( int i = 0; i < numberOfFiles; i++ )
+        size_t numberOfFiles = filestoLoad.size();
+        for( size_t i = 0; i < numberOfFiles; i++ )
         {
             LoadScene(filestoLoad.at(i));
             LoadViewpointsFromSphere( distance, angle, 1.0f, 3, 640, false );
             float radius = mScene->GetBoundingSphere()->GetRadius();
             glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
-            for( int j = 0; j < mViewpointMeasures.size(); j++ )
+            for( size_t j = 0; j < mViewpointMeasures.size(); j++ )
             {
                 glm::vec3 position = mSphereOfViewpoints->GetViewpoint(mViewpointMeasures.at(j)->GetBestViewpoint())->GetPosition();
                 position = (position - center) / (radius * 3.0f);
                 bestViewpoints[j].push_back(position);
             }
         }
-        for( int i = 0; i < mViewpointMeasures.size(); i++ )
+        for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
         {
             QString fileName = QString{mViewpointMeasures.at(i)->GetName()}.replace("|","_").replace("/","_") + ".txt";
             QFile file(fileName);
@@ -665,7 +665,7 @@ void MainModuleController::on_measureInViewpointSphereList_currentIndexChanged(i
         {
             colors = Tools::ConvertFloatsToColors(mViewpointMeasures.at(pValue)->GetValues(), !mViewpointMeasures.at(pValue)->IsMaximumBest());
         }
-        for( int i = 0; i < colors.size(); i++ )
+        for( size_t i = 0; i < colors.size(); i++ )
         {
             colors[i].a = mUi->alphaSpinBox->value();
         }
@@ -686,11 +686,11 @@ void MainModuleController::on_alphaSpinBox_valueChanged(double pValue)
     on_measureInViewpointSphereList_currentIndexChanged(mUi->measureInViewpointSphereList->currentIndex());
 }
 
-void MainModuleController::SliderChanged(int pMeasure, int pValue)
+void MainModuleController::SliderChanged(size_t pMeasure, size_t pValue)
 {
     if(mUpdateView)
     {
-        unsigned int viewpoint = mViewpointMeasures.at(pMeasure)->GetNth(pValue);
+        size_t viewpoint = mViewpointMeasures.at(pMeasure)->GetNth(pValue);
         SetViewpoint(viewpoint);
     }
 }
@@ -783,9 +783,9 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
     mUi->applyMaterialsCheckBox->setChecked(true);
     on_applyMaterialsCheckBox_clicked(true);
     mUi->alphaSpinBox->setValue( 0.01f );
-    int numberOfMeasures = mViewpointMeasures.size();
+    size_t numberOfMeasures = mViewpointMeasures.size();
 
-    for( int measureIndex = 0; measureIndex < numberOfMeasures; measureIndex++ )
+    for( size_t measureIndex = 0; measureIndex < numberOfMeasures; measureIndex++ )
     {
         Measure* measure = mViewpointMeasures.at(measureIndex);
         QString measureName = measure->GetName();
@@ -796,7 +796,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
         measureName = measureName.replace("|","_");
         measureName = measureName.replace("/","_");
 
-        unsigned int viewpoint = measure->GetNth(0);
+        size_t viewpoint = measure->GetNth(0);
         SetViewpoint(viewpoint);
         if(measure->IsMaximumBest())
         {
@@ -809,7 +809,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
 
         mUi->alphaSpinBox->setValue( 1.0f );
 
-        on_measureInViewpointSphereList_currentIndexChanged( measureIndex );
+        on_measureInViewpointSphereList_currentIndexChanged( static_cast<int>(measureIndex) );
 
         mOpenGLCanvas->ResetActiveCamera();
         if(measure->IsMaximumBest())
@@ -837,7 +837,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
 
         mUi->alphaSpinBox->setValue( 1.0f );
 
-        on_measureInViewpointSphereList_currentIndexChanged( measureIndex );
+        on_measureInViewpointSphereList_currentIndexChanged( static_cast<int>(measureIndex) );
 
         mOpenGLCanvas->ResetActiveCamera();
         if(measure->IsMaximumBest())

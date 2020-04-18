@@ -60,7 +60,7 @@ void ProjectedAreasMatrix::SetValues(size_t pViewpoint, const std::vector< unsig
     mValues[pViewpoint] = pValues;
 }
 
-unsigned int ProjectedAreasMatrix::GetValue(size_t pViewpoint, int pPolygon) const
+unsigned int ProjectedAreasMatrix::GetValue(size_t pViewpoint, size_t pPolygon) const
 {
     return mValues.at(pViewpoint).at(pPolygon);
 }

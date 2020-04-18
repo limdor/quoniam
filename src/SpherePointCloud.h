@@ -39,16 +39,16 @@ public:
     void SetToQuasiUniform(unsigned char pDepth);
 
     /// Return the faces of the triangles
-    std::vector<unsigned int> GetFaces() const;
+    std::vector<size_t> GetFaces() const;
     /// Return the points in cartesian coordinates
     std::vector<glm::vec3> GetVertices() const;
 
     /// Return the vertex \a pI
-    glm::vec3 GetVertex(unsigned int pI) const;
+    glm::vec3 GetVertex(size_t pI) const;
     /// Return the neighbours of every point
-    std::vector< std::vector<int> > GetNeighbours() const;
+    std::vector< std::vector<size_t> > GetNeighbours() const;
     /// Return the neighbours of the point \a pI
-    std::vector<int> GetNeighbours(unsigned int pI) const;
+    std::vector<size_t> GetNeighbours(size_t pI) const;
 
     /// Return the 3D mesh
     std::shared_ptr<Geometry> GetMesh() const;
@@ -59,7 +59,7 @@ private:
     /// Create the vertexs, faces and normals of an icosahedron (level 0)
     void CreateIcosahedron();
     /// Find if a vertex already exists, if exists return the index
-    bool FindSphereCloudVertex(const glm::vec3 &pV, unsigned int &pPosition) const;
+    bool FindSphereCloudVertex(const glm::vec3 &pV, size_t &pPosition) const;
     /// Create a new face with 3 vertex from the point cloud
     void CreateSphereCloudTriangle(const glm::vec3 &pV1, const glm::vec3 &pV2, const glm::vec3 &pV3);
     /// Subdivide the point cloud recursively until \a pDepth
@@ -73,13 +73,13 @@ protected:
     /// Number of points
     size_t mNumberOfPoints;
     /// Faces
-    std::vector< unsigned int > mFaces;
+    std::vector< size_t > mFaces;
     /// Vertexs in cartesian coordinates
     std::vector< glm::vec3 > mVertices;
     /// Normals of the vertexs
     std::vector< glm::vec3 > mNormals;
     /// Neighbours of the vertexs
-    std::vector< std::vector<int> > mNeighbours;
+    std::vector< std::vector<size_t> > mNeighbours;
 };
 
 #endif

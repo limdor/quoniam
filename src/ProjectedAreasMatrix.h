@@ -14,7 +14,7 @@ public:
     unsigned int GetSumPerPolygon(size_t pPolygon) const;
     unsigned int GetTotalSum() const;
     void SetValues(size_t pViewpoint, const std::vector< unsigned int > &pValues);
-    unsigned int GetValue(size_t pViewpoint, int pPolygon) const;
+    unsigned int GetValue(size_t pViewpoint, size_t pPolygon) const;
     void Compute();
     void SaveToFile() const;
 

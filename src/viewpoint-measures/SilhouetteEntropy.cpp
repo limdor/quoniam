@@ -21,15 +21,15 @@ void SilhouetteEntropy::Compute(const SceneInformationBuilder *pSceneInformation
     {
         std::vector<unsigned int> curvatureHistogram(9, 0);
         std::vector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
-        int silhouetteSize = silhouetteCurvature.size();
-        for( int i = 0; i < silhouetteSize; i++ )
+        size_t silhouetteSize = silhouetteCurvature.size();
+        for( size_t i = 0; i < silhouetteSize; i++ )
         {
             float angle = silhouetteCurvature.at(i);
             //int bin = (int)(( (angle + 180.0f) / 360.0f ) * 8);
             int bin = (int)( (angle + 180.0f) / 45.0f );
             curvatureHistogram[bin]++;
         }
-        for( int i = 0; i < curvatureHistogram.size(); i++ )
+        for( size_t i = 0; i < curvatureHistogram.size(); i++ )
         {
             unsigned int value = curvatureHistogram.at(i);
             if( value != 0 )

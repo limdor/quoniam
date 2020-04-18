@@ -17,7 +17,7 @@ public:
 
 protected:
     /// Return the dissimilarity between two viewpoints
-    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pViewpointI, int pViewpointJ);
+    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pViewpointI, size_t pViewpointJ);
 };
 
 #endif

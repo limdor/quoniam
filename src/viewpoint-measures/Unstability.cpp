@@ -16,23 +16,23 @@ Unstability::Unstability(const QString &pName): Measure(pName, false)
 void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
-    int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
+    size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    std::vector< std::vector< int > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
-    std::vector< int > viewpointsOutOfDomain;
+    std::vector< std::vector< size_t > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
+    std::vector< size_t > viewpointsOutOfDomain;
     float minValue = FLT_MAX;
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
 
-        std::vector< int > neighbours = viewpointNeighbours.at(currentViewpoint);
+        std::vector< size_t > neighbours = viewpointNeighbours.at(currentViewpoint);
         if(neighbours.size() == 0)
         {
             Debug::Log("Unstability::No neighbours");
         }
-        for( int currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
+        for( size_t currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
         {
             unsigned int a_t_i = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
             unsigned int a_t_j = projectedAreasMatrix->GetSumPerViewpoint(neighbours.at(currentNeighbour));
@@ -70,16 +70,16 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
     mComputed = true;
 }
 
-float Unstability::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pViewpointI, int pViewpointJ)
+float Unstability::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pViewpointI, size_t pViewpointJ)
 {
-    int numberOfPolygons = pProjectedAreasMatrix->GetNumberOfPolygons();
+    size_t numberOfPolygons = pProjectedAreasMatrix->GetNumberOfPolygons();
     unsigned int a_t_i = pProjectedAreasMatrix->GetSumPerViewpoint(pViewpointI);
     unsigned int a_t_j = pProjectedAreasMatrix->GetSumPerViewpoint(pViewpointJ);
     unsigned int a_t_ij = a_t_i + a_t_j;
     float dissimilarity = 0.0f;
     if( a_t_ij != 0 )
     {
-        for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
+        for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
         {
             unsigned int a_z_i = pProjectedAreasMatrix->GetValue(pViewpointI, currentPolygon);
             unsigned int a_z_j = pProjectedAreasMatrix->GetValue(pViewpointJ, currentPolygon);

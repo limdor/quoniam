@@ -21,8 +21,8 @@ void SilhouetteCurvatureExtrema::Compute(const SceneInformationBuilder *pSceneIn
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         std::vector<float> silhouetteCurvature = pSceneInformationBuilder->GetSilhouetteCurvature(currentViewpoint);
-        int silhouetteSize = silhouetteCurvature.size();
-        for( int i = 0; i < silhouetteSize; i++ )
+        size_t silhouetteSize = silhouetteCurvature.size();
+        for( size_t i = 0; i < silhouetteSize; i++ )
         {
             float angle = silhouetteCurvature.at(i);
             mValues[currentViewpoint] += glm::pow(glm::abs(angle) / 90.0f, 2.0f);

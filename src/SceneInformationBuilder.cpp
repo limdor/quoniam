@@ -30,7 +30,7 @@
 
 void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)
 {
-    int numberOfViewpoints = pSphereOfViewpoints->GetNumberOfViewpoints();
+    size_t numberOfViewpoints = pSphereOfViewpoints->GetNumberOfViewpoints();
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QTime t;
@@ -38,7 +38,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     QProgressDialog progress(MainWindow::GetInstance());
     progress.setLabelText("Projecting scene to viewpoint sphere...");
     progress.setCancelButton(nullptr);
-    progress.setRange(0, numberOfViewpoints);
+    progress.setRange(0, static_cast<int>(numberOfViewpoints));
     progress.show();
 
     SaveOpenGLStats();
@@ -149,10 +149,10 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     verticesScene.SetVerticesData(numberOfVertices, vertices.data());
     verticesScene.SetIndexsData(numberOfVertices, indexs.data());
     //We iterate over all the viewpoint of the sphere
-    for( int i = 0; i < numberOfViewpoints; i++ )
+    for( size_t i = 0; i < numberOfViewpoints; i++ )
     {
         //We update the progress bar
-        progress.setValue(i);   
+        progress.setValue(static_cast<int>(i));
 
         //We compute the camera matrix
         auto currentViewpoint = pSphereOfViewpoints->GetViewpoint(i);
@@ -265,7 +265,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         verticesScene.Draw();
         glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage.data());
         CHECK_GL_ERROR();
-        QSet<int> visibleVertexs;
+        std::set<int> visibleVertexs;
         for(unsigned int j = 0; j < totalNumberOfPixels; j++ )
         {
             int pixelActual = glm::round(valuePerFaceImage[j]);
@@ -300,7 +300,7 @@ std::shared_ptr<ProjectedAreasMatrix const> SceneInformationBuilder::GetProjecte
     return mProjectedAreasMatrix;
 }
 
-std::vector< std::vector< int > > SceneInformationBuilder::GetViewpointNeighbours() const
+std::vector< std::vector< size_t > > SceneInformationBuilder::GetViewpointNeighbours() const
 {
     return mViewpointNeighbours;
 }
@@ -310,32 +310,32 @@ std::vector< std::vector< size_t > > SceneInformationBuilder::GetSerializedPolyg
     return mSerializedScene->GetFacesNeighbours();
 }
 
-float SceneInformationBuilder::GetSilhouetteLength(int pViewpoint) const
+float SceneInformationBuilder::GetSilhouetteLength(size_t pViewpoint) const
 {
     return mSilhouetteLengths.at(pViewpoint);
 }
 
-std::vector< float > SceneInformationBuilder::GetSilhouetteCurvature(int pViewpoint) const
+std::vector< float > SceneInformationBuilder::GetSilhouetteCurvature(size_t pViewpoint) const
 {
     return mSilhouetteCurvature.at(pViewpoint);
 }
 
-std::vector< float > SceneInformationBuilder::GetNormalizedDepthHistogram(int pViewpoint) const
+std::vector< float > SceneInformationBuilder::GetNormalizedDepthHistogram(size_t pViewpoint) const
 {
     return mNormalizedDepthHistograms.at(pViewpoint);
 }
 
-cv::Mat SceneInformationBuilder::GetDepthImage(int pViewpoint) const
+cv::Mat SceneInformationBuilder::GetDepthImage(size_t pViewpoint) const
 {
     return mDepthImages.at(pViewpoint);
 }
 
-float SceneInformationBuilder::GetMaximumDepth(int pViewpoint) const
+float SceneInformationBuilder::GetMaximumDepth(size_t pViewpoint) const
 {
     return mMaxDepths.at(pViewpoint);
 }
 
-QSet< int > SceneInformationBuilder::GetVisibleVertices(int pViewpoint) const
+std::set< int > SceneInformationBuilder::GetVisibleVertices(size_t pViewpoint) const
 {
     return mVisibleVertexs.at(pViewpoint);
 }
