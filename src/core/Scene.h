@@ -56,7 +56,7 @@ public:
         reference operator*() const {return *mCurrentNode;}
     };
     /// Create an scene given the name and the root scene node
-    Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries, const QVector<std::shared_ptr<Mesh>>& pMeshes );
+    Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes );
     Scene(const Scene& pScene) = delete;
     ~Scene() = default;
 
@@ -73,11 +73,11 @@ private:
     QString mName;
     std::shared_ptr<SceneNode> mRootNode;
     /// List of materials used
-    QVector<std::shared_ptr<Material>> mMaterials;
+    std::vector<std::shared_ptr<Material>> mMaterials;
     /// List of geometries used
-    QVector<std::shared_ptr<Geometry>> mGeometries;
+    std::vector<std::shared_ptr<Geometry>> mGeometries;
     /// List of meshes used
-    QVector<std::shared_ptr<Mesh>> mMeshes;
+    std::vector<std::shared_ptr<Mesh>> mMeshes;
 };
 
 #endif

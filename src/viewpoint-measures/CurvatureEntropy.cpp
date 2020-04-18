@@ -19,13 +19,13 @@ CurvatureEntropy::CurvatureEntropy(const QString& pName): Measure(pName, true)
 void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
     const int histogramSize = 256;
-    int numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
+    const size_t numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
     std::vector<float> vertexCurvatures = pSceneInformationBuilder->GetSerializedVertexCurvature();
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     float min = -2.0f * glm::pi<float>();
     float range = 4.0f * glm::pi<float>();
-    for( int currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
+    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         QVector<unsigned int> curvatureHistogram(histogramSize, 0);
         QSet<int> visibleVertices = pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);

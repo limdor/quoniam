@@ -4,7 +4,7 @@
 
 #include "glm/vec3.hpp"
 
-Scene::Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries, const QVector<std::shared_ptr<Mesh>>& pMeshes ):
+Scene::Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes ):
     mName(pName), mRootNode(std::move(pSceneRoot)), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
 {
 

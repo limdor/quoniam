@@ -90,32 +90,32 @@ void SceneNode::SetParent(std::shared_ptr<SceneNode> pParent)
     }
 }
 
-int SceneNode::GetNumMeshes() const
+size_t SceneNode::GetNumMeshes() const
 {
     return mMeshes.size();
 }
 
-std::shared_ptr<Mesh const> SceneNode::GetMesh(int pPosition) const
+std::shared_ptr<Mesh const> SceneNode::GetMesh(size_t pPosition) const
 {
     return mMeshes.at(pPosition);
 }
 
-int SceneNode::GetNumCameras() const
+size_t SceneNode::GetNumCameras() const
 {
     return mCameras.size();
 }
 
-const Camera* SceneNode::GetCamera(int pPosition) const
+const Camera* SceneNode::GetCamera(size_t pPosition) const
 {
     return mCameras.at(pPosition);
 }
 
-int SceneNode::GetNumChilds() const
+size_t SceneNode::GetNumChilds() const
 {
     return mChilds.size();
 }
 
-std::shared_ptr<SceneNode const> SceneNode::GetChild(int pPosition) const
+std::shared_ptr<SceneNode const> SceneNode::GetChild(size_t pPosition) const
 {
     return mChilds.at(pPosition);
 }

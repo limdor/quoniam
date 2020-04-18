@@ -7,12 +7,12 @@
 #include "Scene.h"
 
 #include <QtCore/QString>
-#include <QtCore/QVector>
 
 #include "assimp/material.h"
 #include "assimp/scene.h"
 
 #include <memory>
+#include <vector>
 
 /// Class to load scenes from files
 class SceneLoader
@@ -25,22 +25,22 @@ private:
     /// Create an SceneNode given an Assimp node
     /// \param pNode Pointer to the Assimp node to be loaded
     /// \param pSceneMeshes List of the meshes used in the node
-    static std::shared_ptr<SceneNode> LoadSceneNode(const QVector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode);
+    static std::shared_ptr<SceneNode> LoadSceneNode(const std::vector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode);
 
     /// Load the materials in pScene
-    static QVector<std::shared_ptr<Material>> LoadMaterials(const aiScene* pAiScene, const QString& pScenePath);
+    static std::vector<std::shared_ptr<Material>> LoadMaterials(const aiScene* pAiScene, const QString& pScenePath);
     /// Convert a aiMaterial to a Material
     static std::unique_ptr<Material> LoadMaterial(const aiMaterial* pAiMaterial, const QString& pScenePath);
 
     /// Load the geometries in pAiScene
-    static QVector<std::shared_ptr<Geometry>> LoadGeometries(const aiScene* pAiScene);
+    static std::vector<std::shared_ptr<Geometry>> LoadGeometries(const aiScene* pAiScene);
     /// Convert a aiMesh to a Geometry
     static std::unique_ptr<Geometry> LoadGeometry(const aiMesh* pAiMesh);
 
     /// Load the meshes in pAiScene
-    static QVector<std::shared_ptr<Mesh>> LoadMeshes(const aiScene* pAiScene, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries);
+    static std::vector<std::shared_ptr<Mesh>> LoadMeshes(const aiScene* pAiScene, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries);
     /// Convert a aiMesh to a Mesh
-    static std::unique_ptr<Mesh> LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const QVector<std::shared_ptr<Material>>& pMaterials, const QVector<std::shared_ptr<Geometry>>& pGeometries);
+    static std::unique_ptr<Mesh> LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries);
 
     /// Show the information of the material
     static void ShowMaterialInformation(const aiMaterial *pMaterial);

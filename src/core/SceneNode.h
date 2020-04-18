@@ -5,11 +5,11 @@
 #include "Mesh.h"
 
 #include <QtCore/QString>
-#include <QtCore/QVector>
 
 #include "glm/mat4x4.hpp"
 
 #include <memory>
+#include <vector>
 
 /// Class for a node of a scene
 class SceneNode : public std::enable_shared_from_this<SceneNode>
@@ -49,19 +49,19 @@ public:
     void SetParent(std::shared_ptr<SceneNode> pParent);
 
     /// Obtain the number of meshes
-    int GetNumMeshes() const;
+    size_t GetNumMeshes() const;
     /// Obtain the mesh
-    std::shared_ptr<Mesh const> GetMesh(int pPosition) const;
+    std::shared_ptr<Mesh const> GetMesh(size_t pPosition) const;
 
     /// Obtain the number of cameras
-    int GetNumCameras() const;
+    size_t GetNumCameras() const;
     /// Obtain the camera
-    const Camera* GetCamera(int pPosition) const;
+    const Camera* GetCamera(size_t pPosition) const;
 
     /// Obtain the number of childs
-    int GetNumChilds() const;
+    size_t GetNumChilds() const;
     /// Obtain the child
-    std::shared_ptr<SceneNode const> GetChild(int pPosition) const;
+    std::shared_ptr<SceneNode const> GetChild(size_t pPosition) const;
 
 private:
     /// Update global transform
@@ -86,10 +86,10 @@ private:
     /// Parent node
     std::shared_ptr<SceneNode> mParent;
     /// Meshes of the node
-    QVector<std::shared_ptr<Mesh>> mMeshes;
+    std::vector<std::shared_ptr<Mesh>> mMeshes;
     /// Cameras of the node
-    QVector<Camera*> mCameras;
+    std::vector<Camera*> mCameras;
     /// Childs of the node
-    QVector<std::shared_ptr<SceneNode>> mChilds;
+    std::vector<std::shared_ptr<SceneNode>> mChilds;
 };
 #endif

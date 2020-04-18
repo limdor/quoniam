@@ -18,9 +18,9 @@ std::shared_ptr<GPUSceneNode> GPUScene::GetSceneNode(int pNode) const
     return mSceneNodes.at(pNode);
 }
 
-QVector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, size_t &pPolygonalOffset)
+std::vector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, size_t &pPolygonalOffset)
 {
-    QVector<std::shared_ptr<GPUSceneNode>> sceneNodes;
+    std::vector<std::shared_ptr<GPUSceneNode>> sceneNodes;
 
     glm::mat4 modelMatrix = pSceneNode->GetGlobalTransform();
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
@@ -29,13 +29,14 @@ QVector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::shared
         auto gpuSceneNode = std::make_shared<GPUSceneNode>(mesh->GetGeometry()->GetGPUGeometry(), mesh->GetMaterial());
         gpuSceneNode->SetModelMatrix(modelMatrix);
         gpuSceneNode->SetPolygonalOffset(pPolygonalOffset);
-        sceneNodes += std::move(gpuSceneNode);
+        sceneNodes.push_back(std::move(gpuSceneNode));
         pPolygonalOffset += mesh->GetGeometry()->GetNumFaces();
     }
 
     for( int i = 0; i < pSceneNode->GetNumChilds(); i++ )
     {
-        sceneNodes += CreateGPUSceneNodes(pSceneNode->GetChild(i), pPolygonalOffset);
+        const auto childGPUSceneNodes = CreateGPUSceneNodes(pSceneNode->GetChild(i), pPolygonalOffset);
+        sceneNodes.insert(sceneNodes.end(), childGPUSceneNodes.cbegin(), childGPUSceneNodes.cend());
     }
     return sceneNodes;
 }
