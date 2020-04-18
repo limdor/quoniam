@@ -21,12 +21,12 @@ float Measure::GetValue(int pViewpoint) const
     return mValues.at(pViewpoint);
 }
 
-int Measure::GetNth(int pNth) const
+size_t Measure::GetNth(int pNth) const
 {
     return mSort.at(pNth);
 }
 
-int Measure::GetPosition(int pViewpoint) const
+size_t Measure::GetPosition(int pViewpoint) const
 {
     return mPositions.at(pViewpoint);
 }
@@ -36,9 +36,9 @@ bool Measure::IsMaximumBest() const
     return mMaximumBest;
 }
 
-int Measure::GetBestViewpoint() const
+size_t Measure::GetBestViewpoint() const
 {
-    int best;
+    size_t best;
     if(mMaximumBest)
     {
         best = mSort.at(mSort.size()-1);

@@ -32,7 +32,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
         {
             Debug::Log("FeixasSaliency::No neighbours");
         }
-        for( int currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
+        for( size_t currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
         {
             unsigned int sum_a_z_i = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
             unsigned int sum_a_z_j = projectedAreasMatrix->GetSumPerPolygon(neighbours.at(currentNeighbour));

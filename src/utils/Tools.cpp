@@ -245,7 +245,7 @@ std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std:
     }
     for (size_t i = 1; i < mixedVector.size(); i++)
     {
-        int currentValue = mixedVector.at(i);
+        T currentValue = mixedVector.at(i);
         if (currentValue == previousValue)
         {
             consecutiveElements++;

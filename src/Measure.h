@@ -22,11 +22,11 @@ public:
     std::vector<float> GetValues() const;
     /// Get the value of the measure given a viewpoint
     float GetValue(int pViewpoint) const;
-    int GetNth(int pNth) const;
-    int GetPosition(int pViewpoint) const;
+    size_t GetNth(int pNth) const;
+    size_t GetPosition(int pViewpoint) const;
     bool IsMaximumBest() const;
     /// Get the best viewpoint
-    int GetBestViewpoint() const;
+    size_t GetBestViewpoint() const;
     /// Return a boolean to know if the measure is computed
     bool Computed() const;
     void SetComputed(bool pComputed);
