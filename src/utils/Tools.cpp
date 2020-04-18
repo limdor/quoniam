@@ -268,13 +268,9 @@ template std::vector<size_t> Tools::MergeNeighbours(const std::vector<size_t> &p
 
 std::vector<glm::vec4> Tools::ConvertNormalizedFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
-    int size = pValues.size();
-
-    std::vector<glm::vec4> results(size);
-    for (int i = 0; i < size; i++)
-    {
-        results[i] = ConvertNormalizedFloatToColor(pValues.at(i), pInverted);
-    }
+    std::vector<glm::vec4> results;
+    std::transform(pValues.cbegin(), pValues.cend(), std::back_inserter(results),
+     [pInverted](float value) -> glm::vec4 { return ConvertNormalizedFloatToColor(value, pInverted); });
 
     return results;
 }
