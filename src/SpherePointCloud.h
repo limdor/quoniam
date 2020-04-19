@@ -1,14 +1,13 @@
 #ifndef SPHERE_POINT_CLOUD_H
 #define SPHERE_POINT_CLOUD_H
 
-//Qt includes
-#include <QtCore/QVector>
-
 //Dependency includes
 #include "glm/vec3.hpp"
 
 //Project includes
 #include "Geometry.h"
+
+#include <vector>
 
 ///
 /// Sphere of points uniformly or quasi-uniformly distributed
@@ -40,16 +39,16 @@ public:
     void SetToQuasiUniform(unsigned char pDepth);
 
     /// Return the faces of the triangles
-    QVector<unsigned int> GetFaces() const;
+    std::vector<size_t> GetFaces() const;
     /// Return the points in cartesian coordinates
-    QVector<glm::vec3> GetVertices() const;
+    std::vector<glm::vec3> GetVertices() const;
 
     /// Return the vertex \a pI
-    glm::vec3 GetVertex(unsigned int pI) const;
+    glm::vec3 GetVertex(size_t pI) const;
     /// Return the neighbours of every point
-    QVector< QVector<int> > GetNeighbours() const;
+    std::vector< std::vector<size_t> > GetNeighbours() const;
     /// Return the neighbours of the point \a pI
-    QVector<int> GetNeighbours(unsigned int pI) const;
+    std::vector<size_t> GetNeighbours(size_t pI) const;
 
     /// Return the 3D mesh
     std::shared_ptr<Geometry> GetMesh() const;
@@ -60,7 +59,7 @@ private:
     /// Create the vertexs, faces and normals of an icosahedron (level 0)
     void CreateIcosahedron();
     /// Find if a vertex already exists, if exists return the index
-    bool FindSphereCloudVertex(const glm::vec3 &pV, unsigned int &pPosition) const;
+    bool FindSphereCloudVertex(const glm::vec3 &pV, size_t &pPosition) const;
     /// Create a new face with 3 vertex from the point cloud
     void CreateSphereCloudTriangle(const glm::vec3 &pV1, const glm::vec3 &pV2, const glm::vec3 &pV3);
     /// Subdivide the point cloud recursively until \a pDepth
@@ -72,15 +71,15 @@ protected:
     /// Mesh to paint the sphere point cloud
     std::shared_ptr<Geometry> mMesh;
     /// Number of points
-    int mNumberOfPoints;
+    size_t mNumberOfPoints;
     /// Faces
-    QVector< unsigned int > mFaces;
+    std::vector< size_t > mFaces;
     /// Vertexs in cartesian coordinates
-    QVector< glm::vec3 > mVertices;
+    std::vector< glm::vec3 > mVertices;
     /// Normals of the vertexs
-    QVector< glm::vec3 > mNormals;
+    std::vector< glm::vec3 > mNormals;
     /// Neighbours of the vertexs
-    QVector< QVector<int> > mNeighbours;
+    std::vector< std::vector<size_t> > mNeighbours;
 };
 
 #endif

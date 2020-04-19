@@ -17,7 +17,7 @@ public:
 
 private:
     /// Return the dissimilarity between two polygons
-    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ);
+    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pPolygonI, size_t pPolygonJ);
 };
 
 #endif

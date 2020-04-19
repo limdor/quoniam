@@ -20,7 +20,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
     const size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     std::vector< float > polygonalSaliency(numberOfPolygons, 0.0f);
     std::vector< std::vector< size_t > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
-    std::vector< int > polygonsOutOfDomain;
+    std::vector< size_t > polygonsOutOfDomain;
     float minValue = FLT_MAX;
     for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {
@@ -61,7 +61,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
         }
     }
     //We assign the minimum value to the polygons that their saliency can not be computed
-    for( int currentPolygon = 0; currentPolygon < polygonsOutOfDomain.size(); currentPolygon++ )
+    for( size_t currentPolygon = 0; currentPolygon < polygonsOutOfDomain.size(); currentPolygon++ )
     {
         polygonalSaliency[polygonsOutOfDomain.at(currentPolygon)] = minValue;
     }
@@ -85,7 +85,7 @@ void FeixasSaliency::Compute(const SceneInformationBuilder *pSceneInformationBui
     mComputed = true;
 }
 
-float FeixasSaliency::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
+float FeixasSaliency::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pPolygonI, size_t pPolygonJ)
 {
     const size_t numberOfViewpoints = pProjectedAreasMatrix->GetNumberOfViewpoints();
     unsigned int sum_a_z_i = pProjectedAreasMatrix->GetSumPerPolygon(pPolygonI);

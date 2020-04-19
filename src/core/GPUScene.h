@@ -5,6 +5,7 @@
 #include "Scene.h"
 
 #include <memory>
+#include <vector>
 
 class GPUScene
 {
@@ -12,9 +13,9 @@ public:
     explicit GPUScene(std::shared_ptr<Scene const> pScene);
 
     /// Get the number of scene nodes
-    int GetNumberOfSceneNodes() const;
+    size_t GetNumberOfSceneNodes() const;
     /// Get the scene node
-    std::shared_ptr<GPUSceneNode> GetSceneNode(int pNode) const;
+    std::shared_ptr<GPUSceneNode> GetSceneNode(size_t pNode) const;
 
 private:
     /// Create the gpu scene nodes given a scene node

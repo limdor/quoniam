@@ -11,13 +11,13 @@ class ModuleController : public QWidget
 public:
     explicit ModuleController(QWidget *pParent = 0);
     
-    QVector<QMenu*> GetModuleMenus() const;
+    std::vector<QMenu*> GetModuleMenus() const;
     virtual void CreateModuleMenus();
 
     virtual void ActiveModule();
 
 protected:
-    QVector<QMenu*> mMenus;
+    std::vector<QMenu*> mMenus;
 
 };
 

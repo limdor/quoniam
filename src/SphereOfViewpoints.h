@@ -27,9 +27,9 @@ public:
     /// subdivision of faces, starting from an icosahedron
     void SetToQuasiUniform(unsigned char pDepth);
     /// Get the pIndex viewpoint
-    std::shared_ptr<Camera> GetViewpoint(int pIndex) const;
+    std::shared_ptr<Camera> GetViewpoint(size_t pIndex) const;
     /// Return the numer of viewpoints over the sphere
-    int GetNumberOfViewpoints() const;
+    size_t GetNumberOfViewpoints() const;
     /// Return the aspect ratio of the viewpoints
     float GetAspectRatio() const;
     /// Apply a transform acording to the radius and the center of the scene
@@ -43,7 +43,7 @@ protected:
     /// Aspect ratio
     float mAspectRatio;
     /// Array of viewpoints
-    QVector<std::shared_ptr<Camera>> mCameras;
+    std::vector<std::shared_ptr<Camera>> mCameras;
 };
 
 #endif

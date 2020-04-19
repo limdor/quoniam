@@ -198,6 +198,16 @@ void Geometry::SetIndexsData(size_t pSize, const unsigned int *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
+void Geometry::SetIndexsData(size_t pSize, const size_t *pData)
+{
+    mIndexData.resize(pSize);
+    for( size_t i = 0; i < pSize; i++ )
+    {
+        mIndexData[i] = static_cast<unsigned int>(pData[i]);
+    }
+    mNeedGPUGeometryUpdate = true;
+}
+
 const std::vector<unsigned int>& Geometry::GetIndexsData() const
 {
     return mIndexData;

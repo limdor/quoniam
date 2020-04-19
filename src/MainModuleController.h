@@ -46,23 +46,23 @@ private:
     /// Mesh of viewpoints related methods
     void LoadViewpoints(int pWidthResolution, bool pFaceCulling);
     void LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio, int pSubdivision, int pWidthResolution, bool pFaceCulling);
-    void ChangeNumberOfViewpoints(int pNumberOfViewpoints);
+    void ChangeNumberOfViewpoints(size_t pNumberOfViewpoints);
     void SaveViewpointMeasuresInformation(const QString &pFileName);
-    int NextViewpoint();
-    void SetViewpoint(int pViewpoint);
-    void ShowViewpointInformation(int pViewpoint);
+    size_t NextViewpoint();
+    void SetViewpoint(size_t pViewpoint);
+    void ShowViewpointInformation(size_t pViewpoint);
     void LoadDutagaciViewpoints();
 
     /// Altres
     void UpdateRenderingGUI();
-    QString GetScreenshotName(int pViewpoint);
+    QString GetScreenshotName(size_t pViewpoint);
 
     QMenu* mMenuVisualization;
     QAction* mActionExport;
     QAction* mActionViewpointsSphere;
 
     DutagaciDialog* mDutagaciDialog;
-    QVector<glm::vec3> mDutagaciViewpoints;
+    std::vector<glm::vec3> mDutagaciViewpoints;
 
     Ui::MainModule* mUi;
 
@@ -73,10 +73,10 @@ private:
 
     bool mUpdateView;
 
-    int mCurrentViewpoint;
+    size_t mCurrentViewpoint;
 
-    QVector<Measure*> mViewpointMeasures;
-    QVector<QSlider*> mViewpointMeasuresSliders;
+    std::vector<Measure*> mViewpointMeasures;
+    std::vector<QSlider*> mViewpointMeasuresSliders;
 
     QPoint mLastMousePosition;
 
@@ -92,7 +92,7 @@ private slots:
     void on_alphaSlider_valueChanged(int pValue);
     void on_alphaSpinBox_valueChanged(double pValue);
 
-    void SliderChanged(int pMeasure, int pValue);
+    void SliderChanged(size_t pMeasure, size_t pValue);
 
     void on_loadViewpointsSphereButton_clicked();
 

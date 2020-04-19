@@ -13,6 +13,7 @@
 #include "SphereOfViewpoints.h"
 
 #include <memory>
+#include <set>
 #include <vector>
 
 /// Static class to create an InformationChannelHistogram
@@ -23,14 +24,14 @@ public:
     void CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals = false);
     /// Get the histogram
     std::shared_ptr<ProjectedAreasMatrix const> GetProjectedAreasMatrix() const;
-    QVector< QVector< int > > GetViewpointNeighbours() const;
+    std::vector< std::vector< size_t > > GetViewpointNeighbours() const;
     std::vector< std::vector< size_t > > GetSerializedPolygonNeighbours() const;
-    float GetSilhouetteLength(int pViewpoint) const;
-    QVector< float > GetSilhouetteCurvature(int pViewpoint) const;
-    QVector< float > GetNormalizedDepthHistogram(int pViewpoint) const;
-    cv::Mat GetDepthImage(int pViewpoint) const;
-    float GetMaximumDepth(int pViewpoint) const;
-    QSet< int > GetVisibleVertices(int pViewpoint) const;
+    float GetSilhouetteLength(size_t pViewpoint) const;
+    std::vector< float > GetSilhouetteCurvature(size_t pViewpoint) const;
+    std::vector< float > GetNormalizedDepthHistogram(size_t pViewpoint) const;
+    cv::Mat GetDepthImage(size_t pViewpoint) const;
+    float GetMaximumDepth(size_t pViewpoint) const;
+    std::set< int > GetVisibleVertices(size_t pViewpoint) const;
     std::vector< float > GetSerializedPolygonAreas() const;
     std::vector< float > GetSerializedVertexCurvature() const;
     int GetWidthResolution() const;
@@ -42,17 +43,17 @@ protected:
     /// Restore the OpenGL stats
     void RestoreOpenGLStats();
 
-    QVector<QVector<int> > mViewpointNeighbours;
+    std::vector<std::vector<size_t> > mViewpointNeighbours;
     std::unique_ptr<SerializedSceneGeometry> mSerializedScene{nullptr};
     /// Matrix with the projected areas of the polygons from every viewpoint
     std::shared_ptr<ProjectedAreasMatrix> mProjectedAreasMatrix{nullptr};
     /// List of lengths of the silhouettes of the models seen from every viewpoint
-    QVector<float> mSilhouetteLengths;
-    QVector< QVector<float> > mSilhouetteCurvature;
-    QVector< QVector<float> > mNormalizedDepthHistograms;
-    QVector<float> mMaxDepths;
-    QVector<cv::Mat> mDepthImages;
-    QVector< QSet<int> > mVisibleVertexs;
+    std::vector<float> mSilhouetteLengths;
+    std::vector< std::vector<float> > mSilhouetteCurvature;
+    std::vector< std::vector<float> > mNormalizedDepthHistograms;
+    std::vector<float> mMaxDepths;
+    std::vector<cv::Mat> mDepthImages;
+    std::vector< std::set<int> > mVisibleVertexs;
     int mWidthResolution{640};
     float mAspectRatio{1.0f};
     /// Program used to paint a different color per face

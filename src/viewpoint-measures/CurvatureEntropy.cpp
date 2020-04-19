@@ -1,9 +1,6 @@
 //Definition include
 #include "CurvatureEntropy.h"
 
-//Qt includes
-#include <QtCore/QSet>
-
 //Dependency includes
 #include "glm/exponential.hpp"
 #include "glm/gtc/constants.hpp"
@@ -27,8 +24,8 @@ void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationB
     float range = 4.0f * glm::pi<float>();
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
-        QVector<unsigned int> curvatureHistogram(histogramSize, 0);
-        QSet<int> visibleVertices = pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);
+        std::vector<unsigned int> curvatureHistogram(histogramSize, 0);
+        std::set<int> visibleVertices = pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);
         foreach(int value, visibleVertices)
         {
             float curvature = vertexCurvatures.at(value);

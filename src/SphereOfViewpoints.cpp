@@ -46,12 +46,12 @@ void SphereOfViewpoints::SetToQuasiUniform(unsigned char pDepth)
     SetCameras();
 }
 
-std::shared_ptr<Camera> SphereOfViewpoints::GetViewpoint(int pIndex) const
+std::shared_ptr<Camera> SphereOfViewpoints::GetViewpoint(size_t pIndex) const
 {
     return mCameras.at(pIndex);
 }
 
-int SphereOfViewpoints::GetNumberOfViewpoints() const
+size_t SphereOfViewpoints::GetNumberOfViewpoints() const
 {
     return mCameras.size();
 }

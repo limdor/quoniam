@@ -17,11 +17,11 @@ I2::I2(const QString &pName): Measure(pName, false)
 
 void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    QVector< int > elementsOutOfDomain;
+    std::vector< size_t > elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
-    int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
+    size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
+    size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
@@ -35,7 +35,7 @@ void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         {
             float sumAux1 = 0.0f;
             float sumAux2 = 0.0f;
-            for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
+            for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
             {
                 unsigned int sum_a_z = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
                 unsigned int a_z = projectedAreasMatrix->GetValue(currentViewpoint, currentPolygon);

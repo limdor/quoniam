@@ -8,12 +8,12 @@ GPUScene::GPUScene(std::shared_ptr<Scene const> pScene)
     mSceneNodes = CreateGPUSceneNodes(pScene->GetRootNode(), polygonalOffset);
 }
 
-int GPUScene::GetNumberOfSceneNodes() const
+size_t GPUScene::GetNumberOfSceneNodes() const
 {
     return mSceneNodes.size();
 }
 
-std::shared_ptr<GPUSceneNode> GPUScene::GetSceneNode(int pNode) const
+std::shared_ptr<GPUSceneNode> GPUScene::GetSceneNode(size_t pNode) const
 {
     return mSceneNodes.at(pNode);
 }

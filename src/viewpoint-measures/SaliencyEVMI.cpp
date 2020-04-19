@@ -20,7 +20,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
     const size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
     std::vector< float > polygonalSaliency(numberOfPolygons, 0.0f);
     std::vector< std::vector< size_t > > serializedPolygonNeighbours = pSceneInformationBuilder->GetSerializedPolygonNeighbours();
-    std::vector< int > polygonsOutOfDomain;
+    std::vector< size_t > polygonsOutOfDomain;
     float maxValue = -FLT_MAX;
     for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {
@@ -65,7 +65,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
     {
         polygonalSaliency[polygonsOutOfDomain.at(currentPolygon)] = maxValue;
     }
-    QVector< int > viewpointsOutOfDomain;
+    std::vector< size_t > viewpointsOutOfDomain;
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     maxValue = -FLT_MAX;
@@ -117,7 +117,7 @@ void SaliencyEVMI::Compute(const SceneInformationBuilder *pSceneInformationBuild
     mComputed = true;
 }
 
-float SaliencyEVMI::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, int pPolygonI, int pPolygonJ)
+float SaliencyEVMI::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pPolygonI, size_t pPolygonJ)
 {
     const size_t numberOfViewpoints = pProjectedAreasMatrix->GetNumberOfViewpoints();
     unsigned int sum_a_z_i = pProjectedAreasMatrix->GetSumPerPolygon(pPolygonI);

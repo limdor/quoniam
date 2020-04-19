@@ -56,6 +56,7 @@ public:
 
     /// Set the information of connectivities between vertices of the geometry
     void SetIndexsData(size_t pSize, const unsigned int *pData);
+    void SetIndexsData(size_t pSize, const size_t *pData);
     /// Get the information of connectivities between vertices of the geometry
     const std::vector<unsigned int>& GetIndexsData() const;
 

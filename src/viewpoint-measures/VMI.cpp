@@ -16,11 +16,11 @@ VMI::VMI(const QString &pName): Measure(pName, false)
 
 void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
 {
-    QVector< int > elementsOutOfDomain;
+    std::vector< size_t > elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
-    int numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    int numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
+    size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
+    size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
     mValues.resize( numberOfViewpoints );
     std::fill(mValues.begin(), mValues.end(), 0.0f);
@@ -31,7 +31,7 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         unsigned int a_t = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
         if( a_t != 0 )
         {
-            for( int currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
+            for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
             {
                 unsigned int a_z = projectedAreasMatrix->GetValue(currentViewpoint, currentPolygon);
                 unsigned int sum_a_z = projectedAreasMatrix->GetSumPerPolygon(currentPolygon);
@@ -54,7 +54,7 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
         }
     }
     //The maximum value is assigned to the viewpoints out of the domain (viewpoints that don't see anything)
-    for( int currentElement = 0; currentElement < elementsOutOfDomain.size(); currentElement++ )
+    for( size_t currentElement = 0; currentElement < elementsOutOfDomain.size(); currentElement++ )
     {
         mValues[elementsOutOfDomain.at(currentElement)] = maxValue;
     }
