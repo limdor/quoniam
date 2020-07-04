@@ -38,6 +38,22 @@ void Debug::SetConsole(QPlainTextEdit * pConsole)
 
 }
 
+std::string iso_8859_1_to_utf8(std::string const &str)
+{
+    std::string strOut;
+    for (unsigned char const ch : str)
+    {
+        if (ch < 0x80) {
+            strOut.push_back(ch);
+        }
+        else {
+            strOut.push_back(0xc0 | ch >> 6);
+            strOut.push_back(0x80 | (ch & 0x3f));
+        }
+    }
+    return strOut;
+}
+
 bool Debug::CheckGLError(const char *pFile, int pLine)
 {
     auto const errors = ExtractGlErrorsFromDriver();
@@ -45,7 +61,7 @@ bool Debug::CheckGLError(const char *pFile, int pLine)
     for (auto const &error : errors)
     {
         auto const &[error_code, optional_string] = error;
-        QString const optional_message{optional_string ? QString::fromStdString(*optional_string) : "no message available"};
+        QString const optional_message{optional_string ? QString::fromStdString(iso_8859_1_to_utf8(*optional_string)) : "no message available"};
         Debug::Error(QString("GL Error #%1(%2) in file %3 at line: %4").arg(error_code).arg(optional_message).arg(pFile).arg(pLine));
     }
     return retCode;
