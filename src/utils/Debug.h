@@ -1,7 +1,14 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
+#include <glew.h>
+
 #include <QtWidgets/QPlainTextEdit>
+
+#include <vector>
+#include <optional>
+#include <tuple>
+#include <string>
 
 /// Class to output log, warning and error messages through a console
 class Debug
@@ -16,6 +23,8 @@ public:
 
     /// Set the console
     static void SetConsole(QPlainTextEdit * pConsole);
+
+    static std::vector<std::tuple<GLenum, std::optional<std::string>>> ExtractGlErrorsFromDriver();
 
     /// If there are errors return true and show them using Debug::Error
     static bool CheckGLError(const char *pFile, int pLine);

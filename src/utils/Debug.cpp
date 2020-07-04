@@ -38,23 +38,48 @@ void Debug::SetConsole(QPlainTextEdit * pConsole)
 
 }
 
+std::string iso_8859_1_to_utf8(std::string const &str)
+{
+    std::string strOut;
+    for (unsigned char const ch : str)
+    {
+        if (ch < 0x80) {
+            strOut.push_back(ch);
+        }
+        else {
+            strOut.push_back(0xc0 | ch >> 6);
+            strOut.push_back(0x80 | (ch & 0x3f));
+        }
+    }
+    return strOut;
+}
+
 bool Debug::CheckGLError(const char *pFile, int pLine)
 {
-    bool retCode = false;
+    auto const errors = ExtractGlErrorsFromDriver();
+    bool const retCode = !errors.empty();
+    for (auto const &error : errors)
+    {
+        auto const &[error_code, optional_string] = error;
+        QString const optional_message{optional_string ? QString::fromStdString(iso_8859_1_to_utf8(*optional_string)) : "no message available"};
+        Debug::Error(QString("GL Error #%1(%2) in file %3 at line: %4").arg(error_code).arg(optional_message).arg(pFile).arg(pLine));
+    }
+    return retCode;
+}
+
+std::vector<std::tuple<GLenum, std::optional<std::string>>> Debug::ExtractGlErrorsFromDriver()
+{
+    std::vector<std::tuple<GLenum, std::optional<std::string>>> errors;
     GLenum glErr = glGetError();
     while (glErr != GL_NO_ERROR)
     {
-        const GLubyte* sError = gluErrorString(glErr);
-
-        if (sError)
-            Debug::Error( QString("GL Error #%1(%2) in file %3 at line: %4").arg(glErr).arg( QString((const char*)sError) ).arg(pFile).arg(pLine) );
-        else
-            Debug::Error( QString("GL Error #%1(no message available) in file %2 at line: %3").arg(glErr).arg(pFile).arg(pLine) );
-
-        retCode = true;
+        GLubyte const *const sError = gluErrorString(glErr);
+        auto error_message = sError ? std::optional<std::string>{reinterpret_cast<char const *>(sError)} : std::optional<std::string>{};
+        auto element = std::make_tuple(glErr, std::move(error_message));
+        errors.push_back(std::move(element));
         glErr = glGetError();
     }
-    return retCode;
+    return errors;
 }
 
 void Debug::ConsoleOutput(QtMsgType pType, const QMessageLogContext &, const QString &pMessage)

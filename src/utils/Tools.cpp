@@ -75,11 +75,10 @@ std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
 
     std::sort(toSort.begin(), toSort.end(), pairCompare<T>);
 
-    std::vector<size_t> result(size);
-    for (size_t i = 0; i < size; i++)
-    {
-        result[i] = toSort.at(i).first;
-    }
+    std::vector<size_t> result;
+    result.reserve(size);
+    std::transform(toSort.cbegin(), toSort.cend(), std::back_inserter(result),
+                   [](std::pair<size_t, T> const &pair) -> size_t { return pair.first; });
 
     return result;
 }
