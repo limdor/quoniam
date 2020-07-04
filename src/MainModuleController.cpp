@@ -686,7 +686,7 @@ void MainModuleController::on_alphaSpinBox_valueChanged(double pValue)
     on_measureInViewpointSphereList_currentIndexChanged(mUi->measureInViewpointSphereList->currentIndex());
 }
 
-void MainModuleController::SliderChanged(size_t pMeasure, size_t pValue)
+void MainModuleController::SliderChanged(int pMeasure, int pValue)
 {
     if(mUpdateView)
     {

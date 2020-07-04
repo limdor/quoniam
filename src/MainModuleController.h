@@ -92,7 +92,7 @@ private slots:
     void on_alphaSlider_valueChanged(int pValue);
     void on_alphaSpinBox_valueChanged(double pValue);
 
-    void SliderChanged(size_t pMeasure, size_t pValue);
+    void SliderChanged(int pMeasure, int pValue);
 
     void on_loadViewpointsSphereButton_clicked();
 
