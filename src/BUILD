@@ -12,6 +12,7 @@ qt_cc_library(
     name = "dutagaci_dialog",
     srcs = ["DutagaciDialog.cpp"],
     hdrs = ["DutagaciDialog.h"],
+    copts = ["/std:c++latest"],
     deps = [
         ":dutagaci_view_ui",
         ":quoniam_lib",
@@ -30,6 +31,7 @@ qt_cc_library(
     name = "main_module_controller",
     srcs = ["MainModuleController.cpp"],
     hdrs = ["MainModuleController.h"],
+    copts = ["/std:c++latest"],
     deps = [
         ":dutagaci_dialog",
         ":main_module_ui",
@@ -49,6 +51,7 @@ qt_cc_library(
     name = "main_window",
     srcs = ["MainWindow.cpp"],
     hdrs = ["MainWindow.h"],
+    copts = ["/std:c++latest"],
     deps = [
         ":dutagaci_dialog",
         ":main_module_controller",
@@ -82,6 +85,7 @@ qt_cc_library(
 cc_binary(
     name = "quoniam",
     srcs = ["Main.cpp"],
+    copts = ["/std:c++latest"],
     deps = [
         ":main_module_controller",
         ":main_window",
@@ -158,6 +162,7 @@ cc_library(
         "viewpoint-measures/VisibilityRatio.cpp",
         "viewpoint-measures/VisibilityRatio.h",
     ],
+    copts = ["/std:c++latest"],
     defines = ['APP_VERSION=\\"1.0.1\\"'],
     includes = [
         ".",

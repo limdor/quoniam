@@ -10,6 +10,7 @@ cc_library(
         "Debug.h",
         "Tools.h",
     ],
+    copts = ["/std:c++latest"],
     includes = ["."],
     linkopts = [
         "-DEFAULTLIB:glu32.lib",
