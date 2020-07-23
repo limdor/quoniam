@@ -67,7 +67,7 @@ void GLCanvas::AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh)
 QString GLCanvas::SaveScreenshot( const QString &pFileName )
 {
     makeCurrent();
-    const QString completePath = Tools::GetProgramPath();
+    const QString completePath = QString::fromStdString(Tools::GetProgramPath().string());
     const QImage image = grabFrameBuffer();
     if(!image.save( completePath + pFileName ))
     {
