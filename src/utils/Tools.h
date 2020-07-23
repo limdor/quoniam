@@ -1,13 +1,11 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-//Qt includes
-#include <QtCore/QString>
-
 //Dependency includes
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
+#include <filesystem>
 #include <vector>
 
 class Tools
@@ -28,7 +26,7 @@ public:
 
     static float TriangleArea(const glm::vec3& pA, const glm::vec3& pB, const glm::vec3& pC);
 
-    static QString GetProgramPath();
+    static std::filesystem::path GetProgramPath();
 private:    
     static glm::vec4 ConvertNormalizedFloatToColor(float pValue, bool pInverted);
 };

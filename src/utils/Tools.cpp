@@ -2,7 +2,7 @@
 #include "Tools.h"
 
 //Qt includes
-#include <QtCore/QDir>
+#include <QtCore/QtGlobal>
 
 //Dependency includes
 #include "glm/common.hpp"
@@ -12,6 +12,8 @@
 #include "Debug.h"
 
 #include <algorithm>
+#include <cstdlib>
+#include <filesystem>
 
 template<typename T>
 bool pairCompareX(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
@@ -316,26 +318,28 @@ float Tools::TriangleArea(const glm::vec3 &pA, const glm::vec3 &pB, const glm::v
     return glm::length(v) / 2.0f;
 }
 
-QString Tools::GetProgramPath()
+std::filesystem::path Tools::GetProgramPath()
 {
-    QString picturesPath, completePath;
-
-    QString programFolder = QString("Quoniam");
 #if defined(Q_OS_WIN32)
-    picturesPath = QString(qgetenv("USERPROFILE")) + QString("\\Pictures");
-    completePath = picturesPath + "\\" + programFolder + "\\";
+    std::string const home_environment_variable{"USERPROFILE"};
 #elif defined(Q_OS_MAC)
-    picturesPath = QString(qgetenv("HOME")) + QString("/Pictures");
-    completePath = picturesPath + "/" + programFolder + "/";
+    std::string const home_environment_variable{"HOME"};
 #else
+    std::string const home_environment_variable{"USERPROFILE"};
     Debug::Warning("I'm on a unidentified operating system!");
 #endif
-    if (!QDir(completePath).exists())
+    std::filesystem::path const home_path{std::getenv(home_environment_variable.c_str())};
+    std::filesystem::path const pictures_path = home_path / "Pictures";
+    std::string const program_folder{"Quoniam"}; //TODO: Change to constexpr once supported by the compiler
+    std::filesystem::path const complete_path = pictures_path / program_folder;
+
+    if (!std::filesystem::is_directory(complete_path))
     {
-        if (!QDir(picturesPath).mkdir(programFolder))
+        if (!std::filesystem::create_directories(complete_path))
         {
-            Debug::Warning(QString("Impossible to create the %1 folder!").arg(programFolder));
+            Debug::Warning(QString("Impossible to create the %1 folder!").arg(QString::fromStdString(complete_path.string())));
         }
     }
-    return completePath;
+
+    return complete_path;
 }
