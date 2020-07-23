@@ -19,17 +19,7 @@ build_script:
   - npx @bazel/bazelisk version
   - npx @bazel/bazelisk build //...
   - npx @bazel/bazelisk test //...
-  - qmake Quoniam.pro
-  - jom
-
-after_build:
-  - set ARTIFACT_NAME=%APPVEYOR_REPO_BRANCH%
-  - if defined APPVEYOR_REPO_TAG_NAME set ARTIFACT_NAME=%APPVEYOR_REPO_TAG_NAME%
-  - 7z a quoniam-%ARTIFACT_NAME%.zip .\bin\*
 
 artifacts:
-  - path: quoniam-$(ARTIFACT_NAME).zip
-    name: pro build
-
   - path: .\bazel-bin\src\quoniam-pkg.tar.gz
     name: bazel build
