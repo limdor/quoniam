@@ -6,7 +6,7 @@ cc_test(
     srcs = ["tst_Tools.cpp"],
     copts = ["/std:c++latest"],
     deps = [
-        "//dependencies/catch2",
         "//src/utils",
+        "@catch2",
     ],
 )

@@ -98,9 +98,9 @@ cc_binary(
 
 pkg_tar(
     name = "quoniam-pkg",
-    include_runfiles = True,
     srcs = [":quoniam"],
     extension = "tar.gz",
+    include_runfiles = True,
     mode = "0755",
     strip_prefix = "/src",
     deps = ["//shaders:shaders-pkg"],
@@ -175,10 +175,10 @@ cc_library(
     deps = [
         ":main_window_ui",
         "//dependencies/glew",
-        "//dependencies/glm",
         "//dependencies/opencv",
         "//src/core",
         "//src/utils",
+        "@glm",
         "@qt//:qt_core",
         "@qt//:qt_gui",
         "@qt//:qt_opengl",

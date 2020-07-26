@@ -6,6 +6,6 @@ cc_test(
     srcs = ["main.cpp"],
     deps = [
         "//dependencies/assimp",
-        "//dependencies/catch2",
+        "@catch2",
     ],
 )

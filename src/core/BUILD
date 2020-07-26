@@ -67,9 +67,9 @@ cc_library(
     deps = [
         "//dependencies/assimp",
         "//dependencies/glew",
-        "//dependencies/glm",
         "//dependencies/miniball",
         "//src/utils",
+        "@glm",
         "@qt//:qt_core",
         "@qt//:qt_widgets",
     ],

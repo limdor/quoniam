@@ -5,7 +5,7 @@ cc_test(
     size = "small",
     srcs = ["main.cpp"],
     deps = [
+        "@catch2",
         "@qt//:qt_core",
-        "//dependencies/catch2",
     ],
 )
