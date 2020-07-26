@@ -19,9 +19,9 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "//dependencies/glew",
-        "//dependencies/glm",
+        "@glm",
         "@qt//:qt_core",
-        "@qt//:qt_widgets",
         "@qt//:qt_gui",
+        "@qt//:qt_widgets",
     ],
 )

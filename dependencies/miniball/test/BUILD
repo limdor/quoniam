@@ -5,7 +5,7 @@ cc_test(
     size = "small",
     srcs = ["main.cpp"],
     deps = [
-        "//dependencies/catch2",
         "//dependencies/miniball",
+        "@catch2",
     ],
 )
