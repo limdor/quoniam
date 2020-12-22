@@ -6,9 +6,9 @@ load_third_party_libraries()
 
 git_repository(
     name = "bazel_rules_qt",
-    commit = "0a5bd81d40fd3d6b339f76476a3795b785e5b28f",
+    commit = "716d61bfdcee9fc2de0f641c087e28584e8fddde",
     remote = "https://github.com/limdor/bazel_rules_qt.git",
-    shallow_since = "1585936025 +0200",
+    shallow_since = "1608662603 +0100",
 )
 
 new_local_repository(
