@@ -1,19 +1,18 @@
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//third_party:third_party.bzl", "load_third_party_libraries")
 
 load_third_party_libraries()
 
-git_repository(
-    name = "bazel_rules_qt",
-    commit = "716d61bfdcee9fc2de0f641c087e28584e8fddde",
-    remote = "https://github.com/limdor/bazel_rules_qt.git",
-    shallow_since = "1608662603 +0100",
+http_archive(
+    name = "com_limdor_rules_qt",
+    sha256 = "94e7b9c77620433185688a418c87efc18524fcd3a22b83d520942fd62e6983d6",
+    strip_prefix = "bazel_rules_qt-0.1.0",
+    url = "https://github.com/limdor/bazel_rules_qt/archive/v0.1.0.tar.gz",
 )
 
 new_local_repository(
     name = "qt",
-    build_file = "@bazel_rules_qt//:qt.BUILD",
+    build_file = "@com_limdor_rules_qt//:qt.BUILD",
     path = "C:\\Qt\\5.9.9\\msvc2017_64\\",
 )
 

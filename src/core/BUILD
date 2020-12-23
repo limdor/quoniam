@@ -1,5 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("@bazel_rules_qt//:qt.bzl", "qt_cc_library")
+load("@com_limdor_rules_qt//:qt.bzl", "qt_cc_library")
 
 qt_cc_library(
     name = "gl_canvas",
