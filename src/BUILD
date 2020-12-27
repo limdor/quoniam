@@ -174,10 +174,10 @@ cc_library(
     ],
     deps = [
         ":main_window_ui",
-        "//dependencies/glew",
         "//dependencies/opencv",
         "//src/core",
         "//src/utils",
+        "@glew",
         "@glm",
         "@qt//:qt_core",
         "@qt//:qt_gui",
