@@ -5,7 +5,7 @@ cc_test(
     size = "small",
     srcs = ["main.cpp"],
     deps = [
-        "//dependencies/opencv",
+        "//third_party/miniball",
         "@catch2",
     ],
 )
