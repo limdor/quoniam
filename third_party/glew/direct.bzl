@@ -1,6 +1,8 @@
 """
 glew: The OpenGL Extension Wrangler Library is a simple tool that helps C/C++ developers
 initialize extensions and write portable applications.
+
+http://glew.sourceforge.net/
 """
 
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
