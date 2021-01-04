@@ -23,10 +23,10 @@ If you find this framework useful, please considering citing the paper:
 
 ## Quoniam contains the following third party libraries:
 
-* [Assimp](http://assimp.sourceforge.net/main_downloads.html): 3.3.1                   
-* [glew](http://glew.sourceforge.net/): 1.12.0                  
-* [glm](http://glm.g-truc.net/download.html): 0.9.6.1                  
-* [Miniball](http://www.inf.ethz.ch/personal/gaertner/miniball.html): 2.0                 
-* [OpenCV](http://opencv.org/): 3.3.1
-* [Qt](http://qt.nokia.com/products): 5.9.9                     
-* [Visual Leak Detector](https://vld.codeplex.com/): 2.3
+* [Assimp](http://assimp.sourceforge.net/main_downloads.html)
+* [glew](http://glew.sourceforge.net/)
+* [glm](http://glm.g-truc.net/download.html)
+* [Miniball](http://www.inf.ethz.ch/personal/gaertner/miniball.html)
+* [OpenCV](http://opencv.org/)
+* [Qt](http://qt.nokia.com/products)
+* [Visual Leak Detector](https://vld.codeplex.com/)

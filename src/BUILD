@@ -174,9 +174,9 @@ cc_library(
     ],
     deps = [
         ":main_window_ui",
-        "//dependencies/opencv",
         "//src/core",
         "//src/utils",
+        "//third_party/opencv",
         "@glew",
         "@glm",
         "@qt//:qt_core",

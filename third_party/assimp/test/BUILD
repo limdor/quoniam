@@ -5,7 +5,7 @@ cc_test(
     size = "small",
     srcs = ["main.cpp"],
     deps = [
-        "//dependencies/assimp",
+        "//third_party/assimp",
         "@catch2",
     ],
 )

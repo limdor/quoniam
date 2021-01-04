@@ -1,0 +1,17 @@
+-------------
+- Libraries -
+-------------
+Assimp: 3.3.1
+Miniball: 2.0
+Qt: 5.9.9
+OpenCV: 3.3.1
+Visual Leak Detector: 2.3
+
+---------
+- Tools -
+---------
+Doxygen: 1.8.7                http://www.stack.nl/~dimitri/doxygen/index.html
+Inno Setup (a): 5.5.5         http://www.jrsoftware.org/isinfo.php
+QtCreator: 3.1.2              http://qt-project.org/downloads#qt-creator
+Visual Paradigm for UML: 11.1 http://www.visual-paradigm.com/
+Cppcheck: 1.65                http://cppcheck.sourceforge.net/
