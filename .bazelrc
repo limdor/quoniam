@@ -1,1 +1,10 @@
-build --verbose_failures --all_incompatible_changes --incompatible_disallow_struct_provider_syntax=false
+#############################
+## Terminal output options ##
+#############################
+
+# If a command fails, print out the full command line
+build --verbose_failures
+
+# Display the subcommands used to generate each target
+# Uncomment to see the effect, if you have it allways enabled it will increase quite a log the logs
+# build --subcommands=pretty_print
