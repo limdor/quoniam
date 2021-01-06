@@ -1,15 +1,9 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
-    name = "utils",
-    srcs = [
-        "Debug.cpp",
-        "Tools.cpp",
-    ],
-    hdrs = [
-        "Debug.h",
-        "Tools.h",
-    ],
+    name = "debug",
+    srcs = ["Debug.cpp"],
+    hdrs = ["Debug.h"],
     copts = ["/std:c++latest"],
     includes = ["."],
     linkopts = [
@@ -19,9 +13,29 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@glew",
+        "@qt//:qt_widgets",
+    ],
+)
+
+cc_library(
+    name = "tools",
+    srcs = ["Tools.cpp"],
+    hdrs = ["Tools.h"],
+    copts = ["/std:c++latest"],
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":debug",
         "@glm",
         "@qt//:qt_core",
-        "@qt//:qt_gui",
-        "@qt//:qt_widgets",
+    ],
+)
+
+cc_library(
+    name = "utils",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":tools",
+        ":debug",
     ],
 )
