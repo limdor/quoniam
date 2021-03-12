@@ -1,5 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
-load("@com_limdor_rules_qt//:qt.bzl", "qt_cc_library", "qt_ui_library")
+load("@com_justbuchanan_rules_qt//:qt.bzl", "qt_cc_library", "qt_ui_library")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 qt_ui_library(
