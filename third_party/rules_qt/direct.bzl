@@ -8,8 +8,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 def load_rules_qt():
     maybe(
         http_archive,
-        name = "com_limdor_rules_qt",
-        sha256 = "94e7b9c77620433185688a418c87efc18524fcd3a22b83d520942fd62e6983d6",
-        strip_prefix = "bazel_rules_qt-0.1.0",
-        url = "https://github.com/limdor/bazel_rules_qt/archive/v0.1.0.tar.gz",
+        name = "com_justbuchanan_rules_qt",
+        sha256 = "45255953b2a66119cb0497f2fe70343f32c5cabc9fdd3af7d8caf796aeee1690",
+        strip_prefix = "bazel_rules_qt-dfd8ea524d6dd28881c9f2ae0acc8637b28d4eed",
+        url = "https://github.com/justbuchanan/bazel_rules_qt/archive/dfd8ea524d6dd28881c9f2ae0acc8637b28d4eed.zip",
     )
