@@ -8,3 +8,11 @@ build --verbose_failures
 # Display the subcommands used to generate each target
 # Uncomment to see the effect, if you have it allways enabled it will increase quite a log the logs
 # build --subcommands=pretty_print
+
+####################################################
+## Config option for Visual Studio 2019 toolchain ##
+####################################################
+
+build:vs2019 --crosstool_top=//toolchain:vs2019_suite
+build:vs2019 --cpu=x64_windows
+build:vs2019 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
