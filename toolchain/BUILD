@@ -33,22 +33,17 @@ _BUILD_TOOLS_INSTALL_PATH = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2
 # CI
 _MSVC_VERSION = "14.28.29910"
 # Local
-#_MSVC_VERSION = "14.24.28314"
+#_MSVC_VERSION = "14.28.29333"
 
-# CI
 _WINDOWS_10_SDK_VERSION = "10.0.19041.0"
-# Local
-#_WINDOWS_10_SDK_VERSION = "10.0.10240.0"
 
 _MSVC_INSTALL_PATH = "{}VC\\Tools\\MSVC\\{}\\".format(_BUILD_TOOLS_INSTALL_PATH, _MSVC_VERSION)
 
 _BUILTIN_INCLUDE_DIRECTORIES = [
     "{}include".format(_MSVC_INSTALL_PATH),
     "C:\\Program Files (x86)\\Windows Kits\\10\\include\\{}\\ucrt".format(_WINDOWS_10_SDK_VERSION),
-    "C:\\Program Files (x86)\\Windows Kits\\8.1\\include\\\\shared",
-    "C:\\Program Files (x86)\\Windows Kits\\8.1\\include\\\\um",
-    "C:\\Program Files (x86)\\Windows Kits\\8.1\\include\\\\winrt",
-    "C:\\Program Files (x86)\\Windows Kits\\8.1\\include\\\\cppwinrt",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\include\\{}\\shared".format(_WINDOWS_10_SDK_VERSION),
+    "C:\\Program Files (x86)\\Windows Kits\\10\\include\\{}\\um".format(_WINDOWS_10_SDK_VERSION),
 ]
 
 cc_toolchain_config(
@@ -68,14 +63,12 @@ cc_toolchain_config(
     msvc_env_lib = semicolon_separated([
         "{}lib\\x64".format(_MSVC_INSTALL_PATH),
         "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\{}\\ucrt\\x64".format(_WINDOWS_10_SDK_VERSION),
-        "C:\\Program Files (x86)\\Windows Kits\\8.1\\lib\\winv6.3\\um\\x64",
+        "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\{}\\um\\x64".format(_WINDOWS_10_SDK_VERSION),
     ]),
     msvc_env_path = semicolon_separated([
         "{}bin\\HostX64\\x64".format(_MSVC_INSTALL_PATH),
-        "{}MSBuild\\Current\\bin\\Roslyn".format(_BUILD_TOOLS_INSTALL_PATH),
-        "C:\\Program Files (x86)\\Windows Kits\\8.1\\bin\\x64",
+        "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\{}\\x64".format(_WINDOWS_10_SDK_VERSION),
         "{}MSBuild\\Current\\Bin".format(_BUILD_TOOLS_INSTALL_PATH),
-        "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319",
         "{}Common7\\IDE\\".format(_BUILD_TOOLS_INSTALL_PATH),
         "{}Common7\\Tools\\".format(_BUILD_TOOLS_INSTALL_PATH),
         "C:\\WINDOWS\\system32",
