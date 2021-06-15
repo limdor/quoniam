@@ -7,7 +7,7 @@ build --verbose_failures
 
 # Display the subcommands used to generate each target
 # Uncomment to see the effect, if you have it allways enabled it will increase quite a log the logs
-# build --subcommands=pretty_print
+build --subcommands=pretty_print
 
 ###################################
 ## Config options for toolchains ##
