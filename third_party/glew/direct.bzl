@@ -12,8 +12,8 @@ def load_glew():
     maybe(
         http_archive,
         name = "glew",
-        url = "https://iweb.dl.sourceforge.net/project/glew/glew/1.12.0/glew-1.12.0-win32.zip",
-        sha256 = "b222ce3622661dd5c2ecef6e8f3832db7a2d6e3e46723743a22befd88ff37a7a",
-        strip_prefix = "glew-1.12.0",
+        url = "https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip",
+        sha256 = "ea6b14a1c6c968d0034e61ff6cb242cff2ce0ede79267a0f2b47b1b0b652c164",
+        strip_prefix = "glew-2.2.0",
         build_file = "//third_party/glew:glew.BUILD",
     )
