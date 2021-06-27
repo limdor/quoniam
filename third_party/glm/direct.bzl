@@ -12,8 +12,8 @@ def load_glm():
     maybe(
         http_archive,
         name = "glm",
-        url = "https://github.com/g-truc/glm/archive/0.9.6.1.zip",
-        sha256 = "e555da763d92114c00171db9a826b33001f0f0bc44d088097a7066b40e3ba8e3",
-        strip_prefix = "glm-0.9.6.1",
+        url = "https://github.com/g-truc/glm/releases/download/0.9.9.8/glm-0.9.9.8.zip",
+        sha256 = "37e2a3d62ea3322e43593c34bae29f57e3e251ea89f4067506c94043769ade4c",
+        strip_prefix = "glm",
         build_file = "//third_party/glm:glm.BUILD",
     )
