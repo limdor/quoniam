@@ -13,13 +13,9 @@ public:
     GLSLShader(const QString& pSourceFile, GLenum pType);
     ~GLSLShader();
 
-    /// Return if the shader has had errors during compilation
-    bool HasErrors() const;
-    /// Get the compilation log
-    const QString& GetLog() const;
-    /// Show the compilation log
-    void ShowLog() const;
-    /// Get the shader id
+    bool HasCompilationErrors() const;
+    const QString& GetCompilationLog() const;
+    void ShowCompilationLog() const;
     GLuint GetId() const;
 
 private:

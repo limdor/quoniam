@@ -76,17 +76,17 @@ GLSLShader::~GLSLShader()
     glDeleteShader(mGLId);
 }
 
-bool GLSLShader::HasErrors() const
+bool GLSLShader::HasCompilationErrors() const
 {
     return mHasErrors;
 }
 
-const QString& GLSLShader::GetLog() const
+const QString& GLSLShader::GetCompilationLog() const
 {
     return mLog;
 }
 
-void GLSLShader::ShowLog() const
+void GLSLShader::ShowCompilationLog() const
 {
     if(mHasErrors)
     {
