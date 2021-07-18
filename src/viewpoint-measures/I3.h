@@ -8,7 +8,7 @@
 class I3 : public Measure
 {
 public:
-    explicit I3(const QString &pName);
+    explicit I3(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

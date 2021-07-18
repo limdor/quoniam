@@ -8,7 +8,7 @@
 class SilhouetteEntropy : public Measure
 {
 public:
-    explicit SilhouetteEntropy(const QString &pName);
+    explicit SilhouetteEntropy(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

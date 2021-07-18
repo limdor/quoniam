@@ -1,23 +1,21 @@
 #ifndef MEASURE_H
 #define MEASURE_H
 
-//Qt includes
-#include <QtCore/QString>
-
 //Project includes
 #include "SceneInformationBuilder.h"
 
+#include <string>
 #include <vector>
 
 /// Parent class for all the measures
 class Measure
 {
 public:
-    Measure(const QString& pName, bool pMaximumBest);
+    Measure(const std::string& pName, bool pMaximumBest);
     virtual ~Measure() = default;
 
     /// Get the name of the measure
-    const QString& GetName() const;
+    const std::string& GetName() const;
     /// Get a list of the values of the measures for every viewpoint
     std::vector<float> GetValues() const;
     /// Get the value of the measure given a viewpoint
@@ -34,7 +32,7 @@ public:
 
 protected:
     /// Name of the measure
-    const QString mName;
+    const std::string mName;
     /// Wheter a high value is a good measure or not
     const bool mMaximumBest;
 

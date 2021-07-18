@@ -7,7 +7,7 @@
 //Project includes
 #include "Tools.h"
 
-SilhouetteEntropy::SilhouetteEntropy(const QString &pName): Measure(pName, true)
+SilhouetteEntropy::SilhouetteEntropy(const std::string &pName): Measure(pName, true)
 {
 
 }

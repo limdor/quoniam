@@ -8,7 +8,7 @@
 class ProjectedArea : public Measure
 {
 public:
-    explicit ProjectedArea(const QString &pName);
+    explicit ProjectedArea(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

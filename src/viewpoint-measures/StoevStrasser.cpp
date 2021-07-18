@@ -7,7 +7,7 @@
 //Project includes
 #include "Tools.h"
 
-StoevStrasser::StoevStrasser(const QString &pName): Measure(pName, true)
+StoevStrasser::StoevStrasser(const std::string &pName): Measure(pName, true)
 {
 
 }

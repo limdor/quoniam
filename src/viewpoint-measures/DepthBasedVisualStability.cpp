@@ -12,7 +12,7 @@
 #include "Debug.h"
 #include "Tools.h"
 
-DepthBasedVisualStability::DepthBasedVisualStability(const QString &pName): Measure(pName, true)
+DepthBasedVisualStability::DepthBasedVisualStability(const std::string &pName): Measure(pName, true)
 {
 
 }

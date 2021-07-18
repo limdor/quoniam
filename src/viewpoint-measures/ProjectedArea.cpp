@@ -4,7 +4,7 @@
 //Project includes
 #include "Tools.h"
 
-ProjectedArea::ProjectedArea(const QString &pName): Measure(pName, true)
+ProjectedArea::ProjectedArea(const std::string &pName): Measure(pName, true)
 {
 
 }

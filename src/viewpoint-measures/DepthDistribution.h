@@ -8,7 +8,7 @@
 class DepthDistribution : public Measure
 {
 public:
-    explicit DepthDistribution(const QString &pName);
+    explicit DepthDistribution(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

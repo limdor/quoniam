@@ -8,7 +8,7 @@
 class StoevStrasser : public Measure
 {
 public:
-    explicit StoevStrasser(const QString &pName);
+    explicit StoevStrasser(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

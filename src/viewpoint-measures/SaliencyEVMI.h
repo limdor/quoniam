@@ -10,7 +10,7 @@
 class SaliencyEVMI : public Measure
 {
 public:
-    explicit SaliencyEVMI(const QString &pName);
+    explicit SaliencyEVMI(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

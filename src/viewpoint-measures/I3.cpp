@@ -10,7 +10,7 @@
 //Project includes
 #include "Tools.h"
 
-I3::I3(const QString &pName): Measure(pName, true)
+I3::I3(const std::string &pName): Measure(pName, true)
 {
 
 }

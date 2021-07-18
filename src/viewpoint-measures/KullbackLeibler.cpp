@@ -7,7 +7,7 @@
 //Project includes
 #include "Tools.h"
 
-KullbackLeibler::KullbackLeibler(const QString& pName): Measure(pName, false)
+KullbackLeibler::KullbackLeibler(const std::string& pName): Measure(pName, false)
 {
 
 }

@@ -8,7 +8,7 @@
 class SilhouetteLength : public Measure
 {
 public:
-    explicit SilhouetteLength(const QString &pName);
+    explicit SilhouetteLength(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

@@ -8,7 +8,7 @@
 #include "Debug.h"
 #include "Tools.h"
 
-SaliencyEVMI::SaliencyEVMI(const QString& pName): Measure(pName, false)
+SaliencyEVMI::SaliencyEVMI(const std::string& pName): Measure(pName, false)
 {
 
 }

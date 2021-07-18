@@ -4,7 +4,7 @@
 //Project includes
 #include "Tools.h"
 
-HeuristicMeasure::HeuristicMeasure(const QString& pName): Measure(pName, true)
+HeuristicMeasure::HeuristicMeasure(const std::string& pName): Measure(pName, true)
 {
 
 }

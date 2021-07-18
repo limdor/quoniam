@@ -8,7 +8,7 @@
 class ViewpointEntropy : public Measure
 {
 public:
-    explicit ViewpointEntropy(const QString &pName);
+    explicit ViewpointEntropy(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

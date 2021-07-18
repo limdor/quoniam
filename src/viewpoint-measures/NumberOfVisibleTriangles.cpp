@@ -4,7 +4,7 @@
 //Project includes
 #include "Tools.h"
 
-NumberOfVisibleTriangles::NumberOfVisibleTriangles(const QString& pName): Measure(pName, true)
+NumberOfVisibleTriangles::NumberOfVisibleTriangles(const std::string& pName): Measure(pName, true)
 {
 
 }

@@ -8,7 +8,7 @@
 class CurvatureEntropy : public Measure
 {
 public:
-    explicit CurvatureEntropy(const QString &pName);
+    explicit CurvatureEntropy(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

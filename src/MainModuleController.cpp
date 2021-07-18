@@ -127,7 +127,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
 
     for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
-        mUi->measureInViewpointSphereList->addItem( mViewpointMeasures.at(i)->GetName() );
+        mUi->measureInViewpointSphereList->addItem( QString::fromStdString(mViewpointMeasures.at(i)->GetName()) );
     }
 
     QHBoxLayout* horizontalLayout = new QHBoxLayout();
@@ -148,7 +148,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     verticalLayout->addWidget(minMaxWidget);
     for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
-        QString text = mViewpointMeasures.at(i)->GetName();
+        std::string text = mViewpointMeasures.at(i)->GetName();
         if(mViewpointMeasures.at(i)->IsMaximumBest())
         {
             text += "->";
@@ -157,7 +157,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
         {
             text += "<-";
         }
-        QLabel* textNameLabel = new QLabel(text);
+        QLabel* textNameLabel = new QLabel(QString::fromStdString(text));
         textNameLabel->setAlignment(Qt::AlignHCenter);
         verticalLayout->addWidget(textNameLabel);
         ViewpointMeasureSlider* slider = new ViewpointMeasureSlider(static_cast<int>(i), Qt::Horizontal);
@@ -374,7 +374,7 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     {
         if(!mViewpointMeasures.at(i)->Computed())
         {
-            progress.setLabelText(QString("Computing %1...").arg(mViewpointMeasures.at(i)->GetName()));
+            progress.setLabelText(QString("Computing %1...").arg(QString::fromStdString(mViewpointMeasures.at(i)->GetName())));
             mViewpointMeasures.at(i)->Compute(mSceneInformationBuilder);
         }
         progress.setValue(i + 1);
@@ -440,7 +440,7 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
             stream.writeAttribute("name", mSphereOfViewpoints->GetViewpoint(i)->mName);
             for( int j = 0; j < mViewpointMeasures.size(); j++ )
             {
-                QString name = mViewpointMeasures.at(j)->GetName();
+                QString name = QString::fromStdString(mViewpointMeasures.at(j)->GetName());
                 name = name.replace(" ","_");
                 name = name.replace("(","_");
                 name = name.replace(")","");
@@ -500,7 +500,7 @@ void MainModuleController::ShowViewpointInformation(size_t pViewpoint)
     Debug::Log("Viewpoint quality measures:");
     for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
-        Debug::Log( "  " + mViewpointMeasures.at(i)->GetName().toStdString() + ": " + std::to_string(mViewpointMeasures.at(i)->GetValue(pViewpoint)) );
+        Debug::Log( "  " + mViewpointMeasures.at(i)->GetName() + ": " + std::to_string(mViewpointMeasures.at(i)->GetValue(pViewpoint)) );
     }
 }
 
@@ -633,7 +633,7 @@ void MainModuleController::RunDutagaciBenchmark()
         }
         for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
         {
-            QString fileName = QString{mViewpointMeasures.at(i)->GetName()}.replace("|","_").replace("/","_") + ".txt";
+            QString fileName = QString::fromStdString(mViewpointMeasures.at(i)->GetName()).replace("|","_").replace("/","_") + ".txt";
             QFile file(fileName);
             if( file.open(QFile::WriteOnly) )
             {
@@ -786,7 +786,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
     for( size_t measureIndex = 0; measureIndex < numberOfMeasures; measureIndex++ )
     {
         Measure* measure = mViewpointMeasures.at(measureIndex);
-        QString measureName = measure->GetName();
+        QString measureName = QString::fromStdString(measure->GetName());
         measureName = measureName.replace(" ","_");
         measureName = measureName.replace("(","_");
         measureName = measureName.replace(")","");

@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-VisibilityRatio::VisibilityRatio(const QString& pName): Measure(pName, true)
+VisibilityRatio::VisibilityRatio(const std::string& pName): Measure(pName, true)
 {
 
 }

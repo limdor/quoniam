@@ -8,7 +8,7 @@
 class HeuristicMeasure : public Measure
 {
 public:
-    explicit HeuristicMeasure(const QString &pName);
+    explicit HeuristicMeasure(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

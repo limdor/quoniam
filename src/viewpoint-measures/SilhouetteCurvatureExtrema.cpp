@@ -8,7 +8,7 @@
 //Project includes
 #include "Tools.h"
 
-SilhouetteCurvatureExtrema::SilhouetteCurvatureExtrema(const QString &pName): Measure(pName, true)
+SilhouetteCurvatureExtrema::SilhouetteCurvatureExtrema(const std::string &pName): Measure(pName, true)
 {
 
 }

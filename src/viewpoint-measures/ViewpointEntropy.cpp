@@ -7,7 +7,7 @@
 //Project includes
 #include "Tools.h"
 
-ViewpointEntropy::ViewpointEntropy(const QString& pName): Measure(pName, true)
+ViewpointEntropy::ViewpointEntropy(const std::string& pName): Measure(pName, true)
 {
 
 }

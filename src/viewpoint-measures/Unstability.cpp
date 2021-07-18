@@ -8,7 +8,7 @@
 #include "Debug.h"
 #include "Tools.h"
 
-Unstability::Unstability(const QString &pName): Measure(pName, false)
+Unstability::Unstability(const std::string &pName): Measure(pName, false)
 {
 
 }

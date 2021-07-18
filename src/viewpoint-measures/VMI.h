@@ -8,7 +8,7 @@
 class VMI : public Measure
 {
 public:
-    explicit VMI(const QString &pName);
+    explicit VMI(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

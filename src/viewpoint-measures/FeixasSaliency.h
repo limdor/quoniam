@@ -10,7 +10,7 @@
 class FeixasSaliency : public Measure
 {
 public:
-    explicit FeixasSaliency(const QString& pName);
+    explicit FeixasSaliency(const std::string& pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

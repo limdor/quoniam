@@ -8,7 +8,7 @@
 class MaximumDepth : public Measure
 {
 public:
-    explicit MaximumDepth(const QString &pName);
+    explicit MaximumDepth(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
