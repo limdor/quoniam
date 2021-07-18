@@ -6,7 +6,7 @@ Mesh::Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMater
 
 }
 
-void Mesh::SetName(const QString &pName)
+void Mesh::SetName(const std::string &pName)
 {
     mName = pName;
 }

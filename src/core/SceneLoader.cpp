@@ -294,7 +294,7 @@ std::vector<std::shared_ptr<Mesh>> SceneLoader::LoadMeshes(const aiScene* pAiSce
 std::unique_ptr<Mesh> SceneLoader::LoadMesh(const aiMesh* pAiMesh, int pAiMeshIndex, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries)
 {
     auto mesh = std::make_unique<Mesh>(pGeometries.at(pAiMeshIndex), pMaterials.at(pAiMesh->mMaterialIndex));
-    mesh->SetName(QString(pAiMesh->mName.data));
+    mesh->SetName(pAiMesh->mName.data);
 
     return mesh;
 }

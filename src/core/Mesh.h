@@ -4,9 +4,8 @@
 #include "Geometry.h"
 #include "Material.h"
 
-#include <QtCore/QString>
-
 #include <memory>
+#include <string>
 
 /// Class to wrap a 3d mesh
 class Mesh
@@ -17,7 +16,7 @@ public:
     ~Mesh() = default;
 
     /// Set the name of the mesh
-    void SetName(const QString &pName);
+    void SetName(const std::string &pName);
 
     /// Set the material that will be used for the renderer
     void SetMaterial(std::shared_ptr<Material> pMaterial);
@@ -35,7 +34,7 @@ public:
 
 private:
     /// Name of the mesh
-    QString mName;
+    std::string mName;
 
     /// Geometry associated to the mesh
     std::shared_ptr<Geometry> mGeometry;
