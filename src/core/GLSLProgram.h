@@ -6,23 +6,22 @@
 
 #include "GLSLShader.h"
 
-#include <QtCore/QString>
-
 #include "glm/mat4x4.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
 #include <map>
+#include <string>
 
 /// Class to wrap the GLSL programs used by OpenGL
 class GLSLProgram
 {
 public:
-    explicit GLSLProgram(const QString& pName);
+    explicit GLSLProgram(const std::string& pName);
     ~GLSLProgram();
 
     /// Get the name of the program
-    const QString& GetName() const;
+    const std::string& GetName() const;
 
     /// Attach the shader \param pShader to the program
     void AttachShader(const GLSLShader& pShader);
@@ -35,35 +34,35 @@ public:
     void ShowInformation() const;
 
     /// Get the location of the uniform \param pName
-    GLint GetUniformLocation(const QString& pName) const;
+    GLint GetUniformLocation(const std::string& pName) const;
     /// Set the square matrix \param pValue to \param pName uniform
-    void SetUniform(const QString &pName, const glm::mat4 &pValue) const;
+    void SetUniform(const std::string &pName, const glm::mat4 &pValue) const;
     /// Set the vector \param pValue to \param pName uniform
-    void SetUniform(const QString& pName, const glm::vec4& pValue) const;
+    void SetUniform(const std::string& pName, const glm::vec4& pValue) const;
     /// Set the vector \param pValue to \param pName uniform
-    void SetUniform(const QString& pName, const glm::vec3& pValue) const;
+    void SetUniform(const std::string& pName, const glm::vec3& pValue) const;
     /// Set the float \param pValue to \param pName uniform
-    void SetUniform(const QString& pName, float pValue) const;
+    void SetUniform(const std::string& pName, float pValue) const;
     /// Set the int \param pValue to \param pName uniform
-    void SetUniform(const QString& pName, int pValue) const;
+    void SetUniform(const std::string& pName, int pValue) const;
     /// Set the bool \param pValue to \param pName uniform
-    void SetUniform(const QString& pName, bool pValue) const;
+    void SetUniform(const std::string& pName, bool pValue) const;
     /// Get the location of the attribute \param pName
-    GLint GetAttribLocation(const QString& pName) const;
+    GLint GetAttribLocation(const std::string& pName) const;
     /// Bind the output variable \param pName to the fragment shader color number \param pLocation
-    void BindFragDataLocation(GLuint pLocation, const QString& pName);
+    void BindFragDataLocation(GLuint pLocation, const std::string& pName);
     /// Bind the texture \param pTextureId of type \param pTarget to the texture unit
     /// \param pTextureUnit defined as \param pTextureName in the program
-    void BindTexture(GLenum pTarget, const QString& pTextureName, GLuint pTextureId, int pTextureUnit);
+    void BindTexture(GLenum pTarget, const std::string& pTextureName, GLuint pTextureId, int pTextureUnit);
 
 private:
     /// Id of the program
     const GLuint mId;
     /// Name of the program
-    const QString mName;
+    const std::string mName;
     /// Hash table that associates each uniform name to the correspoinding uniform location
-    std::map<QString, GLint> mUniforms;
+    std::map<std::string, GLint> mUniforms;
     /// Hash table that associates each attribute name to the correspoinding attribute location
-    std::map<QString, GLint> mAttributes;
+    std::map<std::string, GLint> mAttributes;
 };
 #endif
