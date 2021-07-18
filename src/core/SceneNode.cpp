@@ -3,7 +3,7 @@
 #include "BoundingSphere.h"
 #include "Debug.h"
 
-SceneNode::SceneNode(const QString &pName):
+SceneNode::SceneNode(const std::string &pName):
     mName(pName), mLocalTransform(), mGlobalTransform(),
     mNumberOfVertices(0), mNumberOfPolygons(0), mBoundingSphere(nullptr),
     mParent(nullptr)
@@ -11,7 +11,7 @@ SceneNode::SceneNode(const QString &pName):
 
 }
 
-QString SceneNode::GetName() const
+std::string SceneNode::GetName() const
 {
     return mName;
 }

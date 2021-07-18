@@ -7,7 +7,7 @@
 //Project includes
 #include "Tools.h"
 
-DepthDistribution::DepthDistribution(const QString &pName): Measure(pName, true)
+DepthDistribution::DepthDistribution(const std::string &pName): Measure(pName, true)
 {
 
 }

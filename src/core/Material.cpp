@@ -2,7 +2,7 @@
 
 #include <QtOpenGL/QGLWidget>
 
-Material::Material(const QString &pName):
+Material::Material(const std::string &pName):
     mName(pName), mKa(0.2f), mKaTexture(nullptr), mKd(0.8f), mKdTexture(nullptr), mKs(1.0f), mKsTexture(nullptr), mShininess(0.0f)
 {
 

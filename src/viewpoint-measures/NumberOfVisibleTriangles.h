@@ -8,7 +8,7 @@
 class NumberOfVisibleTriangles : public Measure
 {
 public:
-    explicit NumberOfVisibleTriangles(const QString &pName);
+    explicit NumberOfVisibleTriangles(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

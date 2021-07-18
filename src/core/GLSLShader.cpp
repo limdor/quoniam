@@ -2,103 +2,98 @@
 
 #include "Debug.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QString>
-#include <QtCore/QTextStream>
+#include <fstream>
 
-GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
+GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType):
     mType(pType)
 {
     // Load shader's source text.
-    QFile file(pSourceFile);
-    if (file.open(QIODevice::ReadOnly))
+    std::ifstream file(pSourceFile, std::ios::in);
+    if (!file.is_open())
     {
-        QTextStream stream (&file);
-        const QString text = stream.readAll();
+        mCompilationLog = "File not found! " + pSourceFile;
+        mHasCompilationErrors = true;
+    }
+    else
+    {
+        std::string const fileContent{std::istreambuf_iterator<char>{file}, {}};
         file.close();
 
-        const QByteArray code = text.toLocal8Bit();
-
         // Create the shader from a text file.
-        mGLId = glCreateShader(pType);
-        if( mGLId != 0 )
+        mId = glCreateShader(pType);
+        if( mId != 0 )
         {
             GLint blen = 0;
             GLsizei slen = 0;
 
-            const char *constCode = code.data();
-            glShaderSource( mGLId, 1, &constCode, nullptr );
-            glCompileShader(mGLId);
+            const char *constCode = fileContent.c_str();
+            glShaderSource( mId, 1, &constCode, nullptr );
+            glCompileShader(mId);
             CHECK_GL_ERROR();
-            glGetShaderiv(mGLId, GL_COMPILE_STATUS, &blen);
+            glGetShaderiv(mId, GL_COMPILE_STATUS, &blen);
             CHECK_GL_ERROR();
             if(blen == GL_TRUE)
             {
-                mHasErrors = false;
-                mLog = QString("Compilation successful!");
+                mHasCompilationErrors = false;
+                mCompilationLog = "Compilation successful!";
             }
             else
             {
-                mHasErrors = true;
-                glGetShaderiv(mGLId, GL_INFO_LOG_LENGTH, &blen);
+                mHasCompilationErrors = true;
+                glGetShaderiv(mId, GL_INFO_LOG_LENGTH, &blen);
                 CHECK_GL_ERROR();
                 if (blen > 1)
                 {
                     char * compilerLog = new char[blen];
                     if ( compilerLog != nullptr )
                     {
-                        glGetShaderInfoLog(mGLId, blen, &slen, compilerLog);
+                        glGetShaderInfoLog(mId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();
-                        mLog = QString::fromLocal8Bit(compilerLog);
+                        mCompilationLog = compilerLog;
                     }
                     else
                     {
-                        mLog = QString("Could not allocate compiler log buffer!");
+                        mCompilationLog = "Could not allocate compiler log buffer!";
                     }
                 }
             }
         }
         else
         {
-            mHasErrors = true;
-            mLog = QString("Impossible to create the shader");
+            mHasCompilationErrors = true;
+            mCompilationLog = "Impossible to create the shader";
         }
-    }
-    else
-    {
-        mHasErrors = true;
-        mLog = QString("File not found! %1").arg(pSourceFile);
     }
 }
 
 GLSLShader::~GLSLShader()
 {
-    glDeleteShader(mGLId);
+    glDeleteShader(mId);
 }
 
-bool GLSLShader::HasErrors() const
+bool GLSLShader::HasCompilationErrors() const
 {
-    return mHasErrors;
+    return mHasCompilationErrors;
 }
 
-const QString& GLSLShader::GetLog() const
+const std::string& GLSLShader::GetCompilationLog() const
 {
-    return mLog;
+    return mCompilationLog;
 }
 
-void GLSLShader::ShowLog() const
+void GLSLShader::ShowCompilationLog() const
 {
-    if(mHasErrors)
+    if(mHasCompilationErrors)
     {
-        Debug::Error(mLog);
+        Debug::Error(mCompilationLog);
     }
     else
     {
-        Debug::Log(mLog);
+        Debug::Log(mCompilationLog);
     }
 }
 
 GLuint GLSLShader::GetId() const
 {
-    return mGLId;
+    return mId;
 }

@@ -8,7 +8,7 @@
 //Project includes
 #include "Tools.h"
 
-CurvatureEntropy::CurvatureEntropy(const QString& pName): Measure(pName, true)
+CurvatureEntropy::CurvatureEntropy(const std::string& pName): Measure(pName, true)
 {
 
 }

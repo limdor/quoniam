@@ -4,7 +4,7 @@
 
 #include "glm/gtc/type_ptr.hpp"
 
-GLSLProgram::GLSLProgram(const QString& pName):
+GLSLProgram::GLSLProgram(const std::string& pName):
     mName(pName),
     mId(glCreateProgram())
 {
@@ -16,7 +16,7 @@ GLSLProgram::~GLSLProgram()
     glDeleteProgram(mId);
 }
 
-const QString& GLSLProgram::GetName() const
+const std::string& GLSLProgram::GetName() const
 {
     return mName;
 }
@@ -46,7 +46,7 @@ void GLSLProgram::LinkProgram()
 
         glGetActiveUniform( mId, i, maxLen, nullptr, &size, &type, name.data() );
         GLint location = glGetUniformLocation(mId, name.data());
-        mUniforms[QString(name.data())] = location;
+        mUniforms[std::string(name.data())] = location;
     }
 
     // Get the location of every attribute
@@ -62,7 +62,7 @@ void GLSLProgram::LinkProgram()
 
         glGetActiveAttrib( mId, i, maxLen, nullptr, &size, &type, name.data() );
         GLint location = glGetAttribLocation(mId, name.data());
-        mAttributes[QString(name.data())] = location;
+        mAttributes[std::string(name.data())] = location;
     }
 }
 
@@ -74,7 +74,7 @@ void GLSLProgram::UseProgram() const
 void GLSLProgram::ShowInformation() const
 {
     // Show program name
-    Debug::Log( QString("Program name: %1").arg(mName) );
+    Debug::Log( "Program name: " + mName );
 
     // Show uniforms information
     Debug::Log("Uniforms:");
@@ -82,7 +82,7 @@ void GLSLProgram::ShowInformation() const
     Debug::Log("------------------------------------------------");;
     for( auto it = mUniforms.cbegin(); it != mUniforms.cend(); ++it )
     {
-        Debug::Log( QString(" %1 | %2").arg(it->first).arg(it->second) );
+        Debug::Log( " " + it->first + " | " + std::to_string(it->second));
     }
 
     // Show attributes information
@@ -91,16 +91,16 @@ void GLSLProgram::ShowInformation() const
     Debug::Log("------------------------------------------------");
     for( auto it = mAttributes.cbegin(); it != mAttributes.cend(); ++it )
     {
-        Debug::Log( QString(" %1 | %2").arg(it->first).arg(it->second) );
+        Debug::Log( " " + it->first + " | " + std::to_string(it->second));
     }
 }
 
-GLint GLSLProgram::GetUniformLocation(const QString& pName) const
+GLint GLSLProgram::GetUniformLocation(const std::string& pName) const
 {
     const auto it = mUniforms.find(pName);
     if( it == mUniforms.end() )
     {
-        Debug::Warning( QString("Invalid uniform: %1").arg(pName) );
+        Debug::Warning( "Invalid uniform: " + pName);
         return -1;
     }
     else
@@ -109,42 +109,42 @@ GLint GLSLProgram::GetUniformLocation(const QString& pName) const
     }
 }
 
-void GLSLProgram::SetUniform(const QString &pName, const glm::mat4 &pValue) const
+void GLSLProgram::SetUniform(const std::string &pName, const glm::mat4 &pValue) const
 {
     glUniformMatrix4fv( GetUniformLocation(pName), 1, GL_FALSE, glm::value_ptr(pValue));
 }
 
-void GLSLProgram::SetUniform(const QString& pName, const glm::vec4& pValue) const
+void GLSLProgram::SetUniform(const std::string& pName, const glm::vec4& pValue) const
 {
     glUniform4fv( GetUniformLocation(pName), 1, glm::value_ptr(pValue) );
 }
 
-void GLSLProgram::SetUniform(const QString& pName, const glm::vec3& pValue) const
+void GLSLProgram::SetUniform(const std::string& pName, const glm::vec3& pValue) const
 {
     glUniform3fv( GetUniformLocation(pName), 1, glm::value_ptr(pValue) );
 }
 
-void GLSLProgram::SetUniform(const QString& pName, float pValue) const
+void GLSLProgram::SetUniform(const std::string& pName, float pValue) const
 {
     glUniform1f( GetUniformLocation(pName), pValue );
 }
 
-void GLSLProgram::SetUniform(const QString& pName, int pValue) const
+void GLSLProgram::SetUniform(const std::string& pName, int pValue) const
 {
     glUniform1i( GetUniformLocation(pName), pValue );
 }
 
-void GLSLProgram::SetUniform(const QString& pName, bool pValue) const
+void GLSLProgram::SetUniform(const std::string& pName, bool pValue) const
 {
     glUniform1i( GetUniformLocation(pName), pValue );
 }
 
-GLint GLSLProgram::GetAttribLocation(const QString& pName) const
+GLint GLSLProgram::GetAttribLocation(const std::string& pName) const
 {
     const auto it = mAttributes.find(pName);
     if( it == mAttributes.end() )
     {
-        Debug::Warning( QString("Invalid attribute: %1").arg(pName) );
+        Debug::Warning( "Invalid attribute: " + pName );
         return -1;
     }
     else
@@ -153,22 +153,21 @@ GLint GLSLProgram::GetAttribLocation(const QString& pName) const
     }
 }
 
-void GLSLProgram::BindFragDataLocation(GLuint pLocation, const QString& pName)
+void GLSLProgram::BindFragDataLocation(GLuint pLocation, const std::string& pName)
 {
-    const QByteArray bAName = pName.toLocal8Bit();
-    const char *constName = bAName.data();
+    const char *constName = pName.c_str();
     glBindFragDataLocation( mId, pLocation, constName );
     CHECK_GL_ERROR();
 }
 
-void GLSLProgram::BindTexture(GLenum pTarget, const QString& pTextureName, GLuint pTextureId, int pTextureUnit)
+void GLSLProgram::BindTexture(GLenum pTarget, const std::string& pTextureName, GLuint pTextureId, int pTextureUnit)
 {
     glActiveTexture(GL_TEXTURE0 + pTextureUnit);
     glBindTexture(pTarget, pTextureId);
     GLint id = GetUniformLocation( pTextureName );
     if( id == -1 )
     {
-        Debug::Warning( QString("Invalid texture: %1").arg(pTextureName) );
+        Debug::Warning( "Invalid texture: " + pTextureName );
     }
     glUniform1i(id, pTextureUnit);
 }

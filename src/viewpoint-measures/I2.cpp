@@ -10,7 +10,7 @@
 //Project includes
 #include "Tools.h"
 
-I2::I2(const QString &pName): Measure(pName, false)
+I2::I2(const std::string &pName): Measure(pName, false)
 {
 
 }

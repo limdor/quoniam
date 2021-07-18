@@ -4,7 +4,7 @@
 //Project includes
 #include "Tools.h"
 
-SilhouetteLength::SilhouetteLength(const QString &pName): Measure(pName, true)
+SilhouetteLength::SilhouetteLength(const std::string &pName): Measure(pName, true)
 {
 
 }

@@ -8,7 +8,7 @@
 class SilhouetteCurvatureExtrema : public Measure
 {
 public:
-    explicit SilhouetteCurvatureExtrema(const QString &pName);
+    explicit SilhouetteCurvatureExtrema(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

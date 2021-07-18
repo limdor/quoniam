@@ -71,7 +71,7 @@ QString GLCanvas::SaveScreenshot( const QString &pFileName )
     const QImage image = grabFrameBuffer();
     if(!image.save( completePath + pFileName ))
     {
-        Debug::Warning( QString("Screenshot have not been saved: %1").arg( completePath + pFileName ) );
+        Debug::Warning( "Screenshot have not been saved: " + (completePath + pFileName).toStdString());
     }
     return (completePath + pFileName);
 }
@@ -252,18 +252,18 @@ void GLCanvas::initializeGL()
     if(GLEW_OK != err)
     {
         const GLubyte* sError = glewGetErrorString(err);
-        Debug::Log(QString("Impossible to initialize GLEW!: %1").arg(QString(reinterpret_cast<const char*>(sError))));
+        Debug::Log("Impossible to initialize GLEW!: " + std::string{reinterpret_cast<const char*>(sError)});
     }
     else
     {
-        const QString gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
-        const QString gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
-        const QString gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
-        const QString gl_shading_language_version{reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))};
-        Debug::Log(QString("GL_VENDOR: %1").arg(gl_vendor));
-        Debug::Log(QString("GL_RENDERER: %1").arg(gl_renderer));
-        Debug::Log(QString("GL_VERSION: %1").arg(gl_version));
-        Debug::Log(QString("GL_SHADING_LANGUAGE_VERSION: %1").arg(gl_shading_language_version));
+        std::string const gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
+        std::string const gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
+        std::string const gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
+        std::string const gl_shading_language_version{reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))};
+        Debug::Log("GL_VENDOR: " + gl_vendor);
+        Debug::Log("GL_RENDERER: " + gl_renderer);
+        Debug::Log("GL_VERSION: " + gl_version);
+        Debug::Log("GL_SHADING_LANGUAGE_VERSION: " + gl_shading_language_version);
 
         LoadShaders();
 
@@ -665,47 +665,47 @@ void GLCanvas::RecomputeViewport()
 void GLCanvas::LoadShaders()
 {
     const GLSLShader basicVS("shaders/Basic.vert", GL_VERTEX_SHADER);
-    if( basicVS.HasErrors() )
+    if( basicVS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/Basic.vert: %1").arg( basicVS.GetLog( )) );
+        Debug::Error( "shaders/Basic.vert: " + basicVS.GetCompilationLog() );
     }
     const GLSLShader dualPeelingInitFS("shaders/DualPeelingInit.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingInitFS.HasErrors() )
+    if( dualPeelingInitFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingInit.frag: %1").arg(dualPeelingInitFS.GetLog()) );
+        Debug::Error( "shaders/DualPeelingInit.frag: " + dualPeelingInitFS.GetCompilationLog() );
     }
     const GLSLShader dualPeelingPeelVS("shaders/DualPeelingPeel.vert", GL_VERTEX_SHADER);
-    if( dualPeelingPeelVS.HasErrors() )
+    if( dualPeelingPeelVS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingPeel.vert: %1").arg(dualPeelingPeelVS.GetLog()) );
+        Debug::Error( "shaders/DualPeelingPeel.vert: " + dualPeelingPeelVS.GetCompilationLog() );
     }
     const GLSLShader dualPeelingPeelFS("shaders/DualPeelingPeel.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingPeelFS.HasErrors() )
+    if( dualPeelingPeelFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingPeel.frag: %1").arg(dualPeelingPeelFS.GetLog()) );
+        Debug::Error( "shaders/DualPeelingPeel.frag: " + dualPeelingPeelFS.GetCompilationLog() );
     }
     const GLSLShader shadeFragmentFS("shaders/ShadeFragment.frag", GL_FRAGMENT_SHADER);
-    if( shadeFragmentFS.HasErrors() )
+    if( shadeFragmentFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/ShadeFragment.frag: %1").arg(shadeFragmentFS.GetLog()) );
+        Debug::Error( "shaders/ShadeFragment.frag: " + shadeFragmentFS.GetCompilationLog() );
     }
     const GLSLShader shadePerVertexColorFS("shaders/ShadePerVertexColor.frag", GL_FRAGMENT_SHADER);
-    if( shadePerVertexColorFS.HasErrors() )
+    if( shadePerVertexColorFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/ShadePerVertexColor.frag: %1").arg(shadePerVertexColorFS.GetLog()) );
+        Debug::Error( "shaders/ShadePerVertexColor.frag: " + shadePerVertexColorFS.GetCompilationLog() );
     }
     const GLSLShader dualPeelingBlendFS("shaders/DualPeelingBlend.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingBlendFS.HasErrors() )
+    if( dualPeelingBlendFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingBlend.frag: %1").arg(dualPeelingBlendFS.GetLog()) );
+        Debug::Error( "shaders/DualPeelingBlend.frag: " + dualPeelingBlendFS.GetCompilationLog() );
     }
     const GLSLShader dualPeelingFinalFS("shaders/DualPeelingFinal.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingFinalFS.HasErrors() )
+    if( dualPeelingFinalFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingFinal.frag: %1").arg(dualPeelingFinalFS.GetLog()) );
+        Debug::Error( "shaders/DualPeelingFinal.frag: " + dualPeelingFinalFS.GetCompilationLog() );
     }
 
-    if(!basicVS.HasErrors() && !dualPeelingInitFS.HasErrors())
+    if(!basicVS.HasCompilationErrors() && !dualPeelingInitFS.HasCompilationErrors())
     {
         mShaderDualInit = std::make_unique<GLSLProgram>("ShaderDualInit");
         mShaderDualInit->AttachShader(basicVS);
@@ -715,10 +715,10 @@ void GLCanvas::LoadShaders()
     else
     {
         mShaderDualInit = nullptr;
-        Debug::Error(QString("Could not load ShaderDualInit"));
+        Debug::Error("Could not load ShaderDualInit");
     }
 
-    if(!dualPeelingPeelVS.HasErrors() && !dualPeelingPeelFS.HasErrors() && !shadeFragmentFS.HasErrors())
+    if(!dualPeelingPeelVS.HasCompilationErrors() && !dualPeelingPeelFS.HasCompilationErrors() && !shadeFragmentFS.HasCompilationErrors())
     {
         mShaderDualPeel = std::make_unique<GLSLProgram>("ShaderDualPeel");
         mShaderDualPeel->AttachShader(dualPeelingPeelVS);
@@ -729,10 +729,10 @@ void GLCanvas::LoadShaders()
     else
     {
         mShaderDualPeel = nullptr;
-        Debug::Error(QString("Could not load ShaderDualPeel"));
+        Debug::Error("Could not load ShaderDualPeel");
     }
 
-    if(!dualPeelingPeelVS.HasErrors() && !dualPeelingPeelFS.HasErrors() && !shadePerVertexColorFS.HasErrors())
+    if(!dualPeelingPeelVS.HasCompilationErrors() && !dualPeelingPeelFS.HasCompilationErrors() && !shadePerVertexColorFS.HasCompilationErrors())
     {
         mShaderDualPeelPerVertexColor = std::make_unique<GLSLProgram>("ShaderDualPeelPerVertexColor");
         mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelVS);
@@ -743,10 +743,10 @@ void GLCanvas::LoadShaders()
     else
     {
         mShaderDualPeelPerVertexColor = nullptr;
-        Debug::Error(QString("Could not load ShaderDualPeelPerVertexColor"));
+        Debug::Error("Could not load ShaderDualPeelPerVertexColor");
     }
 
-    if(!basicVS.HasErrors() && !dualPeelingBlendFS.HasErrors())
+    if(!basicVS.HasCompilationErrors() && !dualPeelingBlendFS.HasCompilationErrors())
     {
         mShaderDualBlend = std::make_unique<GLSLProgram>("ShaderDualBlend");
         mShaderDualBlend->AttachShader(basicVS);
@@ -756,10 +756,10 @@ void GLCanvas::LoadShaders()
     else
     {
         mShaderDualBlend = nullptr;
-        Debug::Error(QString("Could not load ShaderDualBlend"));
+        Debug::Error("Could not load ShaderDualBlend");
     }
 
-    if(!basicVS.HasErrors() && !dualPeelingFinalFS.HasErrors())
+    if(!basicVS.HasCompilationErrors() && !dualPeelingFinalFS.HasCompilationErrors())
     {
         mShaderDualFinal = std::make_unique<GLSLProgram>("ShaderDualFinal");
         mShaderDualFinal->AttachShader(basicVS);
@@ -769,7 +769,7 @@ void GLCanvas::LoadShaders()
     else
     {
         mShaderDualFinal = nullptr;
-        Debug::Error(QString("Could not load ShaderDualFinal"));
+        Debug::Error("Could not load ShaderDualFinal");
     }
 }
 

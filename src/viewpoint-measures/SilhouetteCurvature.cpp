@@ -7,7 +7,7 @@
 //Project includes
 #include "Tools.h"
 
-SilhouetteCurvature::SilhouetteCurvature(const QString &pName): Measure(pName, true)
+SilhouetteCurvature::SilhouetteCurvature(const std::string &pName): Measure(pName, true)
 {
 
 }

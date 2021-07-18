@@ -8,7 +8,7 @@
 class VisibilityRatio : public Measure
 {
 public:
-    explicit VisibilityRatio(const QString &pName);
+    explicit VisibilityRatio(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

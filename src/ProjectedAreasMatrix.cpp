@@ -99,10 +99,10 @@ void ProjectedAreasMatrix::SaveToFile() const
             out << "\n";
         }
         file.close();
-        Debug::Log( QString("Informacio escrita al fitxer: InformationChannelHistogram.txt") );
+        Debug::Log( "Informacio escrita al fitxer: InformationChannelHistogram.txt" );
     }
     else
     {
-        Debug::Error( QString("Impossible escriure a fitxer: InformationChannelHistogram.txt") );
+        Debug::Error( "Impossible escriure a fitxer: InformationChannelHistogram.txt" );
     }
 }

@@ -8,7 +8,7 @@
 #include "Debug.h"
 #include "Tools.h"
 
-FeixasSaliency::FeixasSaliency(const QString &pName): Measure(pName, true)
+FeixasSaliency::FeixasSaliency(const std::string &pName): Measure(pName, true)
 {
 
 }

@@ -9,7 +9,7 @@
 
 #include <algorithm>
 
-VMI::VMI(const QString &pName): Measure(pName, false)
+VMI::VMI(const std::string &pName): Measure(pName, false)
 {
 
 }

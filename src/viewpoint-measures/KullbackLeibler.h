@@ -8,7 +8,7 @@
 class KullbackLeibler : public Measure
 {
 public:
-    explicit KullbackLeibler(const QString &pName);
+    explicit KullbackLeibler(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

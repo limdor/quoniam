@@ -3,18 +3,18 @@
 
 #include "Texture.h"
 
-#include <QtCore/QString>
 #include <QtGui/QImage>
 
 #include "glm/vec3.hpp"
 
 #include <memory>
+#include <string>
 
 /// Class to wrap the material of a mesh
 class Material
 {
 public:
-    explicit Material(const QString &pName);
+    explicit Material(const std::string &pName);
 
     /// Get the ambient color
     glm::vec3 GetKa() const;
@@ -55,7 +55,7 @@ public:
 
 private:
     /// Name of the material
-    QString mName;
+    std::string mName;
     /// Ambient color
     glm::vec3 mKa;
     /// Ambient texture

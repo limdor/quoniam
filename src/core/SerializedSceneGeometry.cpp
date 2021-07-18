@@ -53,7 +53,7 @@ void SerializedSceneGeometry::ComputeBoundingSphere()
     {
         double slack;
         double error = mb.accuracy(slack);
-        Debug::Warning(QString("Bounding sphere in SerializedSceneGeometry may be invalid. Accuracy: %1").arg(error));
+        Debug::Warning("Bounding sphere in SerializedSceneGeometry may be invalid. Accuracy: " + std::to_string(error));
     }
 
     mBoundingSphere->SetCenter(sphereCenter);
@@ -67,7 +67,7 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
     t.start();
 
     float epsilon = mBoundingSphere->GetRadius() / 1000000.0f;
-    Debug::Log( QString("SerializedSceneGeometry::ComputeNeighbourhood: Epsilon value: %1").arg(epsilon) );
+    Debug::Log( "SerializedSceneGeometry::ComputeNeighbourhood: Epsilon value: " + std::to_string(epsilon) );
 
     std::vector< std::pair< size_t, glm::vec3 > > points(mNumberOfFaces * 3);
     // All vertices of the scene are added to a list of points with information about what mesh they belong,
@@ -118,7 +118,7 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
 
     if( verticesWithoutNeighbours > 1 )
     {
-        Debug::Warning( QString("%1 vertices without neighbours").arg(verticesWithoutNeighbours) );
+        Debug::Warning( std::to_string(verticesWithoutNeighbours) + " vertices without neighbours");
     }
     else if( verticesWithoutNeighbours == 1 )
     {
@@ -142,7 +142,7 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
         mFaceNeighbors[j] = polygonNeighbours;
     }
 
-    Debug::Log(QString("Scene::ComputeNeighbourhood - Total time elapsed: %1 ms").arg(t.elapsed()));
+    Debug::Log("Scene::ComputeNeighbourhood - Total time elapsed: " + std::to_string(t.elapsed()) + " ms");
 }
 
 void SerializedSceneGeometry::ComputeVertexCurvatures()
@@ -187,19 +187,19 @@ void SerializedSceneGeometry::ShowNeighbours() const
     Debug::Log( "-- Vertex neighbours --" );
     for( int i = 0; i < mVertexNeighbors.size(); i++ )
     {
-        Debug::Log( QString("Neighbours of %1:").arg(i) );
+        Debug::Log( "Neighbours of " + std::to_string(i) + ":");
         for( int j = 0; j < mVertexNeighbors.at(i).size(); j++ )
         {
-            Debug::Log( QString("   %1").arg(mVertexNeighbors.at(i).at(j)) );
+            Debug::Log( "   " + std::to_string(mVertexNeighbors.at(i).at(j)) );
         }
     }
     Debug::Log( "-- Polygon neighbours --" );
     for( int i = 0; i < mFaceNeighbors.size(); i++ )
     {
-        Debug::Log( QString("Neighbours of %1:").arg(i) );
+        Debug::Log( "Neighbours of " + std::to_string(i) + ":");
         for( int j = 0; j < mFaceNeighbors.at(i).size(); j++ )
         {
-            Debug::Log( QString("   %1").arg(mFaceNeighbors.at(i).at(j)) );
+            Debug::Log( "   " + std::to_string(mFaceNeighbors.at(i).at(j)) );
         }
     }
 }

@@ -7,7 +7,7 @@
 class DepthBasedVisualStability : public Measure
 {
 public:
-    explicit DepthBasedVisualStability(const QString &pName);
+    explicit DepthBasedVisualStability(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);

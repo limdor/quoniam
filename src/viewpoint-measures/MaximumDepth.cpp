@@ -4,7 +4,7 @@
 //Project includes
 #include "Tools.h"
 
-MaximumDepth::MaximumDepth(const QString &pName): Measure(pName, true)
+MaximumDepth::MaximumDepth(const std::string &pName): Measure(pName, true)
 {
 
 }

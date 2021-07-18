@@ -127,7 +127,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
 
     for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
-        mUi->measureInViewpointSphereList->addItem( mViewpointMeasures.at(i)->GetName() );
+        mUi->measureInViewpointSphereList->addItem( QString::fromStdString(mViewpointMeasures.at(i)->GetName()) );
     }
 
     QHBoxLayout* horizontalLayout = new QHBoxLayout();
@@ -148,7 +148,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
     verticalLayout->addWidget(minMaxWidget);
     for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
-        QString text = mViewpointMeasures.at(i)->GetName();
+        std::string text = mViewpointMeasures.at(i)->GetName();
         if(mViewpointMeasures.at(i)->IsMaximumBest())
         {
             text += "->";
@@ -157,7 +157,7 @@ MainModuleController::MainModuleController(QWidget *pParent): ModuleController(p
         {
             text += "<-";
         }
-        QLabel* textNameLabel = new QLabel(text);
+        QLabel* textNameLabel = new QLabel(QString::fromStdString(text));
         textNameLabel->setAlignment(Qt::AlignHCenter);
         verticalLayout->addWidget(textNameLabel);
         ViewpointMeasureSlider* slider = new ViewpointMeasureSlider(static_cast<int>(i), Qt::Horizontal);
@@ -262,7 +262,7 @@ void MainModuleController::keyPressEvent(QKeyEvent *pEvent)
     if( pEvent->key() == Qt::Key_N && mSphereOfViewpoints != nullptr )
     {
         size_t viewpoint = NextViewpoint();
-        Debug::Log(QString("Viewpoint %1 selected").arg(mSphereOfViewpoints->GetViewpoint(viewpoint)->mName));
+        Debug::Log("Viewpoint " + mSphereOfViewpoints->GetViewpoint(viewpoint)->mName + " selected");
 
         mUpdateView = false;
         for( size_t i = 0; i < mViewpointMeasuresSliders.size(); i++ )
@@ -322,7 +322,7 @@ void MainModuleController::LoadScene(const QString &pFileName)
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
     t.start();
-    Debug::Log(QString("Loading %1").arg(pFileName));
+    Debug::Log("Loading " + pFileName.toStdString());
 
     mUpdateView = true;
     mUi->leftTabWidget->hide();
@@ -338,7 +338,7 @@ void MainModuleController::LoadScene(const QString &pFileName)
     mScene = SceneLoader::LoadScene(pFileName);
     mScene->ShowInformation();
     mOpenGLCanvas->LoadScene(mScene);
-    Debug::Log( QString("MainWindow::LoadScene - Total time elapsed: %1 ms").arg( t.elapsed() ) );
+    Debug::Log( "MainWindow::LoadScene - Total time elapsed: " + std::to_string(t.elapsed()) + " ms");
 
     on_applyMaterialsCheckBox_clicked( mUi->applyMaterialsCheckBox->isChecked() );
     QApplication::restoreOverrideCursor();
@@ -374,14 +374,14 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     {
         if(!mViewpointMeasures.at(i)->Computed())
         {
-            progress.setLabelText(QString("Computing %1...").arg(mViewpointMeasures.at(i)->GetName()));
+            progress.setLabelText(QString("Computing %1...").arg(QString::fromStdString(mViewpointMeasures.at(i)->GetName())));
             mViewpointMeasures.at(i)->Compute(mSceneInformationBuilder);
         }
         progress.setValue(i + 1);
         qApp->processEvents();
     }
     progress.hide();
-    Debug::Log( QString("MainWindow::Measures computed - Time elapsed: %1 ms").arg(t.elapsed()) );
+    Debug::Log( "MainWindow::Measures computed - Time elapsed: " + std::to_string(t.elapsed()) + " ms");
     QApplication::restoreOverrideCursor();
 
     on_measureInViewpointSphereList_currentIndexChanged( mUi->measureInViewpointSphereList->currentIndex() );
@@ -425,7 +425,7 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
     QFile file(pFileName);
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
-    Debug::Log(QString("Exportant %1").arg(pFileName));
+    Debug::Log("Exportant " + pFileName.toStdString());
 
     if(file.open(QFile::WriteOnly))
     {
@@ -437,10 +437,10 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
         for( int i = 0; i < mSphereOfViewpoints->GetNumberOfViewpoints(); i++ )
         {
             stream.writeStartElement("viewpoint");
-            stream.writeAttribute("name", mSphereOfViewpoints->GetViewpoint(i)->mName);
+            stream.writeAttribute("name", QString::fromStdString(mSphereOfViewpoints->GetViewpoint(i)->mName));
             for( int j = 0; j < mViewpointMeasures.size(); j++ )
             {
-                QString name = mViewpointMeasures.at(j)->GetName();
+                QString name = QString::fromStdString(mViewpointMeasures.at(j)->GetName());
                 name = name.replace(" ","_");
                 name = name.replace("(","_");
                 name = name.replace(")","");
@@ -453,11 +453,11 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
         stream.writeEndElement();
         stream.writeEndDocument();
         file.close();
-        Debug::Log(QString("Information written to file: %1").arg(pFileName));
+        Debug::Log("Information written to file: " + pFileName.toStdString());
     }
     else
     {
-        Debug::Error(QString("Impossible to write to file: %1").arg(pFileName));
+        Debug::Error("Impossible to write to file: " + pFileName.toStdString());
     }
     QApplication::restoreOverrideCursor();
 }
@@ -490,19 +490,17 @@ void MainModuleController::SetViewpoint(size_t pViewpoint)
 
 void MainModuleController::ShowViewpointInformation(size_t pViewpoint)
 {
-    Debug::Log(QString("Selected viewpoint: %1").arg(pViewpoint));
+    Debug::Log("Selected viewpoint: " + std::to_string(pViewpoint));
     glm::vec3 position = mSphereOfViewpoints->GetViewpoint(pViewpoint)->GetPosition();
-    Debug::Log(QString("Position: %1, %2, %3").arg(position.x).arg(position.y).arg(position.z));
+    Debug::Log("Position: " + std::to_string(position.x) + ", " + std::to_string(position.y) + ", " + std::to_string(position.z));
     float radius = mScene->GetBoundingSphere()->GetRadius();
     glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
     position = (position - center) / (radius * 3.0f);
-    Debug::Log(QString("Normalized position: %1, %2, %3").arg(position.x).arg(position.y).arg(position.z));
-    //Debug::Log(QString("  Latitude: %1").arg(mGeographicViewpoints[pViewpoint].y));
-    //Debug::Log(QString("  Longitude: %1").arg(mGeographicViewpoints[pViewpoint].z));
-    Debug::Log(QString("Viewpoint quality measures:"));
+    Debug::Log("Normalized position: " + std::to_string(position.x) + ", " + std::to_string(position.y) + ", " + std::to_string(position.z));
+    Debug::Log("Viewpoint quality measures:");
     for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
     {
-        Debug::Log( QString("  %1: %2").arg(mViewpointMeasures.at(i)->GetName()).arg(mViewpointMeasures.at(i)->GetValue(pViewpoint)) );
+        Debug::Log( "  " + mViewpointMeasures.at(i)->GetName() + ": " + std::to_string(mViewpointMeasures.at(i)->GetValue(pViewpoint)) );
     }
 }
 
@@ -533,11 +531,11 @@ void MainModuleController::LoadDutagaciViewpoints()
     {
         if(!file.exists())
         {
-            Debug::Error(QString("File with viewpoints not found"));
+            Debug::Error("File with viewpoints not found");
         }
         else
         {
-            Debug::Error(QString("Impossible to open file with viewpoints"));
+            Debug::Error("Impossible to open file with viewpoints");
         }
     }
 }
@@ -562,7 +560,7 @@ void MainModuleController::UpdateRenderingGUI()
 
 QString MainModuleController::GetScreenshotName(size_t pViewpoint)
 {
-    QString name = mScene->GetName();
+    QString name = QString::fromStdString(mScene->GetName());
     name += "_";
     if( mUi->applyMaterialsCheckBox->isChecked() )
     {
@@ -570,7 +568,7 @@ QString MainModuleController::GetScreenshotName(size_t pViewpoint)
     }
     if( pViewpoint != -1 )
     {
-        name += mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint)->mName;
+        name += QString::fromStdString(mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint)->mName);
     }
     name.replace( " ", "_" );
     name.replace( ".", "_" );
@@ -635,7 +633,7 @@ void MainModuleController::RunDutagaciBenchmark()
         }
         for( size_t i = 0; i < mViewpointMeasures.size(); i++ )
         {
-            QString fileName = QString{mViewpointMeasures.at(i)->GetName()}.replace("|","_").replace("/","_") + ".txt";
+            QString fileName = QString::fromStdString(mViewpointMeasures.at(i)->GetName()).replace("|","_").replace("/","_") + ".txt";
             QFile file(fileName);
             if( file.open(QFile::WriteOnly) )
             {
@@ -645,11 +643,11 @@ void MainModuleController::RunDutagaciBenchmark()
                     out << bestViewpoints.at(i).at(j).x << " " << bestViewpoints.at(i).at(j).y << " " << bestViewpoints.at(i).at(j).z << "\n";
                 }
                 file.close();
-                Debug::Log( QString("Information written to file: %1").arg(fileName) );
+                Debug::Log( "Information written to file: " + fileName.toStdString() );
             }
             else
             {
-                Debug::Error( QString("Impossible to write a file: %1").arg(fileName) );
+                Debug::Error( "Impossible to write a file: " + fileName.toStdString() );
             }
         }
     }
@@ -776,7 +774,7 @@ void MainModuleController::on_ambientLightAmountSpinBox_valueChanged(double pVal
 
 void MainModuleController::on_bestAndWorstViewsButton_clicked()
 {
-    QString sceneName = mScene->GetName();
+    QString sceneName = QString::fromStdString(mScene->GetName());
 
     mUi->applyIlluminationCheckBox->setChecked(true);
     mOpenGLCanvas->ApplyIllumination(true);
@@ -788,7 +786,7 @@ void MainModuleController::on_bestAndWorstViewsButton_clicked()
     for( size_t measureIndex = 0; measureIndex < numberOfMeasures; measureIndex++ )
     {
         Measure* measure = mViewpointMeasures.at(measureIndex);
-        QString measureName = measure->GetName();
+        QString measureName = QString::fromStdString(measure->GetName());
         measureName = measureName.replace(" ","_");
         measureName = measureName.replace("(","_");
         measureName = measureName.replace(")","");

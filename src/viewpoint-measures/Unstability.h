@@ -10,7 +10,7 @@
 class Unstability : public Measure
 {
 public:
-    explicit Unstability(const QString &pName);
+    explicit Unstability(const std::string &pName);
 
     /// Method that computes the measure
     void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
