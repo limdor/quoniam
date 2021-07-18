@@ -10,9 +10,8 @@
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
-#include <QtCore/QString>
-
 #include <memory>
+#include <string>
 #include <vector>
 
 class AxisAlignedBoundingBox;
@@ -23,7 +22,7 @@ class GPUGeometry;
 class Geometry
 {
 public:
-    Geometry(const QString &pName, GeometryTopology pT);
+    Geometry(const std::string &pName, GeometryTopology pT);
     Geometry() = default;
     Geometry(const Geometry& pGeometry);
     Geometry& operator=(const Geometry& pGeometry) = delete;
@@ -61,7 +60,7 @@ public:
     const std::vector<unsigned int>& GetIndexsData() const;
 
     /// Set the name of the geometry
-    void SetName(const QString &pName);
+    void SetName(const std::string &pName);
     /// Set the topology
     void SetTopology( GeometryTopology pTopology );
 
@@ -110,7 +109,7 @@ private:
     std::vector<unsigned int> mIndexData;
 
     /// Name of the geometry
-    QString mName{"Default"};
+    std::string mName{"Default"};
     /// Topology of the geometry
     GeometryTopology mTopology{GeometryTopology::Triangles};
 

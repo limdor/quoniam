@@ -9,7 +9,7 @@
 
 #include "glm/exponential.hpp"
 
-Geometry::Geometry(const QString &pName, GeometryTopology pT):
+Geometry::Geometry(const std::string &pName, GeometryTopology pT):
     mTopology{pT}, mName{pName}
 {
 
@@ -213,7 +213,7 @@ const std::vector<unsigned int>& Geometry::GetIndexsData() const
     return mIndexData;
 }
 
-void Geometry::SetName(const QString &pName)
+void Geometry::SetName(const std::string &pName)
 {
     mName = pName;
 }
@@ -292,7 +292,7 @@ void Geometry::ComputeBoundingVolumes()
     {
         double slack;
         double error = mb.accuracy(slack);
-        Debug::Warning("Bounding sphere in geometry " + mName.toStdString() + " may be invalid. Accuracy: " + std::to_string(error));
+        Debug::Warning("Bounding sphere in geometry " + mName + " may be invalid. Accuracy: " + std::to_string(error));
     }
 
     mBoundingSphere->SetCenter(sphereCenter);
@@ -301,7 +301,7 @@ void Geometry::ComputeBoundingVolumes()
 
 void Geometry::ShowInformation() const
 {
-    Debug::Log("Information of the mesh " + mName.toStdString() + ":");
+    Debug::Log("Information of the mesh " + mName + ":");
     Debug::Log("   Number of faces: " + std::to_string(GetNumFaces()));
     Debug::Log("   Number of vertices: " + std::to_string(GetNumVertices()));
     Debug::Log("   Diameter: " + std::to_string(mBoundingSphere->GetRadius()*2));

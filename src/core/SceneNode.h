@@ -4,23 +4,22 @@
 #include "Camera.h"
 #include "Mesh.h"
 
-#include <QtCore/QString>
-
 #include "glm/mat4x4.hpp"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 /// Class for a node of a scene
 class SceneNode : public std::enable_shared_from_this<SceneNode>
 {
 public:
-    explicit SceneNode(const QString &pName);
+    explicit SceneNode(const std::string &pName);
     explicit SceneNode(const SceneNode& sceneNode) = delete;
     ~SceneNode() = default;
 
     /// Get the name of the node
-    QString GetName() const;
+    std::string GetName() const;
 
     /// Set the local transform of the node (scale must be equal in x, y and z)
     void SetLocalTransform(const glm::mat4 &pTransform);
@@ -70,7 +69,7 @@ private:
     void UpdateGeometryInformation();
 
     /// Name of the node
-    QString mName;
+    std::string mName;
     /// Local transform
     glm::mat4 mLocalTransform;
     /// Global transform

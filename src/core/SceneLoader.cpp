@@ -64,7 +64,7 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
 std::shared_ptr<SceneNode> SceneLoader::LoadSceneNode(const std::vector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode)
 {
     // Store the node's name.
-    auto nodeLoaded = std::make_shared<SceneNode>( QString(pNode->mName.data) );
+    auto nodeLoaded = std::make_shared<SceneNode>( pNode->mName.data );
 
     // Load the transformation matrix.
     aiMatrix4x4 mat = pNode->mTransformation;
@@ -194,7 +194,7 @@ std::unique_ptr<Geometry> SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
 {
     unsigned int numberOfVertices = pAiMesh->mNumVertices;
 
-    auto geometry = std::make_unique<Geometry>(QString(pAiMesh->mName.data), GeometryTopology::Triangles);
+    auto geometry = std::make_unique<Geometry>(pAiMesh->mName.data, GeometryTopology::Triangles);
 
     if( pAiMesh->mPrimitiveTypes == aiPrimitiveType_TRIANGLE )
     {
