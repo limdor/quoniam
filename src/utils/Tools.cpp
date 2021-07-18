@@ -337,7 +337,7 @@ std::filesystem::path Tools::GetProgramPath()
     {
         if (!std::filesystem::create_directories(complete_path))
         {
-            Debug::Warning(QString("Impossible to create the %1 folder!").arg(QString::fromStdString(complete_path.string())));
+            Debug::Warning("Impossible to create the " + complete_path.string() + " folder!");
         }
     }
 

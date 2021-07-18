@@ -39,9 +39,9 @@ void Scene::ShowInformation() const
 {
     auto boundingSphere = GetBoundingSphere();
     glm::vec3 sceneCenter = boundingSphere->GetCenter();
-    Debug::Log( QString("Scene: %1").arg(mName) );
-    Debug::Log( QString("  Number of vertices: %1").arg(GetNumberOfVertices()) );
-    Debug::Log( QString("  Number of polygons: %1").arg(GetNumberOfPolygons()) );
-    Debug::Log( QString("  Center: (%1, %2, %3)").arg(sceneCenter.x).arg(sceneCenter.y).arg(sceneCenter.z) );
-    Debug::Log( QString("  Radius: %1").arg(boundingSphere->GetRadius()) );
+    Debug::Log( "Scene: " + mName.toStdString() );
+    Debug::Log( "  Number of vertices: " + std::to_string(GetNumberOfVertices()) );
+    Debug::Log( "  Number of polygons: " + std::to_string(GetNumberOfPolygons()) );
+    Debug::Log( "  Center: (" + std::to_string(sceneCenter.x) + ", " + std::to_string(sceneCenter.y) + ", " + std::to_string(sceneCenter.z) + ")");
+    Debug::Log( "  Radius: " + std::to_string(boundingSphere->GetRadius()) );
 }

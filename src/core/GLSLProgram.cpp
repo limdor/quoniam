@@ -74,7 +74,7 @@ void GLSLProgram::UseProgram() const
 void GLSLProgram::ShowInformation() const
 {
     // Show program name
-    Debug::Log( QString("Program name: %1").arg(mName) );
+    Debug::Log( "Program name: " + mName.toStdString() );
 
     // Show uniforms information
     Debug::Log("Uniforms:");
@@ -82,7 +82,7 @@ void GLSLProgram::ShowInformation() const
     Debug::Log("------------------------------------------------");;
     for( auto it = mUniforms.cbegin(); it != mUniforms.cend(); ++it )
     {
-        Debug::Log( QString(" %1 | %2").arg(it->first).arg(it->second) );
+        Debug::Log( " " + it->first.toStdString() + " | " + std::to_string(it->second));
     }
 
     // Show attributes information
@@ -91,7 +91,7 @@ void GLSLProgram::ShowInformation() const
     Debug::Log("------------------------------------------------");
     for( auto it = mAttributes.cbegin(); it != mAttributes.cend(); ++it )
     {
-        Debug::Log( QString(" %1 | %2").arg(it->first).arg(it->second) );
+        Debug::Log( " " + it->first.toStdString() + " | " + std::to_string(it->second));
     }
 }
 
@@ -100,7 +100,7 @@ GLint GLSLProgram::GetUniformLocation(const QString& pName) const
     const auto it = mUniforms.find(pName);
     if( it == mUniforms.end() )
     {
-        Debug::Warning( QString("Invalid uniform: %1").arg(pName) );
+        Debug::Warning( "Invalid uniform: " + pName.toStdString());
         return -1;
     }
     else
@@ -144,7 +144,7 @@ GLint GLSLProgram::GetAttribLocation(const QString& pName) const
     const auto it = mAttributes.find(pName);
     if( it == mAttributes.end() )
     {
-        Debug::Warning( QString("Invalid attribute: %1").arg(pName) );
+        Debug::Warning( "Invalid attribute: " + pName.toStdString() );
         return -1;
     }
     else
@@ -168,7 +168,7 @@ void GLSLProgram::BindTexture(GLenum pTarget, const QString& pTextureName, GLuin
     GLint id = GetUniformLocation( pTextureName );
     if( id == -1 )
     {
-        Debug::Warning( QString("Invalid texture: %1").arg(pTextureName) );
+        Debug::Warning( "Invalid texture: " + pTextureName.toStdString() );
     }
     glUniform1i(id, pTextureUnit);
 }

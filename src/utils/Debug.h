@@ -15,11 +15,11 @@ class Debug
 {
 public:
     /// Output a log message
-    static void Log(const QString& pMessage);
+    static void Log(const std::string& pMessage);
     /// Output a warning message
-    static void Warning(const QString& pMessage);
+    static void Warning(const std::string& pMessage);
     /// Output a error message
-    static void Error(const QString& pMessage);
+    static void Error(const std::string& pMessage);
 
     /// Set the console
     static void SetConsole(QPlainTextEdit * pConsole);
@@ -27,7 +27,7 @@ public:
     static std::vector<std::tuple<GLenum, std::optional<std::string>>> ExtractGlErrorsFromDriver();
 
     /// If there are errors return true and show them using Debug::Error
-    static bool CheckGLError(const char *pFile, int pLine);
+    static bool CheckGLError(std::string const& pFile, int pLine);
 #ifdef QT_DEBUG
     #define CHECK_GL_ERROR() Debug::CheckGLError(__FILE__, __LINE__)
 #else

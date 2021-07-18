@@ -5,19 +5,19 @@
 
 QPlainTextEdit* Debug::mConsole;
 
-void Debug::Log(const QString &pMessage)
+void Debug::Log(const std::string &pMessage)
 {
-    qDebug(pMessage.toStdString().c_str());
+    qDebug(pMessage.c_str());
 }
 
-void Debug::Warning(const QString& pMessage)
+void Debug::Warning(const std::string& pMessage)
 {
-    qWarning(pMessage.toStdString().c_str());
+    qWarning(pMessage.c_str());
 }
 
-void Debug::Error(const QString &pMessage)
+void Debug::Error(const std::string &pMessage)
 {
-    qCritical(pMessage.toStdString().c_str());
+    qCritical(pMessage.c_str());
 }
 
 void Debug::SetConsole(QPlainTextEdit * pConsole)
@@ -54,15 +54,15 @@ std::string iso_8859_1_to_utf8(std::string const &str)
     return strOut;
 }
 
-bool Debug::CheckGLError(const char *pFile, int pLine)
+bool Debug::CheckGLError(std::string const& pFile, int pLine)
 {
     auto const errors = ExtractGlErrorsFromDriver();
     bool const retCode = !errors.empty();
     for (auto const &error : errors)
     {
         auto const &[error_code, optional_string] = error;
-        QString const optional_message{optional_string ? QString::fromStdString(iso_8859_1_to_utf8(*optional_string)) : "no message available"};
-        Debug::Error(QString("GL Error #%1(%2) in file %3 at line: %4").arg(error_code).arg(optional_message).arg(pFile).arg(pLine));
+        std::string const optional_message{optional_string ? iso_8859_1_to_utf8(*optional_string) : "no message available"};
+        Debug::Error("GL Error #" + std::to_string(error_code) + "(" + optional_message + ") in file " + pFile + " at line: " + std::to_string(pLine));
     }
     return retCode;
 }

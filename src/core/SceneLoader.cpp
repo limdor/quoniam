@@ -42,20 +42,20 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
     {
         const QFileInfo fileInfo(pPath);
 
-        Debug::Log(QString("Load materials"));
+        Debug::Log("Load materials");
         const std::vector<std::shared_ptr<Material>> materials = LoadMaterials(scene, fileInfo.absolutePath());
-        Debug::Log(QString("Load geometries"));
+        Debug::Log("Load geometries");
         const std::vector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
-        Debug::Log(QString("Load meshes"));
+        Debug::Log("Load meshes");
         const std::vector<std::shared_ptr<Mesh>> meshes = LoadMeshes(scene, materials, geometries);
 
-        Debug::Log(QString("Load scene"));
+        Debug::Log("Load scene");
         auto rootNode = LoadSceneNode( meshes, scene->mRootNode );
         sceneLoaded = std::make_unique<Scene>( fileInfo.baseName(), std::move(rootNode), materials, geometries, meshes );
     }
     else
     {
-        Debug::Error(QString("Impossible to load with AssimpLoader: %1").arg(importer.GetErrorString()));
+        Debug::Error(std::string{"Impossible to load with AssimpLoader: "} + importer.GetErrorString());
         sceneLoaded = std::make_unique<Scene>("Default", std::make_unique<SceneNode>("Default"), std::vector<std::shared_ptr<Material>>(), std::vector<std::shared_ptr<Geometry>>(), std::vector<std::shared_ptr<Mesh>>());
     }
     return sceneLoaded;
@@ -155,15 +155,15 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
             QFile file(finalTexturePath);
             if(!file.exists())
             {
-                Debug::Warning(QString("Image %1 not found").arg(finalTexturePath));
+                Debug::Warning("Image " + finalTexturePath.toStdString() + " not found");
             }
             else
             {
-                Debug::Warning(QString("Impossible to load the image: %1").arg(finalTexturePath));
+                Debug::Warning("Impossible to load the image: " + finalTexturePath.toStdString());
                 QFileInfo info(finalTexturePath);
                 if(info.suffix() == "tga")
                 {
-                    Debug::Warning(QString("RLE compression not supported in tga files"));
+                    Debug::Warning("RLE compression not supported in tga files");
                 }
                 QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
                 QString output;
@@ -172,7 +172,7 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
                     output += supportedFormats.at(k);
                     output += ", ";
                 }
-                Debug::Log(QString("Supported images: %1").arg(output));
+                Debug::Log("Supported images: " + output.toStdString());
             }
         }
     }
@@ -254,7 +254,7 @@ std::unique_ptr<Geometry> SceneLoader::LoadGeometry(const aiMesh* pAiMesh)
                 }
                 else
                 {
-                    Debug::Warning(QString("Only 2 UV components supported"));
+                    Debug::Warning("Only 2 UV components supported");
                 }
             }
         }
@@ -304,109 +304,109 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aiString name;
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_NAME, name) )
     {
-        Debug::Log( QString("Name: %1").arg(name.data) );
+        Debug::Log( std::string{"Name: "} + name.data );
     }
     aiColor3D color;
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color) )
     {
-        Debug::Log( QString("   Ambient color: (%1, %2, %3)").arg(color.r).arg(color.g).arg(color.b) );
+        Debug::Log( "   Ambient color: (" + std::to_string(color.r) + ", " + std::to_string(color.g) + ", " + std::to_string(color.b) + ")");
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, color) )
     {
-        Debug::Log( QString("   Diffuse color: (%1, %2, %3)").arg(color.r).arg(color.g).arg(color.b) );
+        Debug::Log( "   Diffuse color: (" + std::to_string(color.r) + ", " + std::to_string(color.g) + ", " + std::to_string(color.b) + ")");
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_COLOR_EMISSIVE, color) )
     {
-        Debug::Log( QString("   Emissive color: (%1, %2, %3)").arg(color.r).arg(color.g).arg(color.b) );
+        Debug::Log( "   Emissive color: (" + std::to_string(color.r) + ", " + std::to_string(color.g) + ", " + std::to_string(color.b) + ")");
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_COLOR_REFLECTIVE, color) )
     {
-        Debug::Log( QString("   Reflective color: (%1, %2, %3)").arg(color.r).arg(color.g).arg(color.b) );
+        Debug::Log( "   Reflective color: (" + std::to_string(color.r) + ", " + std::to_string(color.g) + ", " + std::to_string(color.b) + ")");
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_COLOR_SPECULAR, color) )
     {
-        Debug::Log( QString("   Specular color: (%1, %2, %3)").arg(color.r).arg(color.g).arg(color.b) );
+        Debug::Log( "   Specular color: (" + std::to_string(color.r) + ", " + std::to_string(color.g) + ", " + std::to_string(color.b) + ")");
     }
     float value;
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_SHININESS, value) )
     {
-        Debug::Log( QString("   Shininess: %1").arg(value) );
+        Debug::Log( "   Shininess: " + std::to_string(value) );
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_SHININESS_STRENGTH, value) )
     {
-        Debug::Log( QString("   Shininess strength: %1").arg(value) );
+        Debug::Log( "   Shininess strength: " + std::to_string(value) );
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_COLOR_TRANSPARENT, color) )
     {
-        Debug::Log( QString("   Transparent color: (%1, %2, %3)").arg(color.r).arg(color.g).arg(color.b) );
+        Debug::Log( "   Transparent color: (" + std::to_string(color.r) + ", " + std::to_string(color.g) + ", " + std::to_string(color.b) + ")");
     }
     int intValue;
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_ENABLE_WIREFRAME, intValue) )
     {
         if( intValue == 0 )
         {
-            Debug::Log( QString("   Wireframe: Disabled") );
+            Debug::Log( "   Wireframe: Disabled" );
         }
         else if( intValue == 1 )
         {
-            Debug::Log( QString("   Wireframe: Enabled") );
+            Debug::Log( "   Wireframe: Enabled" );
         }
         else
         {
-            Debug::Warning( QString("   Wireframe: Unexpected value") );
+            Debug::Warning( "   Wireframe: Unexpected value" );
         }
     }
     if( AI_SUCCESS == pMaterial->Get(AI_MATKEY_SHADING_MODEL, intValue) )
     {
         if( intValue == aiShadingMode_Flat )
         {
-            Debug::Log( QString("   Shading model: Flat") );
+            Debug::Log( "   Shading model: Flat" );
         }
         else if( intValue == aiShadingMode_Gouraud )
         {
-            Debug::Log( QString("   Shading model: Gouraud (simple)") );
+            Debug::Log( "   Shading model: Gouraud (simple)" );
         }
         else if( intValue == aiShadingMode_Phong )
         {
-            Debug::Log( QString("   Shading model: Phong") );
+            Debug::Log( "   Shading model: Phong" );
         }
         else if( intValue == aiShadingMode_Blinn )
         {
-            Debug::Log( QString("   Shading model: Blinn-Phong") );
+            Debug::Log( "   Shading model: Blinn-Phong" );
         }
         else if( intValue == aiShadingMode_Toon )
         {
-            Debug::Log( QString("   Shading model: Toon (comic)") );
+            Debug::Log( "   Shading model: Toon (comic)" );
         }
         else if( intValue == aiShadingMode_OrenNayar )
         {
-            Debug::Log( QString("   Shading model: Oren-Nayar") );
+            Debug::Log( "   Shading model: Oren-Nayar" );
         }
         else if( intValue == aiShadingMode_Minnaert )
         {
-            Debug::Log( QString("   Shading model: Minnaert") );
+            Debug::Log( "   Shading model: Minnaert" );
         }
         else if( intValue == aiShadingMode_CookTorrance )
         {
-            Debug::Log( QString("   Shading model: Cook-Torrance") );
+            Debug::Log( "   Shading model: Cook-Torrance" );
         }
         else if( intValue == aiShadingMode_NoShading )
         {
-            Debug::Log( QString("   Shading model: No shading") );
+            Debug::Log( "   Shading model: No shading" );
         }
         else if( intValue == aiShadingMode_Fresnel )
         {
-            Debug::Log( QString("   Shading model: Fresnel") );
+            Debug::Log( "   Shading model: Fresnel" );
         }
         else
         {
-            Debug::Warning( QString("   Shading model: Unexpected value") );
+            Debug::Warning( "   Shading model: Unexpected value" );
         }
     }
     unsigned int aux = pMaterial->GetTextureCount(aiTextureType_AMBIENT);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of ambient textures: %1").arg( aux ) );
+        Debug::Log( "   Number of ambient textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_AMBIENT, i);
@@ -415,7 +415,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_DIFFUSE);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of diffuse textures: %1").arg( aux ) );
+        Debug::Log( "   Number of diffuse textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_DIFFUSE, i);
@@ -424,7 +424,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_DISPLACEMENT);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of displacement textures: %1").arg( aux ) );
+        Debug::Log( "   Number of displacement textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_DISPLACEMENT, i);
@@ -433,7 +433,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_EMISSIVE);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of emissive textures: %1").arg( aux ) );
+        Debug::Log( "   Number of emissive textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_EMISSIVE, i);
@@ -442,7 +442,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_HEIGHT);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of height textures: %1").arg( aux ) );
+        Debug::Log( "   Number of height textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_HEIGHT, i);
@@ -451,7 +451,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_LIGHTMAP);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of lightmap textures: %1").arg( aux ) );
+        Debug::Log( "   Number of lightmap textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_LIGHTMAP, i);
@@ -460,7 +460,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_NORMALS);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of normals textures: %1").arg( aux ) );
+        Debug::Log( "   Number of normals textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_NORMALS, i);
@@ -469,7 +469,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_OPACITY);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of opacity textures: %1").arg( aux ) );
+        Debug::Log( "   Number of opacity textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_OPACITY, i);
@@ -478,7 +478,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_REFLECTION);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of reflection textures: %1").arg( aux ) );
+        Debug::Log( "   Number of reflection textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_REFLECTION, i);
@@ -487,7 +487,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_SHININESS);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of shininess textures: %1").arg( aux ) );
+        Debug::Log( "   Number of shininess textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_SHININESS, i);
@@ -496,7 +496,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_SPECULAR);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of specular textures: %1").arg( aux ) );
+        Debug::Log( "   Number of specular textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_SPECULAR, i);
@@ -505,7 +505,7 @@ void SceneLoader::ShowMaterialInformation(const aiMaterial* pMaterial)
     aux = pMaterial->GetTextureCount(aiTextureType_UNKNOWN);
     if( aux > 0 )
     {
-        Debug::Log( QString("   Number of unknown textures: %1").arg( aux ) );
+        Debug::Log( "   Number of unknown textures: " + std::to_string(aux));
         for( unsigned int i = 0; i < aux; i++ )
         {
             ShowTextureInformation(pMaterial, aiTextureType_UNKNOWN, i);
@@ -521,15 +521,15 @@ void SceneLoader::ShowTextureInformation(const aiMaterial* pMaterial, aiTextureT
     float blend;
     aiTextureOp op;
     aiTextureMapMode mapmode;
-    Debug::Log( QString("      Information of texture %1").arg(pTextureNumber) );
+    Debug::Log( "      Information of texture " + std::to_string(pTextureNumber) );
     if( AI_SUCCESS == pMaterial->GetTexture( pType, pTextureNumber, &path, &mapping, &uvindex, &blend, &op, &mapmode ) )
     {
-        Debug::Log( QString("         Path: %1").arg(path.data) );
-        Debug::Log( QString("         UV index: %1").arg(uvindex) );
-        Debug::Log( QString("         Blend: %1").arg(blend) );
+        Debug::Log( "         Path: " + std::string{path.data} );
+        Debug::Log( "         UV index: " + std::to_string(uvindex) );
+        Debug::Log( "         Blend: " + std::to_string(blend) );
     }
     else
     {
-        Debug::Log( QString("         Impossible to get the texture") );
+        Debug::Log( "         Impossible to get the texture" );
     }
 }

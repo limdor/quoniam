@@ -68,12 +68,12 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
         if( basicVS.HasCompilationErrors() )
         {
-            Debug::Error( QString::fromStdString("shaders/Basic.vert: " + basicVS.GetCompilationLog()) );
+            Debug::Error( "shaders/Basic.vert: " + basicVS.GetCompilationLog() );
         }
         GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
         if( colorPerFaceFS.HasCompilationErrors() )
         {
-            Debug::Error( QString::fromStdString("shaders/ColorPerFace.frag: " + colorPerFaceFS.GetCompilationLog()) );
+            Debug::Error( "shaders/ColorPerFace.frag: " + colorPerFaceFS.GetCompilationLog() );
         }
 
         mShaderColorPerFace = std::make_unique<GLSLProgram>("ShaderColorPerFace");
@@ -286,7 +286,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     glDeleteRenderbuffers( 1, &renderBuffer );
 
     mProjectedAreasMatrix->Compute();
-    Debug::Log( QString("GLCanvas::ComputeViewpointsProbabilities %1x%2 - Time elapsed: %3 ms").arg(windowWidth).arg(windowHeight).arg(t.elapsed()) );
+    Debug::Log( "GLCanvas::ComputeViewpointsProbabilities " + std::to_string(windowWidth) + "x" + std::to_string(windowHeight) + " - Time elapsed: " + std::to_string(t.elapsed()) + " ms");
 
     RestoreOpenGLStats();
 

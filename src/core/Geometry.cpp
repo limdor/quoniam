@@ -292,7 +292,7 @@ void Geometry::ComputeBoundingVolumes()
     {
         double slack;
         double error = mb.accuracy(slack);
-        Debug::Warning(QString("Bounding sphere in geometry %1 may be invalid. Accuracy: %2").arg(mName).arg(error));
+        Debug::Warning("Bounding sphere in geometry " + mName.toStdString() + " may be invalid. Accuracy: " + std::to_string(error));
     }
 
     mBoundingSphere->SetCenter(sphereCenter);
@@ -301,10 +301,10 @@ void Geometry::ComputeBoundingVolumes()
 
 void Geometry::ShowInformation() const
 {
-    Debug::Log(QString("Information of the mesh %1:").arg(mName));
-    Debug::Log(QString("   Number of faces: %1").arg(GetNumFaces()));
-    Debug::Log(QString("   Number of vertices: %1").arg(GetNumVertices()));
-    Debug::Log(QString("   Diameter: %1").arg(mBoundingSphere->GetRadius()*2));
+    Debug::Log("Information of the mesh " + mName.toStdString() + ":");
+    Debug::Log("   Number of faces: " + std::to_string(GetNumFaces()));
+    Debug::Log("   Number of vertices: " + std::to_string(GetNumVertices()));
+    Debug::Log("   Diameter: " + std::to_string(mBoundingSphere->GetRadius()*2));
 }
 
 std::shared_ptr<AxisAlignedBoundingBox> Geometry::GetBoundingBox() const

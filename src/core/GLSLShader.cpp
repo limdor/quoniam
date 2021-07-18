@@ -2,8 +2,6 @@
 
 #include "Debug.h"
 
-#include <QtCore/QString>
-
 #include <fstream>
 
 GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType):
@@ -87,11 +85,11 @@ void GLSLShader::ShowCompilationLog() const
 {
     if(mHasCompilationErrors)
     {
-        Debug::Error(QString::fromStdString(mCompilationLog));
+        Debug::Error(mCompilationLog);
     }
     else
     {
-        Debug::Log(QString::fromStdString(mCompilationLog));
+        Debug::Log(mCompilationLog);
     }
 }
 
