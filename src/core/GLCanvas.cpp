@@ -667,42 +667,42 @@ void GLCanvas::LoadShaders()
     const GLSLShader basicVS("shaders/Basic.vert", GL_VERTEX_SHADER);
     if( basicVS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/Basic.vert: %1").arg( basicVS.GetCompilationLog( )) );
+        Debug::Error( QString::fromStdString("shaders/Basic.vert: " + basicVS.GetCompilationLog()) );
     }
     const GLSLShader dualPeelingInitFS("shaders/DualPeelingInit.frag", GL_FRAGMENT_SHADER);
     if( dualPeelingInitFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingInit.frag: %1").arg(dualPeelingInitFS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/DualPeelingInit.frag: " + dualPeelingInitFS.GetCompilationLog()) );
     }
     const GLSLShader dualPeelingPeelVS("shaders/DualPeelingPeel.vert", GL_VERTEX_SHADER);
     if( dualPeelingPeelVS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingPeel.vert: %1").arg(dualPeelingPeelVS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/DualPeelingPeel.vert: " + dualPeelingPeelVS.GetCompilationLog()) );
     }
     const GLSLShader dualPeelingPeelFS("shaders/DualPeelingPeel.frag", GL_FRAGMENT_SHADER);
     if( dualPeelingPeelFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingPeel.frag: %1").arg(dualPeelingPeelFS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/DualPeelingPeel.frag: " + dualPeelingPeelFS.GetCompilationLog()) );
     }
     const GLSLShader shadeFragmentFS("shaders/ShadeFragment.frag", GL_FRAGMENT_SHADER);
     if( shadeFragmentFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/ShadeFragment.frag: %1").arg(shadeFragmentFS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/ShadeFragment.frag: " + shadeFragmentFS.GetCompilationLog()) );
     }
     const GLSLShader shadePerVertexColorFS("shaders/ShadePerVertexColor.frag", GL_FRAGMENT_SHADER);
     if( shadePerVertexColorFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/ShadePerVertexColor.frag: %1").arg(shadePerVertexColorFS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/ShadePerVertexColor.frag: " + shadePerVertexColorFS.GetCompilationLog()) );
     }
     const GLSLShader dualPeelingBlendFS("shaders/DualPeelingBlend.frag", GL_FRAGMENT_SHADER);
     if( dualPeelingBlendFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingBlend.frag: %1").arg(dualPeelingBlendFS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/DualPeelingBlend.frag: " + dualPeelingBlendFS.GetCompilationLog()) );
     }
     const GLSLShader dualPeelingFinalFS("shaders/DualPeelingFinal.frag", GL_FRAGMENT_SHADER);
     if( dualPeelingFinalFS.HasCompilationErrors() )
     {
-        Debug::Error( QString("shaders/DualPeelingFinal.frag: %1").arg(dualPeelingFinalFS.GetCompilationLog()) );
+        Debug::Error( QString::fromStdString("shaders/DualPeelingFinal.frag: " + dualPeelingFinalFS.GetCompilationLog()) );
     }
 
     if(!basicVS.HasCompilationErrors() && !dualPeelingInitFS.HasCompilationErrors())

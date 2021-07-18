@@ -2,22 +2,24 @@
 
 #include "Debug.h"
 
-#include <QtCore/QFile>
 #include <QtCore/QString>
-#include <QtCore/QTextStream>
 
-GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
+#include <fstream>
+
+GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType):
     mType(pType)
 {
     // Load shader's source text.
-    QFile file(pSourceFile);
-    if (file.open(QIODevice::ReadOnly))
+    std::ifstream file(pSourceFile, std::ios::in);
+    if (!file.is_open())
     {
-        QTextStream stream (&file);
-        const QString text = stream.readAll();
+        mCompilationLog = "File not found! " + pSourceFile;
+        mHasCompilationErrors = true;
+    }
+    else
+    {
+        std::string const fileContent{std::istreambuf_iterator<char>{file}, {}};
         file.close();
-
-        const QByteArray code = text.toLocal8Bit();
 
         // Create the shader from a text file.
         mId = glCreateShader(pType);
@@ -26,7 +28,7 @@ GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
             GLint blen = 0;
             GLsizei slen = 0;
 
-            const char *constCode = code.data();
+            const char *constCode = fileContent.c_str();
             glShaderSource( mId, 1, &constCode, nullptr );
             glCompileShader(mId);
             CHECK_GL_ERROR();
@@ -35,7 +37,7 @@ GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
             if(blen == GL_TRUE)
             {
                 mHasCompilationErrors = false;
-                mCompilationLog = QString("Compilation successful!");
+                mCompilationLog = "Compilation successful!";
             }
             else
             {
@@ -49,11 +51,11 @@ GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
                     {
                         glGetShaderInfoLog(mId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();
-                        mCompilationLog = QString::fromLocal8Bit(compilerLog);
+                        mCompilationLog = compilerLog;
                     }
                     else
                     {
-                        mCompilationLog = QString("Could not allocate compiler log buffer!");
+                        mCompilationLog = "Could not allocate compiler log buffer!";
                     }
                 }
             }
@@ -61,13 +63,8 @@ GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
         else
         {
             mHasCompilationErrors = true;
-            mCompilationLog = QString("Impossible to create the shader");
+            mCompilationLog = "Impossible to create the shader";
         }
-    }
-    else
-    {
-        mHasCompilationErrors = true;
-        mCompilationLog = QString("File not found! %1").arg(pSourceFile);
     }
 }
 
@@ -81,7 +78,7 @@ bool GLSLShader::HasCompilationErrors() const
     return mHasCompilationErrors;
 }
 
-const QString& GLSLShader::GetCompilationLog() const
+const std::string& GLSLShader::GetCompilationLog() const
 {
     return mCompilationLog;
 }
@@ -90,11 +87,11 @@ void GLSLShader::ShowCompilationLog() const
 {
     if(mHasCompilationErrors)
     {
-        Debug::Error(mCompilationLog);
+        Debug::Error(QString::fromStdString(mCompilationLog));
     }
     else
     {
-        Debug::Log(mCompilationLog);
+        Debug::Log(QString::fromStdString(mCompilationLog));
     }
 }
 

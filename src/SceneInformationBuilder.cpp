@@ -68,12 +68,12 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
         GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
         if( basicVS.HasCompilationErrors() )
         {
-            Debug::Error( QString("shaders/Basic.vert: %1").arg(basicVS.GetCompilationLog()) );
+            Debug::Error( QString::fromStdString("shaders/Basic.vert: " + basicVS.GetCompilationLog()) );
         }
         GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
         if( colorPerFaceFS.HasCompilationErrors() )
         {
-            Debug::Error( QString("shaders/ColorPerFace.frag: %1").arg(colorPerFaceFS.GetCompilationLog()) );
+            Debug::Error( QString::fromStdString("shaders/ColorPerFace.frag: " + colorPerFaceFS.GetCompilationLog()) );
         }
 
         mShaderColorPerFace = std::make_unique<GLSLProgram>("ShaderColorPerFace");
