@@ -2,7 +2,6 @@
 
 #include "Debug.h"
 
-#include <QtCore/QFileInfo>
 #include <QtGui/QImageReader>
 
 #include "assimp/Importer.hpp"
@@ -11,7 +10,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/matrix.hpp"
 
-std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
+std::unique_ptr<Scene> SceneLoader::LoadScene(const std::filesystem::path &pPath)
 {
     std::unique_ptr<Scene> sceneLoaded;
 
@@ -27,7 +26,7 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
     //   aiProcess_PreTransformVertices
     //   aiProcess_RemoveRedundantMaterials
     //   aiProcess_OptimizeMeshes
-    const aiScene* scene = importer.ReadFile(pPath.toLatin1().data(),
+    const aiScene* scene = importer.ReadFile(pPath.string().c_str(),
                                              aiProcess_GenNormals               |
                                              aiProcess_CalcTangentSpace         |
                                              aiProcess_Triangulate              |
@@ -40,10 +39,8 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
 
     if(scene)
     {
-        const QFileInfo fileInfo(pPath);
-
         Debug::Log("Load materials");
-        const std::vector<std::shared_ptr<Material>> materials = LoadMaterials(scene, fileInfo.absolutePath());
+        const std::vector<std::shared_ptr<Material>> materials = LoadMaterials(scene, std::filesystem::absolute(pPath.parent_path()));
         Debug::Log("Load geometries");
         const std::vector<std::shared_ptr<Geometry>> geometries = LoadGeometries(scene);
         Debug::Log("Load meshes");
@@ -51,7 +48,7 @@ std::unique_ptr<Scene> SceneLoader::LoadScene(const QString &pPath)
 
         Debug::Log("Load scene");
         auto rootNode = LoadSceneNode( meshes, scene->mRootNode );
-        sceneLoaded = std::make_unique<Scene>( fileInfo.baseName().toStdString(), std::move(rootNode), materials, geometries, meshes );
+        sceneLoaded = std::make_unique<Scene>( pPath.stem().string(), std::move(rootNode), materials, geometries, meshes );
     }
     else
     {
@@ -88,7 +85,7 @@ std::shared_ptr<SceneNode> SceneLoader::LoadSceneNode(const std::vector<std::sha
     return nodeLoaded;
 }
 
-std::vector<std::shared_ptr<Material>> SceneLoader::LoadMaterials(const aiScene* pAiScene, const QString& pScenePath)
+std::vector<std::shared_ptr<Material>> SceneLoader::LoadMaterials(const aiScene* pAiScene, const std::filesystem::path& pScenePath)
 {
     int numberOfMaterials = (int)pAiScene->mNumMaterials;
     std::vector<std::shared_ptr<Material>> materials(numberOfMaterials);
@@ -99,7 +96,7 @@ std::vector<std::shared_ptr<Material>> SceneLoader::LoadMaterials(const aiScene*
     return materials;
 }
 
-std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const QString& pScenePath)
+std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMaterial, const std::filesystem::path& pScenePath)
 {
     std::unique_ptr<Material> material;
 
@@ -138,30 +135,25 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
     if( pAiMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0 )
     {
         aiString actualAiTexturePath;
-
         pAiMaterial->GetTexture( aiTextureType_DIFFUSE, 0, &actualAiTexturePath );
-        const QString actualTexturePath( actualAiTexturePath.data );
 
-        QString finalTexturePath = pScenePath;
-        finalTexturePath.append("/").append(actualTexturePath);
+        std::filesystem::path const finalTexturePath = pScenePath / actualAiTexturePath.data;
 
         QImage imageTexture{};
-        if( imageTexture.load(finalTexturePath) )
+        if( imageTexture.load(QString::fromStdString(finalTexturePath.string())) )
         {
             material->SetKdTexture(imageTexture);
         }
         else
         {
-            QFile file(finalTexturePath);
-            if(!file.exists())
+            if(!std::filesystem::exists(finalTexturePath))
             {
-                Debug::Warning("Image " + finalTexturePath.toStdString() + " not found");
+                Debug::Warning("Image " + finalTexturePath.string() + " not found");
             }
             else
             {
-                Debug::Warning("Impossible to load the image: " + finalTexturePath.toStdString());
-                QFileInfo info(finalTexturePath);
-                if(info.suffix() == "tga")
+                Debug::Warning("Impossible to load the image: " + finalTexturePath.string());
+                if(finalTexturePath.extension() == ".tga")
                 {
                     Debug::Warning("RLE compression not supported in tga files");
                 }

@@ -316,13 +316,13 @@ void MainModuleController::mousePressEvent(QMouseEvent *pEvent)
     mLastMousePosition = pEvent->pos();
 }
 
-void MainModuleController::LoadScene(const QString &pFileName)
+void MainModuleController::LoadScene(const std::filesystem::path &pFileName)
 {
     QTime t;
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
     t.start();
-    Debug::Log("Loading " + pFileName.toStdString());
+    Debug::Log("Loading " + pFileName.string());
 
     mUpdateView = true;
     mUi->leftTabWidget->hide();
@@ -581,7 +581,7 @@ void MainModuleController::OpenModel()
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Choose a model"), "./", tr("Supported models (*.3ds *.dae *.off *.ply *.obj);;3ds Max 3DS (*.3ds);;Collada (*.dae);;Object File Format (*.off);;Stanford Polygon Library (*.ply);;Wavefront Object (*.obj);;All files (*.*)"));
     if(!fileName.isEmpty())
     {
-        LoadScene(fileName);
+        LoadScene(fileName.toStdString());
     }
 }
 
@@ -620,7 +620,7 @@ void MainModuleController::RunDutagaciBenchmark()
         size_t numberOfFiles = filestoLoad.size();
         for( size_t i = 0; i < numberOfFiles; i++ )
         {
-            LoadScene(filestoLoad.at(i));
+            LoadScene(filestoLoad.at(i).toStdString());
             LoadViewpointsFromSphere( distance, angle, 1.0f, 3, 640, false );
             float radius = mScene->GetBoundingSphere()->GetRadius();
             glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
