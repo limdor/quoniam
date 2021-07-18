@@ -6,6 +6,8 @@
 #include "glm/geometric.hpp"
 #include "glm/exponential.hpp"
 
+#include <cassert>
+
 glm::vec3 SpherePointCloud::Up(const glm::vec3 &pViewpoint)
 {
     glm::vec3 front = -pViewpoint;
@@ -339,7 +341,7 @@ void SpherePointCloud::ComputeQuasiUniformNeighbours()
 {
     mNeighbours.clear();
     const size_t nFaces = mFaces.size() / 3;
-    Q_ASSERT( nFaces * 3 == mFaces.size() );
+    assert( nFaces * 3 == mFaces.size() );
 
     for ( size_t i = 0; i < mNumberOfPoints; i++ )
     {
