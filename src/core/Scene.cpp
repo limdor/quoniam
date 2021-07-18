@@ -4,13 +4,13 @@
 
 #include "glm/vec3.hpp"
 
-Scene::Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes ):
+Scene::Scene(const std::string &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes ):
     mName(pName), mRootNode(std::move(pSceneRoot)), mMaterials(pMaterials), mGeometries(pGeometries), mMeshes(pMeshes)
 {
 
 }
 
-QString Scene::GetName() const
+std::string Scene::GetName() const
 {
     return mName;
 }
@@ -39,7 +39,7 @@ void Scene::ShowInformation() const
 {
     auto boundingSphere = GetBoundingSphere();
     glm::vec3 sceneCenter = boundingSphere->GetCenter();
-    Debug::Log( "Scene: " + mName.toStdString() );
+    Debug::Log( "Scene: " + mName );
     Debug::Log( "  Number of vertices: " + std::to_string(GetNumberOfVertices()) );
     Debug::Log( "  Number of polygons: " + std::to_string(GetNumberOfPolygons()) );
     Debug::Log( "  Center: (" + std::to_string(sceneCenter.x) + ", " + std::to_string(sceneCenter.y) + ", " + std::to_string(sceneCenter.z) + ")");

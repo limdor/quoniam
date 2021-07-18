@@ -560,7 +560,7 @@ void MainModuleController::UpdateRenderingGUI()
 
 QString MainModuleController::GetScreenshotName(size_t pViewpoint)
 {
-    QString name = mScene->GetName();
+    QString name = QString::fromStdString(mScene->GetName());
     name += "_";
     if( mUi->applyMaterialsCheckBox->isChecked() )
     {
@@ -774,7 +774,7 @@ void MainModuleController::on_ambientLightAmountSpinBox_valueChanged(double pVal
 
 void MainModuleController::on_bestAndWorstViewsButton_clicked()
 {
-    QString sceneName = mScene->GetName();
+    QString sceneName = QString::fromStdString(mScene->GetName());
 
     mUi->applyIlluminationCheckBox->setChecked(true);
     mOpenGLCanvas->ApplyIllumination(true);

@@ -4,12 +4,11 @@
 #include "BoundingSphere.h"
 #include "SceneNode.h"
 
-#include <QtCore/QString>
-
 #include <stack>
 #include <cassert>
 #include <iterator>
 #include <memory>
+#include <string>
 
 class Scene
 {
@@ -56,13 +55,13 @@ public:
         reference operator*() const {return *mCurrentNode;}
     };
     /// Create an scene given the name and the root scene node
-    Scene(const QString &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes );
+    Scene(const std::string &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes );
     Scene(const Scene& pScene) = delete;
     ~Scene() = default;
 
     inline const_iterator cbegin() const{return const_iterator{mRootNode};}
     inline const_iterator cend() const{return const_iterator{nullptr};}
-    QString GetName() const;
+    std::string GetName() const;
     std::shared_ptr<SceneNode const> GetRootNode() const;
     std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;
     size_t GetNumberOfPolygons() const;
@@ -70,7 +69,7 @@ public:
     void ShowInformation() const;
 
 private:
-    QString mName;
+    std::string mName;
     std::shared_ptr<SceneNode> mRootNode;
     /// List of materials used
     std::vector<std::shared_ptr<Material>> mMaterials;
