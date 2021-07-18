@@ -19,15 +19,12 @@ public:
     GLuint GetId() const;
 
 private:
-    /// Shader id
-    GLuint mGLId;
+    GLuint mId;
     /// Shader type using the same values than OpenGL (GL_VERTEX_SHADER, GL_TESS_CONTROL_SHADER,
     /// GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER and GL_FRAGMENT_SHADER)
     GLenum mType;
-    /// Compilation log
-    QString mLog;
-    /// Boolean to know if the compilation process has produced some errors
-    bool mHasErrors;
+    QString mCompilationLog;
+    bool mHasCompilationErrors;
 };
 
 #endif

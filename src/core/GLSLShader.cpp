@@ -20,85 +20,85 @@ GLSLShader::GLSLShader(const QString& pSourceFile, GLenum pType):
         const QByteArray code = text.toLocal8Bit();
 
         // Create the shader from a text file.
-        mGLId = glCreateShader(pType);
-        if( mGLId != 0 )
+        mId = glCreateShader(pType);
+        if( mId != 0 )
         {
             GLint blen = 0;
             GLsizei slen = 0;
 
             const char *constCode = code.data();
-            glShaderSource( mGLId, 1, &constCode, nullptr );
-            glCompileShader(mGLId);
+            glShaderSource( mId, 1, &constCode, nullptr );
+            glCompileShader(mId);
             CHECK_GL_ERROR();
-            glGetShaderiv(mGLId, GL_COMPILE_STATUS, &blen);
+            glGetShaderiv(mId, GL_COMPILE_STATUS, &blen);
             CHECK_GL_ERROR();
             if(blen == GL_TRUE)
             {
-                mHasErrors = false;
-                mLog = QString("Compilation successful!");
+                mHasCompilationErrors = false;
+                mCompilationLog = QString("Compilation successful!");
             }
             else
             {
-                mHasErrors = true;
-                glGetShaderiv(mGLId, GL_INFO_LOG_LENGTH, &blen);
+                mHasCompilationErrors = true;
+                glGetShaderiv(mId, GL_INFO_LOG_LENGTH, &blen);
                 CHECK_GL_ERROR();
                 if (blen > 1)
                 {
                     char * compilerLog = new char[blen];
                     if ( compilerLog != nullptr )
                     {
-                        glGetShaderInfoLog(mGLId, blen, &slen, compilerLog);
+                        glGetShaderInfoLog(mId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();
-                        mLog = QString::fromLocal8Bit(compilerLog);
+                        mCompilationLog = QString::fromLocal8Bit(compilerLog);
                     }
                     else
                     {
-                        mLog = QString("Could not allocate compiler log buffer!");
+                        mCompilationLog = QString("Could not allocate compiler log buffer!");
                     }
                 }
             }
         }
         else
         {
-            mHasErrors = true;
-            mLog = QString("Impossible to create the shader");
+            mHasCompilationErrors = true;
+            mCompilationLog = QString("Impossible to create the shader");
         }
     }
     else
     {
-        mHasErrors = true;
-        mLog = QString("File not found! %1").arg(pSourceFile);
+        mHasCompilationErrors = true;
+        mCompilationLog = QString("File not found! %1").arg(pSourceFile);
     }
 }
 
 GLSLShader::~GLSLShader()
 {
-    glDeleteShader(mGLId);
+    glDeleteShader(mId);
 }
 
 bool GLSLShader::HasCompilationErrors() const
 {
-    return mHasErrors;
+    return mHasCompilationErrors;
 }
 
 const QString& GLSLShader::GetCompilationLog() const
 {
-    return mLog;
+    return mCompilationLog;
 }
 
 void GLSLShader::ShowCompilationLog() const
 {
-    if(mHasErrors)
+    if(mHasCompilationErrors)
     {
-        Debug::Error(mLog);
+        Debug::Error(mCompilationLog);
     }
     else
     {
-        Debug::Log(mLog);
+        Debug::Log(mCompilationLog);
     }
 }
 
 GLuint GLSLShader::GetId() const
 {
-    return mGLId;
+    return mId;
 }
