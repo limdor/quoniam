@@ -6,11 +6,10 @@
 #include "Mesh.h"
 #include "Scene.h"
 
-#include <QtCore/QString>
-
 #include "assimp/material.h"
 #include "assimp/scene.h"
 
+#include <filesystem>
 #include <memory>
 #include <vector>
 
@@ -19,7 +18,7 @@ class SceneLoader
 {
 public:
     /// Create a scene from the given file
-    static std::unique_ptr<Scene> LoadScene(const QString &pPath);
+    static std::unique_ptr<Scene> LoadScene(const std::filesystem::path &pPath);
 
 private:
     /// Create an SceneNode given an Assimp node
@@ -28,9 +27,9 @@ private:
     static std::shared_ptr<SceneNode> LoadSceneNode(const std::vector<std::shared_ptr<Mesh>>& pSceneMeshes, const aiNode* pNode);
 
     /// Load the materials in pScene
-    static std::vector<std::shared_ptr<Material>> LoadMaterials(const aiScene* pAiScene, const QString& pScenePath);
+    static std::vector<std::shared_ptr<Material>> LoadMaterials(const aiScene* pAiScene, const std::filesystem::path& pScenePath);
     /// Convert a aiMaterial to a Material
-    static std::unique_ptr<Material> LoadMaterial(const aiMaterial* pAiMaterial, const QString& pScenePath);
+    static std::unique_ptr<Material> LoadMaterial(const aiMaterial* pAiMaterial, const std::filesystem::path& pScenePath);
 
     /// Load the geometries in pAiScene
     static std::vector<std::shared_ptr<Geometry>> LoadGeometries(const aiScene* pAiScene);

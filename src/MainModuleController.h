@@ -18,6 +18,8 @@
 #include "SceneInformationBuilder.h"
 #include "SphereOfViewpoints.h"
 
+#include <filesystem>
+
 namespace Ui {
     class MainModule;
 }
@@ -41,7 +43,7 @@ protected:
 
 private:
     /// Scene related methods
-    void LoadScene(const QString &pFileName);
+    void LoadScene(const std::filesystem::path &pFileName);
 
     /// Mesh of viewpoints related methods
     void LoadViewpoints(int pWidthResolution, bool pFaceCulling);
