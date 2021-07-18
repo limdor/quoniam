@@ -262,7 +262,7 @@ void MainModuleController::keyPressEvent(QKeyEvent *pEvent)
     if( pEvent->key() == Qt::Key_N && mSphereOfViewpoints != nullptr )
     {
         size_t viewpoint = NextViewpoint();
-        Debug::Log("Viewpoint " + mSphereOfViewpoints->GetViewpoint(viewpoint)->mName.toStdString() + " selected");
+        Debug::Log("Viewpoint " + mSphereOfViewpoints->GetViewpoint(viewpoint)->mName + " selected");
 
         mUpdateView = false;
         for( size_t i = 0; i < mViewpointMeasuresSliders.size(); i++ )
@@ -437,7 +437,7 @@ void MainModuleController::SaveViewpointMeasuresInformation(const QString &pFile
         for( int i = 0; i < mSphereOfViewpoints->GetNumberOfViewpoints(); i++ )
         {
             stream.writeStartElement("viewpoint");
-            stream.writeAttribute("name", mSphereOfViewpoints->GetViewpoint(i)->mName);
+            stream.writeAttribute("name", QString::fromStdString(mSphereOfViewpoints->GetViewpoint(i)->mName));
             for( int j = 0; j < mViewpointMeasures.size(); j++ )
             {
                 QString name = QString::fromStdString(mViewpointMeasures.at(j)->GetName());
@@ -568,7 +568,7 @@ QString MainModuleController::GetScreenshotName(size_t pViewpoint)
     }
     if( pViewpoint != -1 )
     {
-        name += mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint)->mName;
+        name += QString::fromStdString(mSphereOfViewpoints->GetViewpoint(mCurrentViewpoint)->mName);
     }
     name.replace( " ", "_" );
     name.replace( ".", "_" );

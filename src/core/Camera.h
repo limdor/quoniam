@@ -3,12 +3,11 @@
 
 #include "Gizmo.h"
 
-#include <QtCore/QString>
-
 #include "glm/mat4x4.hpp"
 #include "glm/vec3.hpp"
 
 #include <memory>
+#include <string>
 
 /// Abstract camera class with methods to configure a generic camera
 class Camera : public Gizmo
@@ -59,7 +58,7 @@ public:
     virtual std::unique_ptr<Camera> Clone() const = 0;
 
     /// Name of the camera
-    QString mName;
+    std::string mName;
 
 protected:
     /// Boolean to know if the view matrix is updated

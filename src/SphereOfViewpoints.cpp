@@ -82,6 +82,6 @@ void SphereOfViewpoints::SetCameras()
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
         mCameras[i] = std::make_shared<PerspectiveCamera>( 0.05f, 2.0f, glm::vec3(0.0f), SpherePointCloud::Up(mVertices.at(i)), mVertices.at(i), mAngle, mAspectRatio );
-        mCameras[i]->mName = QString("%1").arg(i);
+        mCameras[i]->mName = std::to_string(i);
     }
 }
