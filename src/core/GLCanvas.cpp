@@ -374,7 +374,7 @@ void GLCanvas::paintGL()
             glBlendEquation(GL_MAX);
 
             mShaderDualPeel->UseProgram();
-            mShaderDualPeel->SetUniform("world", glm::mat4());
+            mShaderDualPeel->SetUniform("world", glm::mat4(1.0f));
             mShaderDualPeel->SetUniform("cameraPosition", mFreeCamera->GetPosition());
 
             mShaderDualPeel->BindTexture(GL_TEXTURE_RECTANGLE, "DepthBlenderTex", mDualDepthTexId[prevId], 1);
