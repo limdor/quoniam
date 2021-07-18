@@ -107,11 +107,11 @@ std::unique_ptr<Material> SceneLoader::LoadMaterial(const aiMaterial* pAiMateria
     aiString name;
     if( AI_SUCCESS == pAiMaterial->Get(AI_MATKEY_NAME, name) )
     {
-        material = std::make_unique<Material>( QString("%1").arg(name.data) );
+        material = std::make_unique<Material>( name.data );
     }
     else
     {
-        material = std::make_unique<Material>( QString("No name") );
+        material = std::make_unique<Material>( "No name" );
     }
 
     aiColor3D color;
