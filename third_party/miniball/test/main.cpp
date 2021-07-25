@@ -14,9 +14,9 @@ TEST_CASE( "basic test", "miniball" ) {
         mb.check_in(p);
     }
     mb.build();
-    float x = mb.center()[0];
-    float y = mb.center()[1];
-    float z = mb.center()[2];
+    auto const x = static_cast<float>(mb.center()[0]);
+    auto const y = static_cast<float>(mb.center()[1]);
+    auto const z = static_cast<float>(mb.center()[2]);
     REQUIRE(std::abs(x - 1.0f) < 0.01f);
     REQUIRE(std::abs(y - 1.0f) < 0.01f);
     REQUIRE(std::abs(z - 1.0f) < 0.01f);
