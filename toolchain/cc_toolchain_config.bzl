@@ -178,6 +178,7 @@ def _impl(ctx):
             "compiler_input_flags",
             "compiler_output_flags",
             "default_compile_flags",
+            "treat_warnings_as_errors",
             "nologo",
             "msvc_env",
             "parse_showincludes",
@@ -241,7 +242,7 @@ def _impl(ctx):
         env_sets = [
             env_set(
                 actions = all_link_actions +
-                            [ACTION_NAMES.cpp_link_static_library],
+                          [ACTION_NAMES.cpp_link_static_library],
                 env_entries = [env_entry(key = "LIB", value = ctx.attr.msvc_env_lib)],
             ),
         ],
@@ -365,7 +366,7 @@ def _impl(ctx):
             ),
             flag_set(
                 actions = all_link_actions +
-                            [ACTION_NAMES.cpp_link_static_library],
+                          [ACTION_NAMES.cpp_link_static_library],
                 flag_groups = [
                     flag_group(
                         iterate_over = "libraries_to_link",
@@ -581,12 +582,36 @@ def _impl(ctx):
                             "/D_CRT_SECURE_NO_DEPRECATE",
                             "/D_CRT_SECURE_NO_WARNINGS",
                             "/bigobj",
-                            "/Zm500",
-                            "/EHsc",
-                            "/wd4351",
-                            "/wd4291",
-                            "/wd4250",
-                            "/wd4996",
+                            "/Zm500",  # Specify Precompiled Header Memory Allocation Limit
+                            "/EHsc",  # Exception handling model
+                            "/permissive-",  # Enforces standards conformance
+                            "/W4",  # displays level 1, level 2, and level 3 warnings, and all level 4 (informational) warnings that aren't off by default
+                            "/wd4100",  # Disable: 'identifier' : unreferenced formal parameter
+                            "/wd4201",  # Disable: nonstandard extension used : nameless struct/union
+                            "/wd4250",  # Disable: 'class1' : inherits 'class2::member' via dominance
+                            "/wd4291",  # Disable: 'declaration' : no matching operator delete found; memory will not be freed if initialization throws an exception
+                            "/wd4996",  # Disable: Your code uses a function, class member, variable, or typedef that's marked deprecated
+                            "/wd4701",  # Disable: Potentially uninitialized local variable 'name' used
+                            "/wd5054",  # Disable: operator 'operator-name': deprecated between enumerations of different types
+                            #"/w14242", # Enable: 'identfier': conversion from 'type1' to 'type1', possible loss of data
+                            "/w14254",  # Enable: 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
+                            "/w14263",  # Enable: 'function': member function does not override any base class virtual member function
+                            #"/w14265", # Enable: 'classname': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+                            "/w14287",  # Enable: 'operator': unsigned/negative constant mismatch
+                            "/we4289",  # Enable: nonstandard extension used: 'variable': loop control variable declared in the for-loop is used outside the for-loop scope
+                            "/w14296",  # Enable: 'operator': expression is always 'boolean_value'
+                            "/w14311",  # Enable: 'variable': pointer truncation from 'type1' to 'type2'
+                            "/w14545",  # Enable: expression before comma evaluates to a function which is missing an argument list
+                            "/w14546",  # Enable: function call before comma missing argument list
+                            "/w14547",  # Enable: 'operator': operator before comma has no effect; expected operator with side-effect
+                            "/w14549",  # Enable: 'operator': operator before comma has no effect; did you intend 'operator'?
+                            "/w14555",  # Enable: expression has no effect; expected expression with side-effect
+                            #"/w14619", # Enable: pragma warning: there is no warning number 'number'
+                            "/w14640",  # Enable: Enable warning on thread un-safe static member initialization
+                            "/w14826",  # Enable: Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
+                            "/w14905",  # Enable: wide string literal cast to 'LPSTR'
+                            "/w14906",  # Enable: string literal cast to 'LPWSTR'
+                            "/w14928",  # Enable: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
                         ],
                     ),
                 ],
@@ -699,7 +724,7 @@ def _impl(ctx):
         flag_sets = [
             flag_set(
                 actions = all_link_actions +
-                            [ACTION_NAMES.cpp_link_static_library],
+                          [ACTION_NAMES.cpp_link_static_library],
                 flag_groups = [
                     flag_group(
                         flags = ["@%{linker_param_file}"],
