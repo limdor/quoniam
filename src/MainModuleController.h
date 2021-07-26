@@ -47,7 +47,7 @@ private:
 
     /// Mesh of viewpoints related methods
     void LoadViewpoints(int pWidthResolution, bool pFaceCulling);
-    void LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio, int pSubdivision, int pWidthResolution, bool pFaceCulling);
+    void LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio, unsigned char pSubdivision, int pWidthResolution, bool pFaceCulling);
     void ChangeNumberOfViewpoints(size_t pNumberOfViewpoints);
     void SaveViewpointMeasuresInformation(const QString &pFileName);
     size_t NextViewpoint();

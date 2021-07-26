@@ -399,7 +399,7 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     mActionViewpointsSphere->setChecked(true);
 }
 
-void MainModuleController::LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio, int pSubdivision, int pWidthResolution, bool pFaceCulling)
+void MainModuleController::LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio, unsigned char pSubdivision, int pWidthResolution, bool pFaceCulling)
 {
     float radius = mScene->GetBoundingSphere()->GetRadius();
     glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
@@ -594,8 +594,9 @@ void MainModuleController::ExportInformation()
     }
 }
 
-void MainModuleController::WillDrawViewpointsSphere(bool pDraw)
+void MainModuleController::WillDrawViewpointsSphere(bool /*pDraw*/)
 {
+    // TODO: Check if this function is still working
     if(mSphereOfViewpoints != nullptr)
     {
         //mSphereOfViewpoints->GetMesh()->SetVisible(pDraw);
@@ -621,7 +622,7 @@ void MainModuleController::RunDutagaciBenchmark()
         for( size_t i = 0; i < numberOfFiles; i++ )
         {
             LoadScene(filestoLoad.at(i).toStdString());
-            LoadViewpointsFromSphere( distance, angle, 1.0f, 3, 640, false );
+            LoadViewpointsFromSphere( distance, angle, 1.0f, 3u, 640, false );
             float radius = mScene->GetBoundingSphere()->GetRadius();
             glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
             for( size_t j = 0; j < mViewpointMeasures.size(); j++ )
@@ -695,7 +696,8 @@ void MainModuleController::SliderChanged(int pMeasure, int pValue)
 
 void MainModuleController::on_loadViewpointsSphereButton_clicked()
 {
-    LoadViewpointsFromSphere( mUi->cameraDistanceSpinBox->value(), mUi->cameraAngleSpinBox->value(), mUi->cameraAspectRatioSpinBox->value(), mUi->numberOfViewpoints->currentIndex(), mUi->widthResolutionSpinBox->value(), mUi->faceCullingCheckBox->isChecked() );
+    auto const subdivision = static_cast<unsigned char>(mUi->numberOfViewpoints->currentIndex());
+    LoadViewpointsFromSphere( mUi->cameraDistanceSpinBox->value(), mUi->cameraAngleSpinBox->value(), mUi->cameraAspectRatioSpinBox->value(), subdivision, mUi->widthResolutionSpinBox->value(), mUi->faceCullingCheckBox->isChecked() );
 }
 
 void MainModuleController::on_computeCameraDistanceButton_clicked()
