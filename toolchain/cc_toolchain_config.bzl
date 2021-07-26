@@ -586,17 +586,18 @@ def _impl(ctx):
                             "/EHsc",  # Exception handling model
                             "/permissive-",  # Enforces standards conformance
                             "/W4",  # displays level 1, level 2, and level 3 warnings, and all level 4 (informational) warnings that aren't off by default
-                            "/wd4100",  # Disable: 'identifier' : unreferenced formal parameter
+                            # This warning needs to be disabled due to glm
                             "/wd4201",  # Disable: nonstandard extension used : nameless struct/union
-                            "/wd4250",  # Disable: 'class1' : inherits 'class2::member' via dominance
-                            "/wd4291",  # Disable: 'declaration' : no matching operator delete found; memory will not be freed if initialization throws an exception
+                            # TODO: This warning can be enabled once the iterator for the Scene is fixed
                             "/wd4996",  # Disable: Your code uses a function, class member, variable, or typedef that's marked deprecated
+                            # TODO: This warning can be enabled once the issue in Tools is fixed
                             "/wd4701",  # Disable: Potentially uninitialized local variable 'name' used
+                            # This warning needs to be disabled due to Qt
                             "/wd5054",  # Disable: operator 'operator-name': deprecated between enumerations of different types
-                            #"/w14242", # Enable: 'identfier': conversion from 'type1' to 'type1', possible loss of data
+                            "/w14242",  # Enable: 'identfier': conversion from 'type1' to 'type1', possible loss of data
                             "/w14254",  # Enable: 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
                             "/w14263",  # Enable: 'function': member function does not override any base class virtual member function
-                            #"/w14265", # Enable: 'classname': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
+                            "/w14265",  # Enable: 'classname': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
                             "/w14287",  # Enable: 'operator': unsigned/negative constant mismatch
                             "/we4289",  # Enable: nonstandard extension used: 'variable': loop control variable declared in the for-loop is used outside the for-loop scope
                             "/w14296",  # Enable: 'operator': expression is always 'boolean_value'
@@ -606,7 +607,8 @@ def _impl(ctx):
                             "/w14547",  # Enable: 'operator': operator before comma has no effect; expected operator with side-effect
                             "/w14549",  # Enable: 'operator': operator before comma has no effect; did you intend 'operator'?
                             "/w14555",  # Enable: expression has no effect; expected expression with side-effect
-                            #"/w14619", # Enable: pragma warning: there is no warning number 'number'
+                            # This cannot be enabled because of Qt, fixed in version 5.15.2
+                            #"/w14619",  # Enable: pragma warning: there is no warning number 'number'
                             "/w14640",  # Enable: Enable warning on thread un-safe static member initialization
                             "/w14826",  # Enable: Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
                             "/w14905",  # Enable: wide string literal cast to 'LPSTR'

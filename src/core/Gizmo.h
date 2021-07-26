@@ -11,6 +11,8 @@
 class Gizmo
 {
 public:
+    virtual ~Gizmo() = default;
+
     /// Draw the gizmo
     void Draw();
 
