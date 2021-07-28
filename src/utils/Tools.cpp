@@ -215,10 +215,6 @@ template std::vector<size_t> Tools::FindNearestThanEpsilonByDimension(size_t pPo
 template <typename T>
 std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std::vector<T> &pVector2, const std::vector<T> &pVector3)
 {
-    int consecutiveElements;
-    T previousValue;
-    std::vector<T> result;
-
     const size_t sizeVector1 = pVector1.size();
     const size_t sizeVector2 = pVector2.size();
     const size_t sizeVector3 = pVector3.size();
@@ -238,12 +234,10 @@ std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std:
     {
         mixedVector[offset + i] = pVector3.at(i);
     }
-    if (!mixedVector.empty())
-    {
-        std::sort(mixedVector.begin(), mixedVector.end());
-        previousValue = mixedVector.at(0);
-        consecutiveElements = 1;
-    }
+    std::sort(mixedVector.begin(), mixedVector.end());
+    T previousValue = mixedVector.empty() ? T{} : mixedVector.at(0);
+    int consecutiveElements = 1;
+    std::vector<T> result;
     for (size_t i = 1; i < mixedVector.size(); i++)
     {
         T currentValue = mixedVector.at(i);

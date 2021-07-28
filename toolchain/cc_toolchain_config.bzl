@@ -590,8 +590,6 @@ def _impl(ctx):
                             "/wd4201",  # Disable: nonstandard extension used : nameless struct/union
                             # TODO: This warning can be enabled once the iterator for the Scene is fixed
                             "/wd4996",  # Disable: Your code uses a function, class member, variable, or typedef that's marked deprecated
-                            # TODO: This warning can be enabled once the issue in Tools is fixed
-                            "/wd4701",  # Disable: Potentially uninitialized local variable 'name' used
                             # This warning needs to be disabled due to Qt
                             "/wd5054",  # Disable: operator 'operator-name': deprecated between enumerations of different types
                             "/w14242",  # Enable: 'identfier': conversion from 'type1' to 'type1', possible loss of data
