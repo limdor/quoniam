@@ -13,12 +13,18 @@
 class Scene
 {
 public:
-    class const_iterator: std::iterator<std::forward_iterator_tag, const SceneNode>
+    class const_iterator
     {
         std::shared_ptr<SceneNode const> mCurrentNode = nullptr;
         std::stack<int> mChildIndexFromParent;
 
     public:
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = const SceneNode;
+        using difference_type = std::ptrdiff_t;
+        using pointer = value_type*;
+        using reference = value_type&;
+
         const_iterator(std::shared_ptr<SceneNode const> currentNode = nullptr):
             mCurrentNode{currentNode}, mChildIndexFromParent{} {}
         const_iterator& operator++() {
