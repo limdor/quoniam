@@ -5,7 +5,6 @@ qt_cc_library(
     name = "gl_canvas",
     srcs = ["GLCanvas.cpp"],
     hdrs = ["GLCanvas.h"],
-    copts = ["/std:c++latest"],
     visibility = ["//visibility:public"],
     deps = [
         ":core",
@@ -61,7 +60,6 @@ cc_library(
         "Texture.h",
         "TrackballCamera.h",
     ],
-    copts = ["/std:c++latest"],
     includes = ["."],
     visibility = ["//visibility:public"],
     deps = [

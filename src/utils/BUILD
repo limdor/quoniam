@@ -4,7 +4,6 @@ cc_library(
     name = "debug",
     srcs = ["Debug.cpp"],
     hdrs = ["Debug.h"],
-    copts = ["/std:c++latest"],
     includes = ["."],
     linkopts = [
         "-DEFAULTLIB:glu32.lib",
@@ -21,7 +20,6 @@ cc_library(
     name = "tools",
     srcs = ["Tools.cpp"],
     hdrs = ["Tools.h"],
-    copts = ["/std:c++latest"],
     includes = ["."],
     visibility = ["//visibility:public"],
     deps = [

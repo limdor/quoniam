@@ -13,3 +13,7 @@ load_third_party_libraries()
 load("//third_party:transitive_dependencies.bzl", "load_transitive_dependencies")
 
 load_transitive_dependencies()
+
+register_toolchains(
+    "//toolchain:msvc_2019_windows_toolchain",
+)
