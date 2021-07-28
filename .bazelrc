@@ -9,10 +9,12 @@ build --verbose_failures
 # Uncomment to see the effect, if you have it allways enabled it will increase quite a log the logs
 # build --subcommands=pretty_print
 
-####################################################
-## Config option for Visual Studio 2019 toolchain ##
-####################################################
+###################################
+## Config options for toolchains ##
+###################################
 
-build:vs2019 --crosstool_top=//toolchain:vs2019_suite
-build:vs2019 --cpu=x64_windows
-build:vs2019 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+# Do not use automatically generated toolchains
+build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+
+# Do not use the deprecated toolchain resolution system with --cpu and --crosstool_top
+build --incompatible_enable_cc_toolchain_resolution

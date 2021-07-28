@@ -1,13 +1,20 @@
-load("@rules_cc//cc:defs.bzl", "cc_toolchain", "cc_toolchain_suite")
+load("@rules_cc//cc:defs.bzl", "cc_toolchain")
 load(":cc_toolchain_config.bzl", "cc_toolchain_config", "semicolon_separated")
 
 package(default_visibility = ["//visibility:public"])
 
-cc_toolchain_suite(
-    name = "vs2019_suite",
-    toolchains = {
-        "x64_windows": ":cc_compiler_x64_windows_vs2019",
-    },
+toolchain(
+    name = "msvc_2019_windows_toolchain",
+    exec_compatible_with = [
+        "@platforms//os:windows",
+        "@platforms//cpu:x86_64",
+    ],
+    target_compatible_with = [
+        "@platforms//os:windows",
+        "@platforms//cpu:x86_64",
+    ],
+    toolchain = ":cc_compiler_x64_windows_vs2019",
+    toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
 )
 
 cc_toolchain(
