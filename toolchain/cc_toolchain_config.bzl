@@ -588,8 +588,6 @@ def _impl(ctx):
                             "/W4",  # displays level 1, level 2, and level 3 warnings, and all level 4 (informational) warnings that aren't off by default
                             # This warning needs to be disabled due to glm
                             "/wd4201",  # Disable: nonstandard extension used : nameless struct/union
-                            # TODO: This warning can be enabled once the iterator for the Scene is fixed
-                            "/wd4996",  # Disable: Your code uses a function, class member, variable, or typedef that's marked deprecated
                             # This warning needs to be disabled due to Qt
                             "/wd5054",  # Disable: operator 'operator-name': deprecated between enumerations of different types
                             "/w14242",  # Enable: 'identfier': conversion from 'type1' to 'type1', possible loss of data
