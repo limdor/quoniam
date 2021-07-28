@@ -576,6 +576,7 @@ def _impl(ctx):
                 flag_groups = [
                     flag_group(
                         flags = [
+                            "/std:c++latest",
                             "/DCOMPILER_MSVC",
                             "/DNOMINMAX",
                             "/D_WIN32_WINNT=0x0601",
