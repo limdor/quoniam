@@ -6,8 +6,8 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QProgressDialog>
+#include <QtCore/QDateTime>
 #include <QtCore/QTextStream>
-#include <QtCore/QTime>
 #include <QtCore/QXmlStreamWriter>
 
 //Dependency includes
@@ -318,10 +318,8 @@ void MainModuleController::mousePressEvent(QMouseEvent *pEvent)
 
 void MainModuleController::LoadScene(const std::filesystem::path &pFileName)
 {
-    QTime t;
-
     QApplication::setOverrideCursor( Qt::WaitCursor );
-    t.start();
+    auto const start = std::chrono::steady_clock::now();
     Debug::Log("Loading " + pFileName.string());
 
     mUpdateView = true;
@@ -338,7 +336,9 @@ void MainModuleController::LoadScene(const std::filesystem::path &pFileName)
     mScene = SceneLoader::LoadScene(pFileName);
     mScene->ShowInformation();
     mOpenGLCanvas->LoadScene(mScene);
-    Debug::Log( "MainWindow::LoadScene - Total time elapsed: " + std::to_string(t.elapsed()) + " ms");
+    auto const end = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> const timeElapsed = end - start;
+    Debug::Log( "MainWindow::LoadScene - Total time elapsed: " + std::to_string(timeElapsed.count()) + " ms");
 
     on_applyMaterialsCheckBox_clicked( mUi->applyMaterialsCheckBox->isChecked() );
     QApplication::restoreOverrideCursor();
@@ -346,8 +346,6 @@ void MainModuleController::LoadScene(const std::filesystem::path &pFileName)
 
 void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCulling)
 {
-    QTime t;
-
     //Creation of the information channel
     mSceneInformationBuilder->CreateHistogram(mScene, mSphereOfViewpoints, pWidthResolution, pFaceCulling, true);
 
@@ -356,7 +354,7 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
     mActionViewpointsSphere->setEnabled(true);
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
-    t.start();
+    auto const start = std::chrono::steady_clock::now();
     QProgressDialog progress(this);
     progress.setLabelText("Computing measures...");
     progress.setCancelButton(0);
@@ -381,7 +379,9 @@ void MainModuleController::LoadViewpoints(int pWidthResolution, bool pFaceCullin
         qApp->processEvents();
     }
     progress.hide();
-    Debug::Log( "MainWindow::Measures computed - Time elapsed: " + std::to_string(t.elapsed()) + " ms");
+    auto const end = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> const timeElapsed = end - start;
+    Debug::Log( "MainWindow::Measures computed - Time elapsed: " + std::to_string(timeElapsed.count()) + " ms");
     QApplication::restoreOverrideCursor();
 
     on_measureInViewpointSphereList_currentIndexChanged( mUi->measureInViewpointSphereList->currentIndex() );

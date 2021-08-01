@@ -3,8 +3,6 @@
 #include "Debug.h"
 #include "Tools.h"
 
-#include <QtCore/QTime>
-
 #include "glm/exponential.hpp"
 #include "glm/geometric.hpp"
 #include "glm/gtc/constants.hpp"
@@ -62,9 +60,7 @@ void SerializedSceneGeometry::ComputeBoundingSphere()
 
 void SerializedSceneGeometry::ComputeNeighbourhood()
 {
-    QTime t;
-
-    t.start();
+    auto const start = std::chrono::steady_clock::now();
 
     float epsilon = mBoundingSphere->GetRadius() / 1000000.0f;
     Debug::Log( "SerializedSceneGeometry::ComputeNeighbourhood: Epsilon value: " + std::to_string(epsilon) );
@@ -141,8 +137,9 @@ void SerializedSceneGeometry::ComputeNeighbourhood()
 
         mFaceNeighbors[j] = polygonNeighbours;
     }
-
-    Debug::Log("Scene::ComputeNeighbourhood - Total time elapsed: " + std::to_string(t.elapsed()) + " ms");
+    auto const end = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> const timeElapsed = end - start;
+    Debug::Log("Scene::ComputeNeighbourhood - Total time elapsed: " + std::to_string(timeElapsed.count()) + " ms");
 }
 
 void SerializedSceneGeometry::ComputeVertexCurvatures()
