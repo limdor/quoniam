@@ -43,15 +43,21 @@ _MSVC_VERSION = "14.29.30037"
 # Local
 #_MSVC_VERSION = "14.28.29333"
 
-_WINDOWS_10_SDK_VERSION = "10.0.19041.0"
+_WINDOWS_SDK_MAJOR_VERSION = "10"
+_WINDOWS_SDK_MINOR_VERSION = "0"
+_WINDOWS_SDK_BUILD_NUMBER = "19041.0"
+
+_WINDOWS_KIT_INSTALL_PATH = "C:\\Program Files (x86)\\Windows Kits\\{}\\".format(_WINDOWS_SDK_MAJOR_VERSION)
+
+_WINDOWS_SDK_FULL_VERSION = "{}.{}.{}".format(_WINDOWS_SDK_MAJOR_VERSION, _WINDOWS_SDK_MINOR_VERSION, _WINDOWS_SDK_BUILD_NUMBER)
 
 _MSVC_INSTALL_PATH = "{}VC\\Tools\\MSVC\\{}\\".format(_BUILD_TOOLS_INSTALL_PATH, _MSVC_VERSION)
 
 _BUILTIN_INCLUDE_DIRECTORIES = [
     "{}include".format(_MSVC_INSTALL_PATH),
-    "C:\\Program Files (x86)\\Windows Kits\\10\\include\\{}\\ucrt".format(_WINDOWS_10_SDK_VERSION),
-    "C:\\Program Files (x86)\\Windows Kits\\10\\include\\{}\\shared".format(_WINDOWS_10_SDK_VERSION),
-    "C:\\Program Files (x86)\\Windows Kits\\10\\include\\{}\\um".format(_WINDOWS_10_SDK_VERSION),
+    "{}include\\{}\\ucrt".format(_WINDOWS_KIT_INSTALL_PATH, _WINDOWS_SDK_FULL_VERSION),
+    "{}include\\{}\\shared".format(_WINDOWS_KIT_INSTALL_PATH, _WINDOWS_SDK_FULL_VERSION),
+    "{}include\\{}\\um".format(_WINDOWS_KIT_INSTALL_PATH, _WINDOWS_SDK_FULL_VERSION),
 ]
 
 cc_toolchain_config(
@@ -70,12 +76,12 @@ cc_toolchain_config(
     msvc_env_include = semicolon_separated(_BUILTIN_INCLUDE_DIRECTORIES),
     msvc_env_lib = semicolon_separated([
         "{}lib\\x64".format(_MSVC_INSTALL_PATH),
-        "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\{}\\ucrt\\x64".format(_WINDOWS_10_SDK_VERSION),
-        "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\{}\\um\\x64".format(_WINDOWS_10_SDK_VERSION),
+        "{}lib\\{}\\ucrt\\x64".format(_WINDOWS_KIT_INSTALL_PATH, _WINDOWS_SDK_FULL_VERSION),
+        "{}lib\\{}\\um\\x64".format(_WINDOWS_KIT_INSTALL_PATH, _WINDOWS_SDK_FULL_VERSION),
     ]),
     msvc_env_path = semicolon_separated([
         "{}bin\\HostX64\\x64".format(_MSVC_INSTALL_PATH),
-        "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\{}\\x64".format(_WINDOWS_10_SDK_VERSION),
+        "{}bin\\{}\\x64".format(_WINDOWS_KIT_INSTALL_PATH, _WINDOWS_SDK_FULL_VERSION),
         "{}MSBuild\\Current\\Bin".format(_BUILD_TOOLS_INSTALL_PATH),
         "{}Common7\\IDE\\".format(_BUILD_TOOLS_INSTALL_PATH),
         "{}Common7\\Tools\\".format(_BUILD_TOOLS_INSTALL_PATH),
