@@ -28,7 +28,7 @@ cc_toolchain(
     linker_files = ":empty",
     objcopy_files = ":empty",
     strip_files = ":empty",
-    supports_param_files = 1,
+    supports_param_files = True,
     toolchain_config = ":msvc_x64",
     toolchain_identifier = "cc_compiler_x64_windows_vs2019",
 )
