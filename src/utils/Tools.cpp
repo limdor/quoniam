@@ -215,32 +215,25 @@ template std::vector<size_t> Tools::FindNearestThanEpsilonByDimension(size_t pPo
 template <typename T>
 std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std::vector<T> &pVector2, const std::vector<T> &pVector3)
 {
-    const size_t sizeVector1 = pVector1.size();
-    const size_t sizeVector2 = pVector2.size();
-    const size_t sizeVector3 = pVector3.size();
-    std::vector<T> mixedVector(sizeVector1 + sizeVector2 + sizeVector3);
-    size_t offset = 0;
-    for (size_t i = 0; i < sizeVector1; i++)
-    {
-        mixedVector[offset + i] = pVector1.at(i);
+    const size_t sizeAllInputs = pVector1.size() + pVector2.size() + pVector3.size();
+    if(sizeAllInputs == 0){
+        return {};
     }
-    offset += sizeVector1;
-    for (size_t i = 0; i < sizeVector2; i++)
-    {
-        mixedVector[offset + i] = pVector2.at(i);
-    }
-    offset += sizeVector2;
-    for (size_t i = 0; i < sizeVector3; i++)
-    {
-        mixedVector[offset + i] = pVector3.at(i);
-    }
+
+    std::vector<T> mixedVector{};
+    mixedVector.reserve(sizeAllInputs);
+    std::copy(pVector1.cbegin(), pVector1.cend(), std::back_inserter(mixedVector));
+    std::copy(pVector2.cbegin(), pVector2.cend(), std::back_inserter(mixedVector));
+    std::copy(pVector3.cbegin(), pVector3.cend(), std::back_inserter(mixedVector));
+    
     std::sort(mixedVector.begin(), mixedVector.end());
-    T previousValue = mixedVector.empty() ? T{} : mixedVector.at(0);
+
+    T previousValue = mixedVector.at(0);
     int consecutiveElements = 1;
     std::vector<T> result;
-    for (size_t i = 1; i < mixedVector.size(); i++)
+    for (size_t i = 1; i < sizeAllInputs; i++)
     {
-        T currentValue = mixedVector.at(i);
+        T const currentValue = mixedVector.at(i);
         if (currentValue == previousValue)
         {
             consecutiveElements++;
@@ -252,8 +245,8 @@ std::vector<T> Tools::MergeNeighbours(const std::vector<T> &pVector1, const std:
         else
         {
             consecutiveElements = 1;
+            previousValue = currentValue;
         }
-        previousValue = currentValue;
     }
     return result;
 }

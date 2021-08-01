@@ -81,6 +81,17 @@ TEST_CASE("GetOrderedIndexes<int>", "Tools")
     REQUIRE(result == expected);
 }
 
+TEST_CASE("MergeNeighbours<size_t>", "Tools")
+{
+    const std::vector<size_t> input1{6, 15, 4, 3, 2};
+    const std::vector<size_t> input2{1, 15, 2, 3, 4, 15};
+    const std::vector<size_t> input3{9, 3, 8, 7, 6, 15};
+
+    const std::vector<size_t> result = Tools::MergeNeighbours(input1, input2, input3);
+    const std::vector<size_t> expected{1, 5};
+    REQUIRE(result == expected);
+}
+
 SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
 {
     const glm::vec3 GREEN{0.0f, 1.0f, 0.0f};
