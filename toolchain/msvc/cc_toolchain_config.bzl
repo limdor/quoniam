@@ -63,9 +63,6 @@ all_link_actions = [
     ACTION_NAMES.cpp_link_nodeps_dynamic_library,
 ]
 
-def semicolon_separated(list):
-    return ";".join(list)
-
 def _impl(ctx):
     artifact_name_patterns = [
         artifact_name_pattern(
