@@ -1,4 +1,5 @@
 #define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
 
 #include <catch2/catch.hpp>
 #include "Tools.h"
@@ -61,6 +62,15 @@ TEST_CASE("GetOrderedIndexesByDimension", "Tools")
     };
     REQUIRE(result_z == expected_indexes_z);
     REQUIRE(input == expected_sorted_z);
+}
+
+TEST_CASE("addIndex<float>", "Tools")
+{
+    const std::vector<float> input{2.0f, 4.0f, 1.0f, 3.0f};
+
+    const std::vector<std::pair<size_t, float>> result = Tools::addIndex(input);
+    const std::vector<std::pair<size_t, float>> expected{{0u,2.0f}, {1u,4.0f}, {2u,1.0f}, {3u,3.0f}};
+    REQUIRE(result == expected);
 }
 
 TEST_CASE("GetOrderedIndexes<float>", "Tools")
