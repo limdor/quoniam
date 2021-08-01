@@ -7,7 +7,6 @@
 //Qt includes
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QProgressDialog>
-#include <QtCore/QTime>
 
 //Dependency includes
 #include "glm/mat4x4.hpp"
@@ -33,8 +32,7 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     size_t numberOfViewpoints = pSphereOfViewpoints->GetNumberOfViewpoints();
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
-    QTime t;
-    t.start();
+    auto const start = std::chrono::steady_clock::now();
     QProgressDialog progress(MainWindow::GetInstance());
     progress.setLabelText("Projecting scene to viewpoint sphere...");
     progress.setCancelButton(nullptr);
@@ -286,7 +284,9 @@ void SceneInformationBuilder::CreateHistogram(std::shared_ptr<Scene> pScene, std
     glDeleteRenderbuffers( 1, &renderBuffer );
 
     mProjectedAreasMatrix->Compute();
-    Debug::Log( "GLCanvas::ComputeViewpointsProbabilities " + std::to_string(windowWidth) + "x" + std::to_string(windowHeight) + " - Time elapsed: " + std::to_string(t.elapsed()) + " ms");
+    auto const end = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> const timeElapsed = end - start;
+    Debug::Log( "GLCanvas::ComputeViewpointsProbabilities " + std::to_string(windowWidth) + "x" + std::to_string(windowHeight) + " - Time elapsed: " + std::to_string(timeElapsed.count()) + " ms");
 
     RestoreOpenGLStats();
 
