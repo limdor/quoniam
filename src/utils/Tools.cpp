@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <filesystem>
+#include <ranges>
+#include <utility>
 
 template<typename T>
 bool pairCompareX(std::pair<T, glm::vec3> pI, std::pair<T, glm::vec3> pJ)
@@ -58,29 +60,16 @@ std::vector<T> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<T, glm:
 template std::vector<int> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<int, glm::vec3>> &pValues, int pDimension);
 template std::vector<size_t> Tools::GetOrderedIndexesByDimension(std::vector<std::pair<size_t, glm::vec3>> &pValues, int pDimension);
 
-template <class T>
-bool pairCompare(std::pair<size_t, T> i, std::pair<size_t, T> j)
-{
-    return (i.second < j.second);
-}
-
 template <typename T>
-std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
+std::vector<std::size_t> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
 {
-    size_t size = pValues.size();
+    std::vector<std::pair<size_t, T>> toSort = addIndex(pValues);
+    std::ranges::sort(toSort,
+                      [](std::pair<size_t, T> const & i, std::pair<size_t, T> const & j) -> bool { return i.second < j.second; });
 
-    std::vector<std::pair<size_t, T>> toSort(size);
-    for (size_t i = 0; i < size; i++)
-    {
-        toSort[i] = std::pair<size_t, T>(i, pValues.at(i));
-    }
-
-    std::sort(toSort.begin(), toSort.end(), pairCompare<T>);
-
-    std::vector<size_t> result;
-    result.reserve(size);
-    std::transform(toSort.cbegin(), toSort.cend(), std::back_inserter(result),
-                   [](std::pair<size_t, T> const &pair) -> size_t { return pair.first; });
+    auto firstElement =  [](std::pair<size_t, T> const &pair) -> size_t { return pair.first; };
+    auto const result_view = toSort | std::views::transform(firstElement);
+    std::vector<std::size_t> result(result_view.begin(), result_view.end());
 
     return result;
 }
@@ -88,6 +77,21 @@ std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<T> &pValues)
 template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<int> &pValues);
 template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<float> &pValues);
 template std::vector<size_t> Tools::GetOrderedIndexes(const std::vector<size_t> &pValues);
+
+template <typename T>
+std::vector< std::pair<std::size_t, T> > Tools::addIndex(const std::vector<T> &values)
+{
+    auto makePair = [](T const& value, std::size_t index)-> std::pair<std::size_t, T>{ return std::make_pair(index, value); };
+    std::vector<std::pair<std::size_t, T>> valuesWithIndex;
+    valuesWithIndex.reserve(values.size());
+    std::ranges::transform(values, std::views::iota(0), std::back_inserter(valuesWithIndex), makePair);
+
+    return valuesWithIndex;
+}
+
+template std::vector<std::pair<std::size_t, int>> Tools::addIndex(const std::vector<int> &values);
+template std::vector<std::pair<std::size_t, float>> Tools::addIndex(const std::vector<float> &values);
+template std::vector<std::pair<std::size_t, std::size_t>> Tools::addIndex(const std::vector<std::size_t> &values);
 
 std::vector<glm::vec4> Tools::ConvertFloatsToColors(const std::vector<float> &pValues, bool pInverted)
 {
