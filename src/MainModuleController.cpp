@@ -304,7 +304,7 @@ void MainModuleController::wheelEvent(QWheelEvent *pEvent)
 {
     if(  mOpenGLCanvas->hasFocus() )
     {
-        int numDegrees = pEvent->delta() / 8;
+        int numDegrees = pEvent->angleDelta().y() / 8;
         float deltaFactor = (numDegrees / 360.0f) * 2.0f;
         mOpenGLCanvas->MoveActiveCamera(deltaFactor);
     }
@@ -514,7 +514,7 @@ void MainModuleController::LoadDutagaciViewpoints()
 
         while( !textReader.atEnd() )
         {
-            QStringList list = textReader.readLine().split(QRegExp("\\s+"), QString::SkipEmptyParts);
+            QStringList list = textReader.readLine().split(QRegExp("\\s+"), Qt::SkipEmptyParts);
             if( list.size() == 3 )
             {
                 mDutagaciViewpoints.push_back( glm::vec3( list.at(0).toFloat(), list.at(1).toFloat(), list.at(2).toFloat() ) );
@@ -738,7 +738,7 @@ void MainModuleController::on_light1GroupBox_toggled(bool pChecked)
 
 void MainModuleController::on_light1ColorButton_clicked()
 {
-    QColor color = QColorDialog::getColor(mUi->light1ColorLabel->palette().color(QPalette::Background), this);
+    QColor color = QColorDialog::getColor(mUi->light1ColorLabel->palette().color(QPalette::Window), this);
     if( color.isValid() )
     {
         mUi->light1ColorLabel->setPalette(QPalette(color));
@@ -758,7 +758,7 @@ void MainModuleController::on_light2GroupBox_toggled(bool pChecked)
 
 void MainModuleController::on_light2ColorButton_clicked()
 {
-    QColor color = QColorDialog::getColor(mUi->light2ColorLabel->palette().color(QPalette::Background), this);
+    QColor color = QColorDialog::getColor(mUi->light2ColorLabel->palette().color(QPalette::Window), this);
     if( color.isValid() )
     {
         mUi->light2ColorLabel->setPalette(QPalette(color));
