@@ -53,7 +53,7 @@ std::vector<QString> DutagaciDialog::GetFileListFromTXT(const QString& pFileName
         while(!stream.atEnd())
         {
             QString line = stream.readLine();
-            QStringList splittedLine = line.split(" ", QString::SkipEmptyParts);
+            QStringList splittedLine = line.split(" ", Qt::SkipEmptyParts);
             if(splittedLine.size() == 1)
             {
                 objFiles.push_back(folder + "\\" + line + ".obj");
