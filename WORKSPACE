@@ -1,3 +1,5 @@
+workspace(name = "quoniam")
+
 # We cannot fully load a dependency without loading the source code of the transitive dependencies.
 # In addition we want that if a dependency appears as a direct dependency and also as a transitive dependency
 # the direct dependency is loaded first, in this way we have better control on which version is used in
