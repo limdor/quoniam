@@ -38,7 +38,7 @@ _BUILD_TOOLS_INSTALL_PATH = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2
 # Local Path
 #_BUILD_TOOLS_INSTALL_PATH = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\"
 
-_MSVC_VERSION = "14.29.30037"
+_MSVC_VERSION = "14.29.30133"
 
 _WINDOWS_SDK_MAJOR_VERSION = "10"
 _WINDOWS_SDK_MINOR_VERSION = "0"
