@@ -7,5 +7,6 @@ cc_test(
     deps = [
         "@catch2",
         "@qt//:qt_core",
+        "@catch2//:catch2_main",
     ],
 )

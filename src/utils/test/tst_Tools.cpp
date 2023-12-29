@@ -1,7 +1,8 @@
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include "Tools.h"
 
 namespace Catch
@@ -22,7 +23,7 @@ struct StringMaker<glm::vec4>
 TEST_CASE("TriangleArea", "Tools")
 {
     const float area = Tools::TriangleArea(glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 0.0f, 0.0f});
-    REQUIRE(area == Approx(0.0f));
+    REQUIRE_THAT(area, Catch::Matchers::WithinAbs(0.0f, 0.000001));
 }
 
 TEST_CASE("GetOrderedIndexesByDimension", "Tools")
