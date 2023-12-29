@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 #include "opencv2/core/core.hpp"
 
 TEST_CASE( "core", "opencv smoke test" ) {

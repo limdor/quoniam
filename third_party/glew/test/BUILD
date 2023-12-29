@@ -7,5 +7,6 @@ cc_test(
     deps = [
         "@glew",
         "@catch2",
+        "@catch2//:catch2_main",
     ],
 )

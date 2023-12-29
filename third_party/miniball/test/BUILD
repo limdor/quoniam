@@ -7,5 +7,6 @@ cc_test(
     deps = [
         "//third_party/miniball",
         "@catch2",
+        "@catch2//:catch2_main",
     ],
 )
