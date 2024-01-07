@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Quoniam (64-bit)"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "University of Girona"
 #define MyAppURL "http://ima.udg.edu/~xavierb/quoniam"
 #define MyAppExeName "Quoniam.exe"
@@ -44,17 +44,17 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\bin\win\release\Quoniam.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\Assimp64.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\glew32.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\opencv_core249.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\opencv_highgui249.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\opencv_imgproc249.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\Qt5OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\bin\win\release\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\bazel-bin\src\quoniam.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\assimp.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\glew32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\opencv_core331.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\opencv_highgui331.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\opencv_imgproc331.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\Qt5OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bazel-bin\src\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Qt\5.15.2\msvc2019_64\plugins\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\shaders\*"; DestDir: "{app}\shaders"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\redist\vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
