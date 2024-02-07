@@ -158,7 +158,7 @@ cc_library(
         "viewpoint-measures/VisibilityRatio.cpp",
         "viewpoint-measures/VisibilityRatio.h",
     ],
-    defines = ['APP_VERSION=\\"1.0.1\\"'],
+    defines = ['APP_VERSION=\\"1.1.0\\"'],
     includes = [
         ".",
         "viewpoint-measures/",
