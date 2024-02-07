@@ -13,7 +13,6 @@ In this folder there is everything needed in order to generate an installer for 
 1. Downaload and install [Inno Setup](https://jrsoftware.org/isinfo.php)
 1. Open and run the Inno Setup script [Quoniam-x64.iss](./Quoniam-x64.iss)
 
-
 ## Note
 
 This has been tested with Windows 10 and Inno Setup 6.2.2.

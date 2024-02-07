@@ -8,9 +8,6 @@
 #define MyAppExeName "Quoniam.exe"
 
 [Setup]
-; NOTE: The value of AppId uniquely identifies this application.
-; Do not use the same AppId value in installers for other applications.
-; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{9A10DF1F-D4CF-4BBA-94B8-6C71373B8C4E}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -27,12 +24,7 @@ OutputBaseFilename=Quoniam-v.{#MyAppVersion}-x64
 SetupIconFile=..\icon.ico
 Compression=lzma2
 SolidCompression=yes
-; "ArchitecturesAllowed=x64" specifies that Setup cannot run on
-; anything but x64.
 ArchitecturesAllowed=x64
-; "ArchitecturesInstallIn64BitMode=x64" requests that the install be
-; done in "64-bit mode" on x64, meaning it should use the native
-; 64-bit Program Files directory and the 64-bit view of the registry.
 ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
@@ -55,13 +47,13 @@ Source: "..\bazel-bin\src\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bazel-bin\src\Qt5OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bazel-bin\src\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Qt\5.15.2\msvc2019_64\plugins\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Qt\5.15.2\msvc2019_64\plugins\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\shaders\*"; DestDir: "{app}\shaders"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\redist\vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
