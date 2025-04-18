@@ -17,7 +17,6 @@
 #include "glm/geometric.hpp"
 #include "glm/trigonometric.hpp"
 #include "glm/exponential.hpp"
-#include "glm/gtx/rotate_vector.hpp"
 
 //Project includes
 #include "CurvatureEntropy.h"

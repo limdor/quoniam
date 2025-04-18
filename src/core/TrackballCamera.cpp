@@ -3,7 +3,7 @@
 #include "glm/exponential.hpp"
 #include "glm/geometric.hpp"
 #include "glm/trigonometric.hpp"
-#include "glm/gtx/transform.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 void TrackballCamera::MoveCamera(const glm::vec2& pMouseInitialPosition, const glm::vec2& pMouseFinalPosition, Camera& pCamera, const glm::vec3& pCenter)
 {
