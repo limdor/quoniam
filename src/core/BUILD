@@ -1,5 +1,5 @@
-load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@com_justbuchanan_rules_qt//:qt.bzl", "qt_cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 qt_cc_library(
     name = "gl_canvas",
@@ -66,7 +66,7 @@ cc_library(
         "//src/utils",
         "//third_party/assimp",
         "//third_party/miniball",
-        "@glew",
+        "@glew//:glew_static",
         "@glm",
         "@qt//:qt_core",
         "@qt//:qt_widgets",

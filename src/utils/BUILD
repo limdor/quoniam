@@ -11,7 +11,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@glew",
+        "@glew//:glew_static",
         "@qt//:qt_widgets",
     ],
 )
@@ -33,7 +33,7 @@ cc_library(
     name = "utils",
     visibility = ["//visibility:public"],
     deps = [
-        ":tools",
         ":debug",
+        ":tools",
     ],
 )

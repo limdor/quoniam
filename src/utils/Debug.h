@@ -1,7 +1,7 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include <glew.h>
+#include <GL/glew.h>
 
 #include <QtWidgets/QPlainTextEdit>
 

@@ -2,7 +2,7 @@
 #define _GLSL_SHADER_
 
 //GLEW has to be included before any OpenGL include
-#include "glew.h"
+#include "GL/glew.h"
 
 #include <string>
 
