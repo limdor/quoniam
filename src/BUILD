@@ -1,5 +1,5 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@com_justbuchanan_rules_qt//:qt.bzl", "qt_cc_library", "qt_ui_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 qt_ui_library(
@@ -172,7 +172,7 @@ cc_library(
         "//src/core",
         "//src/utils",
         "//third_party/opencv",
-        "@glew",
+        "@glew//:glew_static",
         "@glm",
         "@qt//:qt_core",
         "@qt//:qt_gui",

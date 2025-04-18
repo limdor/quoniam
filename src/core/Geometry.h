@@ -2,7 +2,7 @@
 #define GEOMETRY_H
 
 //GLEW has to be included before any OpenGL include
-#include "glew.h"
+#include "GL/glew.h"
 
 #include "GeometryTopology.h"
 

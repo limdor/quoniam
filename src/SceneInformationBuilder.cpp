@@ -2,7 +2,7 @@
 #include "SceneInformationBuilder.h"
 
 //GLEW has to be included before any OpenGL include
-#include "glew.h"
+#include "GL/glew.h"
 
 //Qt includes
 #include <QtWidgets/QApplication>

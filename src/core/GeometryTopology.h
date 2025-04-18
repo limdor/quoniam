@@ -2,7 +2,7 @@
 #define GEOMETRY_TOPOLOGY_H
 
 //GLEW has to be included before any OpenGL include
-#include "glew.h"
+#include "GL/glew.h"
 
 /// Enumeration to define the topology of the geometry
 enum class GeometryTopology
