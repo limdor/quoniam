@@ -167,6 +167,7 @@ cc_library(
         "-DEFAULTLIB:opengl32.lib",
         "-DEFAULTLIB:glu32.lib",
     ],
+    local_defines = ["GLM_ENABLE_EXPERIMENTAL"],
     deps = [
         ":main_window_ui",
         "//src/core",

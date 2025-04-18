@@ -5,6 +5,7 @@ qt_cc_library(
     name = "gl_canvas",
     srcs = ["GLCanvas.cpp"],
     hdrs = ["GLCanvas.h"],
+    local_defines = ["GLM_ENABLE_EXPERIMENTAL"],
     visibility = ["//visibility:public"],
     deps = [
         ":core",
@@ -61,6 +62,7 @@ cc_library(
         "TrackballCamera.h",
     ],
     includes = ["."],
+    local_defines = ["GLM_ENABLE_EXPERIMENTAL"],
     visibility = ["//visibility:public"],
     deps = [
         "//src/utils",
