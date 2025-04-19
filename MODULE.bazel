@@ -8,3 +8,21 @@ bazel_dep(name = "glm", version = "1.0.0.bcr.1")
 bazel_dep(name = "glew", version = "2.2.0")
 
 bazel_dep(name = "catch2", version = "3.8.1")
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+new_local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "new_local_repository")
+
+http_archive(
+    name = "com_justbuchanan_rules_qt",
+    sha256 = "45255953b2a66119cb0497f2fe70343f32c5cabc9fdd3af7d8caf796aeee1690",
+    strip_prefix = "bazel_rules_qt-dfd8ea524d6dd28881c9f2ae0acc8637b28d4eed",
+    url = "https://github.com/justbuchanan/bazel_rules_qt/archive/dfd8ea524d6dd28881c9f2ae0acc8637b28d4eed.zip",
+)
+
+new_local_repository(
+    name = "qt",
+    build_file = "@com_justbuchanan_rules_qt//:qt.BUILD",
+    path = "C:\\Qt\\5.15.2\\msvc2019_64\\",
+)
+
+register_toolchains("//toolchain/msvc:msvc_2019_windows_toolchain")
