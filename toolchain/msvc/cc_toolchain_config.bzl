@@ -601,7 +601,8 @@ def _impl(ctx):
                             "/w14547",  # Enable: 'operator': operator before comma has no effect; expected operator with side-effect
                             "/w14549",  # Enable: 'operator': operator before comma has no effect; did you intend 'operator'?
                             "/w14555",  # Enable: expression has no effect; expected expression with side-effect
-                            "/w14619",  # Enable: pragma warning: there is no warning number 'number'
+                            # This warning cannot be enabled due to assimp, fixed in the next assimp version
+                            # "/w14619",  # Enable: pragma warning: there is no warning number 'number'
                             "/w14640",  # Enable: Enable warning on thread un-safe static member initialization
                             "/w14826",  # Enable: Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
                             "/w14905",  # Enable: wide string literal cast to 'LPSTR'

@@ -66,8 +66,8 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "//src/utils",
-        "//third_party/assimp",
         "//third_party/miniball",
+        "@assimp",
         "@glew//:glew_static",
         "@glm",
         "@qt//:qt_core",
