@@ -67,13 +67,13 @@ public slots:
 
 protected:
     /// Initialize the OpenGL
-    void initializeGL();
+    void initializeGL() override;
     /// OpenGL paint method
-    void paintGL();
+    void paintGL() override;
     /// Method to catch the resize event
-    void resizeGL(int pWidth, int pHeight);
+    void resizeGL(int pWidth, int pHeight) override;
     /// Method to catch the key events
-    void keyPressEvent(QKeyEvent* pEvent);
+    void keyPressEvent(QKeyEvent* pEvent) override;
 
 private:
     void DrawGeometryBoundingVolumes(const glm::mat4& viewProjectionMatrix, bool init);
