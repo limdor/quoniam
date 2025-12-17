@@ -1,10 +1,10 @@
-//Definition include
+// Definition include
 #include "MainWindow.h"
 
-//Qt includes
+// Qt includes
 #include <QtWidgets/QMessageBox>
 
-//Project includes
+// Project includes
 #include "Debug.h"
 #include "MainModuleController.h"
 
@@ -12,15 +12,14 @@ MainWindow* MainWindow::mInstance;
 
 MainWindow* MainWindow::GetInstance()
 {
-    if(mInstance == nullptr)
+    if( mInstance == nullptr )
     {
         mInstance = new MainWindow();
     }
     return mInstance;
 }
 
-MainWindow::MainWindow(QWidget *pParent): QMainWindow(pParent),
-    mUi(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* pParent) : QMainWindow(pParent), mUi(new Ui::MainWindow)
 {
     mUi->setupUi(this);
 
@@ -40,10 +39,11 @@ void MainWindow::ModuleChanged(int pIndex)
 {
     Debug::SetConsole(nullptr);
     menuBar()->clear();
-    if(pIndex >= 0)
+    if( pIndex >= 0 )
     {
         // We load the menus of the current module
-        ModuleController* currentModule = dynamic_cast<ModuleController*>(mModuleTabWidget->currentWidget());
+        ModuleController* currentModule =
+            dynamic_cast<ModuleController*>(mModuleTabWidget->currentWidget());
 
         currentModule->ActiveModule();
 
@@ -72,7 +72,8 @@ void MainWindow::ModuleChanged(int pIndex)
 
 void MainWindow::LoadMainModule()
 {
-    mModuleTabWidget->LoadModule(new MainModuleController(mModuleTabWidget), "Main module", "MainModule");
+    mModuleTabWidget->LoadModule(new MainModuleController(mModuleTabWidget), "Main module",
+                                 "MainModule");
 }
 
 void MainWindow::ShowAbout()

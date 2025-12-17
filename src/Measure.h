@@ -1,7 +1,7 @@
 #ifndef MEASURE_H
 #define MEASURE_H
 
-//Project includes
+// Project includes
 #include "SceneInformationBuilder.h"
 
 #include <string>
@@ -28,7 +28,7 @@ public:
     /// Return a boolean to know if the measure is computed
     bool Computed() const;
     void SetComputed(bool pComputed);
-    virtual void Compute(const SceneInformationBuilder *pSceneInformationBuilder) = 0;
+    virtual void Compute(const SceneInformationBuilder* pSceneInformationBuilder) = 0;
 
 protected:
     /// Name of the measure

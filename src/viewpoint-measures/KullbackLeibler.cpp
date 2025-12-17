@@ -1,25 +1,25 @@
-//Definition include
+// Definition include
 #include "KullbackLeibler.h"
 
-//Dependency includes
+// Dependency includes
 #include "glm/exponential.hpp"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
-KullbackLeibler::KullbackLeibler(const std::string& pName): Measure(pName, false)
+KullbackLeibler::KullbackLeibler(const std::string& pName) : Measure(pName, false)
 {
-
 }
 
-void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void KullbackLeibler::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    std::vector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
+    std::vector<float> serializedPolygonAreas =
+        pSceneInformationBuilder->GetSerializedPolygonAreas();
     float sumAreaPolygons = 0.0f;
     for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {
@@ -34,7 +34,9 @@ void KullbackLeibler::Compute(const SceneInformationBuilder *pSceneInformationBu
             if( a_z != 0 )
             {
                 float aux = a_z / (float)a_t;
-                mValues[currentViewpoint] += aux * glm::log2( aux / ( serializedPolygonAreas.at(currentPolygon) / sumAreaPolygons ) );
+                mValues[currentViewpoint] +=
+                    aux *
+                    glm::log2(aux / (serializedPolygonAreas.at(currentPolygon) / sumAreaPolygons));
             }
         }
     }

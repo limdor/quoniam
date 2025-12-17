@@ -1,7 +1,7 @@
 #ifndef GL_CANVAS_H
 #define GL_CANVAS_H
 
-//GLEW has to be included before any OpenGL include
+// GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
 #include "Camera.h"
@@ -25,18 +25,19 @@ class GLCanvas : public QGLWidget
     Q_OBJECT
 
 public:
-    explicit GLCanvas(QWidget *pParent = nullptr);
+    explicit GLCanvas(QWidget* pParent = nullptr);
     ~GLCanvas();
 
     /// Load an scene
-    void LoadScene(std::shared_ptr<Scene> pScene , const Camera* pCamera = nullptr);
-    /// Initialize the list of meshes that will be render with the color per vertex with the parameter
+    void LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera = nullptr);
+    /// Initialize the list of meshes that will be render with the color per vertex with the
+    /// parameter
     void SetPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh);
     /// Add a mesh that will be render with the color per vertex
     void AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh);
 
     /// Save a screenshot of the renderer
-    QString SaveScreenshot( const QString &pFileName );
+    QString SaveScreenshot(const QString& pFileName);
 
     void PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint);
     void RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint);
@@ -72,7 +73,7 @@ protected:
     /// Method to catch the resize event
     void resizeGL(int pWidth, int pHeight);
     /// Method to catch the key events
-    void keyPressEvent(QKeyEvent *pEvent);
+    void keyPressEvent(QKeyEvent* pEvent);
 
 private:
     void DrawGeometryBoundingVolumes(const glm::mat4& viewProjectionMatrix, bool init);
@@ -117,7 +118,8 @@ private:
     std::unique_ptr<GLSLProgram> mShaderDualPeelPerVertexColor = nullptr;
     /// Shader used to alpha-blend the back color for the dual depth peeling
     std::unique_ptr<GLSLProgram> mShaderDualBlend = nullptr;
-    /// Shader used to combinte the color of the front and the back buffer for the dual depth peeling
+    /// Shader used to combinte the color of the front and the back buffer for the dual depth
+    /// peeling
     std::unique_ptr<GLSLProgram> mShaderDualFinal = nullptr;
 
     /// Variable used for the dual deep peeling
@@ -135,13 +137,9 @@ private:
     /// Variable used for the dual deep peeling
     GLuint mDualBackBlenderTexId;
     /// Variable used for the dual deep peeling
-    const GLenum mDrawBuffers[7] = {GL_COLOR_ATTACHMENT0,
-                                    GL_COLOR_ATTACHMENT1,
-                                    GL_COLOR_ATTACHMENT2,
-                                    GL_COLOR_ATTACHMENT3,
-                                    GL_COLOR_ATTACHMENT4,
-                                    GL_COLOR_ATTACHMENT5,
-                                    GL_COLOR_ATTACHMENT6};
+    const GLenum mDrawBuffers[7] = {
+        GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3,
+        GL_COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT5, GL_COLOR_ATTACHMENT6};
 
     /// Background color
     const glm::vec3 mBackgroundColor = glm::vec3(0.5f, 0.5f, 0.5f);

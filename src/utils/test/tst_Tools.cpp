@@ -10,19 +10,18 @@ namespace Catch
 template <>
 struct StringMaker<glm::vec4>
 {
-    static std::string convert(glm::vec4 const &value)
+    static std::string convert(glm::vec4 const& value)
     {
-        return "(" + std::to_string(value.r) + ", " +
-               std::to_string(value.g) + ", " +
-               std::to_string(value.b) + ", " +
-               std::to_string(value.a) + ")";
+        return "(" + std::to_string(value.r) + ", " + std::to_string(value.g) + ", " +
+               std::to_string(value.b) + ", " + std::to_string(value.a) + ")";
     }
 };
-} // namespace Catch
+}  // namespace Catch
 
 TEST_CASE("TriangleArea", "Tools")
 {
-    const float area = Tools::TriangleArea(glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 0.0f, 0.0f});
+    const float area = Tools::TriangleArea(glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 0.0f, 0.0f},
+                                           glm::vec3{0.0f, 0.0f, 0.0f});
     REQUIRE_THAT(area, Catch::Matchers::WithinAbs(0.0f, 0.000001));
 }
 
@@ -70,7 +69,8 @@ TEST_CASE("addIndex<float>", "Tools")
     const std::vector<float> input{2.0f, 4.0f, 1.0f, 3.0f};
 
     const std::vector<std::pair<size_t, float>> result = Tools::addIndex(input);
-    const std::vector<std::pair<size_t, float>> expected{{0u,2.0f}, {1u,4.0f}, {2u,1.0f}, {3u,3.0f}};
+    const std::vector<std::pair<size_t, float>> expected{
+        {0u, 2.0f}, {1u, 4.0f}, {2u, 1.0f}, {3u, 3.0f}};
     REQUIRE(result == expected);
 }
 
@@ -118,10 +118,8 @@ SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
 
             THEN("lower gets blue, middle gets green and higher gets red")
             {
-                const std::vector<glm::vec4> expected{
-                    glm::vec4{GREEN, 0.5f},
-                    glm::vec4{BLUE, 0.0f},
-                    glm::vec4{RED, 1.0f}};
+                const std::vector<glm::vec4> expected{glm::vec4{GREEN, 0.5f}, glm::vec4{BLUE, 0.0f},
+                                                      glm::vec4{RED, 1.0f}};
                 REQUIRE(result == expected);
             }
         }
@@ -132,10 +130,8 @@ SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
 
             THEN("lower gets red, middle gets green and higher gets blue")
             {
-                const std::vector<glm::vec4> expected{
-                    glm::vec4{GREEN, 0.5f},
-                    glm::vec4{RED, 1.0f},
-                    glm::vec4{BLUE, 0.0f}};
+                const std::vector<glm::vec4> expected{glm::vec4{GREEN, 0.5f}, glm::vec4{RED, 1.0f},
+                                                      glm::vec4{BLUE, 0.0f}};
                 REQUIRE(result == expected);
             }
         }
@@ -151,10 +147,8 @@ SCENARIO("colors can be converted to colors", "ConvertFloatsToColors")
 
             THEN("all get green")
             {
-                const std::vector<glm::vec4> expected{
-                    glm::vec4{RED, 1.0f},
-                    glm::vec4{RED, 1.0f},
-                    glm::vec4{RED, 1.0f}};
+                const std::vector<glm::vec4> expected{glm::vec4{RED, 1.0f}, glm::vec4{RED, 1.0f},
+                                                      glm::vec4{RED, 1.0f}};
                 REQUIRE(result == expected);
             }
         }
@@ -173,7 +167,9 @@ SCENARIO("values can be scaled within a range", "ScaleValues")
         {
             const std::vector<float> result = Tools::ScaleValues(input, LOWER_BOUND, UPPER_BOUND);
 
-            THEN("the lowest value gets the lower bound, the upper value the higher bound and the others the values in between")
+            THEN(
+                "the lowest value gets the lower bound, the upper value the higher bound and the "
+                "others the values in between")
             {
                 const std::vector<float> expected{LOWER_BOUND, 0.5f, 1.0f, 1.5f, UPPER_BOUND};
                 REQUIRE(result == expected);
@@ -206,7 +202,8 @@ SCENARIO("values can be scaled within a range", "ScaleValues")
 
             THEN("the output is all values the same like the closer bound")
             {
-                const std::vector<float> expected{UPPER_BOUND, UPPER_BOUND, UPPER_BOUND, UPPER_BOUND, UPPER_BOUND};
+                const std::vector<float> expected{UPPER_BOUND, UPPER_BOUND, UPPER_BOUND,
+                                                  UPPER_BOUND, UPPER_BOUND};
                 REQUIRE(result == expected);
             }
         }

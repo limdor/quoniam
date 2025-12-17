@@ -9,7 +9,8 @@
 class OrthographicCamera : public Camera
 {
 public:
-    OrthographicCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp, glm::vec3 pPosition, float pTop, float pBottom, float pLeft, float pRight);
+    OrthographicCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp,
+                       glm::vec3 pPosition, float pTop, float pBottom, float pLeft, float pRight);
     OrthographicCamera(const OrthographicCamera& pOrthographicCamera);
     ~OrthographicCamera();
 

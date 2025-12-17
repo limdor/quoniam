@@ -2,16 +2,23 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera(float pNearPlane, float pFarPlane, const glm::vec3 &pLookAt, const glm::vec3 &pUp, const glm::vec3 &pPosition, float pAspectRatio): Gizmo(),
-    mNearPlane(pNearPlane), mFarPlane(pFarPlane), mLookAt(pLookAt), mUp(pUp), mPosition(pPosition), mAspectRatio(pAspectRatio),
-    mUpdatedView(false), mUpdatedProjection(false)
+Camera::Camera(float pNearPlane, float pFarPlane, const glm::vec3& pLookAt, const glm::vec3& pUp,
+               const glm::vec3& pPosition, float pAspectRatio)
+    : Gizmo(),
+      mNearPlane(pNearPlane),
+      mFarPlane(pFarPlane),
+      mLookAt(pLookAt),
+      mUp(pUp),
+      mPosition(pPosition),
+      mAspectRatio(pAspectRatio),
+      mUpdatedView(false),
+      mUpdatedProjection(false)
 {
-
 }
 
 glm::mat4 Camera::GetViewMatrix()
 {
-    if(!mUpdatedView)
+    if( !mUpdatedView )
     {
         UpdateView();
     }
@@ -21,7 +28,7 @@ glm::mat4 Camera::GetViewMatrix()
 
 glm::mat4 Camera::GetProjectionMatrix()
 {
-    if(!mUpdatedProjection)
+    if( !mUpdatedProjection )
     {
         UpdateProjection();
     }
@@ -43,21 +50,21 @@ void Camera::SetFarPlane(float pFarPlane)
     UpdatePositions();
 }
 
-void Camera::SetLookAt(const glm::vec3 &pLookAt)
+void Camera::SetLookAt(const glm::vec3& pLookAt)
 {
     mLookAt = pLookAt;
     mUpdatedView = false;
     UpdatePositions();
 }
 
-void Camera::SetUp(const glm::vec3 &pUp)
+void Camera::SetUp(const glm::vec3& pUp)
 {
     mUp = pUp;
     mUpdatedView = false;
     UpdatePositions();
 }
 
-void Camera::SetPosition(const glm::vec3 &pPosition)
+void Camera::SetPosition(const glm::vec3& pPosition)
 {
     mPosition = pPosition;
     mUpdatedView = false;

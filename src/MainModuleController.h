@@ -1,16 +1,16 @@
 #ifndef _MAIN_MODULE_CONTROLLER_H_
 #define _MAIN_MODULE_CONTROLLER_H_
 
-//UI include
+// UI include
 #include "ui_MainModule.h"
 
-//Qt includes
+// Qt includes
 #include <QtCore/QSignalMapper>
 
-//Dependency includes
+// Dependency includes
 #include "glm/vec3.hpp"
 
-//Project includes
+// Project includes
 #include "DutagaciDialog.h"
 #include "GLCanvas.h"
 #include "Measure.h"
@@ -20,8 +20,9 @@
 
 #include <filesystem>
 
-namespace Ui {
-    class MainModule;
+namespace Ui
+{
+class MainModule;
 }
 
 /// Controller for the view of the main module
@@ -29,27 +30,29 @@ class MainModuleController : public ModuleController
 {
     Q_OBJECT
 public:
-    explicit MainModuleController(QWidget *pParent = 0);
+    explicit MainModuleController(QWidget* pParent = 0);
     ~MainModuleController();
 
     void CreateModuleMenus();
     void ActiveModule();
 
 protected:
-    void keyPressEvent(QKeyEvent *pEvent);
-    void mouseMoveEvent(QMouseEvent *pEvent);
-    void wheelEvent(QWheelEvent *pEvent);
-    void mousePressEvent(QMouseEvent *pEvent);
+    void keyPressEvent(QKeyEvent* pEvent);
+    void mouseMoveEvent(QMouseEvent* pEvent);
+    void wheelEvent(QWheelEvent* pEvent);
+    void mousePressEvent(QMouseEvent* pEvent);
 
 private:
     /// Scene related methods
-    void LoadScene(const std::filesystem::path &pFileName);
+    void LoadScene(const std::filesystem::path& pFileName);
 
     /// Mesh of viewpoints related methods
     void LoadViewpoints(int pWidthResolution, bool pFaceCulling);
-    void LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio, unsigned char pSubdivision, int pWidthResolution, bool pFaceCulling);
+    void LoadViewpointsFromSphere(float pRadius, float pAngle, float pAspectRatio,
+                                  unsigned char pSubdivision, int pWidthResolution,
+                                  bool pFaceCulling);
     void ChangeNumberOfViewpoints(size_t pNumberOfViewpoints);
-    void SaveViewpointMeasuresInformation(const QString &pFileName);
+    void SaveViewpointMeasuresInformation(const QString& pFileName);
     size_t NextViewpoint();
     void SetViewpoint(size_t pViewpoint);
     void ShowViewpointInformation(size_t pViewpoint);
@@ -68,10 +71,10 @@ private:
 
     Ui::MainModule* mUi;
 
-    GLCanvas *mOpenGLCanvas;
+    GLCanvas* mOpenGLCanvas;
     std::shared_ptr<Scene> mScene;
     std::shared_ptr<SphereOfViewpoints> mSphereOfViewpoints;
-    SceneInformationBuilder *mSceneInformationBuilder;
+    SceneInformationBuilder* mSceneInformationBuilder;
 
     bool mUpdateView;
 
@@ -83,13 +86,13 @@ private:
     QPoint mLastMousePosition;
 
 private slots:
-    //Menu
+    // Menu
     void OpenModel();
     void ExportInformation();
     void WillDrawViewpointsSphere(bool pDraw);
     void RunDutagaciBenchmark();
 
-    //Right panel
+    // Right panel
     void on_measureInViewpointSphereList_currentIndexChanged(int pValue);
     void on_alphaSlider_valueChanged(int pValue);
     void on_alphaSpinBox_valueChanged(double pValue);

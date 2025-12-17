@@ -4,12 +4,11 @@
 
 #include <fstream>
 
-GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType):
-    mType(pType)
+GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType) : mType(pType)
 {
     // Load shader's source text.
     std::ifstream file(pSourceFile, std::ios::in);
-    if (!file.is_open())
+    if( !file.is_open() )
     {
         mCompilationLog = "File not found! " + pSourceFile;
         mHasCompilationErrors = true;
@@ -26,13 +25,13 @@ GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType):
             GLint blen = 0;
             GLsizei slen = 0;
 
-            const char *constCode = fileContent.c_str();
-            glShaderSource( mId, 1, &constCode, nullptr );
+            const char* constCode = fileContent.c_str();
+            glShaderSource(mId, 1, &constCode, nullptr);
             glCompileShader(mId);
             CHECK_GL_ERROR();
             glGetShaderiv(mId, GL_COMPILE_STATUS, &blen);
             CHECK_GL_ERROR();
-            if(blen == GL_TRUE)
+            if( blen == GL_TRUE )
             {
                 mHasCompilationErrors = false;
                 mCompilationLog = "Compilation successful!";
@@ -42,10 +41,10 @@ GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType):
                 mHasCompilationErrors = true;
                 glGetShaderiv(mId, GL_INFO_LOG_LENGTH, &blen);
                 CHECK_GL_ERROR();
-                if (blen > 1)
+                if( blen > 1 )
                 {
-                    char * compilerLog = new char[blen];
-                    if ( compilerLog != nullptr )
+                    char* compilerLog = new char[blen];
+                    if( compilerLog != nullptr )
                     {
                         glGetShaderInfoLog(mId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();
@@ -83,7 +82,7 @@ const std::string& GLSLShader::GetCompilationLog() const
 
 void GLSLShader::ShowCompilationLog() const
 {
-    if(mHasCompilationErrors)
+    if( mHasCompilationErrors )
     {
         Debug::Error(mCompilationLog);
     }

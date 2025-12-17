@@ -5,9 +5,8 @@
 
 #include "Debug.h"
 
-ProjectedAreasMatrix::ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pNumberOfPolygons):
-    mNumberOfViewpoints(pNumberOfViewpoints), mNumberOfPolygons(pNumberOfPolygons),
-    mTotalSum(0)
+ProjectedAreasMatrix::ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pNumberOfPolygons)
+    : mNumberOfViewpoints(pNumberOfViewpoints), mNumberOfPolygons(pNumberOfPolygons), mTotalSum(0)
 {
     mValues.resize(pNumberOfViewpoints);
     for( size_t currentViewpoint = 0; currentViewpoint < pNumberOfViewpoints; currentViewpoint++ )
@@ -15,19 +14,20 @@ ProjectedAreasMatrix::ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pN
         mValues[currentViewpoint].resize(pNumberOfPolygons);
         std::fill(mValues[currentViewpoint].begin(), mValues[currentViewpoint].end(), 0);
     }
-    mSumPerPolygon.resize( mNumberOfPolygons );
+    mSumPerPolygon.resize(mNumberOfPolygons);
     std::fill(mSumPerPolygon.begin(), mSumPerPolygon.end(), 0);
-    mSumPerViewpoint.resize( mNumberOfViewpoints );
+    mSumPerViewpoint.resize(mNumberOfViewpoints);
     std::fill(mSumPerViewpoint.begin(), mSumPerViewpoint.end(), 0);
 }
 
-ProjectedAreasMatrix::ProjectedAreasMatrix(const ProjectedAreasMatrix *pProjectedAreasMatrix):
-    mValues(pProjectedAreasMatrix->mValues),
-    mNumberOfViewpoints(pProjectedAreasMatrix->mNumberOfViewpoints), mNumberOfPolygons(pProjectedAreasMatrix->mNumberOfPolygons),
-    mSumPerViewpoint(pProjectedAreasMatrix->mSumPerViewpoint), mSumPerPolygon(pProjectedAreasMatrix->mSumPerPolygon),
-    mTotalSum(pProjectedAreasMatrix->mTotalSum)
+ProjectedAreasMatrix::ProjectedAreasMatrix(const ProjectedAreasMatrix* pProjectedAreasMatrix)
+    : mValues(pProjectedAreasMatrix->mValues),
+      mNumberOfViewpoints(pProjectedAreasMatrix->mNumberOfViewpoints),
+      mNumberOfPolygons(pProjectedAreasMatrix->mNumberOfPolygons),
+      mSumPerViewpoint(pProjectedAreasMatrix->mSumPerViewpoint),
+      mSumPerPolygon(pProjectedAreasMatrix->mSumPerPolygon),
+      mTotalSum(pProjectedAreasMatrix->mTotalSum)
 {
-
 }
 
 size_t ProjectedAreasMatrix::GetNumberOfViewpoints() const
@@ -55,7 +55,7 @@ unsigned int ProjectedAreasMatrix::GetTotalSum() const
     return mTotalSum;
 }
 
-void ProjectedAreasMatrix::SetValues(size_t pViewpoint, const std::vector< unsigned int > &pValues)
+void ProjectedAreasMatrix::SetValues(size_t pViewpoint, const std::vector<unsigned int>& pValues)
 {
     mValues[pViewpoint] = pValues;
 }
@@ -67,9 +67,9 @@ unsigned int ProjectedAreasMatrix::GetValue(size_t pViewpoint, size_t pPolygon) 
 
 void ProjectedAreasMatrix::Compute()
 {
-    mSumPerPolygon.resize( mNumberOfPolygons );
+    mSumPerPolygon.resize(mNumberOfPolygons);
     std::fill(mSumPerPolygon.begin(), mSumPerPolygon.end(), 0);
-    mSumPerViewpoint.resize( mNumberOfViewpoints );
+    mSumPerViewpoint.resize(mNumberOfViewpoints);
     std::fill(mSumPerViewpoint.begin(), mSumPerViewpoint.end(), 0);
     mTotalSum = 0;
     for( size_t currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
@@ -90,7 +90,8 @@ void ProjectedAreasMatrix::SaveToFile() const
     if( file.open(QFile::WriteOnly) )
     {
         QTextStream out(&file);
-        for( size_t currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints; currentViewpoint++ )
+        for( size_t currentViewpoint = 0; currentViewpoint < mNumberOfViewpoints;
+             currentViewpoint++ )
         {
             for( size_t currentPolygon = 0; currentPolygon < mNumberOfPolygons; currentPolygon++ )
             {
@@ -99,10 +100,10 @@ void ProjectedAreasMatrix::SaveToFile() const
             out << "\n";
         }
         file.close();
-        Debug::Log( "Informacio escrita al fitxer: InformationChannelHistogram.txt" );
+        Debug::Log("Informacio escrita al fitxer: InformationChannelHistogram.txt");
     }
     else
     {
-        Debug::Error( "Impossible escriure a fitxer: InformationChannelHistogram.txt" );
+        Debug::Error("Impossible escriure a fitxer: InformationChannelHistogram.txt");
     }
 }

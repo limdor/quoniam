@@ -25,29 +25,36 @@ public:
         using pointer = value_type*;
         using reference = value_type&;
 
-        const_iterator(std::shared_ptr<SceneNode const> currentNode = nullptr):
-            mCurrentNode{currentNode}, mChildIndexFromParent{} {}
-        const_iterator& operator++() {
-            if(mCurrentNode) {
-                if(mCurrentNode->GetNumChilds() > 0) {
+        const_iterator(std::shared_ptr<SceneNode const> currentNode = nullptr)
+            : mCurrentNode{currentNode}, mChildIndexFromParent{}
+        {
+        }
+        const_iterator& operator++()
+        {
+            if( mCurrentNode )
+            {
+                if( mCurrentNode->GetNumChilds() > 0 )
+                {
                     mCurrentNode = mCurrentNode->GetChild(0);
                     mChildIndexFromParent.push(0);
                 }
-                else{
+                else
+                {
                     bool nextFound = false;
-                    while(!nextFound && mCurrentNode->GetParent() != nullptr && !mChildIndexFromParent.empty())
+                    while( !nextFound && mCurrentNode->GetParent() != nullptr &&
+                           !mChildIndexFromParent.empty() )
                     {
                         mCurrentNode = mCurrentNode->GetParent();
                         int nextChild = mChildIndexFromParent.top() + 1;
                         mChildIndexFromParent.pop();
-                        if(nextChild < mCurrentNode->GetNumChilds())
+                        if( nextChild < mCurrentNode->GetNumChilds() )
                         {
                             mCurrentNode = mCurrentNode->GetChild(nextChild);
                             mChildIndexFromParent.push(nextChild);
                             nextFound = true;
                         }
                     }
-                    if(!nextFound)
+                    if( !nextFound )
                     {
                         mCurrentNode = nullptr;
                         assert(mChildIndexFromParent.empty());
@@ -55,18 +62,36 @@ public:
                 }
             }
             return *this;
-            }
-        bool operator==(const_iterator other) const {return mCurrentNode == other.mCurrentNode;}
-        bool operator!=(const_iterator other) const {return !(*this == other);}
-        reference operator*() const {return *mCurrentNode;}
+        }
+        bool operator==(const_iterator other) const
+        {
+            return mCurrentNode == other.mCurrentNode;
+        }
+        bool operator!=(const_iterator other) const
+        {
+            return !(*this == other);
+        }
+        reference operator*() const
+        {
+            return *mCurrentNode;
+        }
     };
     /// Create an scene given the name and the root scene node
-    Scene(const std::string &pName, std::shared_ptr<SceneNode> pSceneRoot, const std::vector<std::shared_ptr<Material>>& pMaterials, const std::vector<std::shared_ptr<Geometry>>& pGeometries, const std::vector<std::shared_ptr<Mesh>>& pMeshes );
+    Scene(const std::string& pName, std::shared_ptr<SceneNode> pSceneRoot,
+          const std::vector<std::shared_ptr<Material>>& pMaterials,
+          const std::vector<std::shared_ptr<Geometry>>& pGeometries,
+          const std::vector<std::shared_ptr<Mesh>>& pMeshes);
     Scene(const Scene& pScene) = delete;
     ~Scene() = default;
 
-    inline const_iterator cbegin() const{return const_iterator{mRootNode};}
-    inline const_iterator cend() const{return const_iterator{nullptr};}
+    inline const_iterator cbegin() const
+    {
+        return const_iterator{mRootNode};
+    }
+    inline const_iterator cend() const
+    {
+        return const_iterator{nullptr};
+    }
     std::string GetName() const;
     std::shared_ptr<SceneNode const> GetRootNode() const;
     std::shared_ptr<BoundingSphere const> GetBoundingSphere() const;

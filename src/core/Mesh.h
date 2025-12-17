@@ -16,7 +16,7 @@ public:
     ~Mesh() = default;
 
     /// Set the name of the mesh
-    void SetName(const std::string &pName);
+    void SetName(const std::string& pName);
 
     /// Set the material that will be used for the renderer
     void SetMaterial(std::shared_ptr<Material> pMaterial);

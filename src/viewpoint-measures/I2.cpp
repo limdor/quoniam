@@ -1,29 +1,28 @@
-//Definition include
+// Definition include
 #include "I2.h"
 
-//System includes
+// System includes
 #include <float.h>
 
-//Dependency includes
+// Dependency includes
 #include "glm/exponential.hpp"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
-I2::I2(const std::string &pName): Measure(pName, false)
+I2::I2(const std::string& pName) : Measure(pName, false)
 {
-
 }
 
-void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void I2::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
-    std::vector< size_t > elementsOutOfDomain;
+    std::vector<size_t> elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     float maxValue = -FLT_MAX;
@@ -50,7 +49,7 @@ void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
                     }
                 }
             }
-            mValues[currentViewpoint] = - sumAux1 + sumAux2;
+            mValues[currentViewpoint] = -sumAux1 + sumAux2;
             if( mValues.at(currentViewpoint) > maxValue )
             {
                 maxValue = mValues.at(currentViewpoint);
@@ -61,7 +60,8 @@ void I2::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
             elementsOutOfDomain.push_back(currentViewpoint);
         }
     }
-    //The maximum value is assigned to the viewpoints out of the domain (viewpoints that don't see anything)
+    // The maximum value is assigned to the viewpoints out of the domain (viewpoints that don't see
+    // anything)
     for( int currentElement = 0; currentElement < elementsOutOfDomain.size(); currentElement++ )
     {
         mValues[elementsOutOfDomain.at(currentElement)] = maxValue;

@@ -9,25 +9,31 @@
 
 #include "glm/exponential.hpp"
 
-Geometry::Geometry(const std::string &pName, GeometryTopology pT):
-    mTopology{pT}, mName{pName}
+Geometry::Geometry(const std::string& pName, GeometryTopology pT) : mTopology{pT}, mName{pName}
 {
-
 }
 
-Geometry::Geometry(const Geometry& pGeometry):
-    mVertexData(pGeometry.mVertexData), mVertexStride(pGeometry.mVertexStride), mNormalData(pGeometry.mNormalData),
-    mColorData(pGeometry.mColorData), mColorStride(pGeometry.mColorStride), mTextCoordsData(pGeometry.mTextCoordsData),
-    mTangentData(pGeometry.mTangentData), mBitangentData(pGeometry.mBitangentData), mIndexData(pGeometry.mIndexData),
-    mName(pGeometry.mName), mTopology(pGeometry.mTopology), mNeedGPUGeometryUpdate(true)
+Geometry::Geometry(const Geometry& pGeometry)
+    : mVertexData(pGeometry.mVertexData),
+      mVertexStride(pGeometry.mVertexStride),
+      mNormalData(pGeometry.mNormalData),
+      mColorData(pGeometry.mColorData),
+      mColorStride(pGeometry.mColorStride),
+      mTextCoordsData(pGeometry.mTextCoordsData),
+      mTangentData(pGeometry.mTangentData),
+      mBitangentData(pGeometry.mBitangentData),
+      mIndexData(pGeometry.mIndexData),
+      mName(pGeometry.mName),
+      mTopology(pGeometry.mTopology),
+      mNeedGPUGeometryUpdate(true)
 {
     mBoundingBox = nullptr;
     mBoundingSphere = nullptr;
-    if(pGeometry.mBoundingBox != nullptr)
+    if( pGeometry.mBoundingBox != nullptr )
     {
         mBoundingBox = std::make_shared<AxisAlignedBoundingBox>(*pGeometry.mBoundingBox);
     }
-    if(pGeometry.mBoundingSphere != nullptr)
+    if( pGeometry.mBoundingSphere != nullptr )
     {
         mBoundingSphere = std::make_shared<BoundingSphere>(*pGeometry.mBoundingSphere);
     }
@@ -50,11 +56,11 @@ Geometry& Geometry::operator=(Geometry&& pGeometry)
     mNeedGPUGeometryUpdate = true;
     mBoundingBox = nullptr;
     mBoundingSphere = nullptr;
-    if(pGeometry.mBoundingBox != nullptr)
+    if( pGeometry.mBoundingBox != nullptr )
     {
         mBoundingBox = std::make_shared<AxisAlignedBoundingBox>(*pGeometry.mBoundingBox);
     }
-    if(pGeometry.mBoundingSphere != nullptr)
+    if( pGeometry.mBoundingSphere != nullptr )
     {
         mBoundingSphere = std::make_shared<BoundingSphere>(*pGeometry.mBoundingSphere);
     }
@@ -65,40 +71,40 @@ Geometry& Geometry::operator=(Geometry&& pGeometry)
 
 Geometry::~Geometry() = default;
 
-void Geometry::SetVerticesData(size_t pSize, const glm::vec4 *pData)
+void Geometry::SetVerticesData(size_t pSize, const glm::vec4* pData)
 {
-    mVertexData.resize(pSize*4);
+    mVertexData.resize(pSize * 4);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mVertexData[i*4] = pData[i].x;
-        mVertexData[i*4+1] = pData[i].y;
-        mVertexData[i*4+2] = pData[i].z;
-        mVertexData[i*4+3] = pData[i].w;
+        mVertexData[i * 4] = pData[i].x;
+        mVertexData[i * 4 + 1] = pData[i].y;
+        mVertexData[i * 4 + 2] = pData[i].z;
+        mVertexData[i * 4 + 3] = pData[i].w;
     }
     mVertexStride = 4;
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetVerticesData(size_t pSize, const glm::vec3 *pData)
+void Geometry::SetVerticesData(size_t pSize, const glm::vec3* pData)
 {
-    mVertexData.resize(pSize*3);
+    mVertexData.resize(pSize * 3);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mVertexData[i*3] = pData[i].x;
-        mVertexData[i*3+1] = pData[i].y;
-        mVertexData[i*3+2] = pData[i].z;
+        mVertexData[i * 3] = pData[i].x;
+        mVertexData[i * 3 + 1] = pData[i].y;
+        mVertexData[i * 3 + 2] = pData[i].z;
     }
     mVertexStride = 3;
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetVerticesData(size_t pSize, const glm::vec2 *pData)
+void Geometry::SetVerticesData(size_t pSize, const glm::vec2* pData)
 {
-    mVertexData.resize(pSize*2);
+    mVertexData.resize(pSize * 2);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mVertexData[i*2] = pData[i].x;
-        mVertexData[i*2+1] = pData[i].y;
+        mVertexData[i * 2] = pData[i].x;
+        mVertexData[i * 2 + 1] = pData[i].y;
     }
     mVertexStride = 2;
     mNeedGPUGeometryUpdate = true;
@@ -114,81 +120,81 @@ unsigned int Geometry::GetVertexStride() const
     return mVertexStride;
 }
 
-void Geometry::SetNormalsData(size_t pSize, const glm::vec3 *pData)
+void Geometry::SetNormalsData(size_t pSize, const glm::vec3* pData)
 {
-    mNormalData.resize(pSize*3);
+    mNormalData.resize(pSize * 3);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mNormalData[i*3] = pData[i].x;
-        mNormalData[i*3+1] = pData[i].y;
-        mNormalData[i*3+2] = pData[i].z;
+        mNormalData[i * 3] = pData[i].x;
+        mNormalData[i * 3 + 1] = pData[i].y;
+        mNormalData[i * 3 + 2] = pData[i].z;
     }
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetColorData(size_t pSize, const glm::vec4 *pData)
+void Geometry::SetColorData(size_t pSize, const glm::vec4* pData)
 {
-    mColorData.resize(pSize*4);
+    mColorData.resize(pSize * 4);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mColorData[i*4] = pData[i].r;
-        mColorData[i*4+1] = pData[i].g;
-        mColorData[i*4+2] = pData[i].b;
-        mColorData[i*4+3] = pData[i].a;
+        mColorData[i * 4] = pData[i].r;
+        mColorData[i * 4 + 1] = pData[i].g;
+        mColorData[i * 4 + 2] = pData[i].b;
+        mColorData[i * 4 + 3] = pData[i].a;
     }
     mColorStride = 4;
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetColorData(size_t pSize, const glm::vec3 *pData)
+void Geometry::SetColorData(size_t pSize, const glm::vec3* pData)
 {
-    mColorData.resize(pSize*3);
+    mColorData.resize(pSize * 3);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mColorData[i*3] = pData[i].x;
-        mColorData[i*3+1] = pData[i].y;
-        mColorData[i*3+2] = pData[i].z;
+        mColorData[i * 3] = pData[i].x;
+        mColorData[i * 3 + 1] = pData[i].y;
+        mColorData[i * 3 + 2] = pData[i].z;
     }
     mColorStride = 3;
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetTextCoordsData(size_t pSize, const glm::vec2 *pData)
+void Geometry::SetTextCoordsData(size_t pSize, const glm::vec2* pData)
 {
-    mTextCoordsData.resize(pSize*2);
+    mTextCoordsData.resize(pSize * 2);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mTextCoordsData[i*2] = pData[i].x;
-        mTextCoordsData[i*2+1] = pData[i].y;
+        mTextCoordsData[i * 2] = pData[i].x;
+        mTextCoordsData[i * 2 + 1] = pData[i].y;
     }
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetTangentData(size_t pSize, const glm::vec3 *pData)
+void Geometry::SetTangentData(size_t pSize, const glm::vec3* pData)
 {
-    mTangentData.resize(pSize*3);
+    mTangentData.resize(pSize * 3);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mTangentData[i*3] = pData[i].x;
-        mTangentData[i*3+1] = pData[i].y;
-        mTangentData[i*3+2] = pData[i].z;
+        mTangentData[i * 3] = pData[i].x;
+        mTangentData[i * 3 + 1] = pData[i].y;
+        mTangentData[i * 3 + 2] = pData[i].z;
     }
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetBitangentData(size_t pSize, const glm::vec3 *pData)
+void Geometry::SetBitangentData(size_t pSize, const glm::vec3* pData)
 {
-    mBitangentData.resize(pSize*3);
+    mBitangentData.resize(pSize * 3);
     for( size_t i = 0; i < pSize; i++ )
     {
-        mBitangentData[i*3] = pData[i].x;
-        mBitangentData[i*3+1] = pData[i].y;
-        mBitangentData[i*3+1] = pData[i].z;
+        mBitangentData[i * 3] = pData[i].x;
+        mBitangentData[i * 3 + 1] = pData[i].y;
+        mBitangentData[i * 3 + 1] = pData[i].z;
     }
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetIndexsData(size_t pSize, const unsigned int *pData)
+void Geometry::SetIndexsData(size_t pSize, const unsigned int* pData)
 {
     mIndexData.resize(pSize);
     for( size_t i = 0; i < pSize; i++ )
@@ -198,7 +204,7 @@ void Geometry::SetIndexsData(size_t pSize, const unsigned int *pData)
     mNeedGPUGeometryUpdate = true;
 }
 
-void Geometry::SetIndexsData(size_t pSize, const size_t *pData)
+void Geometry::SetIndexsData(size_t pSize, const size_t* pData)
 {
     mIndexData.resize(pSize);
     for( size_t i = 0; i < pSize; i++ )
@@ -213,12 +219,12 @@ const std::vector<unsigned int>& Geometry::GetIndexsData() const
     return mIndexData;
 }
 
-void Geometry::SetName(const std::string &pName)
+void Geometry::SetName(const std::string& pName)
 {
     mName = pName;
 }
 
-void Geometry::SetTopology( GeometryTopology pTopology )
+void Geometry::SetTopology(GeometryTopology pTopology)
 {
     mTopology = pTopology;
     mNeedGPUGeometryUpdate = true;
@@ -234,10 +240,10 @@ void Geometry::ComputeBoundingVolumes()
     for( int i = 0; i < mVertexData.size(); i += mVertexStride )
     {
         p[0] = mVertexData.at(i);
-        p[1] = mVertexData.at(i+1);
+        p[1] = mVertexData.at(i + 1);
         if( mVertexStride > 2 )
         {
-            p[2] = mVertexData.at(i+2);
+            p[2] = mVertexData.at(i + 2);
         }
         else
         {
@@ -245,40 +251,40 @@ void Geometry::ComputeBoundingVolumes()
         }
         mb.check_in(p);
 
-        if(mVertexData.at(i) <  min.x)
+        if( mVertexData.at(i) < min.x )
         {
             min.x = mVertexData.at(i);
         }
-        if(mVertexData.at(i) > max.x)
+        if( mVertexData.at(i) > max.x )
         {
             max.x = mVertexData.at(i);
         }
-        if(mVertexData.at(i+1) <  min.y)
+        if( mVertexData.at(i + 1) < min.y )
         {
-            min.y = mVertexData.at(i+1);
+            min.y = mVertexData.at(i + 1);
         }
-        if(mVertexData.at(i+1) > max.y)
+        if( mVertexData.at(i + 1) > max.y )
         {
-            max.y = mVertexData.at(i+1);
+            max.y = mVertexData.at(i + 1);
         }
         if( mVertexStride > 2 )
         {
-            if(mVertexData.at(i+2) <  min.z)
+            if( mVertexData.at(i + 2) < min.z )
             {
-                min.z = mVertexData.at(i+2);
+                min.z = mVertexData.at(i + 2);
             }
-            if(mVertexData.at(i+2) > max.z)
+            if( mVertexData.at(i + 2) > max.z )
             {
-                max.z = mVertexData.at(i+2);
+                max.z = mVertexData.at(i + 2);
             }
         }
     }
     mb.build();
-    if(mBoundingBox == nullptr)
+    if( mBoundingBox == nullptr )
     {
         mBoundingBox = std::make_shared<AxisAlignedBoundingBox>();
     }
-    if(mBoundingSphere == nullptr)
+    if( mBoundingSphere == nullptr )
     {
         mBoundingSphere = std::make_shared<BoundingSphere>();
     }
@@ -288,11 +294,12 @@ void Geometry::ComputeBoundingVolumes()
     sphereCenter.x = mb.center()[0];
     sphereCenter.y = mb.center()[1];
     sphereCenter.z = mb.center()[2];
-    if(!mb.is_valid(1e-6))
+    if( !mb.is_valid(1e-6) )
     {
         double slack;
         double error = mb.accuracy(slack);
-        Debug::Warning("Bounding sphere in geometry " + mName + " may be invalid. Accuracy: " + std::to_string(error));
+        Debug::Warning("Bounding sphere in geometry " + mName +
+                       " may be invalid. Accuracy: " + std::to_string(error));
     }
 
     mBoundingSphere->SetCenter(sphereCenter);
@@ -304,7 +311,7 @@ void Geometry::ShowInformation() const
     Debug::Log("Information of the mesh " + mName + ":");
     Debug::Log("   Number of faces: " + std::to_string(GetNumFaces()));
     Debug::Log("   Number of vertices: " + std::to_string(GetNumVertices()));
-    Debug::Log("   Diameter: " + std::to_string(mBoundingSphere->GetRadius()*2));
+    Debug::Log("   Diameter: " + std::to_string(mBoundingSphere->GetRadius() * 2));
 }
 
 std::shared_ptr<AxisAlignedBoundingBox> Geometry::GetBoundingBox() const
@@ -368,22 +375,17 @@ GeometryTopology Geometry::GetTopology() const
 
 std::shared_ptr<GPUGeometry const> Geometry::GetGPUGeometry()
 {
-    if(mGPUGeometry == nullptr || mNeedGPUGeometryUpdate)
+    if( mGPUGeometry == nullptr || mNeedGPUGeometryUpdate )
     {
         CHECK_GL_ERROR();
         mGPUGeometry = std::make_shared<GPUGeometry>();
-        mGPUGeometry->SetVerticesData( mVertexData, mVertexStride );
-        if(mNormalData.size() > 0)
-            mGPUGeometry->SetNormalsData(mNormalData);
+        mGPUGeometry->SetVerticesData(mVertexData, mVertexStride);
+        if( mNormalData.size() > 0 ) mGPUGeometry->SetNormalsData(mNormalData);
         mGPUGeometry->SetIndexsData(mIndexData, mTopology);
-        if(mColorData.size() > 0)
-            mGPUGeometry->SetColorData(mColorData, mColorStride );
-        if(mTextCoordsData.size() > 0)
-            mGPUGeometry->SetTextCoordsData(mTextCoordsData);
-        if(mTangentData.size() > 0)
-            mGPUGeometry->SetTangentData(mTangentData);
-        if(mBitangentData.size() > 0)
-            mGPUGeometry->SetBitangentData(mBitangentData);
+        if( mColorData.size() > 0 ) mGPUGeometry->SetColorData(mColorData, mColorStride);
+        if( mTextCoordsData.size() > 0 ) mGPUGeometry->SetTextCoordsData(mTextCoordsData);
+        if( mTangentData.size() > 0 ) mGPUGeometry->SetTangentData(mTangentData);
+        if( mBitangentData.size() > 0 ) mGPUGeometry->SetBitangentData(mBitangentData);
         mGPUGeometry->ConfigureVAO();
         mNeedGPUGeometryUpdate = false;
     }

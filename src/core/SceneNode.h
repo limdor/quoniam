@@ -14,7 +14,7 @@
 class SceneNode : public std::enable_shared_from_this<SceneNode>
 {
 public:
-    explicit SceneNode(const std::string &pName);
+    explicit SceneNode(const std::string& pName);
     explicit SceneNode(const SceneNode& sceneNode) = delete;
     ~SceneNode() = default;
 
@@ -22,7 +22,7 @@ public:
     std::string GetName() const;
 
     /// Set the local transform of the node (scale must be equal in x, y and z)
-    void SetLocalTransform(const glm::mat4 &pTransform);
+    void SetLocalTransform(const glm::mat4& pTransform);
     /// Get the local transform of the node
     glm::mat4 GetLocalTransform() const;
     /// Get the global transform of the node

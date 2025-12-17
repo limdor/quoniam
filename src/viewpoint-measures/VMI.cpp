@@ -1,28 +1,27 @@
-//Definition include
+// Definition include
 #include "VMI.h"
 
-//Dependency includes
+// Dependency includes
 #include "glm/exponential.hpp"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
 #include <algorithm>
 
-VMI::VMI(const std::string &pName): Measure(pName, false)
+VMI::VMI(const std::string& pName) : Measure(pName, false)
 {
-
 }
 
-void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void VMI::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
-    std::vector< size_t > elementsOutOfDomain;
+    std::vector<size_t> elementsOutOfDomain;
 
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
 
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
 
     float maxValue = -FLT_MAX;
@@ -39,7 +38,7 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
                 {
                     unsigned int sum_a_t = projectedAreasMatrix->GetTotalSum();
                     float aux = a_z / (float)a_t;
-                    mValues[currentViewpoint] += a_z * glm::log2( aux * ( sum_a_t / (float) sum_a_z ) );
+                    mValues[currentViewpoint] += a_z * glm::log2(aux * (sum_a_t / (float)sum_a_z));
                 }
             }
             mValues[currentViewpoint] /= a_t;
@@ -53,7 +52,8 @@ void VMI::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
             elementsOutOfDomain.push_back(currentViewpoint);
         }
     }
-    //The maximum value is assigned to the viewpoints out of the domain (viewpoints that don't see anything)
+    // The maximum value is assigned to the viewpoints out of the domain (viewpoints that don't see
+    // anything)
     for( size_t currentElement = 0; currentElement < elementsOutOfDomain.size(); currentElement++ )
     {
         mValues[elementsOutOfDomain.at(currentElement)] = maxValue;

@@ -1,36 +1,37 @@
-//Definition include
+// Definition include
 #include "CurvatureEntropy.h"
 
-//Dependency includes
+// Dependency includes
 #include "glm/exponential.hpp"
 #include "glm/gtc/constants.hpp"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
-CurvatureEntropy::CurvatureEntropy(const std::string& pName): Measure(pName, true)
+CurvatureEntropy::CurvatureEntropy(const std::string& pName) : Measure(pName, true)
 {
-
 }
 
-void CurvatureEntropy::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void CurvatureEntropy::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const int histogramSize = 256;
-    const size_t numberOfViewpoints = pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
+    const size_t numberOfViewpoints =
+        pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
     std::vector<float> vertexCurvatures = pSceneInformationBuilder->GetSerializedVertexCurvature();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     float min = -2.0f * glm::pi<float>();
     float range = 4.0f * glm::pi<float>();
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         std::vector<unsigned int> curvatureHistogram(histogramSize, 0);
-        std::set<int> visibleVertices = pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);
-        foreach(int value, visibleVertices)
+        std::set<int> visibleVertices =
+            pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);
+        foreach (int value, visibleVertices)
         {
             float curvature = vertexCurvatures.at(value);
-            int bin = (int)( (histogramSize - 1) * ( (curvature - min) / range ) );
-            if(bin < 0)
+            int bin = (int)((histogramSize - 1) * ((curvature - min) / range));
+            if( bin < 0 )
             {
                 bin = 0;
             }

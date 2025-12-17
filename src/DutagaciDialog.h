@@ -1,15 +1,16 @@
 #ifndef DUTAGACI_DIALOG_H
 #define DUTAGACI_DIALOG_H
 
-//UI include
+// UI include
 #include "ui_DutagaciView.h"
 
-//Qt includes
+// Qt includes
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFileDialog>
 
-namespace Ui {
-    class DutagaciView;
+namespace Ui
+{
+class DutagaciView;
 }
 
 /// Dialog to run the Dutagaci benchmark
@@ -17,7 +18,7 @@ class DutagaciDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DutagaciDialog(QWidget *parent = 0);
+    explicit DutagaciDialog(QWidget* parent = 0);
     ~DutagaciDialog();
 
     /// Return the list of files loaded in the dialog
@@ -34,7 +35,7 @@ private:
     float mDistance;
     int mAngle;
 
-    std::vector<QString> GetFileListFromTXT(const QString &pFileName) const;
+    std::vector<QString> GetFileListFromTXT(const QString& pFileName) const;
 
 private slots:
     /// Compute camera distance button method

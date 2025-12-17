@@ -1,21 +1,21 @@
-//Definition include
+// Definition include
 #include "SpherePointCloud.h"
 
-//Dependency includes
+// Dependency includes
 #include "glm/common.hpp"
 #include "glm/geometric.hpp"
 #include "glm/exponential.hpp"
 
 #include <cassert>
 
-glm::vec3 SpherePointCloud::Up(const glm::vec3 &pViewpoint)
+glm::vec3 SpherePointCloud::Up(const glm::vec3& pViewpoint)
 {
     glm::vec3 front = -pViewpoint;
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    if(glm::abs(front.y) > 0.66)
+    if( glm::abs(front.y) > 0.66 )
     {
-        if(front.x < 0.0f)
+        if( front.x < 0.0f )
         {
             up = glm::vec3(1.0f, 0.0f, 0.0f);
         }
@@ -30,8 +30,7 @@ glm::vec3 SpherePointCloud::Up(const glm::vec3 &pViewpoint)
     return up;
 }
 
-SpherePointCloud::SpherePointCloud():
-    mNumberOfPoints(0)
+SpherePointCloud::SpherePointCloud() : mNumberOfPoints(0)
 {
     mMesh = std::make_shared<Geometry>("Sphere point cloud", GeometryTopology::Points);
 }
@@ -42,28 +41,34 @@ void SpherePointCloud::SetToUniform4()
 
     mNumberOfPoints = 4;
     mVertices.resize(mNumberOfPoints);
-    mVertices[0] = glm::vec3(  UNIT,  UNIT,  UNIT );  // 0
-    mVertices[1] = glm::vec3( -UNIT, -UNIT,  UNIT );  // 1
-    mVertices[2] = glm::vec3( -UNIT,  UNIT, -UNIT );  // 2
-    mVertices[3] = glm::vec3(  UNIT, -UNIT, -UNIT );  // 3
+    // clang-format off
+    mVertices[0] = glm::vec3( UNIT,  UNIT,  UNIT);  // 0
+    mVertices[1] = glm::vec3(-UNIT, -UNIT,  UNIT);  // 1
+    mVertices[2] = glm::vec3(-UNIT,  UNIT, -UNIT);  // 2
+    mVertices[3] = glm::vec3( UNIT, -UNIT, -UNIT);  // 3
+    // clang-format on
 
     mNormals = mVertices;
 
     mFaces.resize(12);
+    // clang-format off
     mFaces[0] = 0; mFaces[ 1] = 1; mFaces[ 2] = 3;
     mFaces[3] = 0; mFaces[ 4] = 2; mFaces[ 5] = 1;
     mFaces[6] = 0; mFaces[ 7] = 3; mFaces[ 8] = 2;
     mFaces[9] = 1; mFaces[10] = 2; mFaces[11] = 3;
+    // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
         mNeighbours[i].resize(3);
     }
+    // clang-format off
     mNeighbours[0][0] = 1; mNeighbours[0][1] = 2; mNeighbours[0][2] = 3;
     mNeighbours[1][0] = 0; mNeighbours[1][1] = 2; mNeighbours[1][2] = 3;
     mNeighbours[2][0] = 0; mNeighbours[2][1] = 1; mNeighbours[2][2] = 3;
     mNeighbours[3][0] = 0; mNeighbours[3][1] = 1; mNeighbours[3][2] = 2;
+    // clang-format on
 
     SetMeshInformation();
 }
@@ -72,16 +77,19 @@ void SpherePointCloud::SetToUniform6()
 {
     mNumberOfPoints = 6;
     mVertices.resize(mNumberOfPoints);
-    mVertices[0] = glm::vec3(  1.0f,  0.0f,  0.0f );  // 0
-    mVertices[1] = glm::vec3( -1.0f,  0.0f,  0.0f );  // 1
-    mVertices[2] = glm::vec3(  0.0f,  1.0f,  0.0f );  // 2
-    mVertices[3] = glm::vec3(  0.0f, -1.0f,  0.0f );  // 3
-    mVertices[4] = glm::vec3(  0.0f,  0.0f,  1.0f );  // 4
-    mVertices[5] = glm::vec3(  0.0f,  0.0f, -1.0f );  // 5
+    // clang-format off
+    mVertices[0] = glm::vec3( 1.0f,  0.0f,  0.0f);  // 0
+    mVertices[1] = glm::vec3(-1.0f,  0.0f,  0.0f);  // 1
+    mVertices[2] = glm::vec3( 0.0f,  1.0f,  0.0f);  // 2
+    mVertices[3] = glm::vec3( 0.0f, -1.0f,  0.0f);  // 3
+    mVertices[4] = glm::vec3( 0.0f,  0.0f,  1.0f);  // 4
+    mVertices[5] = glm::vec3( 0.0f,  0.0f, -1.0f);  // 5
+    // clang-format on
 
     mNormals = mVertices;
 
     mFaces.resize(24);
+    // clang-format off
     mFaces[ 0] = 0; mFaces[ 1] = 4; mFaces[ 2] = 3;
     mFaces[ 3] = 1; mFaces[ 4] = 3; mFaces[ 5] = 4;
     mFaces[ 6] = 1; mFaces[ 7] = 5; mFaces[ 8] = 3;
@@ -90,18 +98,21 @@ void SpherePointCloud::SetToUniform6()
     mFaces[15] = 1; mFaces[16] = 4; mFaces[17] = 2;
     mFaces[18] = 0; mFaces[19] = 2; mFaces[20] = 4;
     mFaces[21] = 0; mFaces[22] = 5; mFaces[23] = 2;
+    // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
         mNeighbours[i].resize(4);
     }
+    // clang-format off
     mNeighbours[0][0] = 2; mNeighbours[0][1] = 3; mNeighbours[0][2] = 4; mNeighbours[0][3] = 5;
     mNeighbours[1][0] = 2; mNeighbours[1][1] = 3; mNeighbours[1][2] = 4; mNeighbours[1][3] = 5;
     mNeighbours[2][0] = 0; mNeighbours[2][1] = 1; mNeighbours[2][2] = 4; mNeighbours[2][3] = 5;
     mNeighbours[3][0] = 0; mNeighbours[3][1] = 1; mNeighbours[3][2] = 4; mNeighbours[3][3] = 5;
     mNeighbours[4][0] = 0; mNeighbours[4][1] = 1; mNeighbours[4][2] = 2; mNeighbours[4][3] = 3;
     mNeighbours[5][0] = 0; mNeighbours[5][1] = 1; mNeighbours[5][2] = 2; mNeighbours[5][3] = 3;
+    // clang-format on
 
     SetMeshInformation();
 }
@@ -112,18 +123,21 @@ void SpherePointCloud::SetToUniform8()
 
     mNumberOfPoints = 8;
     mVertices.resize(mNumberOfPoints);
-    mVertices[0] = glm::vec3(  UNIT,  UNIT,  UNIT ); // 0
-    mVertices[1] = glm::vec3(  UNIT,  UNIT, -UNIT ); // 1
-    mVertices[2] = glm::vec3(  UNIT, -UNIT,  UNIT ); // 2
-    mVertices[3] = glm::vec3(  UNIT, -UNIT, -UNIT ); // 3
-    mVertices[4] = glm::vec3( -UNIT,  UNIT,  UNIT ); // 4
-    mVertices[5] = glm::vec3( -UNIT,  UNIT, -UNIT ); // 5
-    mVertices[6] = glm::vec3( -UNIT, -UNIT,  UNIT ); // 6
-    mVertices[7] = glm::vec3( -UNIT, -UNIT, -UNIT ); // 7
+    // clang-format off
+    mVertices[0] = glm::vec3( UNIT,  UNIT,  UNIT);  // 0
+    mVertices[1] = glm::vec3( UNIT,  UNIT, -UNIT);  // 1
+    mVertices[2] = glm::vec3( UNIT, -UNIT,  UNIT);  // 2
+    mVertices[3] = glm::vec3( UNIT, -UNIT, -UNIT);  // 3
+    mVertices[4] = glm::vec3(-UNIT,  UNIT,  UNIT);  // 4
+    mVertices[5] = glm::vec3(-UNIT,  UNIT, -UNIT);  // 5
+    mVertices[6] = glm::vec3(-UNIT, -UNIT,  UNIT);  // 6
+    mVertices[7] = glm::vec3(-UNIT, -UNIT, -UNIT);  // 7
+    // clang-format on
 
     mNormals = mVertices;
 
     mFaces.resize(36);
+    // clang-format off
     mFaces[ 0] = 0; mFaces[ 1] = 6; mFaces[ 2] = 2;
     mFaces[ 3] = 0; mFaces[ 4] = 4; mFaces[ 5] = 6;
     mFaces[ 6] = 0; mFaces[ 7] = 2; mFaces[ 8] = 3;
@@ -136,12 +150,14 @@ void SpherePointCloud::SetToUniform8()
     mFaces[27] = 5; mFaces[28] = 7; mFaces[29] = 6;
     mFaces[30] = 1; mFaces[31] = 3; mFaces[32] = 5;
     mFaces[33] = 3; mFaces[34] = 7; mFaces[35] = 5;
+    // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
         mNeighbours[i].resize(3);
     }
+    // clang-format off
     mNeighbours[0][0] = 1; mNeighbours[0][1] = 2; mNeighbours[0][2] = 4;
     mNeighbours[1][0] = 0; mNeighbours[1][1] = 3; mNeighbours[1][2] = 5;
     mNeighbours[2][0] = 0; mNeighbours[2][1] = 3; mNeighbours[2][2] = 6;
@@ -150,13 +166,14 @@ void SpherePointCloud::SetToUniform8()
     mNeighbours[5][0] = 1; mNeighbours[5][1] = 4; mNeighbours[5][2] = 7;
     mNeighbours[6][0] = 2; mNeighbours[6][1] = 4; mNeighbours[6][2] = 7;
     mNeighbours[7][0] = 3; mNeighbours[7][1] = 5; mNeighbours[7][2] = 6;
+    // clang-format on
 
     SetMeshInformation();
 }
 
 void SpherePointCloud::SetToUniform12()
 {
-    glm::vec3 v( 1.0f, 0.0f, ( 1.0f + glm::sqrt( 5.0f ) ) / 2.0f );
+    glm::vec3 v(1.0f, 0.0f, (1.0f + glm::sqrt(5.0f)) / 2.0f);
     v = glm::normalize(v);
 
     const double PHI_X = v.x;
@@ -164,22 +181,25 @@ void SpherePointCloud::SetToUniform12()
 
     mNumberOfPoints = 12;
     mVertices.resize(mNumberOfPoints);
-    mVertices[ 0] = glm::vec3(   0.0f,  PHI_X,  PHI_Z ); //  0
-    mVertices[ 1] = glm::vec3(   0.0f,  PHI_X, -PHI_Z ); //  1
-    mVertices[ 2] = glm::vec3(   0.0f, -PHI_X,  PHI_Z ); //  2
-    mVertices[ 3] = glm::vec3(   0.0f, -PHI_X, -PHI_Z ); //  3
-    mVertices[ 4] = glm::vec3(  PHI_X,  PHI_Z,   0.0f ); //  4
-    mVertices[ 5] = glm::vec3(  PHI_X, -PHI_Z,   0.0f ); //  5
-    mVertices[ 6] = glm::vec3( -PHI_X,  PHI_Z,   0.0f ); //  6
-    mVertices[ 7] = glm::vec3( -PHI_X, -PHI_Z,   0.0f ); //  7
-    mVertices[ 8] = glm::vec3(  PHI_Z,   0.0f,  PHI_X ); //  8
-    mVertices[ 9] = glm::vec3(  PHI_Z,   0.0f, -PHI_X ); //  9
-    mVertices[10] = glm::vec3( -PHI_Z,   0.0f,  PHI_X ); // 10
-    mVertices[11] = glm::vec3( -PHI_Z,   0.0f, -PHI_X ); // 11
+    // clang-format off
+    mVertices[ 0] = glm::vec3(  0.0f,  PHI_X,  PHI_Z);  //  0
+    mVertices[ 1] = glm::vec3(  0.0f,  PHI_X, -PHI_Z);  //  1
+    mVertices[ 2] = glm::vec3(  0.0f, -PHI_X,  PHI_Z);  //  2
+    mVertices[ 3] = glm::vec3(  0.0f, -PHI_X, -PHI_Z);  //  3
+    mVertices[ 4] = glm::vec3( PHI_X,  PHI_Z,   0.0f);  //  4
+    mVertices[ 5] = glm::vec3( PHI_X, -PHI_Z,   0.0f);  //  5
+    mVertices[ 6] = glm::vec3(-PHI_X,  PHI_Z,   0.0f);  //  6
+    mVertices[ 7] = glm::vec3(-PHI_X, -PHI_Z,   0.0f);  //  7
+    mVertices[ 8] = glm::vec3( PHI_Z,   0.0f,  PHI_X);  //  8
+    mVertices[ 9] = glm::vec3( PHI_Z,   0.0f, -PHI_X);  //  9
+    mVertices[10] = glm::vec3(-PHI_Z,   0.0f,  PHI_X);  // 10
+    mVertices[11] = glm::vec3(-PHI_Z,   0.0f, -PHI_X);  // 11
+    // clang-format on
 
     mNormals = mVertices;
 
     mFaces.resize(60);
+    // clang-format off
     mFaces[ 0] =  6; mFaces[ 1] = 10; mFaces[ 2] =  0;
     mFaces[ 3] =  6; mFaces[ 4] =  0; mFaces[ 5] =  4;
     mFaces[ 6] =  6; mFaces[ 7] =  4; mFaces[ 8] =  1;
@@ -200,12 +220,14 @@ void SpherePointCloud::SetToUniform12()
     mFaces[51] =  3; mFaces[52] =  7; mFaces[53] = 11;
     mFaces[54] =  9; mFaces[55] =  3; mFaces[56] =  1;
     mFaces[57] =  8; mFaces[58] =  9; mFaces[59] =  4;
+    // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
         mNeighbours[i].resize(5);
     }
+    // clang-format off
     mNeighbours[ 0][0] = 2; mNeighbours[ 0][1] = 4; mNeighbours[ 0][2] = 6; mNeighbours[ 0][3] =  8; mNeighbours[ 0][4] = 10;
     mNeighbours[ 1][0] = 3; mNeighbours[ 1][1] = 4; mNeighbours[ 1][2] = 6; mNeighbours[ 1][3] =  9; mNeighbours[ 1][4] = 11;
     mNeighbours[ 2][0] = 0; mNeighbours[ 2][1] = 5; mNeighbours[ 2][2] = 7; mNeighbours[ 2][3] =  8; mNeighbours[ 2][4] = 10;
@@ -218,48 +240,52 @@ void SpherePointCloud::SetToUniform12()
     mNeighbours[ 9][0] = 1; mNeighbours[ 9][1] = 3; mNeighbours[ 9][2] = 4; mNeighbours[ 9][3] =  5; mNeighbours[ 9][4] =  8;
     mNeighbours[10][0] = 0; mNeighbours[10][1] = 2; mNeighbours[10][2] = 6; mNeighbours[10][3] =  7; mNeighbours[10][4] = 11;
     mNeighbours[11][0] = 1; mNeighbours[11][1] = 3; mNeighbours[11][2] = 6; mNeighbours[11][3] =  7; mNeighbours[11][4] = 10;
+    // clang-format on
 
     SetMeshInformation();
 }
 
 void SpherePointCloud::SetToUniform20()
 {
-    const float UNIT = 1.0f / glm::sqrt( 3.0f );
-    const double PHI = ( 1.0f + glm::sqrt( 5.0f ) ) / 2.0f;
+    const float UNIT = 1.0f / glm::sqrt(3.0f);
+    const double PHI = (1.0f + glm::sqrt(5.0f)) / 2.0f;
     const double INV_PHI = 1.0f / PHI;
 
     mNumberOfPoints = 20;
     mVertices.resize(mNumberOfPoints);
-    mVertices[ 0] = glm::vec3(     UNIT,     UNIT,     UNIT );         //  0
-    mVertices[ 1] = glm::vec3(     UNIT,     UNIT,    -UNIT );         //  1
-    mVertices[ 2] = glm::vec3(     UNIT,    -UNIT,     UNIT );         //  2
-    mVertices[ 3] = glm::vec3(     UNIT,    -UNIT,    -UNIT );         //  3
-    mVertices[ 4] = glm::vec3(    -UNIT,     UNIT,     UNIT );         //  4
-    mVertices[ 5] = glm::vec3(    -UNIT,     UNIT,    -UNIT );         //  5
-    mVertices[ 6] = glm::vec3(    -UNIT,    -UNIT,     UNIT );         //  6
-    mVertices[ 7] = glm::vec3(    -UNIT,    -UNIT,    -UNIT );         //  7
-    mVertices[ 8] = glm::vec3(     0.0f,  INV_PHI,      PHI ) * UNIT;  //  8
-    mVertices[ 9] = glm::vec3(     0.0f,  INV_PHI,     -PHI ) * UNIT;  //  9
-    mVertices[10] = glm::vec3(     0.0f, -INV_PHI,      PHI ) * UNIT;  // 10
-    mVertices[11] = glm::vec3(     0.0f, -INV_PHI,     -PHI ) * UNIT;  // 11
-    mVertices[12] = glm::vec3(  INV_PHI,      PHI,     0.0f ) * UNIT;  // 12
-    mVertices[13] = glm::vec3(  INV_PHI,     -PHI,     0.0f ) * UNIT;  // 13
-    mVertices[14] = glm::vec3( -INV_PHI,      PHI,     0.0f ) * UNIT;  // 14
-    mVertices[15] = glm::vec3( -INV_PHI,     -PHI,     0.0f ) * UNIT;  // 15
-    mVertices[16] = glm::vec3(      PHI,     0.0f,  INV_PHI ) * UNIT;  // 16
-    mVertices[17] = glm::vec3(      PHI,     0.0f, -INV_PHI ) * UNIT;  // 17
-    mVertices[18] = glm::vec3(     -PHI,     0.0f,  INV_PHI ) * UNIT;  // 18
-    mVertices[19] = glm::vec3(     -PHI,     0.0f, -INV_PHI ) * UNIT;  // 19
+    // clang-format off
+    mVertices[ 0] = glm::vec3(    UNIT,     UNIT,     UNIT);         //  0
+    mVertices[ 1] = glm::vec3(    UNIT,     UNIT,    -UNIT);         //  1
+    mVertices[ 2] = glm::vec3(    UNIT,    -UNIT,     UNIT);         //  2
+    mVertices[ 3] = glm::vec3(    UNIT,    -UNIT,    -UNIT);         //  3
+    mVertices[ 4] = glm::vec3(   -UNIT,     UNIT,     UNIT);         //  4
+    mVertices[ 5] = glm::vec3(   -UNIT,     UNIT,    -UNIT);         //  5
+    mVertices[ 6] = glm::vec3(   -UNIT,    -UNIT,     UNIT);         //  6
+    mVertices[ 7] = glm::vec3(   -UNIT,    -UNIT,    -UNIT);         //  7
+    mVertices[ 8] = glm::vec3(    0.0f,  INV_PHI,      PHI) * UNIT;  //  8
+    mVertices[ 9] = glm::vec3(    0.0f,  INV_PHI,     -PHI) * UNIT;  //  9
+    mVertices[10] = glm::vec3(    0.0f, -INV_PHI,      PHI) * UNIT;  // 10
+    mVertices[11] = glm::vec3(    0.0f, -INV_PHI,     -PHI) * UNIT;  // 11
+    mVertices[12] = glm::vec3( INV_PHI,      PHI,     0.0f) * UNIT;  // 12
+    mVertices[13] = glm::vec3( INV_PHI,     -PHI,     0.0f) * UNIT;  // 13
+    mVertices[14] = glm::vec3(-INV_PHI,      PHI,     0.0f) * UNIT;  // 14
+    mVertices[15] = glm::vec3(-INV_PHI,     -PHI,     0.0f) * UNIT;  // 15
+    mVertices[16] = glm::vec3(     PHI,     0.0f,  INV_PHI) * UNIT;  // 16
+    mVertices[17] = glm::vec3(     PHI,     0.0f, -INV_PHI) * UNIT;  // 17
+    mVertices[18] = glm::vec3(    -PHI,     0.0f,  INV_PHI) * UNIT;  // 18
+    mVertices[19] = glm::vec3(    -PHI,     0.0f, -INV_PHI) * UNIT;  // 19
+    // clang-format on
 
     mNormals = mVertices;
 
-    //TODO: Add faces
+    // TODO: Add faces
 
     mNeighbours.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
         mNeighbours[i].resize(3);
     }
+    // clang-format off
     mNeighbours[ 0][0] =  8; mNeighbours[ 0][1] = 12; mNeighbours[ 0][2] = 16;
     mNeighbours[ 1][0] =  9; mNeighbours[ 1][1] = 12; mNeighbours[ 1][2] = 17;
     mNeighbours[ 2][0] = 10; mNeighbours[ 2][1] = 13; mNeighbours[ 2][2] = 16;
@@ -280,6 +306,7 @@ void SpherePointCloud::SetToUniform20()
     mNeighbours[17][0] =  1; mNeighbours[17][1] =  3; mNeighbours[17][2] = 16;
     mNeighbours[18][0] =  4; mNeighbours[18][1] =  6; mNeighbours[18][2] = 19;
     mNeighbours[19][0] =  5; mNeighbours[19][1] =  7; mNeighbours[19][2] = 18;
+    // clang-format on
 
     SetMeshInformation();
 }
@@ -289,7 +316,7 @@ void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
     // Create the initial vertices and faces from the sphere cloud
     CreateIcosahedron();
 
-    std::vector< size_t > tempFaces = mFaces;
+    std::vector<size_t> tempFaces = mFaces;
 
     mFaces.clear();
 
@@ -297,10 +324,10 @@ void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
     for( size_t i = 0; i < tempFaces.size(); i += 3 )
     {
         size_t face1 = tempFaces.at(i);
-        size_t face2 = tempFaces.at(i+1);
-        size_t face3 = tempFaces.at(i+2);
+        size_t face2 = tempFaces.at(i + 1);
+        size_t face3 = tempFaces.at(i + 2);
 
-        Subdivide( mVertices.at(face1), mVertices.at(face2), mVertices.at(face3), pDepth );
+        Subdivide(mVertices.at(face1), mVertices.at(face2), mVertices.at(face3), pDepth);
     }
     mNumberOfPoints = mVertices.size();
     ComputeQuasiUniformNeighbours();
@@ -322,7 +349,7 @@ glm::vec3 SpherePointCloud::GetVertex(size_t pI) const
     return mVertices.at(pI);
 }
 
-std::vector<std::vector<size_t> > SpherePointCloud::GetNeighbours() const
+std::vector<std::vector<size_t>> SpherePointCloud::GetNeighbours() const
 {
     return mNeighbours;
 }
@@ -341,47 +368,53 @@ void SpherePointCloud::ComputeQuasiUniformNeighbours()
 {
     mNeighbours.clear();
     const size_t nFaces = mFaces.size() / 3;
-    assert( nFaces * 3 == mFaces.size() );
+    assert(nFaces * 3 == mFaces.size());
 
-    for ( size_t i = 0; i < mNumberOfPoints; i++ )
+    for( size_t i = 0; i < mNumberOfPoints; i++ )
     {
         std::vector<size_t> vertexNeighbours;
 
-        for ( size_t j = 0; j < nFaces; j++ )
+        for( size_t j = 0; j < nFaces; j++ )
         {
-            if ( mFaces.at( 3 * j ) == i )
+            if( mFaces.at(3 * j) == i )
             {
-                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 1 ) ) == vertexNeighbours.cend() )
+                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 1)) == vertexNeighbours.cend() )
                 {
-                    vertexNeighbours.push_back(mFaces.at( 3 * j + 1 ));
+                    vertexNeighbours.push_back(mFaces.at(3 * j + 1));
                 }
-                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 2 ) ) == vertexNeighbours.cend() )
+                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 2)) == vertexNeighbours.cend() )
                 {
-                    vertexNeighbours.push_back(mFaces.at( 3 * j + 2 ));
+                    vertexNeighbours.push_back(mFaces.at(3 * j + 2));
                 }
             }
 
-            if ( mFaces.at( 3 * j + 1 ) == i )
+            if( mFaces.at(3 * j + 1) == i )
             {
-                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j ) ) == vertexNeighbours.cend() )
+                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j)) == vertexNeighbours.cend() )
                 {
-                    vertexNeighbours.push_back(mFaces.at( 3 * j ));
+                    vertexNeighbours.push_back(mFaces.at(3 * j));
                 }
-                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 2 ) ) == vertexNeighbours.cend() )
+                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 2)) == vertexNeighbours.cend() )
                 {
-                    vertexNeighbours.push_back(mFaces.at( 3 * j + 2 ));
+                    vertexNeighbours.push_back(mFaces.at(3 * j + 2));
                 }
             }
 
-            if ( mFaces.at( 3 * j + 2 ) == i )
+            if( mFaces.at(3 * j + 2) == i )
             {
-                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j ) ) == vertexNeighbours.cend() )
+                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j)) == vertexNeighbours.cend() )
                 {
-                    vertexNeighbours.push_back(mFaces.at( 3 * j ));
+                    vertexNeighbours.push_back(mFaces.at(3 * j));
                 }
-                if ( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(), mFaces.at( 3 * j + 1 ) ) == vertexNeighbours.cend() )
+                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 1)) == vertexNeighbours.cend() )
                 {
-                    vertexNeighbours.push_back(mFaces.at( 3 * j + 1 ));
+                    vertexNeighbours.push_back(mFaces.at(3 * j + 1));
                 }
             }
         }
@@ -391,7 +424,7 @@ void SpherePointCloud::ComputeQuasiUniformNeighbours()
 
 void SpherePointCloud::CreateIcosahedron()
 {
-    glm::vec3 v( 1.0f, 0.0f, ( 1.0f + glm::sqrt( 5.0f ) ) / 2.0f );
+    glm::vec3 v(1.0f, 0.0f, (1.0f + glm::sqrt(5.0f)) / 2.0f);
     v = glm::normalize(v);
 
     const double ICOSAHEDRON_X = v.x;
@@ -399,22 +432,25 @@ void SpherePointCloud::CreateIcosahedron()
 
     mNumberOfPoints = 12;
     mVertices.resize(mNumberOfPoints);
-    mVertices[ 0] = glm::vec3( -ICOSAHEDRON_X, 0.0f,  ICOSAHEDRON_Z );
-    mVertices[ 1] = glm::vec3(  ICOSAHEDRON_X, 0.0f,  ICOSAHEDRON_Z );
-    mVertices[ 2] = glm::vec3( -ICOSAHEDRON_X, 0.0f, -ICOSAHEDRON_Z );
-    mVertices[ 3] = glm::vec3(  ICOSAHEDRON_X, 0.0f, -ICOSAHEDRON_Z );
-    mVertices[ 4] = glm::vec3( 0.0f,  ICOSAHEDRON_Z,  ICOSAHEDRON_X );
-    mVertices[ 5] = glm::vec3( 0.0f,  ICOSAHEDRON_Z, -ICOSAHEDRON_X );
-    mVertices[ 6] = glm::vec3( 0.0f, -ICOSAHEDRON_Z,  ICOSAHEDRON_X );
-    mVertices[ 7] = glm::vec3( 0.0f, -ICOSAHEDRON_Z, -ICOSAHEDRON_X );
-    mVertices[ 8] = glm::vec3(  ICOSAHEDRON_Z,  ICOSAHEDRON_X, 0.0f );
-    mVertices[ 9] = glm::vec3( -ICOSAHEDRON_Z,  ICOSAHEDRON_X, 0.0f );
-    mVertices[10] = glm::vec3(  ICOSAHEDRON_Z, -ICOSAHEDRON_X, 0.0f );
-    mVertices[11] = glm::vec3( -ICOSAHEDRON_Z, -ICOSAHEDRON_X, 0.0f );
+    // clang-format off
+    mVertices[ 0] = glm::vec3(-ICOSAHEDRON_X,           0.0f,  ICOSAHEDRON_Z);
+    mVertices[ 1] = glm::vec3( ICOSAHEDRON_X,           0.0f,  ICOSAHEDRON_Z);
+    mVertices[ 2] = glm::vec3(-ICOSAHEDRON_X,           0.0f, -ICOSAHEDRON_Z);
+    mVertices[ 3] = glm::vec3( ICOSAHEDRON_X,           0.0f, -ICOSAHEDRON_Z);
+    mVertices[ 4] = glm::vec3(          0.0f,  ICOSAHEDRON_Z,  ICOSAHEDRON_X);
+    mVertices[ 5] = glm::vec3(          0.0f,  ICOSAHEDRON_Z, -ICOSAHEDRON_X);
+    mVertices[ 6] = glm::vec3(          0.0f, -ICOSAHEDRON_Z,  ICOSAHEDRON_X);
+    mVertices[ 7] = glm::vec3(          0.0f, -ICOSAHEDRON_Z, -ICOSAHEDRON_X);
+    mVertices[ 8] = glm::vec3( ICOSAHEDRON_Z,  ICOSAHEDRON_X,           0.0f);
+    mVertices[ 9] = glm::vec3(-ICOSAHEDRON_Z,  ICOSAHEDRON_X,           0.0f);
+    mVertices[10] = glm::vec3( ICOSAHEDRON_Z, -ICOSAHEDRON_X,           0.0f);
+    mVertices[11] = glm::vec3(-ICOSAHEDRON_Z, -ICOSAHEDRON_X,           0.0f);
+    // clang-format on
 
     mNormals = mVertices;
 
     mFaces.resize(60);
+    // clang-format off
     mFaces[ 0] =  1; mFaces[ 1] =  4; mFaces[ 2] =  0;
     mFaces[ 3] =  4; mFaces[ 4] =  9; mFaces[ 5] =  0;
     mFaces[ 6] =  4; mFaces[ 7] =  5; mFaces[ 8] =  9;
@@ -435,73 +471,77 @@ void SpherePointCloud::CreateIcosahedron()
     mFaces[51] =  2; mFaces[52] = 11; mFaces[53] =  9;
     mFaces[54] =  5; mFaces[55] =  2; mFaces[56] =  9;
     mFaces[57] = 11; mFaces[58] =  2; mFaces[59] =  7;
+    // clang-format on
 }
 
-inline bool equal(const glm::vec3 & v1, const glm::vec3 & v2, float error)
+inline bool equal(const glm::vec3& v1, const glm::vec3& v2, float error)
 {
     glm::vec3 v = v1 - v2;
 
-    return ( glm::abs( v.x ) <= error && glm::abs( v.y ) <= error && glm::abs( v.z ) <= error );
+    return (glm::abs(v.x) <= error && glm::abs(v.y) <= error && glm::abs(v.z) <= error);
 }
 
-bool SpherePointCloud::FindSphereCloudVertex(const glm::vec3 & pV, size_t & pPosition) const
+bool SpherePointCloud::FindSphereCloudVertex(const glm::vec3& pV, size_t& pPosition) const
 {
     size_t i = 0;
     bool trobat = false;
 
-    while ( i < mVertices.size() && !trobat )
+    while( i < mVertices.size() && !trobat )
     {
-        if ( equal( pV, mVertices.at(i), 0.0001f ) ) trobat = true;
-        else i++;
+        if( equal(pV, mVertices.at(i), 0.0001f) )
+            trobat = true;
+        else
+            i++;
     }
     pPosition = i;
 
     return trobat;
 }
 
-void SpherePointCloud::CreateSphereCloudTriangle(const glm::vec3 & pV1, const glm::vec3 & pV2, const glm::vec3 & pV3)
+void SpherePointCloud::CreateSphereCloudTriangle(const glm::vec3& pV1, const glm::vec3& pV2,
+                                                 const glm::vec3& pV3)
 {
     size_t pos;
 
     // Add the triangle (v1, v2, v3) to the list --> Add vertexs (if needed) and faces!!!
 
-    if( FindSphereCloudVertex( pV1, pos ) )
+    if( FindSphereCloudVertex(pV1, pos) )
     {
         // Vertex finded at position pos --> Only the index of the face is added
-        mFaces.push_back( pos );
+        mFaces.push_back(pos);
     }
     else
     {
         // Add the vertex and the index of the face
-        mVertices.push_back( pV1 );
-        mNormals.push_back( pV1 );
-        mFaces.push_back( mVertices.size() - 1 );
+        mVertices.push_back(pV1);
+        mNormals.push_back(pV1);
+        mFaces.push_back(mVertices.size() - 1);
     }
 
-    if( FindSphereCloudVertex( pV2, pos ) )
+    if( FindSphereCloudVertex(pV2, pos) )
     {
         // Vertex finded at position pos --> Only the index of the face is added
-        mFaces.push_back( pos );
+        mFaces.push_back(pos);
     }
     else
     {
         // Add the vertex and the index of the face
-        mVertices.push_back( pV2 );
-        mNormals.push_back( pV2 );
-        mFaces.push_back( mVertices.size() - 1 );
+        mVertices.push_back(pV2);
+        mNormals.push_back(pV2);
+        mFaces.push_back(mVertices.size() - 1);
     }
 
-    if( FindSphereCloudVertex( pV3, pos ) )
+    if( FindSphereCloudVertex(pV3, pos) )
     {
         // Vertex finded at position pos --> Only the index of the face is added
-        mFaces.push_back( pos );
+        mFaces.push_back(pos);
     }
     else
     {
         // Add the vertex and the index of the face
-        mVertices.push_back( pV3 );
-        mNormals.push_back( pV3 );
-        mFaces.push_back( mVertices.size() - 1 );
+        mVertices.push_back(pV3);
+        mNormals.push_back(pV3);
+        mFaces.push_back(mVertices.size() - 1);
     }
 }
 
@@ -509,7 +549,7 @@ void SpherePointCloud::Subdivide(glm::vec3 pV1, glm::vec3 pV2, glm::vec3 pV3, un
 {
     if( pDepth == 0 )
     {
-        CreateSphereCloudTriangle( pV1, pV2, pV3 );
+        CreateSphereCloudTriangle(pV1, pV2, pV3);
     }
     else
     {
@@ -523,10 +563,10 @@ void SpherePointCloud::Subdivide(glm::vec3 pV1, glm::vec3 pV2, glm::vec3 pV3, un
         v23 = glm::normalize(v23);
         v31 = glm::normalize(v31);
 
-        Subdivide( pV1, v12, v31, pDepth - 1 );
-        Subdivide( pV2, v23, v12, pDepth - 1 );
-        Subdivide( pV3, v31, v23, pDepth - 1 );
-        Subdivide( v12, v23, v31, pDepth - 1 );
+        Subdivide(pV1, v12, v31, pDepth - 1);
+        Subdivide(pV2, v23, v12, pDepth - 1);
+        Subdivide(pV3, v31, v23, pDepth - 1);
+        Subdivide(v12, v23, v31, pDepth - 1);
     }
 }
 
@@ -534,7 +574,7 @@ void SpherePointCloud::SetMeshInformation()
 {
     mMesh->SetVerticesData(mNumberOfPoints, mVertices.data());
     mMesh->SetNormalsData(mNumberOfPoints, mNormals.data());
-    if(mFaces.size() > 0)
+    if( mFaces.size() > 0 )
     {
         mMesh->SetIndexsData(mFaces.size(), mFaces.data());
         mMesh->SetTopology(GeometryTopology::Triangles);

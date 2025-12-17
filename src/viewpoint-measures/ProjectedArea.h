@@ -1,17 +1,17 @@
 #ifndef PROJECTED_AREA_H
 #define PROJECTED_AREA_H
 
-//Project includes
+// Project includes
 #include "Measure.h"
 
 /// Class that implements the projected area measure
 class ProjectedArea : public Measure
 {
 public:
-    explicit ProjectedArea(const std::string &pName);
+    explicit ProjectedArea(const std::string& pName);
 
     /// Method that computes the measure
-    void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
+    void Compute(const SceneInformationBuilder* pSceneInformationBuilder);
 };
 
 #endif

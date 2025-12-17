@@ -1,45 +1,47 @@
-//Definition include
+// Definition include
 #include "Unstability.h"
 
-//Dependency includes
+// Dependency includes
 #include "glm/exponential.hpp"
 
-//Project includes
+// Project includes
 #include "Debug.h"
 #include "Tools.h"
 
-Unstability::Unstability(const std::string &pName): Measure(pName, false)
+Unstability::Unstability(const std::string& pName) : Measure(pName, false)
 {
-
 }
 
-void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void Unstability::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    std::vector< std::vector< size_t > > viewpointNeighbours = pSceneInformationBuilder->GetViewpointNeighbours();
-    std::vector< size_t > viewpointsOutOfDomain;
+    std::vector<std::vector<size_t>> viewpointNeighbours =
+        pSceneInformationBuilder->GetViewpointNeighbours();
+    std::vector<size_t> viewpointsOutOfDomain;
     float minValue = FLT_MAX;
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
         unsigned int numberOfNeighbours = 0;
         bool ocludedNeighbours = false;
 
-        std::vector< size_t > neighbours = viewpointNeighbours.at(currentViewpoint);
-        if(neighbours.size() == 0)
+        std::vector<size_t> neighbours = viewpointNeighbours.at(currentViewpoint);
+        if( neighbours.size() == 0 )
         {
             Debug::Log("Unstability::No neighbours");
         }
         for( size_t currentNeighbour = 0; currentNeighbour < neighbours.size(); currentNeighbour++ )
         {
             unsigned int a_t_i = projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint);
-            unsigned int a_t_j = projectedAreasMatrix->GetSumPerViewpoint(neighbours.at(currentNeighbour));
+            unsigned int a_t_j =
+                projectedAreasMatrix->GetSumPerViewpoint(neighbours.at(currentNeighbour));
 
             if( a_t_i != 0 && a_t_j != 0 )
             {
-                mValues[currentViewpoint] += GetDissimilarity( projectedAreasMatrix, currentViewpoint, neighbours.at(currentNeighbour) );
+                mValues[currentViewpoint] += GetDissimilarity(
+                    projectedAreasMatrix, currentViewpoint, neighbours.at(currentNeighbour));
                 numberOfNeighbours++;
             }
             else
@@ -47,7 +49,7 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
                 ocludedNeighbours = true;
             }
         }
-        if(numberOfNeighbours != 0)
+        if( numberOfNeighbours != 0 )
         {
             mValues[currentViewpoint] /= numberOfNeighbours;
             if( mValues.at(currentViewpoint) < minValue )
@@ -55,13 +57,15 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
                 minValue = mValues.at(currentViewpoint);
             }
         }
-        else if(ocludedNeighbours)
+        else if( ocludedNeighbours )
         {
             viewpointsOutOfDomain.push_back(currentViewpoint);
         }
     }
-    //The minimum value is assigned to the viewpoints out of the domain (viewpoints that don't see anything)
-    for( size_t currentViewpoint = 0; currentViewpoint < viewpointsOutOfDomain.size(); currentViewpoint++ )
+    // The minimum value is assigned to the viewpoints out of the domain (viewpoints that don't see
+    // anything)
+    for( size_t currentViewpoint = 0; currentViewpoint < viewpointsOutOfDomain.size();
+         currentViewpoint++ )
     {
         mValues[viewpointsOutOfDomain.at(currentViewpoint)] = minValue;
     }
@@ -70,7 +74,9 @@ void Unstability::Compute(const SceneInformationBuilder *pSceneInformationBuilde
     mComputed = true;
 }
 
-float Unstability::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pViewpointI, size_t pViewpointJ)
+float Unstability::GetDissimilarity(
+    std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pViewpointI,
+    size_t pViewpointJ)
 {
     size_t numberOfPolygons = pProjectedAreasMatrix->GetNumberOfPolygons();
     unsigned int a_t_i = pProjectedAreasMatrix->GetSumPerViewpoint(pViewpointI);
@@ -86,20 +92,20 @@ float Unstability::GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> 
             unsigned int a_z_ij = a_z_i + a_z_j;
             if( a_z_ij != 0 )
             {
-                dissimilarity -= a_z_ij * glm::log2( a_z_ij / (float)a_t_ij );
+                dissimilarity -= a_z_ij * glm::log2(a_z_ij / (float)a_t_ij);
             }
             if( a_z_i != 0 )
             {
-                dissimilarity += a_z_i * glm::log2( a_z_i / (float)a_t_i );
+                dissimilarity += a_z_i * glm::log2(a_z_i / (float)a_t_i);
             }
             if( a_z_j != 0 )
             {
-                dissimilarity += a_z_j * glm::log2( a_z_j / (float)a_t_j );
+                dissimilarity += a_z_j * glm::log2(a_z_j / (float)a_t_j);
             }
         }
         dissimilarity /= a_t_ij;
     }
-    //We force the range of the variable due to precision problems
+    // We force the range of the variable due to precision problems
     if( dissimilarity > 1.0f )
     {
         dissimilarity = 1.0f;

@@ -19,7 +19,8 @@ public:
 
 private:
     /// Create the gpu scene nodes given a scene node
-    std::vector<std::shared_ptr<GPUSceneNode>> CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, size_t &pPolygonalOffset);
+    std::vector<std::shared_ptr<GPUSceneNode>> CreateGPUSceneNodes(
+        std::shared_ptr<SceneNode const> pSceneNode, size_t& pPolygonalOffset);
 
     /// List of gpu scene nodes
     std::vector<std::shared_ptr<GPUSceneNode>> mSceneNodes;

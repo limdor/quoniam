@@ -1,12 +1,11 @@
 #include "Mesh.h"
 
-Mesh::Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMaterial):
-    mGeometry(pGeometry), mMaterial(pMaterial), mVisible(true), mName("")
+Mesh::Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMaterial)
+    : mGeometry(pGeometry), mMaterial(pMaterial), mVisible(true), mName("")
 {
-
 }
 
-void Mesh::SetName(const std::string &pName)
+void Mesh::SetName(const std::string& pName)
 {
     mName = pName;
 }
@@ -33,7 +32,7 @@ void Mesh::SetVisible(bool pVisible)
 
 void Mesh::Draw()
 {
-    if(mVisible)
+    if( mVisible )
     {
         mGeometry->Draw();
     }

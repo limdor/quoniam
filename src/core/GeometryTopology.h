@@ -1,7 +1,7 @@
 #ifndef GEOMETRY_TOPOLOGY_H
 #define GEOMETRY_TOPOLOGY_H
 
-//GLEW has to be included before any OpenGL include
+// GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
 /// Enumeration to define the topology of the geometry

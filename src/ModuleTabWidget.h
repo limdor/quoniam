@@ -1,7 +1,7 @@
 #ifndef MODULE_TAB_WIDGET_H
 #define MODULE_TAB_WIDGET_H
 
-//Qt includes
+// Qt includes
 #include <QtCore/QMap>
 #include <QtWidgets/QTabWidget>
 
@@ -10,11 +10,11 @@ class ModuleTabWidget : public QTabWidget
 {
     Q_OBJECT
 public:
-    explicit ModuleTabWidget(QWidget *pParent = 0);
+    explicit ModuleTabWidget(QWidget* pParent = 0);
     ~ModuleTabWidget();
 
-    void LoadModule(QWidget *pModule, const QString &pCaption, const QString &pModuleIdentifier);
-    void RemoveModule(QWidget *pModule);
+    void LoadModule(QWidget* pModule, const QString& pCaption, const QString& pModuleIdentifier);
+    void RemoveModule(QWidget* pModule);
 
     QMap<QWidget*, QString> GetLoadedModules() const;
 
@@ -25,7 +25,6 @@ private:
 
 private slots:
     void CloseModuleByTabIndex(int pIndex);
-    
 };
 
 #endif

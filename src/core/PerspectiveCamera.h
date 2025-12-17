@@ -9,7 +9,8 @@
 class PerspectiveCamera : public Camera
 {
 public:
-    PerspectiveCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp, glm::vec3 pPosition, float pAngle, float pAspectRatio);
+    PerspectiveCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp,
+                      glm::vec3 pPosition, float pAngle, float pAspectRatio);
     PerspectiveCamera(const PerspectiveCamera& pPerspectiveCamera);
 
     /// Update the projection matrix

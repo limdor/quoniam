@@ -14,9 +14,9 @@ public:
     AxisAlignedBoundingBox();
 
     /// Set minimum of every axis
-    void SetMin(const glm::vec3 &pValue);
+    void SetMin(const glm::vec3& pValue);
     /// Set maximum of every axis
-    void SetMax(const glm::vec3 &pValue);
+    void SetMax(const glm::vec3& pValue);
 
     /// Get minimum of every axis
     glm::vec3 GetMin() const;
@@ -24,7 +24,9 @@ public:
     glm::vec3 GetMax() const;
 
     /// Create the minimum axis-aligned bounding box that includes pAABB0 and pAABB1
-    static std::shared_ptr<AxisAlignedBoundingBox> Merge(std::shared_ptr<AxisAlignedBoundingBox const> pAABB0, std::shared_ptr<AxisAlignedBoundingBox const> pAABB1);
+    static std::shared_ptr<AxisAlignedBoundingBox> Merge(
+        std::shared_ptr<AxisAlignedBoundingBox const> pAABB0,
+        std::shared_ptr<AxisAlignedBoundingBox const> pAABB1);
 
 protected:
     /// Minimum of every axis

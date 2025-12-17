@@ -1,9 +1,8 @@
 #include "Measure.h"
 
-Measure::Measure(const std::string &pName, bool pMaximumBest):
-    mName{pName}, mMaximumBest{pMaximumBest}, mComputed{false}
+Measure::Measure(const std::string& pName, bool pMaximumBest)
+    : mName{pName}, mMaximumBest{pMaximumBest}, mComputed{false}
 {
-
 }
 
 const std::string& Measure::GetName() const
@@ -39,9 +38,9 @@ bool Measure::IsMaximumBest() const
 size_t Measure::GetBestViewpoint() const
 {
     size_t best;
-    if(mMaximumBest)
+    if( mMaximumBest )
     {
-        best = mSort.at(mSort.size()-1);
+        best = mSort.at(mSort.size() - 1);
     }
     else
     {

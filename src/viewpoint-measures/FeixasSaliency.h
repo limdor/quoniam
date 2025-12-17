@@ -1,7 +1,7 @@
 #ifndef FEIXAS_SALIENCY_H
 #define FEIXAS_SALIENCY_H
 
-//Project includes
+// Project includes
 #include "Measure.h"
 
 #include <memory>
@@ -13,11 +13,12 @@ public:
     explicit FeixasSaliency(const std::string& pName);
 
     /// Method that computes the measure
-    void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
+    void Compute(const SceneInformationBuilder* pSceneInformationBuilder);
 
 private:
     /// Return the dissimilarity between two polygons
-    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix, size_t pPolygonI, size_t pPolygonJ);
+    float GetDissimilarity(std::shared_ptr<ProjectedAreasMatrix const> pProjectedAreasMatrix,
+                           size_t pPolygonI, size_t pPolygonJ);
 };
 
 #endif

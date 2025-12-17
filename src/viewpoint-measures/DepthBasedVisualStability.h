@@ -1,16 +1,16 @@
 #ifndef DEPTH_BASED_VISUAL_STABILITY_H
 #define DEPTH_BASED_VISUAL_STABILITY_H
 
-//Project includes
+// Project includes
 #include "Measure.h"
 
 class DepthBasedVisualStability : public Measure
 {
 public:
-    explicit DepthBasedVisualStability(const std::string &pName);
+    explicit DepthBasedVisualStability(const std::string& pName);
 
     /// Method that computes the measure
-    void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
+    void Compute(const SceneInformationBuilder* pSceneInformationBuilder);
 };
 
 #endif

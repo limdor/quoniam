@@ -1,13 +1,13 @@
-//Definition include
+// Definition include
 #include "SphereOfViewpoints.h"
 
-//Project includes
+// Project includes
 #include "PerspectiveCamera.h"
 
 #include <algorithm>
 
-SphereOfViewpoints::SphereOfViewpoints(float pAngle, float pAspectRatio):
-    mAngle(pAngle), mAspectRatio(pAspectRatio)
+SphereOfViewpoints::SphereOfViewpoints(float pAngle, float pAspectRatio)
+    : mAngle(pAngle), mAspectRatio(pAspectRatio)
 {
     mMesh->SetName("Sphere of viewpoints");
 }
@@ -63,11 +63,12 @@ float SphereOfViewpoints::GetAspectRatio() const
     return mAspectRatio;
 }
 
-void SphereOfViewpoints::ApplyTransform(float pSceneRadius, float pSphereRadius, const glm::vec3& pCenter)
+void SphereOfViewpoints::ApplyTransform(float pSceneRadius, float pSphereRadius,
+                                        const glm::vec3& pCenter)
 {
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
-        glm::vec3 cameraPosition= mVertices.at(i) * pSphereRadius + pCenter;
+        glm::vec3 cameraPosition = mVertices.at(i) * pSphereRadius + pCenter;
         mVertices[i] = mVertices.at(i) * pSceneRadius * 2.0f + pCenter;
         auto cam = mCameras.at(i);
         cam->SetNearPlane(std::max(pSphereRadius - 2.0f * pSceneRadius, pSphereRadius / 1000.0f));
@@ -83,7 +84,9 @@ void SphereOfViewpoints::SetCameras()
     mCameras.resize(mNumberOfPoints);
     for( int i = 0; i < mNumberOfPoints; i++ )
     {
-        mCameras[i] = std::make_shared<PerspectiveCamera>( 0.05f, 2.0f, glm::vec3(0.0f), SpherePointCloud::Up(mVertices.at(i)), mVertices.at(i), mAngle, mAspectRatio );
+        mCameras[i] = std::make_shared<PerspectiveCamera>(0.05f, 2.0f, glm::vec3(0.0f),
+                                                          SpherePointCloud::Up(mVertices.at(i)),
+                                                          mVertices.at(i), mAngle, mAspectRatio);
         mCameras[i]->mName = std::to_string(i);
     }
 }
