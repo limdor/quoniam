@@ -1,7 +1,7 @@
 #ifndef GPU_GEOMETRY_H
 #define GPU_GEOMETRY_H
 
-//GLEW has to be included before any OpenGL include
+// GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
 #include "GeometryTopology.h"
@@ -17,23 +17,23 @@ public:
     GPUGeometry(GPUGeometry const&) = delete;
     GPUGeometry(GPUGeometry&&) = default;
 
-    GPUGeometry& operator =(const GPUGeometry&) = delete;
-    GPUGeometry& operator =(GPUGeometry&&) = default;
+    GPUGeometry& operator=(const GPUGeometry&) = delete;
+    GPUGeometry& operator=(GPUGeometry&&) = default;
 
     /// Set the vertices of the mesh
-    void SetVerticesData(const std::vector<float> &pVertices, unsigned int pStride);
+    void SetVerticesData(const std::vector<float>& pVertices, unsigned int pStride);
     /// Set the normals of the mesh
-    void SetNormalsData(const std::vector<float> &pNormals);
+    void SetNormalsData(const std::vector<float>& pNormals);
     /// Set the colors of the mesh
-    void SetColorData(const std::vector<float> &pColors, unsigned int pStride);
+    void SetColorData(const std::vector<float>& pColors, unsigned int pStride);
     /// Set the tangents of the mesh
-    void SetTangentData(const std::vector<float> &pTangents);
+    void SetTangentData(const std::vector<float>& pTangents);
     /// Set the bitangents of the mesh
-    void SetBitangentData(const std::vector<float> &pBitangents);
+    void SetBitangentData(const std::vector<float>& pBitangents);
     /// Set the texture coordinates of the mesh
-    void SetTextCoordsData(const std::vector<float> &pTextCoords);
+    void SetTextCoordsData(const std::vector<float>& pTextCoords);
     /// Set the information of connectivities between vertices of the mesh
-    void SetIndexsData(const std::vector<unsigned int> &pIndexs, GeometryTopology pTopology);
+    void SetIndexsData(const std::vector<unsigned int>& pIndexs, GeometryTopology pTopology);
 
     /// Draw the mesh
     void Draw() const;
@@ -42,10 +42,11 @@ public:
     void ConfigureVAO();
 
 private:
-    /// We don't want a default copy constructor because it will not work due to it will not duplicate the memory in the gpu
+    /// We don't want a default copy constructor because it will not work due to it will not
+    /// duplicate the memory in the gpu
 
-
-    /// Draw the mesh given the number of elements to be drawn when the vertex array object is already binded
+    /// Draw the mesh given the number of elements to be drawn when the vertex array object is
+    /// already binded
     void FastDraw(unsigned int pSize) const;
 
     /// Id of the vertex array object

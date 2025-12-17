@@ -1,17 +1,17 @@
 #ifndef NUMBER_OF_VISIBLE_TRIANGLES_H
 #define NUMBER_OF_VISIBLE_TRIANGLES_H
 
-//Project includes
+// Project includes
 #include "Measure.h"
 
 /// Class that implements the number of visible triangles measures
 class NumberOfVisibleTriangles : public Measure
 {
 public:
-    explicit NumberOfVisibleTriangles(const std::string &pName);
+    explicit NumberOfVisibleTriangles(const std::string& pName);
 
     /// Method that computes the measure
-    void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
+    void Compute(const SceneInformationBuilder* pSceneInformationBuilder);
 };
 
 #endif

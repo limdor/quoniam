@@ -1,20 +1,19 @@
-//Definition include
+// Definition include
 #include "NumberOfVisibleTriangles.h"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
-NumberOfVisibleTriangles::NumberOfVisibleTriangles(const std::string& pName): Measure(pName, true)
+NumberOfVisibleTriangles::NumberOfVisibleTriangles(const std::string& pName) : Measure(pName, true)
 {
-
 }
 
-void NumberOfVisibleTriangles::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void NumberOfVisibleTriangles::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {

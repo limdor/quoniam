@@ -2,19 +2,18 @@
 
 #include "Geometry.h"
 
-AxisAlignedBoundingBox::AxisAlignedBoundingBox(): Gizmo(),
-    mMin(FLT_MAX), mMax(-FLT_MAX)
+AxisAlignedBoundingBox::AxisAlignedBoundingBox() : Gizmo(), mMin(FLT_MAX), mMax(-FLT_MAX)
 {
     CreateMesh();
 }
 
-void AxisAlignedBoundingBox::SetMin(const glm::vec3 &pValue)
+void AxisAlignedBoundingBox::SetMin(const glm::vec3& pValue)
 {
     mMin = pValue;
     UpdatePositions();
 }
 
-void AxisAlignedBoundingBox::SetMax(const glm::vec3 &pValue)
+void AxisAlignedBoundingBox::SetMax(const glm::vec3& pValue)
 {
     mMax = pValue;
     UpdatePositions();
@@ -30,7 +29,9 @@ glm::vec3 AxisAlignedBoundingBox::GetMax() const
     return mMax;
 }
 
-std::shared_ptr<AxisAlignedBoundingBox> AxisAlignedBoundingBox::Merge(std::shared_ptr<AxisAlignedBoundingBox const> pAABB0, std::shared_ptr<AxisAlignedBoundingBox const> pAABB1)
+std::shared_ptr<AxisAlignedBoundingBox> AxisAlignedBoundingBox::Merge(
+    std::shared_ptr<AxisAlignedBoundingBox const> pAABB0,
+    std::shared_ptr<AxisAlignedBoundingBox const> pAABB1)
 {
     glm::vec3 newMin, newMax;
 
@@ -101,6 +102,7 @@ void AxisAlignedBoundingBox::CreateMesh()
 
     /// Set the indexs
     std::vector<unsigned int> indexs(24);
+    // clang-format off
     indexs[0]  = 0; indexs[1]  = 1;
     indexs[2]  = 0; indexs[3]  = 2;
     indexs[4]  = 0; indexs[5]  = 4;
@@ -113,6 +115,7 @@ void AxisAlignedBoundingBox::CreateMesh()
     indexs[18] = 3; indexs[19] = 7;
     indexs[20] = 5; indexs[21] = 7;
     indexs[22] = 6; indexs[23] = 7;
+    // clang-format on
     mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 

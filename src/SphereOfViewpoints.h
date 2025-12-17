@@ -1,10 +1,10 @@
 #ifndef SPHERE_OF_VIEWPOINTS_H
 #define SPHERE_OF_VIEWPOINTS_H
 
-//Dependency includes
+// Dependency includes
 #include "glm/vec3.hpp"
 
-//Project includes
+// Project includes
 #include "Camera.h"
 #include "SpherePointCloud.h"
 

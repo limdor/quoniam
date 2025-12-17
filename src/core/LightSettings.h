@@ -3,10 +3,11 @@
 
 #include "glm/vec3.hpp"
 
-struct LightSettings {
+struct LightSettings
+{
     bool enabled;
     glm::vec3 look_at_vector;
     glm::vec3 color;
 };
 
-#endif // LIGHT_SETTINGS_H
+#endif  // LIGHT_SETTINGS_H

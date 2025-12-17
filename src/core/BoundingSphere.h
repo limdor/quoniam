@@ -19,12 +19,13 @@ public:
     float GetRadius() const;
 
     /// Set the center
-    void SetCenter(const glm::vec3 &pValue);
+    void SetCenter(const glm::vec3& pValue);
     /// Set the radius
     void SetRadius(float pValue);
 
     /// Create the minimum bounding sphere that includes pBS0 and pBS1
-    static std::shared_ptr<BoundingSphere> Merge(std::shared_ptr<BoundingSphere const> pBS0, std::shared_ptr<BoundingSphere const> pBS1);
+    static std::shared_ptr<BoundingSphere> Merge(std::shared_ptr<BoundingSphere const> pBS0,
+                                                 std::shared_ptr<BoundingSphere const> pBS1);
 
 protected:
     /// Center

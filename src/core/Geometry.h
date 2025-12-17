@@ -1,7 +1,7 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-//GLEW has to be included before any OpenGL include
+// GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
 #include "GeometryTopology.h"
@@ -18,11 +18,12 @@ class AxisAlignedBoundingBox;
 class BoundingSphere;
 class GPUGeometry;
 
-/// Class to wrap the geometry of a 3d mesh that is not stored into the GPU until the GetGPUGeometry method is called.
+/// Class to wrap the geometry of a 3d mesh that is not stored into the GPU until the GetGPUGeometry
+/// method is called.
 class Geometry
 {
 public:
-    Geometry(const std::string &pName, GeometryTopology pT);
+    Geometry(const std::string& pName, GeometryTopology pT);
     Geometry() = default;
     Geometry(const Geometry& pGeometry);
     Geometry& operator=(const Geometry& pGeometry) = delete;
@@ -31,38 +32,38 @@ public:
     ~Geometry();
 
     /// Set the vertices of the geometry
-    void SetVerticesData(size_t pSize, const glm::vec4 *pData);
+    void SetVerticesData(size_t pSize, const glm::vec4* pData);
     /// Set the vertices of the geometry
-    void SetVerticesData(size_t pSize, const glm::vec3 *pData);
+    void SetVerticesData(size_t pSize, const glm::vec3* pData);
     /// Set the vertices of the geometry
-    void SetVerticesData(size_t pSize, const glm::vec2 *pData);
+    void SetVerticesData(size_t pSize, const glm::vec2* pData);
     /// Get the vertices of the geometry
     const std::vector<float>& GetVerticesData() const;
     /// Get vertex stride
     unsigned int GetVertexStride() const;
     /// Set the normals of the geometry
-    void SetNormalsData(size_t pSize, const glm::vec3 *pData);
+    void SetNormalsData(size_t pSize, const glm::vec3* pData);
     /// Set the colors of the geometry
-    void SetColorData(size_t pSize, const glm::vec4 *pData);
+    void SetColorData(size_t pSize, const glm::vec4* pData);
     /// Set the colors of the geometry
-    void SetColorData(size_t pSize, const glm::vec3 *pData);
+    void SetColorData(size_t pSize, const glm::vec3* pData);
     /// Set the texture coordinates of the geometry
-    void SetTextCoordsData(size_t pSize, const glm::vec2 *pData);
+    void SetTextCoordsData(size_t pSize, const glm::vec2* pData);
     /// Set the tangents of the geometry
-    void SetTangentData(size_t pSize, const glm::vec3 *pData);
+    void SetTangentData(size_t pSize, const glm::vec3* pData);
     /// Set the bitangents of the geometry
-    void SetBitangentData(size_t pSize, const glm::vec3 *pData);
+    void SetBitangentData(size_t pSize, const glm::vec3* pData);
 
     /// Set the information of connectivities between vertices of the geometry
-    void SetIndexsData(size_t pSize, const unsigned int *pData);
-    void SetIndexsData(size_t pSize, const size_t *pData);
+    void SetIndexsData(size_t pSize, const unsigned int* pData);
+    void SetIndexsData(size_t pSize, const size_t* pData);
     /// Get the information of connectivities between vertices of the geometry
     const std::vector<unsigned int>& GetIndexsData() const;
 
     /// Set the name of the geometry
-    void SetName(const std::string &pName);
+    void SetName(const std::string& pName);
     /// Set the topology
-    void SetTopology( GeometryTopology pTopology );
+    void SetTopology(GeometryTopology pTopology);
 
     /// Compute the bounding volumes
     void ComputeBoundingVolumes();

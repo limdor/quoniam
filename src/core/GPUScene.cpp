@@ -18,7 +18,8 @@ std::shared_ptr<GPUSceneNode> GPUScene::GetSceneNode(size_t pNode) const
     return mSceneNodes.at(pNode);
 }
 
-std::vector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::shared_ptr<SceneNode const> pSceneNode, size_t &pPolygonalOffset)
+std::vector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(
+    std::shared_ptr<SceneNode const> pSceneNode, size_t& pPolygonalOffset)
 {
     std::vector<std::shared_ptr<GPUSceneNode>> sceneNodes;
 
@@ -26,7 +27,8 @@ std::vector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::sh
     for( int i = 0; i < pSceneNode->GetNumMeshes(); i++ )
     {
         auto mesh = pSceneNode->GetMesh(i);
-        auto gpuSceneNode = std::make_shared<GPUSceneNode>(mesh->GetGeometry()->GetGPUGeometry(), mesh->GetMaterial());
+        auto gpuSceneNode = std::make_shared<GPUSceneNode>(mesh->GetGeometry()->GetGPUGeometry(),
+                                                           mesh->GetMaterial());
         gpuSceneNode->SetModelMatrix(modelMatrix);
         gpuSceneNode->SetPolygonalOffset(pPolygonalOffset);
         sceneNodes.push_back(std::move(gpuSceneNode));
@@ -35,7 +37,8 @@ std::vector<std::shared_ptr<GPUSceneNode>> GPUScene::CreateGPUSceneNodes(std::sh
 
     for( int i = 0; i < pSceneNode->GetNumChilds(); i++ )
     {
-        const auto childGPUSceneNodes = CreateGPUSceneNodes(pSceneNode->GetChild(i), pPolygonalOffset);
+        const auto childGPUSceneNodes =
+            CreateGPUSceneNodes(pSceneNode->GetChild(i), pPolygonalOffset);
         sceneNodes.insert(sceneNodes.end(), childGPUSceneNodes.cbegin(), childGPUSceneNodes.cend());
     }
     return sceneNodes;

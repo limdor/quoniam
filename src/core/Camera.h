@@ -13,7 +13,8 @@
 class Camera : public Gizmo
 {
 public:
-    Camera(float pNearPlane, float pFarPlane, const glm::vec3 &pLookAt, const glm::vec3 &pUp, const glm::vec3 &pPosition, float pAspectRatio);
+    Camera(float pNearPlane, float pFarPlane, const glm::vec3& pLookAt, const glm::vec3& pUp,
+           const glm::vec3& pPosition, float pAspectRatio);
     Camera(const Camera& pCamera) = default;
     Camera(Camera&& pCamera) = default;
     virtual ~Camera() = default;
@@ -28,11 +29,11 @@ public:
     /// Set the far plane
     void SetFarPlane(float pFarPlane);
     /// Set the position where the camera is looking
-    void SetLookAt(const glm::vec3 &pLookAt);
+    void SetLookAt(const glm::vec3& pLookAt);
     /// Set the up vector
-    void SetUp(const glm::vec3 &pUp);
+    void SetUp(const glm::vec3& pUp);
     /// Set the position
-    void SetPosition(const glm::vec3 &pPosition);
+    void SetPosition(const glm::vec3& pPosition);
     /// Set the aspect ratio
     void SetAspectRatio(float pAspectRatio);
 

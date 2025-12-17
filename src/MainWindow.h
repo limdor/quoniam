@@ -1,17 +1,18 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
-//UI include
+// UI include
 #include "ui_MainWindow.h"
 
-//Qt includes
+// Qt includes
 #include <QtWidgets/QMainWindow>
 
-//Project includes
+// Project includes
 #include "ModuleTabWidget.h"
 
-namespace Ui {
-    class MainWindow;
+namespace Ui
+{
+class MainWindow;
 }
 
 /// Main class of the project
@@ -25,7 +26,7 @@ public:
 
 protected:
     /// Protected constructor for the singleton class
-    explicit MainWindow(QWidget *pParent = 0);
+    explicit MainWindow(QWidget* pParent = 0);
     /// Destructor called when the main window is closed
     ~MainWindow();
 
@@ -33,7 +34,7 @@ private:
     /// Unique instance of the main window
     static MainWindow* mInstance;
     /// User interface instance
-    Ui::MainWindow *mUi;
+    Ui::MainWindow* mUi;
     /// Widget that handle multiple tabs
     ModuleTabWidget* mModuleTabWidget;
 

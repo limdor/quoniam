@@ -3,12 +3,15 @@
 #include "BoundingSphere.h"
 #include "Debug.h"
 
-SceneNode::SceneNode(const std::string &pName):
-    mName(pName), mLocalTransform(), mGlobalTransform(),
-    mNumberOfVertices(0), mNumberOfPolygons(0), mBoundingSphere(nullptr),
-    mParent(nullptr)
+SceneNode::SceneNode(const std::string& pName)
+    : mName(pName),
+      mLocalTransform(),
+      mGlobalTransform(),
+      mNumberOfVertices(0),
+      mNumberOfPolygons(0),
+      mBoundingSphere(nullptr),
+      mParent(nullptr)
 {
-
 }
 
 std::string SceneNode::GetName() const
@@ -16,7 +19,7 @@ std::string SceneNode::GetName() const
     return mName;
 }
 
-void SceneNode::SetLocalTransform(const glm::mat4 &pTransform)
+void SceneNode::SetLocalTransform(const glm::mat4& pTransform)
 {
     mLocalTransform = pTransform;
     UpdateGlobalTransform();
@@ -55,7 +58,7 @@ void SceneNode::AddMesh(std::shared_ptr<Mesh> pMesh)
     mNumberOfVertices += geometry->GetNumVertices();
     mNumberOfPolygons += geometry->GetNumFaces();
     mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, geometry->GetBoundingSphere());
-    if(mParent != nullptr)
+    if( mParent != nullptr )
     {
         mParent->UpdateGeometryInformation();
     }
@@ -68,7 +71,7 @@ void SceneNode::AddCamera(Camera* pCamera)
 
 void SceneNode::AddChild(std::shared_ptr<SceneNode> pChild)
 {
-    if(pChild != nullptr)
+    if( pChild != nullptr )
     {
         mChilds.push_back(std::move(pChild));
         mChilds.back()->SetParent(shared_from_this());
@@ -84,7 +87,7 @@ void SceneNode::SetParent(std::shared_ptr<SceneNode> pParent)
 {
     mParent = std::move(pParent);
     UpdateGlobalTransform();
-    if(mParent != nullptr)
+    if( mParent != nullptr )
     {
         mParent->UpdateGeometryInformation();
     }
@@ -122,7 +125,7 @@ std::shared_ptr<SceneNode const> SceneNode::GetChild(size_t pPosition) const
 
 void SceneNode::UpdateGlobalTransform()
 {
-    if(mParent != nullptr)
+    if( mParent != nullptr )
     {
         mGlobalTransform = mParent->GetGlobalTransform() * mLocalTransform;
     }
@@ -130,7 +133,7 @@ void SceneNode::UpdateGlobalTransform()
     {
         mGlobalTransform = mLocalTransform;
     }
-    for(int i = 0; i < mChilds.size(); i++ )
+    for( int i = 0; i < mChilds.size(); i++ )
     {
         mChilds.at(i)->UpdateGlobalTransform();
     }
@@ -144,20 +147,22 @@ void SceneNode::UpdateGeometryInformation()
     for( int i = 0; i < mChilds.size(); i++ )
     {
         auto child = mChilds.at(i);
-        if(child->GetNumMeshes() != 0)
+        if( child->GetNumMeshes() != 0 )
         {
             mNumberOfVertices += child->GetNumberOfVertices();
             mNumberOfPolygons += child->GetNumberOfPolygons();
 
             glm::mat4 childTransform = child->GetLocalTransform();
-            glm::vec4 aux = childTransform * glm::vec4(child->GetBoundingSphere()->GetCenter(), 1.0);
+            glm::vec4 aux =
+                childTransform * glm::vec4(child->GetBoundingSphere()->GetCenter(), 1.0);
             childBoundingSphere->SetCenter(glm::vec3(aux.x, aux.y, aux.z));
-            childBoundingSphere->SetRadius(childTransform[0][0] * child->GetBoundingSphere()->GetRadius());
+            childBoundingSphere->SetRadius(childTransform[0][0] *
+                                           child->GetBoundingSphere()->GetRadius());
 
             mBoundingSphere = BoundingSphere::Merge(mBoundingSphere, childBoundingSphere);
         }
     }
-    if(mParent != nullptr)
+    if( mParent != nullptr )
     {
         mParent->UpdateGeometryInformation();
     }

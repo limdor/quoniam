@@ -1,7 +1,7 @@
 #ifndef _GLSL_PROGRAM_
 #define _GLSL_PROGRAM_
 
-//GLEW has to be included before any OpenGL include
+// GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
 #include "GLSLShader.h"
@@ -36,7 +36,7 @@ public:
     /// Get the location of the uniform \param pName
     GLint GetUniformLocation(const std::string& pName) const;
     /// Set the square matrix \param pValue to \param pName uniform
-    void SetUniform(const std::string &pName, const glm::mat4 &pValue) const;
+    void SetUniform(const std::string& pName, const glm::mat4& pValue) const;
     /// Set the vector \param pValue to \param pName uniform
     void SetUniform(const std::string& pName, const glm::vec4& pValue) const;
     /// Set the vector \param pValue to \param pName uniform
@@ -53,7 +53,8 @@ public:
     void BindFragDataLocation(GLuint pLocation, const std::string& pName);
     /// Bind the texture \param pTextureId of type \param pTarget to the texture unit
     /// \param pTextureUnit defined as \param pTextureName in the program
-    void BindTexture(GLenum pTarget, const std::string& pTextureName, GLuint pTextureId, int pTextureUnit);
+    void BindTexture(GLenum pTarget, const std::string& pTextureName, GLuint pTextureId,
+                     int pTextureUnit);
 
 private:
     /// Id of the program

@@ -1,7 +1,7 @@
 #ifndef GPU_SCENE_NODE_H
 #define GPU_SCENE_NODE_H
 
-//GLEW has to be included before any OpenGL include
+// GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
 #include "GPUGeometry.h"
@@ -17,7 +17,7 @@ public:
     GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, std::shared_ptr<Material> pMaterial);
 
     /// Set the model matrix
-    void SetModelMatrix(const glm::mat4 &pModelMatrix);
+    void SetModelMatrix(const glm::mat4& pModelMatrix);
     /// Set the polygonal offset
     void SetPolygonalOffset(size_t pPolygonalOffset);
 

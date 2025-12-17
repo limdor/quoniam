@@ -2,10 +2,16 @@
 
 #include <QtOpenGL/QGLWidget>
 
-Material::Material(const std::string &pName):
-    mName(pName), mKa(0.2f), mKaTexture(nullptr), mKd(0.8f), mKdTexture(nullptr), mKs(1.0f), mKsTexture(nullptr), mShininess(0.0f)
+Material::Material(const std::string& pName)
+    : mName(pName),
+      mKa(0.2f),
+      mKaTexture(nullptr),
+      mKd(0.8f),
+      mKdTexture(nullptr),
+      mKs(1.0f),
+      mKsTexture(nullptr),
+      mShininess(0.0f)
 {
-
 }
 
 glm::vec3 Material::GetKa() const
@@ -13,7 +19,7 @@ glm::vec3 Material::GetKa() const
     return mKa;
 }
 
-void Material::SetKa(const glm::vec3 &pKa)
+void Material::SetKa(const glm::vec3& pKa)
 {
     mKa = pKa;
 }
@@ -25,12 +31,13 @@ std::shared_ptr<Texture> Material::GetKaTexture() const
 
 void Material::SetKaTexture(const QImage& pKaTexture)
 {
-    mKaTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(pKaTexture) ) );
+    mKaTexture = std::make_shared<Texture>(
+        std::make_unique<QImage>(QGLWidget::convertToGLFormat(pKaTexture)));
 }
 
 bool Material::HasKaTexture() const
 {
-    return ( mKaTexture != nullptr );
+    return (mKaTexture != nullptr);
 }
 
 glm::vec3 Material::GetKd() const
@@ -38,7 +45,7 @@ glm::vec3 Material::GetKd() const
     return mKd;
 }
 
-void Material::SetKd(const glm::vec3 &pKd)
+void Material::SetKd(const glm::vec3& pKd)
 {
     mKd = pKd;
 }
@@ -50,12 +57,13 @@ std::shared_ptr<Texture> Material::GetKdTexture() const
 
 void Material::SetKdTexture(const QImage& pKdTexture)
 {
-    mKdTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(pKdTexture) ) );
+    mKdTexture = std::make_shared<Texture>(
+        std::make_unique<QImage>(QGLWidget::convertToGLFormat(pKdTexture)));
 }
 
 bool Material::HasKdTexture() const
 {
-    return ( mKdTexture != nullptr );
+    return (mKdTexture != nullptr);
 }
 
 glm::vec3 Material::GetKs() const
@@ -63,7 +71,7 @@ glm::vec3 Material::GetKs() const
     return mKs;
 }
 
-void Material::SetKs(const glm::vec3 &pKs)
+void Material::SetKs(const glm::vec3& pKs)
 {
     mKs = pKs;
 }
@@ -75,12 +83,13 @@ std::shared_ptr<Texture> Material::GetKsTexture() const
 
 void Material::SetKsTexture(const QImage& pKsTexture)
 {
-    mKsTexture = std::make_shared<Texture>( std::make_unique<QImage>( QGLWidget::convertToGLFormat(pKsTexture) ) );
+    mKsTexture = std::make_shared<Texture>(
+        std::make_unique<QImage>(QGLWidget::convertToGLFormat(pKsTexture)));
 }
 
 bool Material::HasKsTexture() const
 {
-    return ( mKsTexture != nullptr );
+    return (mKsTexture != nullptr);
 }
 
 float Material::GetShininess() const

@@ -1,17 +1,17 @@
 #ifndef SILHOUETTE_CURVATURE_EXTREMA_H
 #define SILHOUETTE_CURVATURE_EXTREMA_H
 
-//Project includes
+// Project includes
 #include "Measure.h"
 
 /// Class that implements the silhouette curvature extrema
 class SilhouetteCurvatureExtrema : public Measure
 {
 public:
-    explicit SilhouetteCurvatureExtrema(const std::string &pName);
+    explicit SilhouetteCurvatureExtrema(const std::string& pName);
 
     /// Method that computes the measure
-    void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
+    void Compute(const SceneInformationBuilder* pSceneInformationBuilder);
 };
 
 #endif

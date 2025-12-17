@@ -1,8 +1,9 @@
-//Definition include
+// Definition include
 #include "ViewpointMeasureSlider.h"
 
-ViewpointMeasureSlider::ViewpointMeasureSlider(int pMeasure, Qt::Orientation pOrientation, QWidget *pParent): QSlider(pOrientation, pParent),
-    mMeasure(pMeasure)
+ViewpointMeasureSlider::ViewpointMeasureSlider(int pMeasure, Qt::Orientation pOrientation,
+                                               QWidget* pParent)
+    : QSlider(pOrientation, pParent), mMeasure(pMeasure)
 {
     connect(this, SIGNAL(valueChanged(int)), this, SLOT(emitValueChangedWithMeasure(int)));
 }

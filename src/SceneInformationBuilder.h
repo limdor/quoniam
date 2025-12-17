@@ -1,11 +1,11 @@
 #ifndef SCENE_INFORMATION_BUILDER_H
 #define SCENE_INFORMATION_BUILDER_H
 
-//Dependency includes
+// Dependency includes
 #include "glm/vec4.hpp"
 #include "opencv2/core/core.hpp"
 
-//Project includes
+// Project includes
 #include "GLSLProgram.h"
 #include "ProjectedAreasMatrix.h"
 #include "Scene.h"
@@ -21,19 +21,21 @@ class SceneInformationBuilder
 {
 public:
     /// Create an InformationChannelHistogram given the Scene and the SphereOfViewpoints
-    void CreateHistogram(std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints, int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals = false);
+    void CreateHistogram(std::shared_ptr<Scene> pScene,
+                         std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints,
+                         int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals = false);
     /// Get the histogram
     std::shared_ptr<ProjectedAreasMatrix const> GetProjectedAreasMatrix() const;
-    std::vector< std::vector< size_t > > GetViewpointNeighbours() const;
-    std::vector< std::vector< size_t > > GetSerializedPolygonNeighbours() const;
+    std::vector<std::vector<size_t>> GetViewpointNeighbours() const;
+    std::vector<std::vector<size_t>> GetSerializedPolygonNeighbours() const;
     float GetSilhouetteLength(size_t pViewpoint) const;
-    std::vector< float > GetSilhouetteCurvature(size_t pViewpoint) const;
-    std::vector< float > GetNormalizedDepthHistogram(size_t pViewpoint) const;
+    std::vector<float> GetSilhouetteCurvature(size_t pViewpoint) const;
+    std::vector<float> GetNormalizedDepthHistogram(size_t pViewpoint) const;
     cv::Mat GetDepthImage(size_t pViewpoint) const;
     float GetMaximumDepth(size_t pViewpoint) const;
-    std::set< int > GetVisibleVertices(size_t pViewpoint) const;
-    std::vector< float > GetSerializedPolygonAreas() const;
-    std::vector< float > GetSerializedVertexCurvature() const;
+    std::set<int> GetVisibleVertices(size_t pViewpoint) const;
+    std::vector<float> GetSerializedPolygonAreas() const;
+    std::vector<float> GetSerializedVertexCurvature() const;
     int GetWidthResolution() const;
     float GetAspectRatio() const;
 
@@ -43,17 +45,17 @@ protected:
     /// Restore the OpenGL stats
     void RestoreOpenGLStats();
 
-    std::vector<std::vector<size_t> > mViewpointNeighbours;
+    std::vector<std::vector<size_t>> mViewpointNeighbours;
     std::unique_ptr<SerializedSceneGeometry> mSerializedScene{nullptr};
     /// Matrix with the projected areas of the polygons from every viewpoint
     std::shared_ptr<ProjectedAreasMatrix> mProjectedAreasMatrix{nullptr};
     /// List of lengths of the silhouettes of the models seen from every viewpoint
     std::vector<float> mSilhouetteLengths;
-    std::vector< std::vector<float> > mSilhouetteCurvature;
-    std::vector< std::vector<float> > mNormalizedDepthHistograms;
+    std::vector<std::vector<float>> mSilhouetteCurvature;
+    std::vector<std::vector<float>> mNormalizedDepthHistograms;
     std::vector<float> mMaxDepths;
     std::vector<cv::Mat> mDepthImages;
-    std::vector< std::set<int> > mVisibleVertexs;
+    std::vector<std::set<int>> mVisibleVertexs;
     int mWidthResolution{640};
     float mAspectRatio{1.0f};
     /// Program used to paint a different color per face

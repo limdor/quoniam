@@ -14,12 +14,12 @@
 class Material
 {
 public:
-    explicit Material(const std::string &pName);
+    explicit Material(const std::string& pName);
 
     /// Get the ambient color
     glm::vec3 GetKa() const;
     /// Set the ambient color
-    void SetKa(const glm::vec3 &pKa);
+    void SetKa(const glm::vec3& pKa);
     /// Get the ambient texture
     std::shared_ptr<Texture> GetKaTexture() const;
     /// Set the ambient texture
@@ -30,7 +30,7 @@ public:
     /// Get the diffuse color
     glm::vec3 GetKd() const;
     /// Set the diffuse color
-    void SetKd(const glm::vec3 &pKd);
+    void SetKd(const glm::vec3& pKd);
     /// Get the diffuse texture
     std::shared_ptr<Texture> GetKdTexture() const;
     /// Set the diffuse texture
@@ -41,7 +41,7 @@ public:
     /// Get the specular color
     glm::vec3 GetKs() const;
     /// Set the specular color
-    void SetKs(const glm::vec3 &pKs);
+    void SetKs(const glm::vec3& pKs);
     /// Get the specular texture
     std::shared_ptr<Texture> GetKsTexture() const;
     /// Set the specular texture

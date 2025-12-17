@@ -1,24 +1,24 @@
-//Definition include
+// Definition include
 #include "VisibilityRatio.h"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
 #include <algorithm>
 
-VisibilityRatio::VisibilityRatio(const std::string& pName): Measure(pName, true)
+VisibilityRatio::VisibilityRatio(const std::string& pName) : Measure(pName, true)
 {
-
 }
 
-void VisibilityRatio::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void VisibilityRatio::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
-    std::vector< float > serializedPolygonAreas = pSceneInformationBuilder->GetSerializedPolygonAreas();
+    std::vector<float> serializedPolygonAreas =
+        pSceneInformationBuilder->GetSerializedPolygonAreas();
     float sumAreaPolygons = 0.0f;
     for( size_t currentPolygon = 0; currentPolygon < numberOfPolygons; currentPolygon++ )
     {

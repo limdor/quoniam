@@ -1,14 +1,13 @@
-//Definition include
+// Definition include
 #include "DutagaciDialog.h"
 
-//Qt includes
+// Qt includes
 #include <QtCore/QTextStream>
 
-//Dependency includes
+// Dependency includes
 #include "glm/trigonometric.hpp"
 
-DutagaciDialog::DutagaciDialog(QWidget *parent): QDialog(parent),
-    mUi(new Ui::DutagaciView)
+DutagaciDialog::DutagaciDialog(QWidget* parent) : QDialog(parent), mUi(new Ui::DutagaciView)
 {
     mUi->setupUi(this);
     mUi->filesListWidget->setDragDropMode(QAbstractItemView::InternalMove);
@@ -50,11 +49,11 @@ std::vector<QString> DutagaciDialog::GetFileListFromTXT(const QString& pFileName
         QFileInfo fileInfo(pFileName);
         QString folder = fileInfo.absolutePath();
         QTextStream stream(&file);
-        while(!stream.atEnd())
+        while( !stream.atEnd() )
         {
             QString line = stream.readLine();
             QStringList splittedLine = line.split(" ", Qt::SkipEmptyParts);
-            if(splittedLine.size() == 1)
+            if( splittedLine.size() == 1 )
             {
                 objFiles.push_back(folder + "\\" + line + ".obj");
             }
@@ -65,23 +64,29 @@ std::vector<QString> DutagaciDialog::GetFileListFromTXT(const QString& pFileName
 
 void DutagaciDialog::on_computeCameraDistanceButton_clicked()
 {
-    mUi->cameraAngleSpinBox->setValue( 2.0f * glm::degrees( glm::asin( 1.0f / (float)mUi->cameraDistanceSpinBox->value() ) ) );
+    mUi->cameraAngleSpinBox->setValue(
+        2.0f * glm::degrees(glm::asin(1.0f / (float)mUi->cameraDistanceSpinBox->value())));
 }
 
 void DutagaciDialog::on_computeCameraAngleButton_clicked()
 {
-    mUi->cameraDistanceSpinBox->setValue( 1.0f / glm::sin( glm::radians( mUi->cameraAngleSpinBox->value() / 2.0f ) ) );
+    mUi->cameraDistanceSpinBox->setValue(
+        1.0f / glm::sin(glm::radians(mUi->cameraAngleSpinBox->value() / 2.0f)));
 }
 
 void DutagaciDialog::on_addButton_clicked()
 {
-    QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Choose a model"), "./", tr("Supported models (*.obj *.3ds *.dae *.ply *.x *.txt);;Wavefront Object (*.obj);;3ds Max 3DS (*.3ds);;Collada (*.dae);;Stanford Polygon Library (*.ply);;DirectX X (*.x);;List of models (*.txt);;All files (*.*)"));
+    QStringList fileNames = QFileDialog::getOpenFileNames(
+        this, tr("Choose a model"), "./",
+        tr("Supported models (*.obj *.3ds *.dae *.ply *.x *.txt);;Wavefront Object (*.obj);;3ds "
+           "Max 3DS (*.3ds);;Collada (*.dae);;Stanford Polygon Library (*.ply);;DirectX X "
+           "(*.x);;List of models (*.txt);;All files (*.*)"));
     for( int i = 0; i < fileNames.size(); i++ )
     {
         QString fileName = fileNames.at(i);
         if( !fileName.isEmpty() )
         {
-            if(fileName.right(3) == "txt")
+            if( fileName.right(3) == "txt" )
             {
                 std::vector<QString> objFiles = GetFileListFromTXT(fileName);
                 for( size_t j = 0; j < objFiles.size(); j++ )
@@ -100,7 +105,7 @@ void DutagaciDialog::on_addButton_clicked()
 
 void DutagaciDialog::on_deletteButton_clicked()
 {
-    QList< QListWidgetItem* > selectedList = mUi->filesListWidget->selectedItems();
+    QList<QListWidgetItem*> selectedList = mUi->filesListWidget->selectedItems();
     for( int i = 0; i < selectedList.size(); i++ )
     {
         mUi->filesListWidget->removeItemWidget(selectedList.at(i));

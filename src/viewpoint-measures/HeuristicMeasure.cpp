@@ -1,20 +1,19 @@
-//Definition include
+// Definition include
 #include "HeuristicMeasure.h"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
-HeuristicMeasure::HeuristicMeasure(const std::string& pName): Measure(pName, true)
+HeuristicMeasure::HeuristicMeasure(const std::string& pName) : Measure(pName, true)
 {
-
 }
 
-void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void HeuristicMeasure::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
     size_t numberOfPolygons = projectedAreasMatrix->GetNumberOfPolygons();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {
@@ -27,7 +26,11 @@ void HeuristicMeasure::Compute(const SceneInformationBuilder *pSceneInformationB
                 differentZero++;
             }
         }
-        mValues[currentViewpoint] = ( differentZero / (float)numberOfPolygons ) + ( projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint) / ( pSceneInformationBuilder->GetWidthResolution() * ( pSceneInformationBuilder->GetWidthResolution() / pSceneInformationBuilder->GetAspectRatio() ) ) );
+        mValues[currentViewpoint] = (differentZero / (float)numberOfPolygons) +
+                                    (projectedAreasMatrix->GetSumPerViewpoint(currentViewpoint) /
+                                     (pSceneInformationBuilder->GetWidthResolution() *
+                                      (pSceneInformationBuilder->GetWidthResolution() /
+                                       pSceneInformationBuilder->GetAspectRatio())));
     }
     mSort = Tools::GetOrderedIndexes(mValues);
     mPositions = Tools::GetOrderedIndexes(mSort);

@@ -1,8 +1,7 @@
 #include "ModuleController.h"
 
-ModuleController::ModuleController(QWidget *pParent): QWidget(pParent)
+ModuleController::ModuleController(QWidget* pParent) : QWidget(pParent)
 {
-
 }
 
 std::vector<QMenu*> ModuleController::GetModuleMenus() const
@@ -12,10 +11,8 @@ std::vector<QMenu*> ModuleController::GetModuleMenus() const
 
 void ModuleController::CreateModuleMenus()
 {
-
 }
 
 void ModuleController::ActiveModule()
 {
-
 }

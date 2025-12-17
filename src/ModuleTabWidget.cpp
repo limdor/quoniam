@@ -1,6 +1,6 @@
 #include "ModuleTabWidget.h"
 
-ModuleTabWidget::ModuleTabWidget(QWidget *pParent): QTabWidget(pParent)
+ModuleTabWidget::ModuleTabWidget(QWidget* pParent) : QTabWidget(pParent)
 {
     setTabsClosable(true);
     setTabPosition(QTabWidget::South);
@@ -13,11 +13,12 @@ ModuleTabWidget::~ModuleTabWidget()
     int numberOfModules = count();
     for( int i = numberOfModules - 1; i >= 0; i-- )
     {
-        RemoveModule( widget(i) );
+        RemoveModule(widget(i));
     }
 }
 
-void ModuleTabWidget::LoadModule(QWidget *pModule, const QString &pCaption, const QString &pModuleIdentifier)
+void ModuleTabWidget::LoadModule(QWidget* pModule, const QString& pCaption,
+                                 const QString& pModuleIdentifier)
 {
     // Add the module as a Tab
     int position = addTab(pModule, pCaption);
@@ -26,7 +27,7 @@ void ModuleTabWidget::LoadModule(QWidget *pModule, const QString &pCaption, cons
     mLoadedModules.insert(pModule, pModuleIdentifier);
 }
 
-void ModuleTabWidget::RemoveModule(QWidget *pModule)
+void ModuleTabWidget::RemoveModule(QWidget* pModule)
 {
     // Remoeve the tab of the module
     removeTab(indexOf(pModule));
@@ -48,8 +49,8 @@ void ModuleTabWidget::CreateConnections()
 
 void ModuleTabWidget::CloseModuleByTabIndex(int pIndex)
 {
-    //Ensure at least one module loaded
-    if(mLoadedModules.size() > 1)
+    // Ensure at least one module loaded
+    if( mLoadedModules.size() > 1 )
     {
         RemoveModule(widget(pIndex));
     }

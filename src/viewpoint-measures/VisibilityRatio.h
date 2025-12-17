@@ -1,17 +1,17 @@
 #ifndef VISIBILITY_RATIO_H
 #define VISIBILITY_RATIO_H
 
-//Project includes
+// Project includes
 #include "Measure.h"
 
 /// Class that implements the visibility ratio measures
 class VisibilityRatio : public Measure
 {
 public:
-    explicit VisibilityRatio(const std::string &pName);
+    explicit VisibilityRatio(const std::string& pName);
 
     /// Method that computes the measure
-    void Compute(const SceneInformationBuilder *pSceneInformationBuilder);
+    void Compute(const SceneInformationBuilder* pSceneInformationBuilder);
 };
 
 #endif

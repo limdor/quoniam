@@ -1,19 +1,18 @@
-//Definition include
+// Definition include
 #include "ProjectedArea.h"
 
-//Project includes
+// Project includes
 #include "Tools.h"
 
-ProjectedArea::ProjectedArea(const std::string &pName): Measure(pName, true)
+ProjectedArea::ProjectedArea(const std::string& pName) : Measure(pName, true)
 {
-
 }
 
-void ProjectedArea::Compute(const SceneInformationBuilder *pSceneInformationBuilder)
+void ProjectedArea::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
 {
     const auto projectedAreasMatrix = pSceneInformationBuilder->GetProjectedAreasMatrix();
     size_t numberOfViewpoints = projectedAreasMatrix->GetNumberOfViewpoints();
-    mValues.resize( numberOfViewpoints );
+    mValues.resize(numberOfViewpoints);
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
     {

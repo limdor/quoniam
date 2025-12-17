@@ -1,0 +1,20 @@
+---
+BasedOnStyle: Google
+IndentWidth: 4
+ColumnLimit: 100
+BreakBeforeBraces: Allman
+SortIncludes: false
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: None
+SpacesInParens: Custom
+SpacesInParensOptions:
+  ExceptDoubleParentheses: false
+  InConditionalStatements: true
+  InEmptyParentheses: false
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: false
+---
+Language: Cpp
+Standard: Latest
+...

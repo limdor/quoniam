@@ -2,22 +2,23 @@
 #include "vld.h"
 #endif
 
-//Qt includes
+// Qt includes
 #include <QtWidgets/QApplication>
 #include <QtGui/QIcon>
 #include <QtGui/QWindow>
 
-//Project includes
+// Project includes
 #include "MainWindow.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
     QApplication app(argc, argv);
 
     MainWindow* window = MainWindow::GetInstance();
     const auto top_level_windows = QGuiApplication::topLevelWindows();
-    for(auto& top_level_window : top_level_windows){
+    for( auto& top_level_window : top_level_windows )
+    {
         top_level_window->setIcon(QIcon("icon.ico"));
     }
 
