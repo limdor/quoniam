@@ -56,6 +56,20 @@ cc_library(
 )
 
 cc_library(
+    name = "geometry_topology",
+    srcs = ["GeometryTopology.cpp"],
+    hdrs = ["GeometryTopology.h"],
+    deps = ["@glew//:glew_static"],
+)
+
+cc_library(
+    name = "light_settings",
+    srcs = ["LightSettings.cpp"],
+    hdrs = ["LightSettings.h"],
+    deps = ["@glm"],
+)
+
+cc_library(
     name = "core",
     srcs = [
         "AxisAlignedBoundingBox.cpp",
@@ -83,9 +97,7 @@ cc_library(
         "GPUScene.h",
         "GPUSceneNode.h",
         "Geometry.h",
-        "GeometryTopology.h",
         "Gizmo.h",
-        "LightSettings.h",
         "Mesh.h",
         "OrthographicCamera.h",
         "PerspectiveCamera.h",
@@ -99,8 +111,10 @@ cc_library(
     local_defines = ["GLM_ENABLE_EXPERIMENTAL"],
     visibility = ["//visibility:public"],
     deps = [
+        ":geometry_topology",
         ":glsl_program",
         ":glsl_shader",
+        ":light_settings",
         ":material",
         ":texture",
         "//src/utils",
