@@ -31,14 +31,14 @@ void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera) {
     if (pCamera != nullptr) {
         mFreeCamera = pCamera->Clone();
     } else {
-        float radius = mScene->GetBoundingSphere()->GetRadius();
-        glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
+        const float radius = mScene->GetBoundingSphere()->GetRadius();
+        const glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
 
-        glm::vec3 position = glm::vec3(center.x, center.y, center.z + radius * 2.0f);
-        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-        glm::vec3 front = center - position;
-        glm::vec3 right = glm::cross(front, up);
-        up = glm::cross(right, front);
+        const glm::vec3 position = glm::vec3(center.x, center.y, center.z + radius * 2.0f);
+        constexpr glm::vec3 UP_VECTOR = glm::vec3(0.0f, 1.0f, 0.0f);
+        const glm::vec3 front = center - position;
+        const glm::vec3 right = glm::cross(front, UP_VECTOR);
+        const glm::vec3 up = glm::cross(right, front);
         mFreeCamera = std::make_unique<PerspectiveCamera>(
             0.05f * radius, radius * 50.0f, center, up, position, 60.0f,
             mWinWidth / static_cast<float>(mWinHeight));
