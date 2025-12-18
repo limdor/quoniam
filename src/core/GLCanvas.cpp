@@ -220,15 +220,16 @@ void GLCanvas::initializeGL() {
         Debug::Log("Impossible to initialize GLEW!: " +
                    std::string{reinterpret_cast<const char*>(sError)});
     } else {
-        std::string const gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
-        std::string const gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
-        std::string const gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
-        std::string const gl_shading_language_version{
+        // Strings comming from glGetString are UTF-8 encoded
+        std::string_view const gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
+        std::string_view const gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
+        std::string_view const gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
+        std::string_view const gl_shading_language_version{
             reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))};
-        Debug::Log("GL_VENDOR: " + gl_vendor);
-        Debug::Log("GL_RENDERER: " + gl_renderer);
-        Debug::Log("GL_VERSION: " + gl_version);
-        Debug::Log("GL_SHADING_LANGUAGE_VERSION: " + gl_shading_language_version);
+        Debug::Log("GL_VENDOR: " + std::string{gl_vendor});
+        Debug::Log("GL_RENDERER: " + std::string{gl_renderer});
+        Debug::Log("GL_VERSION: " + std::string{gl_version});
+        Debug::Log("GL_SHADING_LANGUAGE_VERSION: " + std::string{gl_shading_language_version});
 
         LoadShaders();
 
