@@ -1,7 +1,5 @@
 #include "Material.h"
 
-#include <QtOpenGL/QGLWidget>
-
 Material::Material(const std::string& pName)
     : mName(pName),
       mKa(0.2f),

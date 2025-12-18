@@ -47,7 +47,6 @@ cc_library(
     name = "material",
     srcs = ["Material.cpp"],
     hdrs = ["Material.h"],
-    implementation_deps = ["@qt//:qt_opengl"],
     deps = [
         ":texture",
         "@glm",

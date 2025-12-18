@@ -2,8 +2,6 @@
 
 #include "Debug.h"
 
-#include <QtOpenGL/QGLWidget>
-
 #include <type_traits>
 
 GPUGeometry::~GPUGeometry()
