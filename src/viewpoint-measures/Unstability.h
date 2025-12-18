@@ -7,8 +7,7 @@
 #include <memory>
 
 /// Class that implements the unstability measure [Feixas et al. 2009]
-class Unstability : public Measure
-{
+class Unstability : public Measure {
 public:
     explicit Unstability(const std::string& pName);
 

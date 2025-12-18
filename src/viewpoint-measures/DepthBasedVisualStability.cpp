@@ -13,12 +13,9 @@
 #include "Tools.h"
 
 DepthBasedVisualStability::DepthBasedVisualStability(const std::string& pName)
-    : Measure(pName, true)
-{
-}
+    : Measure(pName, true) {}
 
-void DepthBasedVisualStability::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
-{
+void DepthBasedVisualStability::Compute(const SceneInformationBuilder* pSceneInformationBuilder) {
     const float threshold = 0.87f;
     const size_t numberOfViewpoints =
         pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
@@ -30,14 +27,13 @@ void DepthBasedVisualStability::Compute(const SceneInformationBuilder* pSceneInf
     QString program("c:\\program files\\7-zip\\7z.exe");
     QStringList arguments;
     arguments << "a" << "-tbzip2" << "-mx9";
-    for( size_t currentViewpointI = 0; currentViewpointI < numberOfViewpoints; currentViewpointI++ )
-    {
+    for (size_t currentViewpointI = 0; currentViewpointI < numberOfViewpoints;
+         currentViewpointI++) {
         cv::Mat depthImageI = pSceneInformationBuilder->GetDepthImage(currentViewpointI);
         cv::Size depthImageSize = depthImageI.size();
         QString pathZippedImageI = pathZippedImage.arg(currentViewpointI);
         QFileInfo fileZippedImageI(pathZippedImageI);
-        if( !fileZippedImageI.exists() )
-        {
+        if (!fileZippedImageI.exists()) {
             QString pathImageI = pathImage.arg(currentViewpointI);
             cv::imwrite(pathImageI.toStdString(), depthImageI);
             QStringList specificArguments(arguments);
@@ -46,14 +42,12 @@ void DepthBasedVisualStability::Compute(const SceneInformationBuilder* pSceneInf
             fileZippedImageI.refresh();
             QFile::remove(pathImageI);
         }
-        for( size_t currentViewpointJ = currentViewpointI + 1;
-             currentViewpointJ < numberOfViewpoints; currentViewpointJ++ )
-        {
+        for (size_t currentViewpointJ = currentViewpointI + 1;
+             currentViewpointJ < numberOfViewpoints; currentViewpointJ++) {
             cv::Mat depthImageJ = pSceneInformationBuilder->GetDepthImage(currentViewpointJ);
             QString pathZippedImageJ = pathZippedImage.arg(currentViewpointJ);
             QFileInfo fileZippedImageJ(pathZippedImageJ);
-            if( !fileZippedImageJ.exists() )
-            {
+            if (!fileZippedImageJ.exists()) {
                 QString pathImageJ = pathImage.arg(currentViewpointJ);
                 cv::imwrite(pathImageJ.toStdString(), depthImageJ);
                 QStringList specificArguments(arguments);
@@ -85,8 +79,7 @@ void DepthBasedVisualStability::Compute(const SceneInformationBuilder* pSceneInf
             int min = qMin(sizeI, sizeJ);
             int max = qMax(sizeI, sizeJ);
             float ncd = (sizeJoin - min) / (float)max;
-            if( ncd < threshold )
-            {
+            if (ncd < threshold) {
                 mValues[currentViewpointI]++;
                 mValues[currentViewpointJ]++;
             }

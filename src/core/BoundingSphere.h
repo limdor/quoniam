@@ -8,8 +8,7 @@
 #include <memory>
 
 /// BoundingVolume class with methods to use a bounding sphere
-class BoundingSphere : public Gizmo
-{
+class BoundingSphere : public Gizmo {
 public:
     BoundingSphere();
 

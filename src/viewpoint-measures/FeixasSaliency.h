@@ -7,8 +7,7 @@
 #include <memory>
 
 /// Class that implements the saliency of a viewpoint [Feixas et al. 2009]
-class FeixasSaliency : public Measure
-{
+class FeixasSaliency : public Measure {
 public:
     explicit FeixasSaliency(const std::string& pName);
 

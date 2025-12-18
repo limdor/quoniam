@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the number of visible triangles measures
-class NumberOfVisibleTriangles : public Measure
-{
+class NumberOfVisibleTriangles : public Measure {
 public:
     explicit NumberOfVisibleTriangles(const std::string& pName);
 

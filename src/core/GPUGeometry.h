@@ -9,8 +9,7 @@
 #include <vector>
 
 /// Class to wrap a Mesh that is stored into the GPU
-class GPUGeometry
-{
+class GPUGeometry {
 public:
     GPUGeometry() = default;
     ~GPUGeometry();

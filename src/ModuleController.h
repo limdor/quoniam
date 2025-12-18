@@ -5,8 +5,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QWidget>
 
-class ModuleController : public QWidget
-{
+class ModuleController : public QWidget {
     Q_OBJECT
 public:
     explicit ModuleController(QWidget* pParent = 0);

@@ -20,14 +20,12 @@
 
 #include <filesystem>
 
-namespace Ui
-{
+namespace Ui {
 class MainModule;
 }
 
 /// Controller for the view of the main module
-class MainModuleController : public ModuleController
-{
+class MainModuleController : public ModuleController {
     Q_OBJECT
 public:
     explicit MainModuleController(QWidget* pParent = 0);

@@ -8,8 +8,7 @@
 #include <vector>
 
 /// A gizmo is a special element that can be rendered but without any kind of illumination.
-class Gizmo
-{
+class Gizmo {
 public:
     virtual ~Gizmo() = default;
 

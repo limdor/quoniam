@@ -3,8 +3,7 @@
 
 #include <vector>
 
-class ProjectedAreasMatrix
-{
+class ProjectedAreasMatrix {
 public:
     ProjectedAreasMatrix(size_t pNumberOfViewpoints, size_t pNumberOfPolygons);
     explicit ProjectedAreasMatrix(const ProjectedAreasMatrix* pProjectedAreasMatrix);

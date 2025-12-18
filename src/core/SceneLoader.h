@@ -14,8 +14,7 @@
 #include <vector>
 
 /// Class to load scenes from files
-class SceneLoader
-{
+class SceneLoader {
 public:
     /// Create a scene from the given file
     static std::unique_ptr<Scene> LoadScene(const std::filesystem::path& pPath);

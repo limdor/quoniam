@@ -9,8 +9,7 @@
 class QImage;
 
 /// Class to wrap an OpenGL texture
-class Texture
-{
+class Texture {
 public:
     Texture(const QImage& pTexture);
     /// Get the texture id in the GPU

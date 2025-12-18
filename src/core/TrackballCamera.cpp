@@ -7,11 +7,9 @@
 
 void TrackballCamera::MoveCamera(const glm::vec2& pMouseInitialPosition,
                                  const glm::vec2& pMouseFinalPosition, Camera& pCamera,
-                                 const glm::vec3& pCenter)
-{
+                                 const glm::vec3& pCenter) {
     const glm::vec2 moviment{pMouseFinalPosition - pMouseInitialPosition};
-    if( moviment != glm::vec2{0, 0} )
-    {
+    if (moviment != glm::vec2{0, 0}) {
         const glm::vec3 prevCamPosition = pCamera.GetPosition();
         const glm::vec3 prevCamUpVector = glm::normalize(pCamera.GetUp());
         const glm::vec3 prevCamFrontVector = glm::normalize(pCamera.GetLookAt() - prevCamPosition);

@@ -8,12 +8,9 @@
 // Project includes
 #include "Tools.h"
 
-CurvatureEntropy::CurvatureEntropy(const std::string& pName) : Measure(pName, true)
-{
-}
+CurvatureEntropy::CurvatureEntropy(const std::string& pName) : Measure(pName, true) {}
 
-void CurvatureEntropy::Compute(const SceneInformationBuilder* pSceneInformationBuilder)
-{
+void CurvatureEntropy::Compute(const SceneInformationBuilder* pSceneInformationBuilder) {
     const int histogramSize = 256;
     const size_t numberOfViewpoints =
         pSceneInformationBuilder->GetProjectedAreasMatrix()->GetNumberOfViewpoints();
@@ -22,26 +19,21 @@ void CurvatureEntropy::Compute(const SceneInformationBuilder* pSceneInformationB
     std::fill(mValues.begin(), mValues.end(), 0.0f);
     float min = -2.0f * glm::pi<float>();
     float range = 4.0f * glm::pi<float>();
-    for( size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++ )
-    {
+    for (size_t currentViewpoint = 0; currentViewpoint < numberOfViewpoints; currentViewpoint++) {
         std::vector<unsigned int> curvatureHistogram(histogramSize, 0);
         std::set<int> visibleVertices =
             pSceneInformationBuilder->GetVisibleVertices(currentViewpoint);
-        foreach (int value, visibleVertices)
-        {
+        foreach (int value, visibleVertices) {
             float curvature = vertexCurvatures.at(value);
             int bin = (int)((histogramSize - 1) * ((curvature - min) / range));
-            if( bin < 0 )
-            {
+            if (bin < 0) {
                 bin = 0;
             }
             curvatureHistogram[bin]++;
         }
-        for( int i = 0; i < histogramSize; i++ )
-        {
+        for (int i = 0; i < histogramSize; i++) {
             unsigned int value = curvatureHistogram.at(i);
-            if( value != 0 )
-            {
+            if (value != 0) {
                 float aux = value / (float)vertexCurvatures.size();
                 mValues[currentViewpoint] += aux * glm::log2(aux);
             }

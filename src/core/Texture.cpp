@@ -1,10 +1,5 @@
 #include "Texture.h"
 
-Texture::Texture(const QImage& pTexture) : mTexture(pTexture.mirrored())
-{
-}
+Texture::Texture(const QImage& pTexture) : mTexture(pTexture.mirrored()) {}
 
-GLuint Texture::GetGLId() const
-{
-    return mTexture.textureId();
-}
+GLuint Texture::GetGLId() const { return mTexture.textureId(); }

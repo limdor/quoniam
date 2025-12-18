@@ -8,8 +8,7 @@
 #include <vector>
 
 /// Parent class for all the measures
-class Measure
-{
+class Measure {
 public:
     Measure(const std::string& pName, bool pMaximumBest);
     virtual ~Measure() = default;

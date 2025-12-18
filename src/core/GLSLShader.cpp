@@ -4,24 +4,19 @@
 
 #include <fstream>
 
-GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType) : mType(pType)
-{
+GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType) : mType(pType) {
     // Load shader's source text.
     std::ifstream file(pSourceFile, std::ios::in);
-    if( !file.is_open() )
-    {
+    if (!file.is_open()) {
         mCompilationLog = "File not found! " + pSourceFile;
         mHasCompilationErrors = true;
-    }
-    else
-    {
+    } else {
         std::string const fileContent{std::istreambuf_iterator<char>{file}, {}};
         file.close();
 
         // Create the shader from a text file.
         mId = glCreateShader(pType);
-        if( mId != 0 )
-        {
+        if (mId != 0) {
             GLint blen = 0;
             GLsizei slen = 0;
 
@@ -31,68 +26,43 @@ GLSLShader::GLSLShader(const std::string& pSourceFile, GLenum pType) : mType(pTy
             CHECK_GL_ERROR();
             glGetShaderiv(mId, GL_COMPILE_STATUS, &blen);
             CHECK_GL_ERROR();
-            if( blen == GL_TRUE )
-            {
+            if (blen == GL_TRUE) {
                 mHasCompilationErrors = false;
                 mCompilationLog = "Compilation successful!";
-            }
-            else
-            {
+            } else {
                 mHasCompilationErrors = true;
                 glGetShaderiv(mId, GL_INFO_LOG_LENGTH, &blen);
                 CHECK_GL_ERROR();
-                if( blen > 1 )
-                {
+                if (blen > 1) {
                     char* compilerLog = new char[blen];
-                    if( compilerLog != nullptr )
-                    {
+                    if (compilerLog != nullptr) {
                         glGetShaderInfoLog(mId, blen, &slen, compilerLog);
                         CHECK_GL_ERROR();
                         mCompilationLog = compilerLog;
-                    }
-                    else
-                    {
+                    } else {
                         mCompilationLog = "Could not allocate compiler log buffer!";
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             mHasCompilationErrors = true;
             mCompilationLog = "Impossible to create the shader";
         }
     }
 }
 
-GLSLShader::~GLSLShader()
-{
-    glDeleteShader(mId);
-}
+GLSLShader::~GLSLShader() { glDeleteShader(mId); }
 
-bool GLSLShader::HasCompilationErrors() const
-{
-    return mHasCompilationErrors;
-}
+bool GLSLShader::HasCompilationErrors() const { return mHasCompilationErrors; }
 
-const std::string& GLSLShader::GetCompilationLog() const
-{
-    return mCompilationLog;
-}
+const std::string& GLSLShader::GetCompilationLog() const { return mCompilationLog; }
 
-void GLSLShader::ShowCompilationLog() const
-{
-    if( mHasCompilationErrors )
-    {
+void GLSLShader::ShowCompilationLog() const {
+    if (mHasCompilationErrors) {
         Debug::Error(mCompilationLog);
-    }
-    else
-    {
+    } else {
         Debug::Log(mCompilationLog);
     }
 }
 
-GLuint GLSLShader::GetId() const
-{
-    return mId;
-}
+GLuint GLSLShader::GetId() const { return mId; }

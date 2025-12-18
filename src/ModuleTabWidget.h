@@ -6,8 +6,7 @@
 #include <QtWidgets/QTabWidget>
 
 /// Class to handle the different moudles that you can load in the program using different tabs
-class ModuleTabWidget : public QTabWidget
-{
+class ModuleTabWidget : public QTabWidget {
     Q_OBJECT
 public:
     explicit ModuleTabWidget(QWidget* pParent = 0);

@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the projected area measure
-class ProjectedArea : public Measure
-{
+class ProjectedArea : public Measure {
 public:
     explicit ProjectedArea(const std::string& pName);
 

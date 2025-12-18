@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the visibility ratio measures
-class VisibilityRatio : public Measure
-{
+class VisibilityRatio : public Measure {
 public:
     explicit VisibilityRatio(const std::string& pName);
 

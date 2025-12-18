@@ -11,8 +11,7 @@
 #include <string>
 
 /// Class to wrap the material of a mesh
-class Material
-{
+class Material {
 public:
     explicit Material(const std::string& pName);
 

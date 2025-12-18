@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the maximum depth measure
-class MaximumDepth : public Measure
-{
+class MaximumDepth : public Measure {
 public:
     explicit MaximumDepth(const std::string& pName);
 

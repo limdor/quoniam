@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the I2 measure [Bonaventura et al. 2011]
-class I2 : public Measure
-{
+class I2 : public Measure {
 public:
     explicit I2(const std::string& pName);
 

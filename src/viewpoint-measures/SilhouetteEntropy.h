@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the silhouette entropy measure
-class SilhouetteEntropy : public Measure
-{
+class SilhouetteEntropy : public Measure {
 public:
     explicit SilhouetteEntropy(const std::string& pName);
 

@@ -10,14 +10,12 @@
 // Project includes
 #include "ModuleTabWidget.h"
 
-namespace Ui
-{
+namespace Ui {
 class MainWindow;
 }
 
 /// Main class of the project
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:

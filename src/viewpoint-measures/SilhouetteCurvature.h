@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the silhouette curvature measure
-class SilhouetteCurvature : public Measure
-{
+class SilhouetteCurvature : public Measure {
 public:
     explicit SilhouetteCurvature(const std::string& pName);
 

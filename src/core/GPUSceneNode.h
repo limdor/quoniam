@@ -11,8 +11,7 @@
 
 #include <memory>
 
-class GPUSceneNode
-{
+class GPUSceneNode {
 public:
     GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry, std::shared_ptr<Material> pMaterial);
 

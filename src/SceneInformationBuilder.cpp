@@ -29,8 +29,7 @@
 
 void SceneInformationBuilder::CreateHistogram(
     std::shared_ptr<Scene> pScene, std::shared_ptr<SphereOfViewpoints> pSphereOfViewpoints,
-    int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals)
-{
+    int pWidthResolution, bool pFaceCulling, bool pIgnoreNormals) {
     size_t numberOfViewpoints = pSphereOfViewpoints->GetNumberOfViewpoints();
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -44,12 +43,9 @@ void SceneInformationBuilder::CreateHistogram(
     SaveOpenGLStats();
 
     glEnable(GL_DEPTH_TEST);
-    if( pFaceCulling && !pIgnoreNormals )
-    {
+    if (pFaceCulling && !pIgnoreNormals) {
         glEnable(GL_CULL_FACE);
-    }
-    else
-    {
+    } else {
         glDisable(GL_CULL_FACE);
     }
     glDisable(GL_BLEND);
@@ -63,16 +59,13 @@ void SceneInformationBuilder::CreateHistogram(
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     CHECK_GL_ERROR();
 
-    if( mShaderColorPerFace == nullptr )
-    {
+    if (mShaderColorPerFace == nullptr) {
         GLSLShader basicVS{"shaders/Basic.vert", GL_VERTEX_SHADER};
-        if( basicVS.HasCompilationErrors() )
-        {
+        if (basicVS.HasCompilationErrors()) {
             Debug::Error("shaders/Basic.vert: " + basicVS.GetCompilationLog());
         }
         GLSLShader colorPerFaceFS{"shaders/ColorPerFace.frag", GL_FRAGMENT_SHADER};
-        if( colorPerFaceFS.HasCompilationErrors() )
-        {
+        if (colorPerFaceFS.HasCompilationErrors()) {
             Debug::Error("shaders/ColorPerFace.frag: " + colorPerFaceFS.GetCompilationLog());
         }
 
@@ -110,7 +103,7 @@ void SceneInformationBuilder::CreateHistogram(
     glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthRenderTexture, 0);
     CHECK_GL_ERROR();
 #ifdef QT_DEBUG
-    if( glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE ) CHECK_GL_ERROR();
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) CHECK_GL_ERROR();
 #endif
 
     // Compute the total number of pixels
@@ -143,15 +136,13 @@ void SceneInformationBuilder::CreateHistogram(
     std::vector<glm::vec3> vertices = mSerializedScene->GetVertices();
     size_t numberOfVertices = vertices.size();
     std::vector<unsigned int> indexs(numberOfVertices);
-    for( size_t j = 0; j < numberOfVertices; j++ )
-    {
+    for (size_t j = 0; j < numberOfVertices; j++) {
         indexs[j] = static_cast<unsigned int>(j);
     }
     verticesScene.SetVerticesData(numberOfVertices, vertices.data());
     verticesScene.SetIndexsData(numberOfVertices, indexs.data());
     // We iterate over all the viewpoint of the sphere
-    for( size_t i = 0; i < numberOfViewpoints; i++ )
-    {
+    for (size_t i = 0; i < numberOfViewpoints; i++) {
         // We update the progress bar
         progress.setValue(static_cast<int>(i));
 
@@ -165,8 +156,7 @@ void SceneInformationBuilder::CreateHistogram(
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // We paint the scene using a different color per face
-        for( int k = 0; k < gpuScene.GetNumberOfSceneNodes(); k++ )
-        {
+        for (int k = 0; k < gpuScene.GetNumberOfSceneNodes(); k++) {
             auto sceneNode = gpuScene.GetSceneNode(k);
             glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderColorPerFace->SetUniform("modelViewProjection",
@@ -184,18 +174,14 @@ void SceneInformationBuilder::CreateHistogram(
         // We compute the projected area of every face and we compute a mask to know what is model
         // and what is background
         std::fill(facesAreas.begin(), facesAreas.end(), 0);
-        for( unsigned int j = 0; j < totalNumberOfPixels; j++ )
-        {
+        for (unsigned int j = 0; j < totalNumberOfPixels; j++) {
             int pixelActual = glm::round(valuePerFaceImage[j]);
 
-            if( pixelActual > 0 )
-            {
+            if (pixelActual > 0) {
                 Q_ASSERT(pixelActual <= numberOfPolygons);
                 facesAreas[pixelActual - 1]++;
                 projectionMask[j] = 255;
-            }
-            else
-            {
+            } else {
                 projectionMask[j] = 0;
             }
         }
@@ -223,8 +209,7 @@ void SceneInformationBuilder::CreateHistogram(
         cv::calcHist(&imageDepth, 1, 0, image, hist, 1, &histSize, &histRange, true, false);
         mNormalizedDepthHistograms[i].resize(histSize);
         int nonZero = cv::countNonZero(image);
-        for( int j = 0; j < histSize; j++ )
-        {
+        for (int j = 0; j < histSize; j++) {
             mNormalizedDepthHistograms[i][j] = hist.at<float>(j) / nonZero;
         }
 
@@ -239,19 +224,16 @@ void SceneInformationBuilder::CreateHistogram(
         cv::findContours(image, contours, hierarchy, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
         mSilhouetteLengths[i] = 0.0f;
         unsigned int numberOfAngles = 0;
-        for( int j = 0; j < contours.size(); j++ )
-        {
+        for (int j = 0; j < contours.size(); j++) {
             mSilhouetteLengths[i] += cv::arcLength(contours.at(j), true);
             unsigned int contourSize = (unsigned int)contours.at(j).size();
             mSilhouetteCurvature[i].resize(numberOfAngles + contourSize);
-            for( unsigned int k = 0; k < contourSize; k++ )
-            {
+            for (unsigned int k = 0; k < contourSize; k++) {
                 cv::Point diff1 = contours.at(j).at(k) - contours.at(j).at((k + 1) % contourSize);
                 cv::Point diff2 = contours.at(j).at((k + 1) % contourSize) -
                                   contours.at(j).at((k + 2) % contourSize);
                 float angle = 0.0f;
-                if( diff1.x != diff2.x || diff1.y != diff2.y )
-                {
+                if (diff1.x != diff2.x || diff1.y != diff2.y) {
                     glm::vec2 v1(diff1.x, diff1.y);
                     glm::vec2 v2(diff2.x, diff2.y);
                     v1 = glm::normalize(v1);
@@ -271,12 +253,10 @@ void SceneInformationBuilder::CreateHistogram(
         glReadPixels(0, 0, windowWidth, windowHeight, GL_RED, GL_FLOAT, valuePerFaceImage.data());
         CHECK_GL_ERROR();
         std::set<int> visibleVertexs;
-        for( unsigned int j = 0; j < totalNumberOfPixels; j++ )
-        {
+        for (unsigned int j = 0; j < totalNumberOfPixels; j++) {
             int pixelActual = glm::round(valuePerFaceImage[j]);
 
-            if( pixelActual > 0 )
-            {
+            if (pixelActual > 0) {
                 Q_ASSERT(pixelActual <= numberOfVertices);
                 visibleVertexs.insert(pixelActual - 1);
             }
@@ -304,73 +284,56 @@ void SceneInformationBuilder::CreateHistogram(
     QApplication::restoreOverrideCursor();
 }
 
-std::shared_ptr<ProjectedAreasMatrix const> SceneInformationBuilder::GetProjectedAreasMatrix() const
-{
+std::shared_ptr<ProjectedAreasMatrix const> SceneInformationBuilder::GetProjectedAreasMatrix()
+    const {
     return mProjectedAreasMatrix;
 }
 
-std::vector<std::vector<size_t>> SceneInformationBuilder::GetViewpointNeighbours() const
-{
+std::vector<std::vector<size_t>> SceneInformationBuilder::GetViewpointNeighbours() const {
     return mViewpointNeighbours;
 }
 
-std::vector<std::vector<size_t>> SceneInformationBuilder::GetSerializedPolygonNeighbours() const
-{
+std::vector<std::vector<size_t>> SceneInformationBuilder::GetSerializedPolygonNeighbours() const {
     return mSerializedScene->GetFacesNeighbours();
 }
 
-float SceneInformationBuilder::GetSilhouetteLength(size_t pViewpoint) const
-{
+float SceneInformationBuilder::GetSilhouetteLength(size_t pViewpoint) const {
     return mSilhouetteLengths.at(pViewpoint);
 }
 
-std::vector<float> SceneInformationBuilder::GetSilhouetteCurvature(size_t pViewpoint) const
-{
+std::vector<float> SceneInformationBuilder::GetSilhouetteCurvature(size_t pViewpoint) const {
     return mSilhouetteCurvature.at(pViewpoint);
 }
 
-std::vector<float> SceneInformationBuilder::GetNormalizedDepthHistogram(size_t pViewpoint) const
-{
+std::vector<float> SceneInformationBuilder::GetNormalizedDepthHistogram(size_t pViewpoint) const {
     return mNormalizedDepthHistograms.at(pViewpoint);
 }
 
-cv::Mat SceneInformationBuilder::GetDepthImage(size_t pViewpoint) const
-{
+cv::Mat SceneInformationBuilder::GetDepthImage(size_t pViewpoint) const {
     return mDepthImages.at(pViewpoint);
 }
 
-float SceneInformationBuilder::GetMaximumDepth(size_t pViewpoint) const
-{
+float SceneInformationBuilder::GetMaximumDepth(size_t pViewpoint) const {
     return mMaxDepths.at(pViewpoint);
 }
 
-std::set<int> SceneInformationBuilder::GetVisibleVertices(size_t pViewpoint) const
-{
+std::set<int> SceneInformationBuilder::GetVisibleVertices(size_t pViewpoint) const {
     return mVisibleVertexs.at(pViewpoint);
 }
 
-std::vector<float> SceneInformationBuilder::GetSerializedPolygonAreas() const
-{
+std::vector<float> SceneInformationBuilder::GetSerializedPolygonAreas() const {
     return mSerializedScene->GetFacesAreas();
 }
 
-std::vector<float> SceneInformationBuilder::GetSerializedVertexCurvature() const
-{
+std::vector<float> SceneInformationBuilder::GetSerializedVertexCurvature() const {
     return mSerializedScene->GetVerticesCurvature();
 }
 
-int SceneInformationBuilder::GetWidthResolution() const
-{
-    return mWidthResolution;
-}
+int SceneInformationBuilder::GetWidthResolution() const { return mWidthResolution; }
 
-float SceneInformationBuilder::GetAspectRatio() const
-{
-    return mAspectRatio;
-}
+float SceneInformationBuilder::GetAspectRatio() const { return mAspectRatio; }
 
-void SceneInformationBuilder::SaveOpenGLStats()
-{
+void SceneInformationBuilder::SaveOpenGLStats() {
     mPreviousDepthTest = glIsEnabled(GL_DEPTH_TEST);
     mPreviousCullFace = glIsEnabled(GL_CULL_FACE);
     mPreviousBlend = glIsEnabled(GL_BLEND);
@@ -378,30 +341,20 @@ void SceneInformationBuilder::SaveOpenGLStats()
     glGetIntegerv(GL_VIEWPORT, &mPreviousViewport[0]);
 }
 
-void SceneInformationBuilder::RestoreOpenGLStats()
-{
-    if( mPreviousDepthTest )
-    {
+void SceneInformationBuilder::RestoreOpenGLStats() {
+    if (mPreviousDepthTest) {
         glEnable(GL_DEPTH_TEST);
-    }
-    else
-    {
+    } else {
         glDisable(GL_DEPTH_TEST);
     }
-    if( mPreviousCullFace )
-    {
+    if (mPreviousCullFace) {
         glEnable(GL_CULL_FACE);
-    }
-    else
-    {
+    } else {
         glDisable(GL_CULL_FACE);
     }
-    if( mPreviousBlend )
-    {
+    if (mPreviousBlend) {
         glEnable(GL_BLEND);
-    }
-    else
-    {
+    } else {
         glDisable(GL_BLEND);
     }
     glClearColor(mPreviousClearColor.r, mPreviousClearColor.g, mPreviousClearColor.b,

@@ -10,8 +10,7 @@
 #include <string>
 
 /// Abstract camera class with methods to configure a generic camera
-class Camera : public Gizmo
-{
+class Camera : public Gizmo {
 public:
     Camera(float pNearPlane, float pFarPlane, const glm::vec3& pLookAt, const glm::vec3& pUp,
            const glm::vec3& pPosition, float pAspectRatio);

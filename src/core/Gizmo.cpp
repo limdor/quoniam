@@ -1,6 +1,3 @@
 #include "Gizmo.h"
 
-void Gizmo::Draw()
-{
-    mGizmo.Draw();
-}
+void Gizmo::Draw() { mGizmo.Draw(); }

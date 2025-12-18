@@ -8,19 +8,14 @@
 
 #include <cassert>
 
-glm::vec3 SpherePointCloud::Up(const glm::vec3& pViewpoint)
-{
+glm::vec3 SpherePointCloud::Up(const glm::vec3& pViewpoint) {
     glm::vec3 front = -pViewpoint;
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    if( glm::abs(front.y) > 0.66 )
-    {
-        if( front.x < 0.0f )
-        {
+    if (glm::abs(front.y) > 0.66) {
+        if (front.x < 0.0f) {
             up = glm::vec3(1.0f, 0.0f, 0.0f);
-        }
-        else
-        {
+        } else {
             up = glm::vec3(-1.0f, 0.0f, 0.0f);
         }
     }
@@ -30,13 +25,11 @@ glm::vec3 SpherePointCloud::Up(const glm::vec3& pViewpoint)
     return up;
 }
 
-SpherePointCloud::SpherePointCloud() : mNumberOfPoints(0)
-{
+SpherePointCloud::SpherePointCloud() : mNumberOfPoints(0) {
     mMesh = std::make_shared<Geometry>("Sphere point cloud", GeometryTopology::Points);
 }
 
-void SpherePointCloud::SetToUniform4()
-{
+void SpherePointCloud::SetToUniform4() {
     const double UNIT = 1.0f / glm::sqrt(3.0f);
 
     mNumberOfPoints = 4;
@@ -59,8 +52,7 @@ void SpherePointCloud::SetToUniform4()
     // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         mNeighbours[i].resize(3);
     }
     // clang-format off
@@ -73,8 +65,7 @@ void SpherePointCloud::SetToUniform4()
     SetMeshInformation();
 }
 
-void SpherePointCloud::SetToUniform6()
-{
+void SpherePointCloud::SetToUniform6() {
     mNumberOfPoints = 6;
     mVertices.resize(mNumberOfPoints);
     // clang-format off
@@ -101,8 +92,7 @@ void SpherePointCloud::SetToUniform6()
     // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         mNeighbours[i].resize(4);
     }
     // clang-format off
@@ -117,8 +107,7 @@ void SpherePointCloud::SetToUniform6()
     SetMeshInformation();
 }
 
-void SpherePointCloud::SetToUniform8()
-{
+void SpherePointCloud::SetToUniform8() {
     const double UNIT = 1.0f / glm::sqrt(3.0f);
 
     mNumberOfPoints = 8;
@@ -153,8 +142,7 @@ void SpherePointCloud::SetToUniform8()
     // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         mNeighbours[i].resize(3);
     }
     // clang-format off
@@ -171,8 +159,7 @@ void SpherePointCloud::SetToUniform8()
     SetMeshInformation();
 }
 
-void SpherePointCloud::SetToUniform12()
-{
+void SpherePointCloud::SetToUniform12() {
     glm::vec3 v(1.0f, 0.0f, (1.0f + glm::sqrt(5.0f)) / 2.0f);
     v = glm::normalize(v);
 
@@ -223,8 +210,7 @@ void SpherePointCloud::SetToUniform12()
     // clang-format on
 
     mNeighbours.resize(mNumberOfPoints);
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         mNeighbours[i].resize(5);
     }
     // clang-format off
@@ -245,8 +231,7 @@ void SpherePointCloud::SetToUniform12()
     SetMeshInformation();
 }
 
-void SpherePointCloud::SetToUniform20()
-{
+void SpherePointCloud::SetToUniform20() {
     const float UNIT = 1.0f / glm::sqrt(3.0f);
     const double PHI = (1.0f + glm::sqrt(5.0f)) / 2.0f;
     const double INV_PHI = 1.0f / PHI;
@@ -281,8 +266,7 @@ void SpherePointCloud::SetToUniform20()
     // TODO: Add faces
 
     mNeighbours.resize(mNumberOfPoints);
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         mNeighbours[i].resize(3);
     }
     // clang-format off
@@ -311,8 +295,7 @@ void SpherePointCloud::SetToUniform20()
     SetMeshInformation();
 }
 
-void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
-{
+void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth) {
     // Create the initial vertices and faces from the sphere cloud
     CreateIcosahedron();
 
@@ -321,8 +304,7 @@ void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
     mFaces.clear();
 
     // Each triangle has to be subdivided as many times as the sphere depth
-    for( size_t i = 0; i < tempFaces.size(); i += 3 )
-    {
+    for (size_t i = 0; i < tempFaces.size(); i += 3) {
         size_t face1 = tempFaces.at(i);
         size_t face2 = tempFaces.at(i + 1);
         size_t face3 = tempFaces.at(i + 2);
@@ -334,86 +316,56 @@ void SpherePointCloud::SetToQuasiUniform(unsigned char pDepth)
     SetMeshInformation();
 }
 
-std::vector<size_t> SpherePointCloud::GetFaces() const
-{
-    return mFaces;
-}
+std::vector<size_t> SpherePointCloud::GetFaces() const { return mFaces; }
 
-std::vector<glm::vec3> SpherePointCloud::GetVertices() const
-{
-    return mVertices;
-}
+std::vector<glm::vec3> SpherePointCloud::GetVertices() const { return mVertices; }
 
-glm::vec3 SpherePointCloud::GetVertex(size_t pI) const
-{
-    return mVertices.at(pI);
-}
+glm::vec3 SpherePointCloud::GetVertex(size_t pI) const { return mVertices.at(pI); }
 
-std::vector<std::vector<size_t>> SpherePointCloud::GetNeighbours() const
-{
-    return mNeighbours;
-}
+std::vector<std::vector<size_t>> SpherePointCloud::GetNeighbours() const { return mNeighbours; }
 
-std::vector<size_t> SpherePointCloud::GetNeighbours(size_t pI) const
-{
-    return mNeighbours.at(pI);
-}
+std::vector<size_t> SpherePointCloud::GetNeighbours(size_t pI) const { return mNeighbours.at(pI); }
 
-std::shared_ptr<Geometry> SpherePointCloud::GetMesh() const
-{
-    return mMesh;
-}
+std::shared_ptr<Geometry> SpherePointCloud::GetMesh() const { return mMesh; }
 
-void SpherePointCloud::ComputeQuasiUniformNeighbours()
-{
+void SpherePointCloud::ComputeQuasiUniformNeighbours() {
     mNeighbours.clear();
     const size_t nFaces = mFaces.size() / 3;
     assert(nFaces * 3 == mFaces.size());
 
-    for( size_t i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (size_t i = 0; i < mNumberOfPoints; i++) {
         std::vector<size_t> vertexNeighbours;
 
-        for( size_t j = 0; j < nFaces; j++ )
-        {
-            if( mFaces.at(3 * j) == i )
-            {
-                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
-                              mFaces.at(3 * j + 1)) == vertexNeighbours.cend() )
-                {
+        for (size_t j = 0; j < nFaces; j++) {
+            if (mFaces.at(3 * j) == i) {
+                if (std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 1)) == vertexNeighbours.cend()) {
                     vertexNeighbours.push_back(mFaces.at(3 * j + 1));
                 }
-                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
-                              mFaces.at(3 * j + 2)) == vertexNeighbours.cend() )
-                {
+                if (std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 2)) == vertexNeighbours.cend()) {
                     vertexNeighbours.push_back(mFaces.at(3 * j + 2));
                 }
             }
 
-            if( mFaces.at(3 * j + 1) == i )
-            {
-                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
-                              mFaces.at(3 * j)) == vertexNeighbours.cend() )
-                {
+            if (mFaces.at(3 * j + 1) == i) {
+                if (std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j)) == vertexNeighbours.cend()) {
                     vertexNeighbours.push_back(mFaces.at(3 * j));
                 }
-                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
-                              mFaces.at(3 * j + 2)) == vertexNeighbours.cend() )
-                {
+                if (std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 2)) == vertexNeighbours.cend()) {
                     vertexNeighbours.push_back(mFaces.at(3 * j + 2));
                 }
             }
 
-            if( mFaces.at(3 * j + 2) == i )
-            {
-                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
-                              mFaces.at(3 * j)) == vertexNeighbours.cend() )
-                {
+            if (mFaces.at(3 * j + 2) == i) {
+                if (std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j)) == vertexNeighbours.cend()) {
                     vertexNeighbours.push_back(mFaces.at(3 * j));
                 }
-                if( std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
-                              mFaces.at(3 * j + 1)) == vertexNeighbours.cend() )
-                {
+                if (std::find(vertexNeighbours.cbegin(), vertexNeighbours.cend(),
+                              mFaces.at(3 * j + 1)) == vertexNeighbours.cend()) {
                     vertexNeighbours.push_back(mFaces.at(3 * j + 1));
                 }
             }
@@ -422,8 +374,7 @@ void SpherePointCloud::ComputeQuasiUniformNeighbours()
     }
 }
 
-void SpherePointCloud::CreateIcosahedron()
-{
+void SpherePointCloud::CreateIcosahedron() {
     glm::vec3 v(1.0f, 0.0f, (1.0f + glm::sqrt(5.0f)) / 2.0f);
     v = glm::normalize(v);
 
@@ -474,21 +425,18 @@ void SpherePointCloud::CreateIcosahedron()
     // clang-format on
 }
 
-inline bool equal(const glm::vec3& v1, const glm::vec3& v2, float error)
-{
+inline bool equal(const glm::vec3& v1, const glm::vec3& v2, float error) {
     glm::vec3 v = v1 - v2;
 
     return (glm::abs(v.x) <= error && glm::abs(v.y) <= error && glm::abs(v.z) <= error);
 }
 
-bool SpherePointCloud::FindSphereCloudVertex(const glm::vec3& pV, size_t& pPosition) const
-{
+bool SpherePointCloud::FindSphereCloudVertex(const glm::vec3& pV, size_t& pPosition) const {
     size_t i = 0;
     bool trobat = false;
 
-    while( i < mVertices.size() && !trobat )
-    {
-        if( equal(pV, mVertices.at(i), 0.0001f) )
+    while (i < mVertices.size() && !trobat) {
+        if (equal(pV, mVertices.at(i), 0.0001f))
             trobat = true;
         else
             i++;
@@ -499,45 +447,35 @@ bool SpherePointCloud::FindSphereCloudVertex(const glm::vec3& pV, size_t& pPosit
 }
 
 void SpherePointCloud::CreateSphereCloudTriangle(const glm::vec3& pV1, const glm::vec3& pV2,
-                                                 const glm::vec3& pV3)
-{
+                                                 const glm::vec3& pV3) {
     size_t pos;
 
     // Add the triangle (v1, v2, v3) to the list --> Add vertexs (if needed) and faces!!!
 
-    if( FindSphereCloudVertex(pV1, pos) )
-    {
+    if (FindSphereCloudVertex(pV1, pos)) {
         // Vertex finded at position pos --> Only the index of the face is added
         mFaces.push_back(pos);
-    }
-    else
-    {
+    } else {
         // Add the vertex and the index of the face
         mVertices.push_back(pV1);
         mNormals.push_back(pV1);
         mFaces.push_back(mVertices.size() - 1);
     }
 
-    if( FindSphereCloudVertex(pV2, pos) )
-    {
+    if (FindSphereCloudVertex(pV2, pos)) {
         // Vertex finded at position pos --> Only the index of the face is added
         mFaces.push_back(pos);
-    }
-    else
-    {
+    } else {
         // Add the vertex and the index of the face
         mVertices.push_back(pV2);
         mNormals.push_back(pV2);
         mFaces.push_back(mVertices.size() - 1);
     }
 
-    if( FindSphereCloudVertex(pV3, pos) )
-    {
+    if (FindSphereCloudVertex(pV3, pos)) {
         // Vertex finded at position pos --> Only the index of the face is added
         mFaces.push_back(pos);
-    }
-    else
-    {
+    } else {
         // Add the vertex and the index of the face
         mVertices.push_back(pV3);
         mNormals.push_back(pV3);
@@ -545,14 +483,11 @@ void SpherePointCloud::CreateSphereCloudTriangle(const glm::vec3& pV1, const glm
     }
 }
 
-void SpherePointCloud::Subdivide(glm::vec3 pV1, glm::vec3 pV2, glm::vec3 pV3, unsigned short pDepth)
-{
-    if( pDepth == 0 )
-    {
+void SpherePointCloud::Subdivide(glm::vec3 pV1, glm::vec3 pV2, glm::vec3 pV3,
+                                 unsigned short pDepth) {
+    if (pDepth == 0) {
         CreateSphereCloudTriangle(pV1, pV2, pV3);
-    }
-    else
-    {
+    } else {
         // Find the midpoint of each edge of the triangle
         glm::vec3 v12 = pV1 + pV2;
         glm::vec3 v23 = pV2 + pV3;
@@ -570,12 +505,10 @@ void SpherePointCloud::Subdivide(glm::vec3 pV1, glm::vec3 pV2, glm::vec3 pV3, un
     }
 }
 
-void SpherePointCloud::SetMeshInformation()
-{
+void SpherePointCloud::SetMeshInformation() {
     mMesh->SetVerticesData(mNumberOfPoints, mVertices.data());
     mMesh->SetNormalsData(mNumberOfPoints, mNormals.data());
-    if( mFaces.size() > 0 )
-    {
+    if (mFaces.size() > 0) {
         mMesh->SetIndexsData(mFaces.size(), mFaces.data());
         mMesh->SetTopology(GeometryTopology::Triangles);
     }

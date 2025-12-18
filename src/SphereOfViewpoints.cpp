@@ -7,67 +7,51 @@
 #include <algorithm>
 
 SphereOfViewpoints::SphereOfViewpoints(float pAngle, float pAspectRatio)
-    : mAngle(pAngle), mAspectRatio(pAspectRatio)
-{
+    : mAngle(pAngle), mAspectRatio(pAspectRatio) {
     mMesh->SetName("Sphere of viewpoints");
 }
 
-void SphereOfViewpoints::SetToUniform4()
-{
+void SphereOfViewpoints::SetToUniform4() {
     SpherePointCloud::SetToUniform4();
     SetCameras();
 }
 
-void SphereOfViewpoints::SetToUniform6()
-{
+void SphereOfViewpoints::SetToUniform6() {
     SpherePointCloud::SetToUniform6();
     SetCameras();
 }
 
-void SphereOfViewpoints::SetToUniform8()
-{
+void SphereOfViewpoints::SetToUniform8() {
     SpherePointCloud::SetToUniform8();
     SetCameras();
 }
 
-void SphereOfViewpoints::SetToUniform12()
-{
+void SphereOfViewpoints::SetToUniform12() {
     SpherePointCloud::SetToUniform12();
     SetCameras();
 }
 
-void SphereOfViewpoints::SetToUniform20()
-{
+void SphereOfViewpoints::SetToUniform20() {
     SpherePointCloud::SetToUniform20();
     SetCameras();
 }
 
-void SphereOfViewpoints::SetToQuasiUniform(unsigned char pDepth)
-{
+void SphereOfViewpoints::SetToQuasiUniform(unsigned char pDepth) {
     SpherePointCloud::SetToQuasiUniform(pDepth);
     SetCameras();
 }
 
-std::shared_ptr<Camera> SphereOfViewpoints::GetViewpoint(size_t pIndex) const
-{
+std::shared_ptr<Camera> SphereOfViewpoints::GetViewpoint(size_t pIndex) const {
     return mCameras.at(pIndex);
 }
 
-size_t SphereOfViewpoints::GetNumberOfViewpoints() const
-{
-    return mCameras.size();
-}
+size_t SphereOfViewpoints::GetNumberOfViewpoints() const { return mCameras.size(); }
 
-float SphereOfViewpoints::GetAspectRatio() const
-{
-    return mAspectRatio;
-}
+float SphereOfViewpoints::GetAspectRatio() const { return mAspectRatio; }
 
 void SphereOfViewpoints::ApplyTransform(float pSceneRadius, float pSphereRadius,
-                                        const glm::vec3& pCenter)
-{
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+                                        const glm::vec3& pCenter) {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         glm::vec3 cameraPosition = mVertices.at(i) * pSphereRadius + pCenter;
         mVertices[i] = mVertices.at(i) * pSceneRadius * 2.0f + pCenter;
         auto cam = mCameras.at(i);
@@ -79,11 +63,9 @@ void SphereOfViewpoints::ApplyTransform(float pSceneRadius, float pSphereRadius,
     SetMeshInformation();
 }
 
-void SphereOfViewpoints::SetCameras()
-{
+void SphereOfViewpoints::SetCameras() {
     mCameras.resize(mNumberOfPoints);
-    for( int i = 0; i < mNumberOfPoints; i++ )
-    {
+    for (int i = 0; i < mNumberOfPoints; i++) {
         mCameras[i] = std::make_shared<PerspectiveCamera>(0.05f, 2.0f, glm::vec3(0.0f),
                                                           SpherePointCloud::Up(mVertices.at(i)),
                                                           mVertices.at(i), mAngle, mAspectRatio);

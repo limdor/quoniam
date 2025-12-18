@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the kullback leibler distance [Sbert et al. 2005]
-class KullbackLeibler : public Measure
-{
+class KullbackLeibler : public Measure {
 public:
     explicit KullbackLeibler(const std::string& pName);
 
