@@ -12,65 +12,54 @@ OrthographicCamera::OrthographicCamera(float pNearPlane, float pFarPlane, glm::v
       mTop(pTop),
       mBottom(pBottom),
       mLeft(pLeft),
-      mRight(pRight)
-{
+      mRight(pRight) {
     CreateMesh();
 }
 
 OrthographicCamera::OrthographicCamera(const OrthographicCamera& pOrthographicCamera)
-    : Camera(pOrthographicCamera)
-{
+    : Camera(pOrthographicCamera) {
     mTop = pOrthographicCamera.mTop;
     mBottom = pOrthographicCamera.mBottom;
     mLeft = pOrthographicCamera.mLeft;
     mRight = pOrthographicCamera.mRight;
 }
 
-OrthographicCamera::~OrthographicCamera()
-{
-}
+OrthographicCamera::~OrthographicCamera() {}
 
-void OrthographicCamera::SetTop(float pTop)
-{
+void OrthographicCamera::SetTop(float pTop) {
     mTop = pTop;
     mUpdatedProjection = false;
     UpdatePositions();
 }
 
-void OrthographicCamera::SetBottom(float pBottom)
-{
+void OrthographicCamera::SetBottom(float pBottom) {
     mBottom = pBottom;
     mUpdatedProjection = false;
     UpdatePositions();
 }
 
-void OrthographicCamera::SetLeft(float pLeft)
-{
+void OrthographicCamera::SetLeft(float pLeft) {
     mLeft = pLeft;
     mUpdatedProjection = false;
     UpdatePositions();
 }
 
-void OrthographicCamera::SetRight(float pRight)
-{
+void OrthographicCamera::SetRight(float pRight) {
     mRight = pRight;
     mUpdatedProjection = false;
     UpdatePositions();
 }
 
-void OrthographicCamera::UpdateProjection()
-{
+void OrthographicCamera::UpdateProjection() {
     mProjectionMatrix = glm::ortho(mLeft, mRight, mBottom, mTop, mNearPlane, mFarPlane);
     mUpdatedProjection = true;
 }
 
-std::unique_ptr<Camera> OrthographicCamera::Clone() const
-{
+std::unique_ptr<Camera> OrthographicCamera::Clone() const {
     return std::make_unique<OrthographicCamera>(*this);
 }
 
-void OrthographicCamera::CreateMesh()
-{
+void OrthographicCamera::CreateMesh() {
     /// Creation of the mesh
     mGizmo = Geometry{"OrthographicCamera", GeometryTopology::Lines};
 
@@ -103,8 +92,7 @@ void OrthographicCamera::CreateMesh()
     mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 
-void OrthographicCamera::UpdatePositions()
-{
+void OrthographicCamera::UpdatePositions() {
     glm::vec3 frontVector = glm::normalize(mLookAt - mPosition);
     glm::vec3 upVector = glm::normalize(mUp);
     glm::vec3 leftVector = glm::normalize(glm::cross(upVector, frontVector));

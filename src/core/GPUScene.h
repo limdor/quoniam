@@ -7,8 +7,7 @@
 #include <memory>
 #include <vector>
 
-class GPUScene
-{
+class GPUScene {
 public:
     explicit GPUScene(std::shared_ptr<Scene const> pScene);
 

@@ -11,8 +11,7 @@
 #include <vector>
 
 /// Class for a node of a scene
-class SceneNode : public std::enable_shared_from_this<SceneNode>
-{
+class SceneNode : public std::enable_shared_from_this<SceneNode> {
 public:
     explicit SceneNode(const std::string& pName);
     explicit SceneNode(const SceneNode& sceneNode) = delete;

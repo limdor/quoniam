@@ -8,8 +8,7 @@
 #include <filesystem>
 #include <vector>
 
-class Tools
-{
+class Tools {
 public:
     template <typename T>
     static std::vector<T> GetOrderedIndexesByDimension(

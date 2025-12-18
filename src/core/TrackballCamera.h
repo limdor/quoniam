@@ -3,8 +3,7 @@
 
 #include "Camera.h"
 
-class TrackballCamera
-{
+class TrackballCamera {
 public:
     static void MoveCamera(const glm::vec2& pMouseInitialPosition,
                            const glm::vec2& pMouseFinalPosition, Camera& pCamera,

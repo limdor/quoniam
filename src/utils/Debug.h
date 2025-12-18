@@ -11,8 +11,7 @@
 #include <string>
 
 /// Class to output log, warning and error messages through a console
-class Debug
-{
+class Debug {
 public:
     /// Output a log message
     static void Log(const std::string& pMessage);

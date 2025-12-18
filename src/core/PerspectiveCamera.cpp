@@ -9,42 +9,33 @@
 PerspectiveCamera::PerspectiveCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt,
                                      glm::vec3 pUp, glm::vec3 pPosition, float pAngle,
                                      float pAspectRatio)
-    : Camera(pNearPlane, pFarPlane, pLookAt, pUp, pPosition, pAspectRatio), mAngle(pAngle)
-{
+    : Camera(pNearPlane, pFarPlane, pLookAt, pUp, pPosition, pAspectRatio), mAngle(pAngle) {
     CreateMesh();
 }
 
 PerspectiveCamera::PerspectiveCamera(const PerspectiveCamera& pPerspectiveCamera)
-    : Camera(pPerspectiveCamera)
-{
+    : Camera(pPerspectiveCamera) {
     mAngle = pPerspectiveCamera.mAngle;
 }
 
-void PerspectiveCamera::SetAngle(float pAngle)
-{
+void PerspectiveCamera::SetAngle(float pAngle) {
     mAngle = pAngle;
     mUpdatedProjection = false;
     UpdatePositions();
 }
 
-float PerspectiveCamera::GetAngle() const
-{
-    return mAngle;
-}
+float PerspectiveCamera::GetAngle() const { return mAngle; }
 
-void PerspectiveCamera::UpdateProjection()
-{
+void PerspectiveCamera::UpdateProjection() {
     mProjectionMatrix = glm::perspective(glm::radians(mAngle), mAspectRatio, mNearPlane, mFarPlane);
     mUpdatedProjection = true;
 }
 
-std::unique_ptr<Camera> PerspectiveCamera::Clone() const
-{
+std::unique_ptr<Camera> PerspectiveCamera::Clone() const {
     return std::make_unique<PerspectiveCamera>(*this);
 }
 
-void PerspectiveCamera::CreateMesh()
-{
+void PerspectiveCamera::CreateMesh() {
     /// Creation of the mesh
     mGizmo = Geometry{"PerspectiveCamera", GeometryTopology::Lines};
 
@@ -73,8 +64,7 @@ void PerspectiveCamera::CreateMesh()
     mGizmo.SetIndexsData(indexs.size(), indexs.data());
 }
 
-void PerspectiveCamera::UpdatePositions()
-{
+void PerspectiveCamera::UpdatePositions() {
     glm::vec3 frontVector = glm::normalize(mLookAt - mPosition);
     glm::vec3 upVector = glm::normalize(mUp);
     glm::vec3 leftVector = glm::normalize(glm::cross(upVector, frontVector));

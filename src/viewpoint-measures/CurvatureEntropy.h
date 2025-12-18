@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the curvature entropy measure
-class CurvatureEntropy : public Measure
-{
+class CurvatureEntropy : public Measure {
 public:
     explicit CurvatureEntropy(const std::string& pName);
 

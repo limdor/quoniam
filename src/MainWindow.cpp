@@ -10,17 +10,14 @@
 
 MainWindow* MainWindow::mInstance;
 
-MainWindow* MainWindow::GetInstance()
-{
-    if( mInstance == nullptr )
-    {
+MainWindow* MainWindow::GetInstance() {
+    if (mInstance == nullptr) {
         mInstance = new MainWindow();
     }
     return mInstance;
 }
 
-MainWindow::MainWindow(QWidget* pParent) : QMainWindow(pParent), mUi(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget* pParent) : QMainWindow(pParent), mUi(new Ui::MainWindow) {
     mUi->setupUi(this);
 
     mModuleTabWidget = mUi->moduleTabWidget;
@@ -29,18 +26,15 @@ MainWindow::MainWindow(QWidget* pParent) : QMainWindow(pParent), mUi(new Ui::Mai
     LoadMainModule();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete mUi;
     delete mModuleTabWidget;
 }
 
-void MainWindow::ModuleChanged(int pIndex)
-{
+void MainWindow::ModuleChanged(int pIndex) {
     Debug::SetConsole(nullptr);
     menuBar()->clear();
-    if( pIndex >= 0 )
-    {
+    if (pIndex >= 0) {
         // We load the menus of the current module
         ModuleController* currentModule =
             dynamic_cast<ModuleController*>(mModuleTabWidget->currentWidget());
@@ -48,8 +42,7 @@ void MainWindow::ModuleChanged(int pIndex)
         currentModule->ActiveModule();
 
         std::vector<QMenu*> menus = currentModule->GetModuleMenus();
-        for( int i = 0; i < menus.size(); i++ )
-        {
+        for (int i = 0; i < menus.size(); i++) {
             menuBar()->addMenu(menus.at(i));
         }
     }
@@ -70,14 +63,12 @@ void MainWindow::ModuleChanged(int pIndex)
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(ShowAbout()));
 }
 
-void MainWindow::LoadMainModule()
-{
+void MainWindow::LoadMainModule() {
     mModuleTabWidget->LoadModule(new MainModuleController(mModuleTabWidget), "Main module",
                                  "MainModule");
 }
 
-void MainWindow::ShowAbout()
-{
+void MainWindow::ShowAbout() {
     QMessageBox::about(this, tr("About Quoniam v%1").arg(APP_VERSION),
                        tr("<b>Quoniam</b> is an application of viewpoint selection and "
                           "object exploration developed by the University of Girona."

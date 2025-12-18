@@ -8,14 +8,12 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFileDialog>
 
-namespace Ui
-{
+namespace Ui {
 class DutagaciView;
 }
 
 /// Dialog to run the Dutagaci benchmark
-class DutagaciDialog : public QDialog
-{
+class DutagaciDialog : public QDialog {
     Q_OBJECT
 public:
     explicit DutagaciDialog(QWidget* parent = 0);

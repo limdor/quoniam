@@ -13,39 +13,32 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 
-GLCanvas::GLCanvas(QWidget* pParent) : QGLWidget(QGLFormat(QGL::SampleBuffers), pParent)
-{
-}
+GLCanvas::GLCanvas(QWidget* pParent) : QGLWidget(QGLFormat(QGL::SampleBuffers), pParent) {}
 
-GLCanvas::~GLCanvas()
-{
+GLCanvas::~GLCanvas() {
     // Delete framebuffers and textures needed for the dual depth peeling
     DeleteDualPeelingRenderTargets();
 
     glDeleteQueries(1, &mQueryId);
 }
 
-void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera)
-{
+void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera) {
     makeCurrent();
     mScene = pScene;
     mGPUScene = std::make_unique<GPUScene>(pScene);
     mPerVertexColorMeshes.clear();
 
-    if( pCamera != nullptr )
-    {
+    if (pCamera != nullptr) {
         mFreeCamera = pCamera->Clone();
-    }
-    else
-    {
-        float radius = mScene->GetBoundingSphere()->GetRadius();
-        glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
+    } else {
+        const float radius = mScene->GetBoundingSphere()->GetRadius();
+        const glm::vec3 center = mScene->GetBoundingSphere()->GetCenter();
 
-        glm::vec3 position = glm::vec3(center.x, center.y, center.z + radius * 2.0f);
-        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-        glm::vec3 front = center - position;
-        glm::vec3 right = glm::cross(front, up);
-        up = glm::cross(right, front);
+        const glm::vec3 position = glm::vec3(center.x, center.y, center.z + radius * 2.0f);
+        constexpr glm::vec3 UP_VECTOR = glm::vec3(0.0f, 1.0f, 0.0f);
+        const glm::vec3 front = center - position;
+        const glm::vec3 right = glm::cross(front, UP_VECTOR);
+        const glm::vec3 up = glm::cross(right, front);
         mFreeCamera = std::make_unique<PerspectiveCamera>(
             0.05f * radius, radius * 50.0f, center, up, position, 60.0f,
             mWinWidth / static_cast<float>(mWinHeight));
@@ -55,34 +48,28 @@ void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera)
     updateGL();
 }
 
-void GLCanvas::SetPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh)
-{
+void GLCanvas::SetPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh) {
     mPerVertexColorMeshes.clear();
     mPerVertexColorMeshes.push_back(pPerVertexMesh);
 }
 
-void GLCanvas::AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh)
-{
+void GLCanvas::AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh) {
     mPerVertexColorMeshes.push_back(pPerVertexMesh);
 }
 
-QString GLCanvas::SaveScreenshot(const QString& pFileName)
-{
+QString GLCanvas::SaveScreenshot(const QString& pFileName) {
     makeCurrent();
     const QString completePath = QString::fromStdString(Tools::GetProgramPath().string());
     const QImage image = grabFrameBuffer();
-    if( !image.save(completePath + pFileName) )
-    {
+    if (!image.save(completePath + pFileName)) {
         Debug::Warning("Screenshot have not been saved: " +
                        (completePath + pFileName).toStdString());
     }
     return (completePath + pFileName);
 }
 
-void GLCanvas::PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint)
-{
-    if( mFreeCamera != nullptr )
-    {
+void GLCanvas::PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint) {
+    if (mFreeCamera != nullptr) {
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamUpVector = glm::normalize(mFreeCamera->GetUp());
         const glm::vec3 prevCamFrontVector =
@@ -102,10 +89,8 @@ void GLCanvas::PanActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pE
     }
 }
 
-void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint)
-{
-    if( mFreeCamera != nullptr && mScene != nullptr )
-    {
+void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2& pEndPoint) {
+    if (mFreeCamera != nullptr && mScene != nullptr) {
         auto boundingSphere = mScene->GetBoundingSphere();
         TrackballCamera::MoveCamera(pStartPoint, pEndPoint, *mFreeCamera,
                                     boundingSphere->GetCenter());
@@ -113,10 +98,8 @@ void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2&
     }
 }
 
-void GLCanvas::MoveActiveCamera(float pDeltaFactor)
-{
-    if( mFreeCamera != nullptr && mScene != nullptr )
-    {
+void GLCanvas::MoveActiveCamera(float pDeltaFactor) {
+    if (mFreeCamera != nullptr && mScene != nullptr) {
         auto boundingSphere = mScene->GetBoundingSphere();
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamFrontVector =
@@ -133,10 +116,8 @@ void GLCanvas::MoveActiveCamera(float pDeltaFactor)
     }
 }
 
-void GLCanvas::ResetActiveCamera()
-{
-    if( mFreeCamera != nullptr && mScene != nullptr )
-    {
+void GLCanvas::ResetActiveCamera() {
+    if (mFreeCamera != nullptr && mScene != nullptr) {
         auto boundingSphere = mScene->GetBoundingSphere();
         const glm::vec3 prevCamPosition = mFreeCamera->GetPosition();
         const glm::vec3 prevCamFrontVector =
@@ -149,23 +130,17 @@ void GLCanvas::ResetActiveCamera()
     }
 }
 
-void GLCanvas::SetCamera(std::unique_ptr<Camera> pCamera)
-{
+void GLCanvas::SetCamera(std::unique_ptr<Camera> pCamera) {
     makeCurrent();
     mFreeCamera = std::move(pCamera);
     RecomputeViewport();
     updateGL();
 }
 
-std::shared_ptr<Scene> GLCanvas::GetScene()
-{
-    return mScene;
-}
+std::shared_ptr<Scene> GLCanvas::GetScene() { return mScene; }
 
-void GLCanvas::ConfigureFirstLight(const LightSettings& settings)
-{
-    if( mOpenGLInitialized )
-    {
+void GLCanvas::ConfigureFirstLight(const LightSettings& settings) {
+    if (mOpenGLInitialized) {
         mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("light1.enabled", settings.enabled);
         mShaderDualPeel->SetUniform("light1.lookAt", settings.look_at_vector);
@@ -174,15 +149,10 @@ void GLCanvas::ConfigureFirstLight(const LightSettings& settings)
     mFirstLightSettings = settings;
 }
 
-const LightSettings& GLCanvas::GetFirstLightConfiguration() const
-{
-    return mFirstLightSettings;
-}
+const LightSettings& GLCanvas::GetFirstLightConfiguration() const { return mFirstLightSettings; }
 
-void GLCanvas::ConfigureSecondLight(const LightSettings& settings)
-{
-    if( mOpenGLInitialized )
-    {
+void GLCanvas::ConfigureSecondLight(const LightSettings& settings) {
+    if (mOpenGLInitialized) {
         mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("light2.enabled", settings.enabled);
         mShaderDualPeel->SetUniform("light2.lookAt", settings.look_at_vector);
@@ -191,61 +161,48 @@ void GLCanvas::ConfigureSecondLight(const LightSettings& settings)
     mSecondLightSettings = settings;
 }
 
-const LightSettings& GLCanvas::GetSecondLightConfiguration() const
-{
-    return mSecondLightSettings;
-}
+const LightSettings& GLCanvas::GetSecondLightConfiguration() const { return mSecondLightSettings; }
 
-void GLCanvas::ApplyIllumination(bool enabled)
-{
-    if( mOpenGLInitialized )
-    {
+void GLCanvas::ApplyIllumination(bool enabled) {
+    if (mOpenGLInitialized) {
         mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("applyIllumination", enabled);
     }
     mApplyIllumination = enabled;
 }
 
-void GLCanvas::ApplyFaceCulling(bool enabled)
-{
-    if( mOpenGLInitialized )
-    {
+void GLCanvas::ApplyFaceCulling(bool enabled) {
+    if (mOpenGLInitialized) {
         mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("faceCulling", enabled);
     }
     mApplyFaceCulling = enabled;
 }
 
-void GLCanvas::SetAmbientLightIntensity(float intensity)
-{
-    if( mOpenGLInitialized )
-    {
+void GLCanvas::SetAmbientLightIntensity(float intensity) {
+    if (mOpenGLInitialized) {
         mShaderDualPeel->UseProgram();
         mShaderDualPeel->SetUniform("ambientLightAmount", intensity);
     }
     mAmbientLightIntensity = intensity;
 }
 
-void GLCanvas::WillDrawBoundingBox(bool pDraw)
-{
+void GLCanvas::WillDrawBoundingBox(bool pDraw) {
     mDrawBoundingBox = pDraw;
     updateGL();
 }
 
-void GLCanvas::WillDrawBoundingSphere(bool pDraw)
-{
+void GLCanvas::WillDrawBoundingSphere(bool pDraw) {
     mDrawBoundingSphere = pDraw;
     updateGL();
 }
 
-void GLCanvas::ApplyMaterials(bool pApplyMaterials)
-{
+void GLCanvas::ApplyMaterials(bool pApplyMaterials) {
     mApplyMaterials = pApplyMaterials;
     updateGL();
 }
 
-void GLCanvas::initializeGL()
-{
+void GLCanvas::initializeGL() {
     // Initialize quad where the scene is painted
     mMeshFullScreenQuad = std::make_unique<Geometry>("FullScreenQuad", GeometryTopology::Triangles);
     glm::vec2 vertices[4] = {glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f),
@@ -258,23 +215,21 @@ void GLCanvas::initializeGL()
     mWinHeight = height();
 
     GLenum err = glewInit();
-    if( GLEW_OK != err )
-    {
+    if (GLEW_OK != err) {
         const GLubyte* sError = glewGetErrorString(err);
         Debug::Log("Impossible to initialize GLEW!: " +
                    std::string{reinterpret_cast<const char*>(sError)});
-    }
-    else
-    {
-        std::string const gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
-        std::string const gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
-        std::string const gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
-        std::string const gl_shading_language_version{
+    } else {
+        // Strings comming from glGetString are UTF-8 encoded
+        std::string_view const gl_vendor{reinterpret_cast<const char*>(glGetString(GL_VENDOR))};
+        std::string_view const gl_renderer{reinterpret_cast<const char*>(glGetString(GL_RENDERER))};
+        std::string_view const gl_version{reinterpret_cast<const char*>(glGetString(GL_VERSION))};
+        std::string_view const gl_shading_language_version{
             reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))};
-        Debug::Log("GL_VENDOR: " + gl_vendor);
-        Debug::Log("GL_RENDERER: " + gl_renderer);
-        Debug::Log("GL_VERSION: " + gl_version);
-        Debug::Log("GL_SHADING_LANGUAGE_VERSION: " + gl_shading_language_version);
+        Debug::Log("GL_VENDOR: " + std::string{gl_vendor});
+        Debug::Log("GL_RENDERER: " + std::string{gl_renderer});
+        Debug::Log("GL_VERSION: " + std::string{gl_version});
+        Debug::Log("GL_SHADING_LANGUAGE_VERSION: " + std::string{gl_shading_language_version});
 
         LoadShaders();
 
@@ -295,10 +250,8 @@ void GLCanvas::initializeGL()
     }
 }
 
-void GLCanvas::paintGL()
-{
-    if( mScene != nullptr )
-    {
+void GLCanvas::paintGL() {
+    if (mScene != nullptr) {
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
 
@@ -325,8 +278,7 @@ void GLCanvas::paintGL()
         const glm::mat4 viewMatrix = mFreeCamera->GetViewMatrix();
         const glm::mat4 viewProjectionMatrix = projectionMatrix * viewMatrix;
         mShaderDualInit->UseProgram();
-        for( int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++ )
-        {
+        for (int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++) {
             auto sceneNode = mGPUScene->GetSceneNode(i);
             const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
             mShaderDualInit->SetUniform("modelViewProjection", viewProjectionMatrix * modelMatrix);
@@ -336,10 +288,8 @@ void GLCanvas::paintGL()
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
         DrawGeometryBoundingVolumes(viewProjectionMatrix, true);
-        for( auto perVertexColorMesh : mPerVertexColorMeshes )
-        {
-            if( mDrawViewpointSphereInWireframe )
-            {
+        for (auto perVertexColorMesh : mPerVertexColorMeshes) {
+            if (mDrawViewpointSphereInWireframe) {
                 glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
             }
             perVertexColorMesh->Draw();
@@ -362,8 +312,7 @@ void GLCanvas::paintGL()
 
         int currId = 0;
         int pass = 1;
-        for( ;; )
-        {
+        for (;;) {
             currId = pass % 2;
             int prevId = 1 - currId;
             int bufId = currId * 3;
@@ -394,18 +343,15 @@ void GLCanvas::paintGL()
                                          mDualFrontBlenderTexId[prevId], 2);
 
             // Recorrem els meshos
-            for( int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++ )
-            {
+            for (int i = 0; i < mGPUScene->GetNumberOfSceneNodes(); i++) {
                 auto sceneNode = mGPUScene->GetSceneNode(i);
                 auto currentMaterial = sceneNode->GetMaterial();
                 const glm::mat4 modelMatrix = sceneNode->GetModelMatrix();
                 mShaderDualPeel->SetUniform("modelViewProjection",
                                             viewProjectionMatrix * modelMatrix);
-                if( mApplyMaterials && currentMaterial != nullptr )
-                {
+                if (mApplyMaterials && currentMaterial != nullptr) {
                     bool hasTexture = currentMaterial->HasKdTexture();
-                    if( hasTexture )
-                    {
+                    if (hasTexture) {
                         auto kdTexture = currentMaterial->GetKdTexture();
                         mShaderDualPeel->BindTexture(GL_TEXTURE_2D, "diffuseTexture",
                                                      kdTexture->GetGLId(), 0);
@@ -416,9 +362,7 @@ void GLCanvas::paintGL()
                     mShaderDualPeel->SetUniform("geometryMaterial.ks", currentMaterial->GetKs());
                     mShaderDualPeel->SetUniform("geometryMaterial.shininess",
                                                 currentMaterial->GetShininess());
-                }
-                else
-                {
+                } else {
                     mShaderDualPeel->SetUniform("applyDiffuseTexture", false);
                     mShaderDualPeel->SetUniform("geometryMaterial.ka", glm::vec3(0.0f, 0.0f, 0.0f));
                     mShaderDualPeel->SetUniform("geometryMaterial.kd", glm::vec3(0.6f, 0.6f, 0.6f));
@@ -439,10 +383,8 @@ void GLCanvas::paintGL()
                                                        mDualFrontBlenderTexId[prevId], 2);
             mShaderDualPeelPerVertexColor->SetUniform("modelViewProjection", viewProjectionMatrix);
             DrawGeometryBoundingVolumes(viewProjectionMatrix, false);
-            for( auto perVertexColorMesh : mPerVertexColorMeshes )
-            {
-                if( mDrawViewpointSphereInWireframe )
-                {
+            for (auto perVertexColorMesh : mPerVertexColorMeshes) {
+                if (mDrawViewpointSphereInWireframe) {
                     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                 }
                 perVertexColorMesh->Draw();
@@ -472,8 +414,7 @@ void GLCanvas::paintGL()
             glEndQuery(GL_SAMPLES_PASSED);
             GLuint sample_count;
             glGetQueryObjectuiv(mQueryId, GL_QUERY_RESULT, &sample_count);
-            if( sample_count == 0 )
-            {
+            if (sample_count == 0) {
                 break;
             }
 
@@ -501,9 +442,7 @@ void GLCanvas::paintGL()
         glUseProgram(0);
 
         CHECK_GL_ERROR();
-    }
-    else
-    {
+    } else {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glClearColor(mBackgroundColor[0], mBackgroundColor[1], mBackgroundColor[2], 0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -512,15 +451,12 @@ void GLCanvas::paintGL()
     glFlush();
 }
 
-void GLCanvas::resizeGL(int pWidth, int pHeight)
-{
-    if( pWidth != mWinWidth || pHeight != mWinHeight )
-    {
+void GLCanvas::resizeGL(int pWidth, int pHeight) {
+    if (pWidth != mWinWidth || pHeight != mWinHeight) {
         mWinHeight = pHeight;
         mWinWidth = pWidth;
 
-        if( mFreeCamera != nullptr )
-        {
+        if (mFreeCamera != nullptr) {
             RecomputeViewport();
         }
         DeleteDualPeelingRenderTargets();
@@ -530,25 +466,21 @@ void GLCanvas::resizeGL(int pWidth, int pHeight)
     }
 }
 
-void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
-{
+void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
     pEvent->ignore();
     // Tecla per recarregar els shaders
-    if( pEvent->key() == Qt::Key_R )
-    {
+    if (pEvent->key() == Qt::Key_R) {
         pEvent->accept();
         LoadShaders();
         updateGL();
     }
     // Wireframe
-    if( pEvent->key() == Qt::Key_F5 )
-    {
+    if (pEvent->key() == Qt::Key_F5) {
         pEvent->accept();
         mDrawViewpointSphereInWireframe = !mDrawViewpointSphereInWireframe;
         updateGL();
     }
-    if( pEvent->key() == Qt::Key_W )
-    {
+    if (pEvent->key() == Qt::Key_W) {
         pEvent->accept();
         glm::vec3 position = mFreeCamera->GetPosition();
         glm::vec3 lookAt = mFreeCamera->GetLookAt();
@@ -558,8 +490,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
         mFreeCamera->SetPosition(position);
         updateGL();
     }
-    if( pEvent->key() == Qt::Key_S )
-    {
+    if (pEvent->key() == Qt::Key_S) {
         pEvent->accept();
         glm::vec3 position = mFreeCamera->GetPosition();
         glm::vec3 lookAt = mFreeCamera->GetLookAt();
@@ -569,8 +500,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
         mFreeCamera->SetPosition(position);
         updateGL();
     }
-    if( pEvent->key() == Qt::Key_A )
-    {
+    if (pEvent->key() == Qt::Key_A) {
         pEvent->accept();
         glm::vec3 position = mFreeCamera->GetPosition();
         glm::vec3 lookAt = mFreeCamera->GetLookAt();
@@ -584,8 +514,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
         mFreeCamera->SetLookAt(lookAt);
         updateGL();
     }
-    if( pEvent->key() == Qt::Key_D )
-    {
+    if (pEvent->key() == Qt::Key_D) {
         pEvent->accept();
         glm::vec3 position = mFreeCamera->GetPosition();
         glm::vec3 lookAt = mFreeCamera->GetLookAt();
@@ -599,8 +528,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
         mFreeCamera->SetLookAt(lookAt);
         updateGL();
     }
-    if( pEvent->key() == Qt::Key_Q )
-    {
+    if (pEvent->key() == Qt::Key_Q) {
         pEvent->accept();
         glm::vec3 position = mFreeCamera->GetPosition();
         glm::vec3 lookAt = mFreeCamera->GetLookAt();
@@ -615,8 +543,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
         mFreeCamera->SetLookAt(lookAt);
         updateGL();
     }
-    if( pEvent->key() == Qt::Key_E )
-    {
+    if (pEvent->key() == Qt::Key_E) {
         pEvent->accept();
         glm::vec3 position = mFreeCamera->GetPosition();
         glm::vec3 lookAt = mFreeCamera->GetLookAt();
@@ -633,32 +560,23 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent)
     }
 }
 
-void GLCanvas::DrawGeometryBoundingVolumes(const glm::mat4& viewProjectionMatrix, bool init)
-{
-    if( mDrawBoundingBox || mDrawBoundingSphere )
-    {
-        for( auto it = mScene->cbegin(); it != mScene->cend(); ++it )
-        {
+void GLCanvas::DrawGeometryBoundingVolumes(const glm::mat4& viewProjectionMatrix, bool init) {
+    if (mDrawBoundingBox || mDrawBoundingSphere) {
+        for (auto it = mScene->cbegin(); it != mScene->cend(); ++it) {
             const auto& sceneNode = (*it);
             glm::mat4 modelMatrix = sceneNode.GetGlobalTransform();
-            for( int i = 0; i < sceneNode.GetNumMeshes(); ++i )
-            {
-                if( init )
-                {
+            for (int i = 0; i < sceneNode.GetNumMeshes(); ++i) {
+                if (init) {
                     mShaderDualInit->SetUniform("modelViewProjection",
                                                 viewProjectionMatrix * modelMatrix);
-                }
-                else
-                {
+                } else {
                     mShaderDualPeelPerVertexColor->SetUniform("modelViewProjection",
                                                               viewProjectionMatrix * modelMatrix);
                 }
-                if( mDrawBoundingBox )
-                {
+                if (mDrawBoundingBox) {
                     sceneNode.GetMesh(i)->GetGeometry()->GetBoundingBox()->Draw();
                 }
-                if( mDrawBoundingSphere )
-                {
+                if (mDrawBoundingSphere) {
                     sceneNode.GetMesh(i)->GetGeometry()->GetBoundingSphere()->Draw();
                 }
             }
@@ -666,149 +584,117 @@ void GLCanvas::DrawGeometryBoundingVolumes(const glm::mat4& viewProjectionMatrix
     }
 }
 
-void GLCanvas::RecomputeViewport()
-{
+void GLCanvas::RecomputeViewport() {
     float aspectRatio = mFreeCamera->GetAspectRatio();
     float widthByRatio = mWinHeight * aspectRatio;
     float heightByRatio = mWinWidth / aspectRatio;
-    if( (int)(widthByRatio) > mWinWidth )
-    {
+    if ((int)(widthByRatio) > mWinWidth) {
         mViewport = QRect(0, (mWinHeight - (int)heightByRatio) / 2, mWinWidth, (int)heightByRatio);
-    }
-    else if( (int)(widthByRatio) < mWinWidth )
-    {
+    } else if ((int)(widthByRatio) < mWinWidth) {
         mViewport = QRect((mWinWidth - (int)widthByRatio) / 2, 0, (int)widthByRatio, mWinHeight);
-    }
-    else
-    {
+    } else {
         mViewport = QRect(0, 0, mWinWidth, mWinHeight);
     }
     glViewport(mViewport.x(), mViewport.y(), mViewport.width(), mViewport.height());
 }
 
-void GLCanvas::LoadShaders()
-{
+void GLCanvas::LoadShaders() {
     const GLSLShader basicVS("shaders/Basic.vert", GL_VERTEX_SHADER);
-    if( basicVS.HasCompilationErrors() )
-    {
+    if (basicVS.HasCompilationErrors()) {
         Debug::Error("shaders/Basic.vert: " + basicVS.GetCompilationLog());
     }
     const GLSLShader dualPeelingInitFS("shaders/DualPeelingInit.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingInitFS.HasCompilationErrors() )
-    {
+    if (dualPeelingInitFS.HasCompilationErrors()) {
         Debug::Error("shaders/DualPeelingInit.frag: " + dualPeelingInitFS.GetCompilationLog());
     }
     const GLSLShader dualPeelingPeelVS("shaders/DualPeelingPeel.vert", GL_VERTEX_SHADER);
-    if( dualPeelingPeelVS.HasCompilationErrors() )
-    {
+    if (dualPeelingPeelVS.HasCompilationErrors()) {
         Debug::Error("shaders/DualPeelingPeel.vert: " + dualPeelingPeelVS.GetCompilationLog());
     }
     const GLSLShader dualPeelingPeelFS("shaders/DualPeelingPeel.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingPeelFS.HasCompilationErrors() )
-    {
+    if (dualPeelingPeelFS.HasCompilationErrors()) {
         Debug::Error("shaders/DualPeelingPeel.frag: " + dualPeelingPeelFS.GetCompilationLog());
     }
     const GLSLShader shadeFragmentFS("shaders/ShadeFragment.frag", GL_FRAGMENT_SHADER);
-    if( shadeFragmentFS.HasCompilationErrors() )
-    {
+    if (shadeFragmentFS.HasCompilationErrors()) {
         Debug::Error("shaders/ShadeFragment.frag: " + shadeFragmentFS.GetCompilationLog());
     }
     const GLSLShader shadePerVertexColorFS("shaders/ShadePerVertexColor.frag", GL_FRAGMENT_SHADER);
-    if( shadePerVertexColorFS.HasCompilationErrors() )
-    {
+    if (shadePerVertexColorFS.HasCompilationErrors()) {
         Debug::Error("shaders/ShadePerVertexColor.frag: " +
                      shadePerVertexColorFS.GetCompilationLog());
     }
     const GLSLShader dualPeelingBlendFS("shaders/DualPeelingBlend.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingBlendFS.HasCompilationErrors() )
-    {
+    if (dualPeelingBlendFS.HasCompilationErrors()) {
         Debug::Error("shaders/DualPeelingBlend.frag: " + dualPeelingBlendFS.GetCompilationLog());
     }
     const GLSLShader dualPeelingFinalFS("shaders/DualPeelingFinal.frag", GL_FRAGMENT_SHADER);
-    if( dualPeelingFinalFS.HasCompilationErrors() )
-    {
+    if (dualPeelingFinalFS.HasCompilationErrors()) {
         Debug::Error("shaders/DualPeelingFinal.frag: " + dualPeelingFinalFS.GetCompilationLog());
     }
 
-    if( !basicVS.HasCompilationErrors() && !dualPeelingInitFS.HasCompilationErrors() )
-    {
+    if (!basicVS.HasCompilationErrors() && !dualPeelingInitFS.HasCompilationErrors()) {
         mShaderDualInit = std::make_unique<GLSLProgram>("ShaderDualInit");
         mShaderDualInit->AttachShader(basicVS);
         mShaderDualInit->AttachShader(dualPeelingInitFS);
         mShaderDualInit->LinkProgram();
-    }
-    else
-    {
+    } else {
         mShaderDualInit = nullptr;
         Debug::Error("Could not load ShaderDualInit");
     }
 
-    if( !dualPeelingPeelVS.HasCompilationErrors() && !dualPeelingPeelFS.HasCompilationErrors() &&
-        !shadeFragmentFS.HasCompilationErrors() )
-    {
+    if (!dualPeelingPeelVS.HasCompilationErrors() && !dualPeelingPeelFS.HasCompilationErrors() &&
+        !shadeFragmentFS.HasCompilationErrors()) {
         mShaderDualPeel = std::make_unique<GLSLProgram>("ShaderDualPeel");
         mShaderDualPeel->AttachShader(dualPeelingPeelVS);
         mShaderDualPeel->AttachShader(dualPeelingPeelFS);
         mShaderDualPeel->AttachShader(shadeFragmentFS);
         mShaderDualPeel->LinkProgram();
-    }
-    else
-    {
+    } else {
         mShaderDualPeel = nullptr;
         Debug::Error("Could not load ShaderDualPeel");
     }
 
-    if( !dualPeelingPeelVS.HasCompilationErrors() && !dualPeelingPeelFS.HasCompilationErrors() &&
-        !shadePerVertexColorFS.HasCompilationErrors() )
-    {
+    if (!dualPeelingPeelVS.HasCompilationErrors() && !dualPeelingPeelFS.HasCompilationErrors() &&
+        !shadePerVertexColorFS.HasCompilationErrors()) {
         mShaderDualPeelPerVertexColor =
             std::make_unique<GLSLProgram>("ShaderDualPeelPerVertexColor");
         mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelVS);
         mShaderDualPeelPerVertexColor->AttachShader(dualPeelingPeelFS);
         mShaderDualPeelPerVertexColor->AttachShader(shadePerVertexColorFS);
         mShaderDualPeelPerVertexColor->LinkProgram();
-    }
-    else
-    {
+    } else {
         mShaderDualPeelPerVertexColor = nullptr;
         Debug::Error("Could not load ShaderDualPeelPerVertexColor");
     }
 
-    if( !basicVS.HasCompilationErrors() && !dualPeelingBlendFS.HasCompilationErrors() )
-    {
+    if (!basicVS.HasCompilationErrors() && !dualPeelingBlendFS.HasCompilationErrors()) {
         mShaderDualBlend = std::make_unique<GLSLProgram>("ShaderDualBlend");
         mShaderDualBlend->AttachShader(basicVS);
         mShaderDualBlend->AttachShader(dualPeelingBlendFS);
         mShaderDualBlend->LinkProgram();
-    }
-    else
-    {
+    } else {
         mShaderDualBlend = nullptr;
         Debug::Error("Could not load ShaderDualBlend");
     }
 
-    if( !basicVS.HasCompilationErrors() && !dualPeelingFinalFS.HasCompilationErrors() )
-    {
+    if (!basicVS.HasCompilationErrors() && !dualPeelingFinalFS.HasCompilationErrors()) {
         mShaderDualFinal = std::make_unique<GLSLProgram>("ShaderDualFinal");
         mShaderDualFinal->AttachShader(basicVS);
         mShaderDualFinal->AttachShader(dualPeelingFinalFS);
         mShaderDualFinal->LinkProgram();
-    }
-    else
-    {
+    } else {
         mShaderDualFinal = nullptr;
         Debug::Error("Could not load ShaderDualFinal");
     }
 }
 
-void GLCanvas::InitDualPeelingRenderTargets()
-{
+void GLCanvas::InitDualPeelingRenderTargets() {
     glGenTextures(2, mDualDepthTexId);
     glGenTextures(2, mDualFrontBlenderTexId);
     glGenTextures(2, mDualBackTempTexId);
     glGenFramebuffers(1, &mDualPeelingSingleFboId);
-    for( int i = 0; i < 2; i++ )
-    {
+    for (int i = 0; i < 2; i++) {
         glBindTexture(GL_TEXTURE_RECTANGLE, mDualDepthTexId[i]);
         glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -871,8 +757,7 @@ void GLCanvas::InitDualPeelingRenderTargets()
     CHECK_GL_ERROR();
 }
 
-void GLCanvas::DeleteDualPeelingRenderTargets()
-{
+void GLCanvas::DeleteDualPeelingRenderTargets() {
     glDeleteFramebuffers(1, &mDualBackBlenderFboId);
 
     glDeleteTextures(1, &mDualBackBlenderTexId);

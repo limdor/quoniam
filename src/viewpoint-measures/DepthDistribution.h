@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the depth distribution [Secord et al. 2011]
-class DepthDistribution : public Measure
-{
+class DepthDistribution : public Measure {
 public:
     explicit DepthDistribution(const std::string& pName);
 

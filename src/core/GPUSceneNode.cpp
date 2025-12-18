@@ -2,36 +2,18 @@
 
 GPUSceneNode::GPUSceneNode(std::shared_ptr<GPUGeometry const> pGeometry,
                            std::shared_ptr<Material> pMaterial)
-    : mGeometry(pGeometry), mMaterial(pMaterial), mModelMatrix(), mPolygonalOffset(0)
-{
-}
+    : mGeometry(pGeometry), mMaterial(pMaterial), mModelMatrix(), mPolygonalOffset(0) {}
 
-void GPUSceneNode::SetModelMatrix(const glm::mat4& pModelMatrix)
-{
-    mModelMatrix = pModelMatrix;
-}
+void GPUSceneNode::SetModelMatrix(const glm::mat4& pModelMatrix) { mModelMatrix = pModelMatrix; }
 
-void GPUSceneNode::SetPolygonalOffset(size_t pPolygonalOffset)
-{
+void GPUSceneNode::SetPolygonalOffset(size_t pPolygonalOffset) {
     mPolygonalOffset = pPolygonalOffset;
 }
 
-glm::mat4 GPUSceneNode::GetModelMatrix() const
-{
-    return mModelMatrix;
-}
+glm::mat4 GPUSceneNode::GetModelMatrix() const { return mModelMatrix; }
 
-std::shared_ptr<GPUGeometry const> GPUSceneNode::GetGeometry()
-{
-    return mGeometry;
-}
+std::shared_ptr<GPUGeometry const> GPUSceneNode::GetGeometry() { return mGeometry; }
 
-std::shared_ptr<Material> GPUSceneNode::GetMaterial()
-{
-    return mMaterial;
-}
+std::shared_ptr<Material> GPUSceneNode::GetMaterial() { return mMaterial; }
 
-size_t GPUSceneNode::GetPolygonalOffset() const
-{
-    return mPolygonalOffset;
-}
+size_t GPUSceneNode::GetPolygonalOffset() const { return mPolygonalOffset; }

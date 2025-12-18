@@ -4,8 +4,7 @@
 // Project includes
 #include "Measure.h"
 
-class DepthBasedVisualStability : public Measure
-{
+class DepthBasedVisualStability : public Measure {
 public:
     explicit DepthBasedVisualStability(const std::string& pName);
 

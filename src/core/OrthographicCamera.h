@@ -6,8 +6,7 @@
 #include "glm/vec3.hpp"
 
 /// Camera class with methods to configure an orthographic camera
-class OrthographicCamera : public Camera
-{
+class OrthographicCamera : public Camera {
 public:
     OrthographicCamera(float pNearPlane, float pFarPlane, glm::vec3 pLookAt, glm::vec3 pUp,
                        glm::vec3 pPosition, float pTop, float pBottom, float pLeft, float pRight);

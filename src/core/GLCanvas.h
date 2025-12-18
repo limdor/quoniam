@@ -20,8 +20,7 @@
 #include <vector>
 
 /// Class to do the OpenGL render
-class GLCanvas : public QGLWidget
-{
+class GLCanvas : public QGLWidget {
     Q_OBJECT
 
 public:

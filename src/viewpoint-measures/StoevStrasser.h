@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the Stoev and Strasser measure  [Stoev and Strasser 2002]
-class StoevStrasser : public Measure
-{
+class StoevStrasser : public Measure {
 public:
     explicit StoevStrasser(const std::string& pName);
 

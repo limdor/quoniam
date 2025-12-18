@@ -8,8 +8,7 @@
 
 /// Class that implements the Saliency-based extended viewpoint mutual information [Feixas et al.
 /// 2009]
-class SaliencyEVMI : public Measure
-{
+class SaliencyEVMI : public Measure {
 public:
     explicit SaliencyEVMI(const std::string& pName);
 

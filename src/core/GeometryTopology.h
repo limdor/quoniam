@@ -5,8 +5,7 @@
 #include "GL/glew.h"
 
 /// Enumeration to define the topology of the geometry
-enum class GeometryTopology
-{
+enum class GeometryTopology {
     Points = GL_POINTS,
     Lines = GL_LINES,
     Line_Strip = GL_LINE_STRIP,

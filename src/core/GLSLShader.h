@@ -7,8 +7,7 @@
 #include <string>
 
 /// Class to wrap the GLSL shaders used by OpenGL
-class GLSLShader
-{
+class GLSLShader {
 public:
     GLSLShader(const std::string& pSourceFile, GLenum pType);
     ~GLSLShader();

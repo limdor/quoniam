@@ -12,37 +12,21 @@ Scene::Scene(const std::string& pName, std::shared_ptr<SceneNode> pSceneRoot,
       mRootNode(std::move(pSceneRoot)),
       mMaterials(pMaterials),
       mGeometries(pGeometries),
-      mMeshes(pMeshes)
-{
-}
+      mMeshes(pMeshes) {}
 
-std::string Scene::GetName() const
-{
-    return mName;
-}
+std::string Scene::GetName() const { return mName; }
 
-std::shared_ptr<SceneNode const> Scene::GetRootNode() const
-{
-    return mRootNode;
-}
+std::shared_ptr<SceneNode const> Scene::GetRootNode() const { return mRootNode; }
 
-std::shared_ptr<BoundingSphere const> Scene::GetBoundingSphere() const
-{
+std::shared_ptr<BoundingSphere const> Scene::GetBoundingSphere() const {
     return mRootNode->GetBoundingSphere();
 }
 
-size_t Scene::GetNumberOfPolygons() const
-{
-    return mRootNode->GetNumberOfPolygons();
-}
+size_t Scene::GetNumberOfPolygons() const { return mRootNode->GetNumberOfPolygons(); }
 
-size_t Scene::GetNumberOfVertices() const
-{
-    return mRootNode->GetNumberOfVertices();
-}
+size_t Scene::GetNumberOfVertices() const { return mRootNode->GetNumberOfVertices(); }
 
-void Scene::ShowInformation() const
-{
+void Scene::ShowInformation() const {
     auto boundingSphere = GetBoundingSphere();
     glm::vec3 sceneCenter = boundingSphere->GetCenter();
     Debug::Log("Scene: " + mName);

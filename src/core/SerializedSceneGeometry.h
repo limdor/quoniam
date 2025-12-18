@@ -8,8 +8,7 @@
 #include <memory>
 #include <vector>
 
-class SerializedSceneGeometry
-{
+class SerializedSceneGeometry {
 public:
     explicit SerializedSceneGeometry(std::shared_ptr<Scene const> pScene);
 

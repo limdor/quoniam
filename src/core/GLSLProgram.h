@@ -14,8 +14,7 @@
 #include <string>
 
 /// Class to wrap the GLSL programs used by OpenGL
-class GLSLProgram
-{
+class GLSLProgram {
 public:
     explicit GLSLProgram(const std::string& pName);
     ~GLSLProgram();

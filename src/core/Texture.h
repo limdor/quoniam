@@ -4,23 +4,19 @@
 // GLEW has to be included before any OpenGL include
 #include "GL/glew.h"
 
-#include <QtGui/QImage>
+#include <QtGUI/QOpenGLTexture>
 
-#include <memory>
+class QImage;
 
 /// Class to wrap an OpenGL texture
-class Texture
-{
+class Texture {
 public:
-    Texture(std::unique_ptr<QImage> pTexture, bool pRectangle = false);
-    ~Texture();
+    Texture(const QImage& pTexture);
     /// Get the texture id in the GPU
     GLuint GetGLId() const;
 
 private:
-    /// Image of the texture
-    std::unique_ptr<QImage> mTexture;
-    /// Id of the texture in the GPU
+    QOpenGLTexture mTexture;
     GLuint mGLId;
 };
 

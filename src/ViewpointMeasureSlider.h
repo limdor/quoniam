@@ -4,8 +4,7 @@
 // Qt includes
 #include <QtWidgets/QSlider>
 
-class ViewpointMeasureSlider : public QSlider
-{
+class ViewpointMeasureSlider : public QSlider {
     Q_OBJECT
 public:
     explicit ViewpointMeasureSlider(int pMeasure, Qt::Orientation pOrientation,

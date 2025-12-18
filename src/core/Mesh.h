@@ -8,8 +8,7 @@
 #include <string>
 
 /// Class to wrap a 3d mesh
-class Mesh
-{
+class Mesh {
 public:
     Mesh(std::shared_ptr<Geometry> pGeometry, std::shared_ptr<Material> pMaterial);
     Mesh(const Mesh& pMesh) = delete;

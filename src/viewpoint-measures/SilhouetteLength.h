@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the silhouette length measure
-class SilhouetteLength : public Measure
-{
+class SilhouetteLength : public Measure {
 public:
     explicit SilhouetteLength(const std::string& pName);
 

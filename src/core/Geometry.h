@@ -20,8 +20,7 @@ class GPUGeometry;
 
 /// Class to wrap the geometry of a 3d mesh that is not stored into the GPU until the GetGPUGeometry
 /// method is called.
-class Geometry
-{
+class Geometry {
 public:
     Geometry(const std::string& pName, GeometryTopology pT);
     Geometry() = default;

@@ -8,8 +8,7 @@
 #include "Camera.h"
 #include "SpherePointCloud.h"
 
-class SphereOfViewpoints : public SpherePointCloud
-{
+class SphereOfViewpoints : public SpherePointCloud {
 public:
     SphereOfViewpoints(float pAngle, float pAspectRatio);
 

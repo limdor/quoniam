@@ -5,8 +5,7 @@
 #include "Measure.h"
 
 /// Class that implements the viewpoint entropy [Vazquez et al. 2002]
-class ViewpointEntropy : public Measure
-{
+class ViewpointEntropy : public Measure {
 public:
     explicit ViewpointEntropy(const std::string& pName);
 

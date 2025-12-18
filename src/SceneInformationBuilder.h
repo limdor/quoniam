@@ -17,8 +17,7 @@
 #include <vector>
 
 /// Static class to create an InformationChannelHistogram
-class SceneInformationBuilder
-{
+class SceneInformationBuilder {
 public:
     /// Create an InformationChannelHistogram given the Scene and the SphereOfViewpoints
     void CreateHistogram(std::shared_ptr<Scene> pScene,

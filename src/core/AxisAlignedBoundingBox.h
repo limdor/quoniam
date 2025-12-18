@@ -8,8 +8,7 @@
 #include <memory>
 
 /// BoundingVolume class with methods to use an axis-aligned bounding box
-class AxisAlignedBoundingBox : public Gizmo
-{
+class AxisAlignedBoundingBox : public Gizmo {
 public:
     AxisAlignedBoundingBox();
 
