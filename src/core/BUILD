@@ -18,7 +18,7 @@ cc_library(
     srcs = ["GLSLShader.cpp"],
     hdrs = ["GLSLShader.h"],
     implementation_deps = ["//src/utils:debug"],
-    deps = ["@glew//:glew_static"],
+    deps = ["@glew"],
 )
 
 cc_library(
@@ -28,7 +28,7 @@ cc_library(
     implementation_deps = ["//src/utils:debug"],
     deps = [
         ":glsl_shader",
-        "@glew//:glew_static",
+        "@glew",
         "@glm",
     ],
 )
@@ -38,7 +38,7 @@ cc_library(
     srcs = ["Texture.cpp"],
     hdrs = ["Texture.h"],
     deps = [
-        "@glew//:glew_static",
+        "@glew",
         "@qt//:qt_gui",
     ],
 )
@@ -58,7 +58,7 @@ cc_library(
     name = "geometry_topology",
     srcs = ["GeometryTopology.cpp"],
     hdrs = ["GeometryTopology.h"],
-    deps = ["@glew//:glew_static"],
+    deps = ["@glew"],
 )
 
 cc_library(
@@ -119,7 +119,7 @@ cc_library(
         "//src/utils",
         "//third_party/miniball",
         "@assimp",
-        "@glew//:glew_static",
+        "@glew",
         "@glm",
         "@qt//:qt_core",
         "@qt//:qt_widgets",
