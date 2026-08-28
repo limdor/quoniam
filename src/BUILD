@@ -173,7 +173,7 @@ cc_library(
         "//src/core",
         "//src/utils",
         "//third_party/opencv",
-        "@glew//:glew_static",
+        "@glew",
         "@glm",
         "@qt//:qt_core",
         "@qt//:qt_gui",
