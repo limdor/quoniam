@@ -248,6 +248,7 @@ void GLCanvas::initializeGL() {
         ApplyFaceCulling(mApplyFaceCulling);
         SetAmbientLightIntensity(mAmbientLightIntensity);
     }
+    CHECK_GL_ERROR();
 }
 
 void GLCanvas::paintGL() {
@@ -414,6 +415,8 @@ void GLCanvas::paintGL() {
             glEndQuery(GL_SAMPLES_PASSED);
             GLuint sample_count;
             glGetQueryObjectuiv(mQueryId, GL_QUERY_RESULT, &sample_count);
+            Debug::Log("After pass " + std::to_string(pass) + ", sample count " +
+                       std::to_string(sample_count));
             if (sample_count == 0) {
                 break;
             }
@@ -426,10 +429,9 @@ void GLCanvas::paintGL() {
         // ---------------------------------------------------------------------
         // 3. Final Pass
         // ---------------------------------------------------------------------
-
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glDrawBuffer(GL_BACK);
-        glClearColor(0, 0, 0, 0);
+        glClearColor(1, 0, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT);
 
         mShaderDualFinal->UseProgram();
