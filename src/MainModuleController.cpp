@@ -455,7 +455,7 @@ void MainModuleController::SetViewpoint(size_t pViewpoint) {
     mOpenGLCanvas->SetCamera(currentCamera->Clone());
 
     // ShowViewpointInformation(pViewpoint);
-    mOpenGLCanvas->updateGL();
+    mOpenGLCanvas->update();
 
     mUpdateView = false;
     for (size_t i = 0; i < mViewpointMeasuresSliders.size(); i++) {
@@ -559,7 +559,7 @@ void MainModuleController::WillDrawViewpointsSphere(bool /*pDraw*/) {
     // TODO: Check if this function is still working
     if (mSphereOfViewpoints != nullptr) {
         // mSphereOfViewpoints->GetMesh()->SetVisible(pDraw);
-        mOpenGLCanvas->updateGL();
+        mOpenGLCanvas->update();
     }
 }
 
@@ -621,7 +621,7 @@ void MainModuleController::on_measureInViewpointSphereList_currentIndexChanged(i
             colors[i].a = mUi->alphaSpinBox->value();
         }
         mSphereOfViewpoints->GetMesh()->SetColorData(colors.size(), colors.data());
-        mOpenGLCanvas->updateGL();
+        mOpenGLCanvas->update();
     }
 }
 

@@ -12,7 +12,7 @@
 #include "PerspectiveCamera.h"
 #include "Scene.h"
 
-#include <QtOpenGL/QGLWidget>
+#include <QtWidgets/QOpenGLWidget>
 
 #include "glm/vec3.hpp"
 
@@ -20,7 +20,7 @@
 #include <vector>
 
 /// Class to do the OpenGL render
-class GLCanvas : public QGLWidget {
+class GLCanvas : public QOpenGLWidget {
     Q_OBJECT
 
 public:

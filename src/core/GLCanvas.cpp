@@ -13,7 +13,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 
-GLCanvas::GLCanvas(QWidget* pParent) : QGLWidget(QGLFormat(QGL::SampleBuffers), pParent) {}
+GLCanvas::GLCanvas(QWidget* pParent) : QOpenGLWidget(pParent) {}
 
 GLCanvas::~GLCanvas() {
     // Delete framebuffers and textures needed for the dual depth peeling
@@ -45,7 +45,7 @@ void GLCanvas::LoadScene(std::shared_ptr<Scene> pScene, const Camera* pCamera) {
     }
 
     RecomputeViewport();
-    updateGL();
+    update();
 }
 
 void GLCanvas::SetPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh) {
@@ -60,7 +60,7 @@ void GLCanvas::AddPerVertexMesh(std::shared_ptr<Geometry> pPerVertexMesh) {
 QString GLCanvas::SaveScreenshot(const QString& pFileName) {
     makeCurrent();
     const QString completePath = QString::fromStdString(Tools::GetProgramPath().string());
-    const QImage image = grabFrameBuffer();
+    const QImage image = grabFramebuffer();
     if (!image.save(completePath + pFileName)) {
         Debug::Warning("Screenshot have not been saved: " +
                        (completePath + pFileName).toStdString());
@@ -94,7 +94,7 @@ void GLCanvas::RotateActiveCamera(const glm::vec2& pStartPoint, const glm::vec2&
         auto boundingSphere = mScene->GetBoundingSphere();
         TrackballCamera::MoveCamera(pStartPoint, pEndPoint, *mFreeCamera,
                                     boundingSphere->GetCenter());
-        updateGL();
+        update();
     }
 }
 
@@ -112,7 +112,7 @@ void GLCanvas::MoveActiveCamera(float pDeltaFactor) {
             prevCamPosition + prevCamFrontVector * boundingSphere->GetRadius() * pDeltaFactor;
         mFreeCamera->SetFarPlane(farPlane);
         mFreeCamera->SetPosition(position);
-        updateGL();
+        update();
     }
 }
 
@@ -126,7 +126,7 @@ void GLCanvas::ResetActiveCamera() {
         const glm::vec3 newCamPosition =
             prevCamPosition - prevCamFrontVector * boundingSphere->GetRadius() * 3.0f * 2.0f;
         mFreeCamera->SetPosition(newCamPosition);
-        updateGL();
+        update();
     }
 }
 
@@ -134,7 +134,7 @@ void GLCanvas::SetCamera(std::unique_ptr<Camera> pCamera) {
     makeCurrent();
     mFreeCamera = std::move(pCamera);
     RecomputeViewport();
-    updateGL();
+    update();
 }
 
 std::shared_ptr<Scene> GLCanvas::GetScene() { return mScene; }
@@ -189,17 +189,17 @@ void GLCanvas::SetAmbientLightIntensity(float intensity) {
 
 void GLCanvas::WillDrawBoundingBox(bool pDraw) {
     mDrawBoundingBox = pDraw;
-    updateGL();
+    update();
 }
 
 void GLCanvas::WillDrawBoundingSphere(bool pDraw) {
     mDrawBoundingSphere = pDraw;
-    updateGL();
+    update();
 }
 
 void GLCanvas::ApplyMaterials(bool pApplyMaterials) {
     mApplyMaterials = pApplyMaterials;
-    updateGL();
+    update();
 }
 
 void GLCanvas::initializeGL() {
@@ -462,7 +462,7 @@ void GLCanvas::resizeGL(int pWidth, int pHeight) {
         DeleteDualPeelingRenderTargets();
         InitDualPeelingRenderTargets();
 
-        updateGL();
+        update();
     }
 }
 
@@ -472,13 +472,13 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
     if (pEvent->key() == Qt::Key_R) {
         pEvent->accept();
         LoadShaders();
-        updateGL();
+        update();
     }
     // Wireframe
     if (pEvent->key() == Qt::Key_F5) {
         pEvent->accept();
         mDrawViewpointSphereInWireframe = !mDrawViewpointSphereInWireframe;
-        updateGL();
+        update();
     }
     if (pEvent->key() == Qt::Key_W) {
         pEvent->accept();
@@ -488,7 +488,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
         position += glm::normalize(front) * mScene->GetBoundingSphere()->GetRadius() * 0.05f;
 
         mFreeCamera->SetPosition(position);
-        updateGL();
+        update();
     }
     if (pEvent->key() == Qt::Key_S) {
         pEvent->accept();
@@ -498,7 +498,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
         position -= glm::normalize(front) * mScene->GetBoundingSphere()->GetRadius() * 0.05f;
 
         mFreeCamera->SetPosition(position);
-        updateGL();
+        update();
     }
     if (pEvent->key() == Qt::Key_A) {
         pEvent->accept();
@@ -512,7 +512,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
 
         mFreeCamera->SetPosition(position);
         mFreeCamera->SetLookAt(lookAt);
-        updateGL();
+        update();
     }
     if (pEvent->key() == Qt::Key_D) {
         pEvent->accept();
@@ -526,7 +526,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
 
         mFreeCamera->SetPosition(position);
         mFreeCamera->SetLookAt(lookAt);
-        updateGL();
+        update();
     }
     if (pEvent->key() == Qt::Key_Q) {
         pEvent->accept();
@@ -541,7 +541,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
 
         mFreeCamera->SetPosition(position);
         mFreeCamera->SetLookAt(lookAt);
-        updateGL();
+        update();
     }
     if (pEvent->key() == Qt::Key_E) {
         pEvent->accept();
@@ -556,7 +556,7 @@ void GLCanvas::keyPressEvent(QKeyEvent* pEvent) {
 
         mFreeCamera->SetPosition(position);
         mFreeCamera->SetLookAt(lookAt);
-        updateGL();
+        update();
     }
 }
 
