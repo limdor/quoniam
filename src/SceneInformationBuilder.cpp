@@ -18,6 +18,7 @@
 #include "glm/gtx/vector_angle.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/geometry/2d.hpp"
 
 // Project includes
 #include "Debug.h"
@@ -221,7 +222,8 @@ void SceneInformationBuilder::CreateHistogram(
         // Compute the silhouette length and the silhouette curvature
         std::vector<std::vector<cv::Point>> contours;
         std::vector<cv::Vec4i> hierarchy;
-        cv::findContours(image, contours, hierarchy, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+        cv::findContours(image, contours, hierarchy, cv::RetrievalModes::RETR_LIST,
+                         cv::ContourApproximationModes::CHAIN_APPROX_NONE);
         mSilhouetteLengths[i] = 0.0f;
         unsigned int numberOfAngles = 0;
         for (int j = 0; j < contours.size(); j++) {
